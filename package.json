@@ -5,17 +5,23 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name k-form-design --dest lib packages/index.js && npm run mini",
+    "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue packages/",
+    "mini": "vue-cli-service build --target lib --name k-form-design-mini --dest lib packages/mini.js --no-clean"
   },
   "dependencies": {
+    "@vue/composition-api": "^1.4.0",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-router": "^3.5.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "^4.5.15",
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
@@ -27,7 +33,7 @@
     "less-loader": "^5.0.0",
     "lint-staged": "^9.5.0",
     "prettier": "^2.2.1",
-    "typescript": "~4.1.5",
+    "typescript": "4.4.3",
     "vue-template-compiler": "^2.6.11"
   },
   "gitHooks": {
