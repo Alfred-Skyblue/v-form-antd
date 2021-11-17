@@ -1,8 +1,11 @@
+import './styles/tailwind.css'
 import { VueConstructor } from 'vue'
-let installed = false
-const components: VueConstructor[] = []
+import HelloForm from './components/HelloForm.vue'
 
-const install = function (Vue: VueConstructor) {
+let installed = false
+const components = [HelloForm]
+
+const install = function (Vue: VueConstructor): void {
   // use ant组件
   if (installed) return
   installed = true

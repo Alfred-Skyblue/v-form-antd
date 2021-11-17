@@ -1,7 +1,6 @@
 <template>
   <div>
-    <p>formDesign</p>
-    <button @click="handleClick">按钮</button>
+    <HelloForm></HelloForm>
   </div>
 </template>
 
