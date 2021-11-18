@@ -4,9 +4,7 @@
  * @Description:
 -->
 <template>
-  <div class="h-10 bg-blue-500 inline">
-    {{ state.name }}
-  </div>
+  <div></div>
 </template>
 <script>
 import { defineComponent, reactive } from '@vue/composition-api'
@@ -14,10 +12,8 @@ import { defineComponent, reactive } from '@vue/composition-api'
 export default defineComponent({
   name: 'HelloForm',
   setup() {
-    const state = reactive({ name: 'xiaoming123' })
+    const state = reactive({})
     return { state }
   }
 })
 </script>
-
-<style scoped></style>
