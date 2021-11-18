@@ -16,8 +16,8 @@
     ],
     "paths": {
       "@/*": [
-        "src/*"
-      ]
+        "examples/*"
+      ],
     },
     "lib": [
       "esnext",
@@ -30,6 +30,9 @@
     "examples/**/*.ts",
     "examples/**/*.tsx",
     "examples/**/*.vue",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
