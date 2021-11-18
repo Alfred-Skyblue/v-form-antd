@@ -1,4 +1,3 @@
-import './styles/tailwind.css'
 import { VueConstructor } from 'vue'
 import HelloForm from './components/HelloForm.vue'
 
@@ -24,9 +23,10 @@ if (typeof window !== 'undefined' && window.Vue) {
  * @return: Boolean
  * @param config
  */
+
 function setFormDesignConfig(config: any): boolean {
   // eslint-disable-next-line no-debugger
-  if (!config || typeof config !== 'object') {
+  if (config || typeof config !== 'object') {
     console.error('传入config的参数必须为对象')
     return false
   }
@@ -38,7 +38,8 @@ function setFormDesignConfig(config: any): boolean {
  * @description 配置k-form-build(预览时)，暂只支持dynamicData的设置
  * @param { object }config
  */
-function setFormBuildConfig(config: any) {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+function setFormBuildConfig(config: any): boolean | void {
   if (!config || typeof config !== 'object') {
     console.error('传入setFormBuildConfig的参数必须为对象')
     return false
