@@ -1,0 +1,66 @@
+@import './variable';
+
+.e-form-design-container{
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  &>header{
+    height: @header-height;
+    background: #42b983;
+  }
+  &>.content{
+    margin-top: 5px;
+    display: flex;
+    height: 100%;
+    .left,.right{
+      width: @left-right-width;
+      height: 100%;
+      box-shadow: 0 0 1px 1px #ccc;
+    }
+    .left{
+      .ant-collapse{
+        border:0;
+        .ant-collapse-header{
+          padding: 7px 0 7px 40px;
+
+        }
+        .ant-collapse-content-box {
+          padding: 0;
+        }
+      }
+
+      ul {
+        padding: 5px;
+        list-style: none;
+        display: flex;
+        margin-bottom: 0;
+        flex-wrap: wrap;
+        // background: #efefef;
+
+        li {
+          padding: 8px 12px;
+          transition: all 0.3s;
+          width: calc(50% - 6px);
+          margin: 2.7px;
+          height: 36px;
+          line-height: 20px;
+          cursor: move;
+          border: 1px solid @border-color;
+          border-radius: 3px;
+          &:hover {
+            color: @primary-color;
+            border: 1px solid @primary-color;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 2px 6px @primary-color;
+          }
+        }
+      }
+    }
+    .node-panel{
+      box-shadow: 0 0 1px 1px #ccc;
+      flex: 1;
+      margin: 0 8px;
+    }
+  }
+}
