@@ -6,10 +6,11 @@ import {
   Empty,
   FormModel,
   Row,
-  Tabs
+  Tabs,
+  Button
 } from 'ant-design-vue'
 import vuedraggable from 'vuedraggable'
-;[Input, ConfigProvider, Collapse, Empty, FormModel, Row, Tabs].forEach(
+;[Input, ConfigProvider, Collapse, Empty, FormModel, Row, Tabs, Button].forEach(
   component => {
     Vue.use(component)
   }

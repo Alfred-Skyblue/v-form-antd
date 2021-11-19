@@ -6,7 +6,7 @@
 <template>
   <a-config-provider :locale="locale">
     <div class="e-form-design-container">
-      <header class="e-form-design-header"></header>
+      <header class="e-form-design-header">{{ data.config.title }}</header>
       <section class="content">
         <div class="left">
           <a-collapse>
@@ -40,13 +40,26 @@ import CollapseItem from './modules/CollapseItem.vue'
 import FormComponentPanel from './modules/FormComponentPanel.vue'
 import PropsPanel, { IPropsPanel } from './modules/PropsPanel.vue'
 
-import { defineComponent, reactive, toRefs, ref } from '@vue/composition-api'
+import {
+  defineComponent,
+  reactive,
+  toRefs,
+  ref,
+  provide
+} from '@vue/composition-api'
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { generateKey } from '@pack/utils'
 import { cloneDeep } from 'lodash-es'
 import { baseComponents } from '@pack/core/formItemConfig'
 
+interface IState {
+  data: IFormConfig
+  currentItem: IEFormComponent
+  locale: any
+  baseComponents: IEFormComponent[]
+  propsPanel: null | IPropsPanel
+}
 export default defineComponent({
   name: 'EFormDesign',
   components: {
@@ -58,14 +71,14 @@ export default defineComponent({
     // 子组件实例
     const propsPanel = ref<null | IPropsPanel>(null)
 
-    const state = reactive({
+    const state = reactive<IState>({
       locale: zhCN,
       baseComponents,
-      currentItem: {} as IEFormComponent,
-      data: { formItems: [], config: {} } as IFormConfig,
+      currentItem: {},
+      data: { formItems: [], config: {} },
       propsPanel
     })
-
+    provide('formConfig', state.data)
     /**
      * 选中表单项
      * @param record 当前选中的表单项
