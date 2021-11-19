@@ -76,6 +76,7 @@ export default defineComponent({
       baseComponents,
       currentItem: {},
       data: { formItems: [], config: {} },
+      // TODO 待解决
       propsPanel
     })
     provide('formConfig', state.data)
