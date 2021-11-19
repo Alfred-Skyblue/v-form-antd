@@ -1,4 +1,6 @@
 type RuleChangeType = 'change' | 'blur' | ['change', 'blur']
+
+export type IEFormCmpOrList = IEFormComponent | IEFormComponent[]
 export interface IRules {
   required?: boolean
   message?: string
@@ -14,7 +16,7 @@ export interface IRules {
   whitespace?: boolean
 }
 
-interface IObject {
+export interface IObject {
   [key: string]: any
 }
 
@@ -40,5 +42,10 @@ export interface IEFormComponent {
   props: IObject
   options: IObject
   key?: string
-  filed?: string
+  field?: string
+}
+
+export interface IFormConfig {
+  formItems: IEFormComponent[]
+  config: IObject
 }
