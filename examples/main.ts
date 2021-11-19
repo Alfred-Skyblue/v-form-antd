@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import VueCompositionAPI from '@vue/composition-api'
-import { EFormDesign } from '../packages/index'
+import EFormDesign from '../packages/index'
 Vue.use(VueCompositionAPI)
 Vue.use(EFormDesign)
 Vue.config.productionTip = false

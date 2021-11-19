@@ -1,7 +1,7 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/11/18
- * @Description:
+ * @Description: 中间表单布局面板
 -->
 <template>
   <div class="form-panel">
@@ -15,35 +15,51 @@
         <draggable
           tag="div"
           class="draggable-box"
-          v-bind="{
-            group: 'form-draggable',
-            ghostClass: 'moving',
-            animation: 180,
-            handle: '.drag-move'
-          }"
+          group="form-draggable"
+          ghostClass="moving"
+          :animation="180"
+          handle=".drag-move"
           v-model="data.formItems"
           @add="addItem"
         >
-          <transition-group
-            tag="div"
-            name="list"
-            class="list-main"
-          ></transition-group>
+          <transition-group tag="div" name="list" class="list-main">
+            <LayoutItem
+              v-for="record in data.formItems"
+              :key="record.key"
+              :record="record"
+              :data="data"
+              :current-item="currentItem"
+            ></LayoutItem>
+          </transition-group>
         </draggable>
       </a-row>
     </a-form-model>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import {
+  defineComponent,
+  reactive,
+  toRefs,
+  PropType
+} from '@vue/composition-api'
+import LayoutItem from '../components/LayoutItem.vue'
+import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 
 export default defineComponent({
   name: 'FormComponentPanel',
   props: {
     data: {
-      type: Object,
+      type: Object as PropType<IFormConfig>,
+      required: true
+    },
+    currentItem: {
+      type: Object as PropType<IEFormComponent>,
       required: true
     }
+  },
+  components: {
+    LayoutItem
   },
   setup(props, { emit }) {
     const state = reactive({})
@@ -62,7 +78,6 @@ export default defineComponent({
 <style lang="less" scoped>
 .form-panel {
   position: relative;
-  height: 100%;
   .empty-text {
     color: #aaa;
     height: 150px;
