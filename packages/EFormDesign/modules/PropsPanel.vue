@@ -16,7 +16,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { IFormConfig } from '@pack/typings/EFormComponent'
+import { defineComponent, reactive, toRefs, inject } from '@vue/composition-api'
 
 type ChangeTabKey = 1 | 2
 export interface IPropsPanel {
@@ -25,9 +26,12 @@ export interface IPropsPanel {
 export default defineComponent({
   name: 'PropsPanel',
   setup() {
-    const state = reactive({ activeKey: 1 })
+    const formConfig = inject('formConfig') as IFormConfig
+    const state = reactive({
+      activeKey: 1,
+      formConfig
+    })
     const changeTab = (e: number) => {
-      console.log('-> e', e)
       state.activeKey = e
     }
     return { ...toRefs(state), changeTab }
