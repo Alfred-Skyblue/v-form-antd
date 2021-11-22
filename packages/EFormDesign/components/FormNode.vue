@@ -57,7 +57,8 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@import '~@pack/styles/variable.less';
+//noinspection CssUnknownTarget
+@import '~@pack/static/styles/variable.less';
 .drag-move-box {
   position: relative;
   box-sizing: border-box;
