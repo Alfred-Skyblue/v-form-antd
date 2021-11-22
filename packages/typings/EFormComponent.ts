@@ -45,6 +45,7 @@ export interface IEFormComponent {
   options?: IObject
   key?: string
   field?: string
+  columns?: Array<{ span: number; children: IEFormComponent[] }>
 }
 
 /**

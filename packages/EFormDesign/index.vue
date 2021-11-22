@@ -17,7 +17,7 @@
             >
               <CollapseItem
                 :list="baseComponents"
-                @addAttrs="addAttrs"
+                @addAttrs="handleAddAttrs"
                 @handleListPush="handleListPush"
               ></CollapseItem>
             </a-collapse-panel>
@@ -61,6 +61,19 @@ interface IState {
   baseComponents: IEFormComponent[]
   propsPanel: Ref<null | IPropsPanel>
 }
+
+export interface IFormDesignMethods {
+  handleSetSelectItem(item: IEFormComponent): void
+  handleListPush(item: IEFormComponent): void
+  handleCopy(item?: IEFormComponent, isCopy?: boolean): void
+  handleAddAttrs(formItems: IEFormComponent[], index: number): void
+  handleColAdd(
+    event: { newIndex: string },
+    formItems: IEFormComponent[],
+    isCopy?: boolean
+  ): void
+}
+
 export default defineComponent({
   name: 'EFormDesign',
   components: {
@@ -79,7 +92,6 @@ export default defineComponent({
       data: { formItems: [], config: {} },
       propsPanel
     })
-    provide('formConfig', state.data)
     /**
      * 选中表单项
      * @param record 当前选中的表单项
@@ -91,11 +103,11 @@ export default defineComponent({
 
     /**
      * 添加属性
-     * @param list
+     * @param formItems
      * @param index
      */
-    const addAttrs = (list: IEFormComponent[], index: number) => {
-      const item = list[index]
+    const handleAddAttrs = (formItems: IEFormComponent[], index: number) => {
+      const item = formItems[index]
       generateKey(item)
     }
 
@@ -111,18 +123,30 @@ export default defineComponent({
         handleSetSelectItem(formItem)
         return
       }
-      handleCopy(formItem)
+      handleCopy(formItem, false)
     }
 
-    const handleCopy = (item: IEFormComponent) => {
+    const handleCopy = (
+      item: IEFormComponent = state.currentItem,
+      isCopy = true
+    ) => {
+      /**
+       * 遍历当表单项配置，如果是复制，则复制一份表单项，如果不是复制，则直接添加到表单项中
+       * @param formItems
+       */
       const traverse = (formItems: IEFormComponent[]) => {
+        // 使用some遍历，找到目标后停止遍历
         formItems.some((formItem: IEFormComponent, index: number) => {
           if (formItem.key === state.currentItem.key) {
-            formItems.splice(index + 1, 0, item)
+            // 判断是不是复制
+            isCopy
+              ? formItems.splice(index + 1, 0, cloneDeep(formItem))
+              : formItems.splice(index + 1, 0, item)
             const event = {
               newIndex: index + 1
             }
-            handleColAdd(event, formItems)
+            // 添加到表单项中
+            handleColAdd(event, formItems, isCopy)
             return true
           }
         })
@@ -130,16 +154,29 @@ export default defineComponent({
       traverse(state.data.formItems)
     }
 
-    const handleColAdd = ({ newIndex }: any, formItems: IEFormComponent[]) => {
+    const handleColAdd = (
+      { newIndex }: any,
+      formItems: IEFormComponent[],
+      isCopy = false
+    ) => {
       const item = formItems[newIndex]
-      const key = generateKey()
-      console.log('-> key', key)
+      isCopy && generateKey(item)
       handleSetSelectItem(item)
     }
+    provide<IFormConfig>('formConfig', state.data)
+
+    provide<IFormDesignMethods>('formDesignMethods', {
+      handleColAdd,
+      handleCopy,
+      handleListPush,
+      handleSetSelectItem,
+      handleAddAttrs
+    })
+
     return {
       ...toRefs(state),
       handleSetSelectItem,
-      addAttrs,
+      handleAddAttrs,
       handleListPush,
       handleCopy
     }
