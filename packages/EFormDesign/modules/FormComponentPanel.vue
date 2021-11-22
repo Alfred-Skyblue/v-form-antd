@@ -98,5 +98,24 @@ export default defineComponent({
   .list-main {
     height: 100vh;
   }
+
+  // 列表动画
+  .list-enter-active {
+    transition: all 0.5s;
+  }
+
+  .list-leave-active {
+    transition: all 0.3s;
+  }
+
+  .list-enter,
+  .list-leave-to {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  .list-enter {
+    height: 30px;
+  }
 }
 </style>

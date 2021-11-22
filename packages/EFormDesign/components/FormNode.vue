@@ -12,9 +12,10 @@
     <div class="form-item-box">
       <EFormItem :data="data" :record="record" />
     </div>
-    <div>
+    <div class="show-key-box">
       {{ record.label + (record.field ? '/' + record.field : '') }}
     </div>
+    <FormNodeOperate :record="record" :currentItem="currentItem" />
   </div>
 </template>
 <script lang="ts">
@@ -25,9 +26,13 @@ import {
   PropType
 } from '@vue/composition-api'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import FormNodeOperate from './FormNodeOperate.vue'
 
 export default defineComponent({
   name: 'FormNode',
+  components: {
+    FormNodeOperate
+  },
   props: {
     data: {
       type: Object as PropType<IFormConfig>,
