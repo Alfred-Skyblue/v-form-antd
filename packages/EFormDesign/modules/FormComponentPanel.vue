@@ -45,6 +45,7 @@ import {
 } from '@vue/composition-api'
 import LayoutItem from '../components/LayoutItem.vue'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { cloneDeep } from 'lodash-es'
 
 export default defineComponent({
   name: 'FormComponentPanel',
@@ -63,9 +64,14 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const state = reactive({})
-    const addItem = (evt: any) => {
-      const newIndex = evt.newIndex
-      emit('handleSetSelectItem', props.data.formItems[newIndex])
+    /**
+     * 拖拽完成事件
+     * @param newIndex
+     */
+    const addItem = ({ newIndex }: any) => {
+      const formItems = props.data.formItems
+      formItems[newIndex] = cloneDeep(formItems[newIndex])
+      emit('handleSetSelectItem', formItems[newIndex])
     }
     return {
       addItem,

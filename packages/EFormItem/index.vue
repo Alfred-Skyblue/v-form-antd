@@ -5,7 +5,9 @@
 -->
 <template>
   <div>
-    <component :is="componentItem"></component>
+    <a-form-model-item v-bind="formItemProps">
+      <component :is="componentItem"></component>
+    </a-form-model-item>
   </div>
 </template>
 <script lang="ts">
@@ -31,8 +33,13 @@ export default defineComponent({
     const state = reactive({
       componentMap
     })
+
+    const formItemProps = computed(() => {
+      const { label } = props.record
+      return { label }
+    })
     const componentItem = computed(() => componentMap[props.record.type])
-    return { ...toRefs(state), componentItem }
+    return { ...toRefs(state), componentItem, formItemProps }
   }
 })
 </script>

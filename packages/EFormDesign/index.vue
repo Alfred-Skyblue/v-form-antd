@@ -6,7 +6,7 @@
 <template>
   <a-config-provider :locale="locale">
     <div class="e-form-design-container">
-      <header class="e-form-design-header">{{ data.config.title }}</header>
+      <header class="e-form-design-header"></header>
       <section class="content">
         <div class="left">
           <a-collapse>
@@ -45,7 +45,8 @@ import {
   reactive,
   toRefs,
   ref,
-  provide
+  provide,
+  Ref
 } from '@vue/composition-api'
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
@@ -58,7 +59,7 @@ interface IState {
   currentItem: IEFormComponent
   locale: any
   baseComponents: IEFormComponent[]
-  propsPanel: null | IPropsPanel
+  propsPanel: Ref<null | IPropsPanel>
 }
 export default defineComponent({
   name: 'EFormDesign',
@@ -74,9 +75,8 @@ export default defineComponent({
     const state = reactive<IState>({
       locale: zhCN,
       baseComponents,
-      currentItem: {},
+      currentItem: { type: '' },
       data: { formItems: [], config: {} },
-      // TODO 待解决
       propsPanel
     })
     provide('formConfig', state.data)
@@ -88,22 +88,60 @@ export default defineComponent({
       state.currentItem = record
       state.propsPanel?.changeTab(record.key ? 2 : 1)
     }
+
+    /**
+     * 添加属性
+     * @param list
+     * @param index
+     */
     const addAttrs = (list: IEFormComponent[], index: number) => {
-      generateKey(list[index])
+      const item = list[index]
+      generateKey(item)
     }
 
+    /**
+     * 单击控件时添加到面板中
+     * @param item {IEFormComponent} 当前点击的组件
+     */
     const handleListPush = (item: IEFormComponent) => {
+      const formItem = cloneDeep(item)
+      generateKey(formItem)
       if (!state.currentItem.key) {
-        generateKey(item)
-        const formItem = cloneDeep(item)
         state.data.formItems.push(formItem)
+        handleSetSelectItem(formItem)
+        return
       }
+      handleCopy(formItem)
+    }
+
+    const handleCopy = (item: IEFormComponent) => {
+      const traverse = (formItems: IEFormComponent[]) => {
+        formItems.some((formItem: IEFormComponent, index: number) => {
+          if (formItem.key === state.currentItem.key) {
+            formItems.splice(index + 1, 0, item)
+            const event = {
+              newIndex: index + 1
+            }
+            handleColAdd(event, formItems)
+            return true
+          }
+        })
+      }
+      traverse(state.data.formItems)
+    }
+
+    const handleColAdd = ({ newIndex }: any, formItems: IEFormComponent[]) => {
+      const item = formItems[newIndex]
+      const key = generateKey()
+      console.log('-> key', key)
+      handleSetSelectItem(item)
     }
     return {
       ...toRefs(state),
       handleSetSelectItem,
       addAttrs,
-      handleListPush
+      handleListPush,
+      handleCopy
     }
   }
 })
