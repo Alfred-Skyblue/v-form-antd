@@ -1,12 +1,12 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/11/18
- * @Description:
+ * @Description: 表单设计器
 -->
 <template>
   <a-config-provider :locale="locale">
     <div class="e-form-design-container">
-      <header></header>
+      <header class="e-form-design-header"></header>
       <section class="content">
         <div class="left">
           <a-collapse>
@@ -15,40 +15,171 @@
               header="基础控件"
               key="1"
             >
-              <CollapseItem :list="baseComponents"></CollapseItem>
+              <CollapseItem
+                :list="baseComponents"
+                @addAttrs="handleAddAttrs"
+                @handleListPush="handleListPush"
+              ></CollapseItem>
             </a-collapse-panel>
           </a-collapse>
         </div>
         <div class="node-panel">
-          <FormComponentPanel :data="data"></FormComponentPanel>
+          <FormComponentPanel
+            :current-item="currentItem"
+            :data="data"
+            @handleSetSelectItem="handleSetSelectItem"
+          ></FormComponentPanel>
         </div>
-        <div class="right">右侧属性区域</div>
+        <div class="right"><PropsPanel ref="propsPanel"></PropsPanel></div>
       </section>
     </div>
   </a-config-provider>
 </template>
 <script lang="ts">
-import CollapseItem from './components/CollapseItem.vue'
-import FormComponentPanel from './components/FormComponentPanel.vue'
+import CollapseItem from './modules/CollapseItem.vue'
+import FormComponentPanel from './modules/FormComponentPanel.vue'
+import PropsPanel, { IPropsPanel } from './modules/PropsPanel.vue'
 
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import {
+  defineComponent,
+  reactive,
+  toRefs,
+  ref,
+  provide,
+  Ref
+} from '@vue/composition-api'
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
-import { baseComponents } from './config/formItemConfig'
+import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { generateKey } from '@pack/utils'
+import { cloneDeep } from 'lodash-es'
+import { baseComponents } from '@pack/core/formItemConfig'
+
+interface IState {
+  data: IFormConfig
+  currentItem: IEFormComponent
+  locale: any
+  baseComponents: IEFormComponent[]
+  propsPanel: Ref<null | IPropsPanel>
+}
+
+export interface IFormDesignMethods {
+  handleSetSelectItem(item: IEFormComponent): void
+  handleListPush(item: IEFormComponent): void
+  handleCopy(item?: IEFormComponent, isCopy?: boolean): void
+  handleAddAttrs(formItems: IEFormComponent[], index: number): void
+  handleColAdd(
+    event: { newIndex: string },
+    formItems: IEFormComponent[],
+    isCopy?: boolean
+  ): void
+}
 
 export default defineComponent({
   name: 'EFormDesign',
   components: {
     CollapseItem,
-    FormComponentPanel
+    FormComponentPanel,
+    PropsPanel
   },
   setup() {
-    const state = reactive({
+    // 子组件实例
+    const propsPanel = ref<null | IPropsPanel>(null)
+
+    const state = reactive<IState>({
       locale: zhCN,
       baseComponents,
-      data: { formItems: [], config: {} }
+      currentItem: { type: '' },
+      data: { formItems: [], config: {} },
+      propsPanel
+    })
+    /**
+     * 选中表单项
+     * @param record 当前选中的表单项
+     */
+    const handleSetSelectItem = (record: IEFormComponent) => {
+      state.currentItem = record
+      state.propsPanel?.changeTab(record.key ? 2 : 1)
+    }
+
+    /**
+     * 添加属性
+     * @param formItems
+     * @param index
+     */
+    const handleAddAttrs = (formItems: IEFormComponent[], index: number) => {
+      const item = formItems[index]
+      generateKey(item)
+    }
+
+    /**
+     * 单击控件时添加到面板中
+     * @param item {IEFormComponent} 当前点击的组件
+     */
+    const handleListPush = (item: IEFormComponent) => {
+      const formItem = cloneDeep(item)
+      generateKey(formItem)
+      if (!state.currentItem.key) {
+        state.data.formItems.push(formItem)
+        handleSetSelectItem(formItem)
+        return
+      }
+      handleCopy(formItem, false)
+    }
+
+    const handleCopy = (
+      item: IEFormComponent = state.currentItem,
+      isCopy = true
+    ) => {
+      /**
+       * 遍历当表单项配置，如果是复制，则复制一份表单项，如果不是复制，则直接添加到表单项中
+       * @param formItems
+       */
+      const traverse = (formItems: IEFormComponent[]) => {
+        // 使用some遍历，找到目标后停止遍历
+        formItems.some((formItem: IEFormComponent, index: number) => {
+          if (formItem.key === state.currentItem.key) {
+            // 判断是不是复制
+            isCopy
+              ? formItems.splice(index + 1, 0, cloneDeep(formItem))
+              : formItems.splice(index + 1, 0, item)
+            const event = {
+              newIndex: index + 1
+            }
+            // 添加到表单项中
+            handleColAdd(event, formItems, isCopy)
+            return true
+          }
+        })
+      }
+      traverse(state.data.formItems)
+    }
+
+    const handleColAdd = (
+      { newIndex }: any,
+      formItems: IEFormComponent[],
+      isCopy = false
+    ) => {
+      const item = formItems[newIndex]
+      isCopy && generateKey(item)
+      handleSetSelectItem(item)
+    }
+    provide<IFormConfig>('formConfig', state.data)
+
+    provide<IFormDesignMethods>('formDesignMethods', {
+      handleColAdd,
+      handleCopy,
+      handleListPush,
+      handleSetSelectItem,
+      handleAddAttrs
     })
 
-    return { ...toRefs(state) }
+    return {
+      ...toRefs(state),
+      handleSetSelectItem,
+      handleAddAttrs,
+      handleListPush,
+      handleCopy
+    }
   }
 })
 </script>

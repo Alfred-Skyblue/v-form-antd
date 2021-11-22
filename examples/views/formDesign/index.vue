@@ -4,23 +4,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive } from '@vue/composition-api'
-import EFormDesign from '../../../packages/EFormDesign/index.vue'
-export default defineComponent({
+<script>
+export default {
   name: 'formDesign',
-  components: { EFormDesign },
-  setup() {
-    const state = reactive({ name: '小明', age: 18 })
-    const handleClick = () => {
-      console.log(state?.name)
-    }
-    return {
-      handleClick,
-      state
-    }
-  }
-})
+  components: {}
+}
 </script>
 
 <style scoped></style>

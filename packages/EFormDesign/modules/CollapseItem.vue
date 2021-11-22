@@ -1,7 +1,7 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/11/18
- * @Description:
+ * @Description: 左侧表单拖拽项
 -->
 <template>
   <div>
@@ -15,12 +15,13 @@
         ghostClass: 'moving'
       }"
       @start="handleStart($event, list)"
+      @add="handleAdd"
     >
       <li
         class="bs-box"
         v-for="(val, index) in list"
         :key="index"
-        @dragstart="$emit('generateKey', list, index)"
+        @dragstart="$emit('addAttrs', list, index)"
         @click="$emit('handleListPush', val)"
       >
         {{ val.label }}
@@ -45,7 +46,10 @@ export default defineComponent({
     const handleStart = (e: any, list: IEFormComponent[]) => {
       emit('start', list[e.oldIndex].type)
     }
-    return { state, handleStart }
+    const handleAdd = (e: any) => {
+      console.log(e)
+    }
+    return { state, handleStart, handleAdd }
   }
 })
 </script>

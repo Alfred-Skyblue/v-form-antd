@@ -58,16 +58,16 @@
 // }
 import './core/use_antd'
 import './styles/index.less'
-import HelloForm from './components/HelloForm.vue'
 import EFormDesign from './EFormDesign'
+import EFormItem from './EFormItem'
 import { VueConstructor } from 'vue'
 
-const components = [HelloForm, EFormDesign]
+const components = [EFormDesign, EFormItem]
 const install = (Vue: VueConstructor) => {
   components.forEach(component => {
     Vue.component(component.name, component)
   })
 }
 
-export { EFormDesign }
-export default { install, EFormDesign }
+export { EFormDesign, EFormItem }
+export default { install, EFormDesign, EFormItem }

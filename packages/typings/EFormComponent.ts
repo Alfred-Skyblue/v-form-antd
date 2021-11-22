@@ -1,4 +1,6 @@
+import { IObject } from './baseType'
 type RuleChangeType = 'change' | 'blur' | ['change', 'blur']
+
 export interface IRules {
   required?: boolean
   message?: string
@@ -14,10 +16,9 @@ export interface IRules {
   whitespace?: boolean
 }
 
-interface IObject {
-  [key: string]: any
-}
-
+/**
+ * 布局属性
+ */
 interface ICol {
   span?: number
   offset?: number
@@ -31,14 +32,26 @@ interface ICol {
   xxl?: number
 }
 
+/**
+ * 组件属性
+ */
 export interface IEFormComponent {
   type: string
-  label: string
-  icon: string
-  rules: IRules[]
-  col: string | ICol
-  props: IObject
-  options: IObject
+  label?: string
+  icon?: string
+  rules?: IRules[]
+  col?: string | ICol
+  props?: IObject
+  options?: IObject
   key?: string
-  filed?: string
+  field?: string
+  columns?: Array<{ span: number; children: IEFormComponent[] }>
+}
+
+/**
+ * 表单配置
+ */
+export interface IFormConfig {
+  formItems: IEFormComponent[]
+  config: IObject
 }
