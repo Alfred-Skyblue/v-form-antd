@@ -19,15 +19,15 @@
     >
       <li
         class="bs-box"
-        v-for="(val, index) in list"
+        v-for="(item, index) in list"
         :key="index"
         @dragstart="$emit('addAttrs', list, index)"
-        @click="$emit('handleListPush', val)"
+        @click="$emit('handleListPush', item)"
       >
         <svg class="icon" aria-hidden="true">
-          <use :xlink:href="`#${val.icon}`"></use>
+          <use :xlink:href="`#${item.icon}`"></use>
         </svg>
-        {{ val.label }}
+        {{ item.label }}
       </li>
     </draggable>
   </div>

@@ -35,8 +35,8 @@ export function generateKey(formItem?: IEFormComponent): string | boolean {
 export function remove<T>(
   array: Array<T>,
   value: number | ((item: T, index: number, array: Array<T>) => boolean)
-): T {
-  let removeVal: Array<any> = []
+): T | undefined {
+  let removeVal: Array<T | undefined> = []
   if (isNumber(value)) {
     removeVal = array.splice(value, 1)
   } else {
