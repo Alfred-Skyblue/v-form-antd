@@ -4,7 +4,8 @@
  * @date: 2021/11/18 16:25
  * @description：$END$
  */
-import { IEFormComponent, IObject } from '@pack/typings/EFormComponent'
+import { IEFormComponent } from '@pack/typings/EFormComponent'
+import { IObject } from '@pack/typings/baseType'
 import ACmp from './use_antd'
 import { isArray } from 'lodash-es'
 export const componentMap: IObject = {

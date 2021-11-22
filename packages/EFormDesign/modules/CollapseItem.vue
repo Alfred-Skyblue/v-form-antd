@@ -15,6 +15,7 @@
         ghostClass: 'moving'
       }"
       @start="handleStart($event, list)"
+      @add="handleAdd"
     >
       <li
         class="bs-box"
@@ -45,7 +46,10 @@ export default defineComponent({
     const handleStart = (e: any, list: IEFormComponent[]) => {
       emit('start', list[e.oldIndex].type)
     }
-    return { state, handleStart }
+    const handleAdd = (e: any) => {
+      console.log(e)
+    }
+    return { state, handleStart, handleAdd }
   }
 })
 </script>
