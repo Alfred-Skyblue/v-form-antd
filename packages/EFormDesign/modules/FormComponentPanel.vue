@@ -21,9 +21,11 @@
           handle=".drag-move"
           v-model="data.formItems"
           @add="addItem"
+          @start="handleDragStart"
         >
           <transition-group tag="div" name="list" class="list-main">
             <LayoutItem
+              class="drag-move"
               v-for="record in data.formItems"
               :key="record.key"
               :record="record"
@@ -73,8 +75,14 @@ export default defineComponent({
       formItems[newIndex] = cloneDeep(formItems[newIndex])
       emit('handleSetSelectItem', formItems[newIndex])
     }
+
+    const handleDragStart = (e: any) => {
+      emit('handleSetSelectItem', props.data.formItems[e.oldIndex])
+    }
+
     return {
       addItem,
+      handleDragStart,
       ...toRefs(state)
     }
   }
@@ -94,28 +102,31 @@ export default defineComponent({
     margin: auto;
     position: absolute;
   }
+  .draggable-box {
+    .drag-move {
+      cursor: move;
+    }
+    .list-main {
+      height: 100vh;
+      // 列表动画
+      .list-enter-active {
+        transition: all 0.5s;
+      }
 
-  .list-main {
-    height: 100vh;
-  }
+      .list-leave-active {
+        transition: all 0.3s;
+      }
 
-  // 列表动画
-  .list-enter-active {
-    transition: all 0.5s;
-  }
+      .list-enter,
+      .list-leave-to {
+        opacity: 0;
+        transform: translateX(-100px);
+      }
 
-  .list-leave-active {
-    transition: all 0.3s;
-  }
-
-  .list-enter,
-  .list-leave-to {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-
-  .list-enter {
-    height: 30px;
+      .list-enter {
+        height: 30px;
+      }
+    }
   }
 }
 </style>

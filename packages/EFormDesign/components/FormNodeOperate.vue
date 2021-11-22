@@ -18,6 +18,7 @@
 import { computed, defineComponent, inject } from '@vue/composition-api'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { IFormDesignMethods } from '@pack/EFormDesign/index.vue'
+import { remove } from '@pack/utils'
 
 export default defineComponent({
   name: 'FormNodeOperate',
@@ -39,24 +40,19 @@ export default defineComponent({
     })
     const formConfig = inject<IFormConfig>('formConfig')
     const formDesignMethods = inject<IFormDesignMethods>('formDesignMethods')
+
     /**
      * 删除当前项
      */
     const handleDelete = () => {
       const traverse = (formItems: IEFormComponent[]) => {
         formItems.some((formItem, index) => {
+          const { type, key } = formItem
           // 处理栅格和标签页布局
-          if (['grid', 'tabs'].includes(formItem.type)) {
-            formItem.columns!.forEach(item => {
-              traverse(item.children)
-            })
-          }
-          /**
-           * 对比formItem和currentItem的key，不同则保留控件，相同时则删除控件
-           */
-          if (formItem.key !== props.currentItem.key) {
-            return false
-          } else {
+          ;['grid', 'tabs'].includes(type) &&
+            formItem.columns!.forEach(item => traverse(item.children))
+
+          if (key === props.currentItem.key) {
             let params: IEFormComponent =
               formItems.length === 1
                 ? { type: '' }
@@ -64,7 +60,7 @@ export default defineComponent({
                 ? formItems[index + 1]
                 : formItems[index - 1]
             formDesignMethods!.handleSetSelectItem(params)
-            formItems.splice(index, 1)
+            remove(formItems, index)
             return true
           }
         })

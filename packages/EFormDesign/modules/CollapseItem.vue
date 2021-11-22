@@ -24,6 +24,9 @@
         @dragstart="$emit('addAttrs', list, index)"
         @click="$emit('handleListPush', val)"
       >
+        <svg class="icon" aria-hidden="true">
+          <use :xlink:href="`#${val.icon}`"></use>
+        </svg>
         {{ val.label }}
       </li>
     </draggable>

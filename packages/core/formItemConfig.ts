@@ -23,11 +23,12 @@ export function setFormDesignConfig(
     componentMap[config.type] = config
   }
 }
+
 export const baseComponents: IEFormComponent[] = [
   {
     type: 'input',
     label: '输入框',
-    icon: 'icon-input',
+    icon: 'icon-shurukuang',
     rules: [
       {
         required: false,
