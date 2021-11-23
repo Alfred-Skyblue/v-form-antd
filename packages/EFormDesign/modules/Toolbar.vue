@@ -17,7 +17,6 @@
           <a-icon :type="item.icon" />
         </a>
       </a-tooltip>
-
       <a-divider type="vertical" />
     </div>
   </div>

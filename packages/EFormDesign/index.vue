@@ -24,7 +24,7 @@
           </a-collapse>
         </div>
         <div class="node-panel">
-          <OperatingArea></OperatingArea>
+          <Toolbar @handleOpenJsonModal="handleOpenJsonModal"></Toolbar>
           <FormComponentPanel
             :current-item="currentItem"
             :data="data"
@@ -33,13 +33,16 @@
         </div>
         <div class="right"><PropsPanel ref="propsPanel"></PropsPanel></div>
       </section>
+      <JsonModal ref="jsonModal"></JsonModal>
     </div>
   </a-config-provider>
 </template>
 <script lang="ts">
 import CollapseItem from './modules/CollapseItem.vue'
 import FormComponentPanel from './modules/FormComponentPanel.vue'
-import OperatingArea from './modules/OperatingArea.vue'
+import JsonModal from './components/JsonModal.vue'
+
+import Toolbar from './modules/Toolbar.vue'
 import PropsPanel, { IPropsPanel } from './modules/PropsPanel.vue'
 
 import {
@@ -55,6 +58,7 @@ import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { generateKey } from '@pack/utils'
 import { cloneDeep } from 'lodash-es'
 import { baseComponents } from '@pack/core/formItemConfig'
+import { IJsonModalMethods } from '@pack/EFormDesign/components/JsonModal.vue'
 
 interface IState {
   data: IFormConfig
@@ -62,6 +66,7 @@ interface IState {
   locale: any
   baseComponents: IEFormComponent[]
   propsPanel: Ref<null | IPropsPanel>
+  jsonModal: Ref<null | IJsonModalMethods>
 }
 
 export interface IFormDesignMethods {
@@ -82,11 +87,13 @@ export default defineComponent({
     CollapseItem,
     FormComponentPanel,
     PropsPanel,
-    OperatingArea
+    Toolbar,
+    JsonModal
   },
   setup() {
     // 子组件实例
     const propsPanel = ref<null | IPropsPanel>(null)
+    const jsonModal = ref<null | IJsonModalMethods>(null)
 
     const state = reactive<IState>({
       locale: zhCN, // 国际化
@@ -96,7 +103,8 @@ export default defineComponent({
         formItems: [],
         config: { labelLayout: 'flex', labelCol: {}, wrapperCol: {} }
       },
-      propsPanel
+      propsPanel,
+      jsonModal
     })
     /**
      * 选中表单项
@@ -169,8 +177,10 @@ export default defineComponent({
       isCopy && generateKey(item)
       handleSetSelectItem(item)
     }
+    const handleOpenJsonModal = () => {
+      state.jsonModal?.showModal(state.data)
+    }
     provide<IFormConfig>('formConfig', state.data)
-
     provide<IFormDesignMethods>('formDesignMethods', {
       handleColAdd,
       handleCopy,
@@ -184,7 +194,8 @@ export default defineComponent({
       handleSetSelectItem,
       handleAddAttrs,
       handleListPush,
-      handleCopy
+      handleCopy,
+      handleOpenJsonModal
     }
   }
 })

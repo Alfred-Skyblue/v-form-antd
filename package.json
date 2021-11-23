@@ -16,6 +16,7 @@
     "core-js": "^3.6.5",
     "lodash-es": "^4.17.21",
     "vue": "^2.6.11",
+    "vue-codemirror-lite": "^1.0.4",
     "vue-router": "^3.5.3",
     "vuedraggable": "^2.24.3"
   },

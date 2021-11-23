@@ -10,3 +10,9 @@ declare module 'ant-design-vue/lib/locale-provider/zh_CN' {
   const zh_CN: zhCN
   export default zh_CN
 }
+
+declare module 'vue-codemirror-lite' {
+  import { VueProxy } from '@vue/composition-api'
+  export const codemirror: VueProxy<any, any>
+  export default { codemirror }
+}
