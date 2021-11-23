@@ -1,6 +1,7 @@
 import { IObject } from './baseType'
 type RuleChangeType = 'change' | 'blur' | ['change', 'blur']
-
+type LayoutType = 'horizontal' | 'vertical' | 'inline'
+type labelLayout = 'flex' | 'grid'
 export interface IRules {
   required?: boolean
   message?: string
@@ -53,5 +54,11 @@ export interface IEFormComponent {
  */
 export interface IFormConfig {
   formItems: IEFormComponent[]
-  config: IObject
+  config: {
+    layout?: LayoutType
+    labelLayout?: labelLayout
+    labelWidth?: number
+    labelCol?: ICol
+    wrapperCol?: ICol
+  }
 }

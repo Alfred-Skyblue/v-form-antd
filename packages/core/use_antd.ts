@@ -8,7 +8,12 @@ import {
   Row,
   Tabs,
   Button,
-  Icon
+  Icon,
+  Radio,
+  InputNumber,
+  Slider,
+  Tooltip,
+  Divider
 } from 'ant-design-vue'
 import vuedraggable from 'vuedraggable'
 ;[
@@ -20,7 +25,13 @@ import vuedraggable from 'vuedraggable'
   Row,
   Tabs,
   Button,
-  Icon
+  Icon,
+  Radio,
+  InputNumber,
+  Slider,
+  Icon,
+  Tooltip,
+  Divider
 ].forEach(component => {
   Vue.use(component)
 })

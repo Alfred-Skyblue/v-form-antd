@@ -1,7 +1,7 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/11/11
- * @Description:
+ * @Description: 节点操作复制删除控件
 -->
 <template>
   <div>

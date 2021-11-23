@@ -1,7 +1,7 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/11/19
- * @Description: $END$
+ * @Description: 拖拽节点控件
 -->
 <template>
   <div
