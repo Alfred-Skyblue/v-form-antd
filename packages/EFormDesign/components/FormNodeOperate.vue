@@ -15,7 +15,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject } from '@vue/composition-api'
+import {
+  computed,
+  defineComponent,
+  inject,
+  Ref,
+  watch
+} from '@vue/composition-api'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { IFormDesignMethods } from '@pack/EFormDesign/index.vue'
 import { remove } from '@pack/utils'
@@ -38,9 +44,11 @@ export default defineComponent({
         ? 'active'
         : 'unactivated'
     })
-    const formConfig = inject<IFormConfig>('formConfig')
+    const formConfig = inject('formConfig') as Ref<IFormConfig>
     const formDesignMethods = inject<IFormDesignMethods>('formDesignMethods')
-
+    watch(formConfig, (newValue, oldValue) => {
+      console.log('-> newValue, oldValue', newValue, oldValue)
+    })
     /**
      * 删除当前项
      */
@@ -51,7 +59,6 @@ export default defineComponent({
           // 处理栅格和标签页布局
           ;['grid', 'tabs'].includes(type) &&
             formItem.columns!.forEach(item => traverse(item.children))
-
           if (key === props.currentItem.key) {
             let params: IEFormComponent =
               formItems.length === 1
@@ -65,7 +72,7 @@ export default defineComponent({
           }
         })
       }
-      traverse(formConfig!.formItems)
+      traverse(formConfig.value!.formItems)
     }
 
     const handleCopy = () => {

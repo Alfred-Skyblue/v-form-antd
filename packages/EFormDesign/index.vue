@@ -27,7 +27,7 @@
           <Toolbar @handleOpenJsonModal="handleOpenJsonModal"></Toolbar>
           <FormComponentPanel
             :current-item="currentItem"
-            :data="data"
+            :data="formConfig"
             @handleSetSelectItem="handleSetSelectItem"
           ></FormComponentPanel>
         </div>
@@ -59,9 +59,9 @@ import { generateKey } from '@pack/utils'
 import { cloneDeep } from 'lodash-es'
 import { baseComponents } from '@pack/core/formItemConfig'
 import { IJsonModalMethods } from '@pack/EFormDesign/components/JsonModal.vue'
+import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
 
 interface IState {
-  data: IFormConfig
   currentItem: IEFormComponent
   locale: any
   baseComponents: IEFormComponent[]
@@ -94,15 +94,16 @@ export default defineComponent({
     // 子组件实例
     const propsPanel = ref<null | IPropsPanel>(null)
     const jsonModal = ref<null | IJsonModalMethods>(null)
-
+    // endregion
+    const formConfig = ref<IFormConfig>({
+      // 表单配置
+      formItems: [],
+      config: { labelLayout: 'flex', labelCol: {}, wrapperCol: {} }
+    })
     const state = reactive<IState>({
       locale: zhCN, // 国际化
       baseComponents, // 基础控件列表
       currentItem: { type: '' }, // 当前选中的控件
-      data: {
-        formItems: [],
-        config: { labelLayout: 'flex', labelCol: {}, wrapperCol: {} }
-      },
       propsPanel,
       jsonModal
     })
@@ -133,13 +134,18 @@ export default defineComponent({
       const formItem = cloneDeep(item)
       generateKey(formItem)
       if (!state.currentItem.key) {
-        state.data.formItems.push(formItem)
+        formConfig.value.formItems.push(formItem)
         handleSetSelectItem(formItem)
         return
       }
       handleCopy(formItem, false)
     }
 
+    /**
+     * 复制或者添加表单，isCopy为true时则复制表单
+     * @param item {IEFormComponent} 当前点击的组件
+     * @param isCopy {boolean} 是否复制
+     */
     const handleCopy = (
       item: IEFormComponent = state.currentItem,
       isCopy = true
@@ -165,9 +171,15 @@ export default defineComponent({
           }
         })
       }
-      traverse(state.data.formItems)
+      traverse(formConfig.value.formItems)
     }
 
+    /**
+     * 添加到表单中
+     * @param newIndex {object} 事件对象
+     * @param formItems {IEFormComponent[]} 表单项列表
+     * @param isCopy {boolean} 是否复制
+     */
     const handleColAdd = (
       { newIndex }: any,
       formItems: IEFormComponent[],
@@ -177,10 +189,20 @@ export default defineComponent({
       isCopy && generateKey(item)
       handleSetSelectItem(item)
     }
+    /**
+     * 打开 JSON 数据模态框
+     */
     const handleOpenJsonModal = () => {
-      state.jsonModal?.showModal(state.data)
+      state.jsonModal?.showModal(formConfig.value)
     }
-    provide<IFormConfig>('formConfig', state.data)
+    const historyReturn = useRefHistory(formConfig, { deep: true })
+
+    // 把表单配置项注入到子组件中，子组件可通过inject获取，获取到的数据为响应式
+    provide<Ref<IFormConfig>>('formConfig', formConfig)
+
+    // 注入历史记录
+    provide<UseRefHistoryReturn<any, any>>('historyReturn', historyReturn)
+    // 把祖先组件的方法项注入到子组件中，子组件可通过inject获取
     provide<IFormDesignMethods>('formDesignMethods', {
       handleColAdd,
       handleCopy,
@@ -195,7 +217,8 @@ export default defineComponent({
       handleAddAttrs,
       handleListPush,
       handleCopy,
-      handleOpenJsonModal
+      handleOpenJsonModal,
+      formConfig
     }
   }
 })

@@ -7,49 +7,52 @@
   <div class="form-props-content">
     <a-form-model class="props-body">
       <a-form-model-item label="表单布局">
-        <a-radio-group buttonStyle="solid" v-model="config.layout">
+        <a-radio-group buttonStyle="solid" v-model="formConfig.config.layout">
           <a-radio-button value="horizontal">水平</a-radio-button>
           <a-radio-button value="vertical">垂直</a-radio-button>
           <a-radio-button value="inline">行内</a-radio-button>
         </a-radio-group>
       </a-form-model-item>
       <a-form-model-item label="标签布局">
-        <a-radio-group buttonStyle="solid" v-model="config.labelLayout">
+        <a-radio-group
+          buttonStyle="solid"
+          v-model="formConfig.config.labelLayout"
+        >
           <a-radio-button value="flex">固定</a-radio-button>
           <a-radio-button value="grid">栅格</a-radio-button>
         </a-radio-group>
       </a-form-model-item>
       <a-form-model-item
         label="标签宽度（px）"
-        v-show="config.labelLayout === 'flex'"
+        v-show="formConfig.config.labelLayout === 'flex'"
       >
         <a-input-number
-          v-model="config.labelWidth"
+          v-model="formConfig.config.labelWidth"
           :min="0"
           :step="1"
         ></a-input-number>
       </a-form-model-item>
-      <div v-if="config.labelLayout === 'grid'">
+      <div v-if="formConfig.config.labelLayout === 'grid'">
         <a-form-model-item label="labelCol">
-          <a-slider v-model="config.labelCol.span" :max="24" />
+          <a-slider v-model="formConfig.config.labelCol.span" :max="24" />
         </a-form-model-item>
         <a-form-model-item label="wrapperCol">
-          <a-slider v-model="config.wrapperCol.span" :max="24" />
+          <a-slider v-model="formConfig.config.wrapperCol.span" :max="24" />
         </a-form-model-item>
       </div>
     </a-form-model>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, inject, toRefs } from '@vue/composition-api'
+import { defineComponent, inject, Ref } from '@vue/composition-api'
 import { IFormConfig } from '@pack/typings/EFormComponent'
 
 export default defineComponent({
   name: 'FormProps',
   setup() {
-    const formConfig = inject('formConfig') as IFormConfig
+    const formConfig = inject('formConfig') as Ref<IFormConfig>
 
-    return { ...toRefs(formConfig) }
+    return { formConfig }
   }
 })
 </script>

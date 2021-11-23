@@ -37,7 +37,7 @@ export default defineComponent({
   },
   setup() {
     const state = reactive<{ visible: boolean; jsonData: IObject }>({
-      visible: true,
+      visible: false,
       jsonData: {}
     })
     const showModal = (jsonData: IObject) => {

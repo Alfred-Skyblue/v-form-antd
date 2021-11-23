@@ -18,12 +18,27 @@
         </a>
       </a-tooltip>
       <a-divider type="vertical" />
+      <a-tooltip title="撤销">
+        <a @click="handleUndo">
+          <a-icon type="undo" />
+          <span>撤销</span>
+        </a>
+      </a-tooltip>
+      <a-tooltip title="重做">
+        <a @click="redo">
+          <a-icon type="redo" />
+          <span>重做</span>
+        </a>
+      </a-tooltip>
     </div>
   </div>
   <!-- 操作区域 start -->
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { defineComponent, inject, reactive, toRefs } from '@vue/composition-api'
+import { UseRefHistoryReturn } from '@vueuse/core'
+import { IFormDesignMethods } from '@pack/EFormDesign/index.vue'
+import { IFormConfig } from '@pack/typings/EFormComponent'
 
 interface IToolbarsConfig {
   type: string
@@ -37,7 +52,9 @@ interface IToolbarsConfig {
 export default defineComponent({
   name: 'operatingArea',
   setup() {
-    const state = reactive<{ toolbarsConfigs: IToolbarsConfig[] }>({
+    const state = reactive<{
+      toolbarsConfigs: IToolbarsConfig[]
+    }>({
       toolbarsConfigs: [
         {
           title: '预览',
@@ -71,12 +88,23 @@ export default defineComponent({
         }
       ]
     })
-    return { ...toRefs(state) }
+    const { undo, redo, canUndo, canRedo, source } = inject(
+      'historyReturn'
+    ) as UseRefHistoryReturn<IFormConfig, IFormConfig>
+    const formDesignMethods = inject<IFormDesignMethods>('formDesignMethods')
+    const handleUndo = () => {
+      undo()
+      // const formItems = source.value.formItems
+      formDesignMethods?.handleSetSelectItem({ type: '' })
+      console.log('-> canUndo, canRedo', canUndo, canRedo)
+    }
+    return { ...toRefs(state), handleUndo, redo, canUndo, canRedo }
   }
 })
 </script>
 
 <style lang="less" scoped>
+//noinspection CssUnknownTarget
 @import '~@pack/static/styles/variable.less';
 .operating-area {
   border-bottom: 2px solid @border-color;
