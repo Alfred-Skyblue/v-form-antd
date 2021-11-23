@@ -41,10 +41,10 @@
 import CollapseItem from './modules/CollapseItem.vue'
 import FormComponentPanel from './modules/FormComponentPanel.vue'
 import JsonModal from './components/JsonModal.vue'
-
 import Toolbar from './modules/Toolbar.vue'
 import PropsPanel, { IPropsPanel } from './modules/PropsPanel.vue'
 
+import 'codemirror/mode/javascript/javascript'
 import {
   defineComponent,
   reactive,
