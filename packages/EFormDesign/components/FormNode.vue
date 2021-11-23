@@ -6,7 +6,7 @@
 <template>
   <div
     class="drag-move-box"
-    @click.stop="$emit('handleSelectItem', record)"
+    @click.stop="handleSelectItem"
     :class="{ active: record.key === currentItem.key }"
   >
     <div class="form-item-box">
@@ -23,10 +23,12 @@ import {
   defineComponent,
   reactive,
   toRefs,
-  PropType
+  PropType,
+  inject
 } from '@vue/composition-api'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import FormNodeOperate from './FormNodeOperate.vue'
+import { IFormDesignMethods } from '@pack/EFormDesign/index.vue'
 
 export default defineComponent({
   name: 'FormNode',
@@ -47,10 +49,17 @@ export default defineComponent({
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const state = reactive({})
+    // 获取 formDesignMethods
+    const formDesignMethods = inject<IFormDesignMethods>('formDesignMethods')
+    const handleSelectItem = () => {
+      // 调用 formDesignMethods
+      formDesignMethods!.handleSetSelectItem(props.record)
+    }
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      handleSelectItem
     }
   }
 })
