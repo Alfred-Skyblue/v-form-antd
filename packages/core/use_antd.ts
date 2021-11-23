@@ -13,7 +13,8 @@ import {
   InputNumber,
   Slider,
   Tooltip,
-  Divider
+  Divider,
+  Modal
 } from 'ant-design-vue'
 import vuedraggable from 'vuedraggable'
 ;[
@@ -31,7 +32,8 @@ import vuedraggable from 'vuedraggable'
   Slider,
   Icon,
   Tooltip,
-  Divider
+  Divider,
+  Modal
 ].forEach(component => {
   Vue.use(component)
 })
