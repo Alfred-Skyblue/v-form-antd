@@ -24,6 +24,7 @@
           </a-collapse>
         </div>
         <div class="node-panel">
+          <OperatingArea></OperatingArea>
           <FormComponentPanel
             :current-item="currentItem"
             :data="data"
@@ -38,6 +39,7 @@
 <script lang="ts">
 import CollapseItem from './modules/CollapseItem.vue'
 import FormComponentPanel from './modules/FormComponentPanel.vue'
+import OperatingArea from './modules/OperatingArea.vue'
 import PropsPanel, { IPropsPanel } from './modules/PropsPanel.vue'
 
 import {
@@ -79,17 +81,21 @@ export default defineComponent({
   components: {
     CollapseItem,
     FormComponentPanel,
-    PropsPanel
+    PropsPanel,
+    OperatingArea
   },
   setup() {
     // 子组件实例
     const propsPanel = ref<null | IPropsPanel>(null)
 
     const state = reactive<IState>({
-      locale: zhCN,
-      baseComponents,
-      currentItem: { type: '' },
-      data: { formItems: [], config: {} },
+      locale: zhCN, // 国际化
+      baseComponents, // 基础控件列表
+      currentItem: { type: '' }, // 当前选中的控件
+      data: {
+        formItems: [],
+        config: { labelLayout: 'flex', labelCol: {}, wrapperCol: {} }
+      },
       propsPanel
     })
     /**

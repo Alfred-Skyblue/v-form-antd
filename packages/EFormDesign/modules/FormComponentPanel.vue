@@ -10,7 +10,7 @@
       v-show="data.formItems.length === 0"
       description="从左侧选择控件添加"
     />
-    <a-form-model>
+    <a-form-model v-bind="data.config">
       <a-row>
         <draggable
           tag="div"
