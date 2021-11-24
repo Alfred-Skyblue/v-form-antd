@@ -20,7 +20,9 @@ export function withInstall<T extends { name: string }>(comp: T) {
  */
 export function generateKey(formItem?: IEFormComponent): string | boolean {
   if (formItem) {
-    formItem.key = uniqueId(`${formItem.type}_`)
+    const key = uniqueId(`${formItem.type}_`)
+    formItem.key = key
+    formItem.field = key
     return true
   }
   return uniqueId('key_')

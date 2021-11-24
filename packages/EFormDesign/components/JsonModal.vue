@@ -26,9 +26,17 @@ import {
 } from '@vue/composition-api'
 import { IObject } from '@pack/typings/baseType'
 import PreviewCode from './PreviewCode.vue'
+import { cloneDeep } from 'lodash-es'
+import { IFormConfig } from '@pack/typings/EFormComponent'
 
 export interface IJsonModalMethods {
   showModal: (jsonData: IObject) => void
+}
+
+const removeAttrs = (formConfig: IFormConfig) => {
+  const copyFormConfig = cloneDeep(formConfig)
+  delete copyFormConfig.currentItem
+  return copyFormConfig
 }
 export default defineComponent({
   name: 'JsonModal',
@@ -36,17 +44,26 @@ export default defineComponent({
     PreviewCode
   },
   setup() {
-    const state = reactive<{ visible: boolean; jsonData: IObject }>({
-      visible: false,
-      jsonData: {}
+    const state = reactive<{
+      visible: boolean
+      jsonData: IFormConfig
+    }>({
+      visible: false, // 控制json数据弹框显示
+      jsonData: {} as IFormConfig // json数据
     })
-    const showModal = (jsonData: IObject) => {
+    /**
+     * 显示Json数据弹框
+     * @param jsonData
+     */
+    const showModal = (jsonData: IFormConfig) => {
       state.visible = true
       state.jsonData = jsonData
     }
+    // 计算json数据
     const editorJson = computed(() => {
-      return JSON.stringify(state.jsonData, null, '\t')
+      return JSON.stringify(removeAttrs(state.jsonData), null, '\t')
     })
+    // 关闭弹框
     const handleCancel = () => {
       state.visible = false
     }

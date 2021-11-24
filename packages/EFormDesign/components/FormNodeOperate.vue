@@ -15,16 +15,10 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  inject,
-  Ref,
-  watch
-} from '@vue/composition-api'
-import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
-import { IFormDesignMethods } from '@pack/EFormDesign/index.vue'
+import { computed, defineComponent } from '@vue/composition-api'
+import { IEFormComponent } from '@pack/typings/EFormComponent'
 import { remove } from '@pack/utils'
+import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
 export default defineComponent({
   name: 'FormNodeOperate',
@@ -39,15 +33,11 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const { formConfig, formDesignMethods } = useFormDesignState()
     const activeClass = computed(() => {
       return props.record.key === props.currentItem.key
         ? 'active'
         : 'unactivated'
-    })
-    const formConfig = inject('formConfig') as Ref<IFormConfig>
-    const formDesignMethods = inject<IFormDesignMethods>('formDesignMethods')
-    watch(formConfig, (newValue, oldValue) => {
-      console.log('-> newValue, oldValue', newValue, oldValue)
     })
     /**
      * 删除当前项
@@ -66,7 +56,7 @@ export default defineComponent({
                 : formItems.length - 1 > index
                 ? formItems[index + 1]
                 : formItems[index - 1]
-            formDesignMethods!.handleSetSelectItem(params)
+            formDesignMethods.handleSetSelectItem(params)
             remove(formItems, index)
             return true
           }
@@ -76,7 +66,7 @@ export default defineComponent({
     }
 
     const handleCopy = () => {
-      formDesignMethods?.handleCopy()
+      formDesignMethods.handleCopy()
     }
     return { activeClass, handleDelete, handleCopy }
   }

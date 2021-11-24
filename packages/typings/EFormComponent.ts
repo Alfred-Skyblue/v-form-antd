@@ -46,6 +46,7 @@ export interface IEFormComponent {
   options?: IObject
   key?: string
   field?: string
+  span?: number
   columns?: Array<{ span: number; children: IEFormComponent[] }>
 }
 
@@ -61,4 +62,5 @@ export interface IFormConfig {
     labelCol?: ICol
     wrapperCol?: ICol
   }
+  currentItem?: IEFormComponent
 }
