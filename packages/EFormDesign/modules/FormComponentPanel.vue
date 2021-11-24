@@ -7,10 +7,10 @@
   <div class="form-panel">
     <a-empty
       class="empty-text"
-      v-show="data.formItems.length === 0"
+      v-show="formConfig.formItems.length === 0"
       description="从左侧选择控件添加"
     />
-    <a-form-model v-bind="data.config">
+    <a-form-model v-bind="formConfig.config">
       <a-row>
         <draggable
           tag="div"
@@ -19,19 +19,24 @@
           ghostClass="moving"
           :animation="180"
           handle=".drag-move"
-          v-model="data.formItems"
+          v-model="formConfig.formItems"
           @add="addItem"
           @start="handleDragStart"
         >
           <transition-group tag="div" name="list" class="list-main">
-            <LayoutItem
-              class="drag-move"
-              v-for="record in data.formItems"
+            <component
+              :is="layoutTag"
+              v-for="record in formConfig.formItems"
               :key="record.key"
-              :record="record"
-              :data="data"
-              :current-item="currentItem"
-            ></LayoutItem>
+              :span="record.span"
+            >
+              <LayoutItem
+                class="drag-move"
+                :record="record"
+                :data="formConfig"
+                :current-item="formConfig.currentItem"
+              ></LayoutItem>
+            </component>
           </transition-group>
         </draggable>
       </a-row>
@@ -43,47 +48,51 @@ import {
   defineComponent,
   reactive,
   toRefs,
-  PropType
+  computed
 } from '@vue/composition-api'
 import LayoutItem from '../components/LayoutItem.vue'
-import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { cloneDeep } from 'lodash-es'
+import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
 export default defineComponent({
   name: 'FormComponentPanel',
-  props: {
-    data: {
-      type: Object as PropType<IFormConfig>,
-      required: true
-    },
-    currentItem: {
-      type: Object as PropType<IEFormComponent>,
-      required: true
-    }
-  },
   components: {
     LayoutItem
   },
   setup(props, { emit }) {
+    const { formConfig } = useFormDesignState()
+
     const state = reactive({})
     /**
      * 拖拽完成事件
      * @param newIndex
      */
     const addItem = ({ newIndex }: any) => {
-      const formItems = props.data.formItems
+      const formItems = formConfig.value.formItems
       formItems[newIndex] = cloneDeep(formItems[newIndex])
       emit('handleSetSelectItem', formItems[newIndex])
     }
-
+    /**
+     * 拖拽开始事件
+     * @param e {Object} 事件对象
+     */
     const handleDragStart = (e: any) => {
-      emit('handleSetSelectItem', props.data.formItems[e.oldIndex])
+      emit('handleSetSelectItem', formConfig.value.formItems[e.oldIndex])
     }
+
+    // 获取祖先组件传递的currentItem
+
+    // 计算布局元素，水平模式下为ACol，非水平模式下为div
+    const layoutTag = computed(() => {
+      return formConfig.value.config.layout === 'horizontal' ? 'ACol' : 'div'
+    })
 
     return {
       addItem,
       handleDragStart,
-      ...toRefs(state)
+      ...toRefs(state),
+      formConfig,
+      layoutTag
     }
   }
 })
@@ -126,6 +135,24 @@ export default defineComponent({
       .list-enter {
         height: 30px;
       }
+    }
+  }
+
+  // 行内组件宽度默认175px
+  .ant-form-inline {
+    .list-main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+
+      .layout-width {
+        width: 100%;
+      }
+    }
+
+    .ant-form-item-control-wrapper {
+      width: 175px !important;
     }
   }
 }

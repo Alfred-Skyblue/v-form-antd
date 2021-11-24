@@ -19,13 +19,17 @@
       </a-tooltip>
       <a-divider type="vertical" />
       <a-tooltip title="撤销">
-        <a @click="handleUndo">
+        <a
+          :class="{ disabled: !canUndo }"
+          :disabled="!canUndo"
+          @click="handleUndo"
+        >
           <a-icon type="undo" />
           <span>撤销</span>
         </a>
       </a-tooltip>
       <a-tooltip title="重做">
-        <a @click="redo">
+        <a :class="{ disabled: !canRedo }" :disabled="!canRedo" @click="redo">
           <a-icon type="redo" />
           <span>重做</span>
         </a>
@@ -46,9 +50,7 @@ interface IToolbarsConfig {
   icon: string
   event: string
 }
-// interface IOperatingArea {
-//   toolbarsConfigs: {}[]
-// }
+
 export default defineComponent({
   name: 'operatingArea',
   setup() {
@@ -88,15 +90,15 @@ export default defineComponent({
         }
       ]
     })
-    const { undo, redo, canUndo, canRedo, source } = inject(
-      'historyReturn'
-    ) as UseRefHistoryReturn<IFormConfig, IFormConfig>
+    const historyRef = inject('historyReturn') as UseRefHistoryReturn<
+      IFormConfig,
+      IFormConfig
+    >
     const formDesignMethods = inject<IFormDesignMethods>('formDesignMethods')
+    const { undo, redo, canUndo, canRedo } = historyRef
     const handleUndo = () => {
       undo()
       // const formItems = source.value.formItems
-      formDesignMethods?.handleSetSelectItem({ type: '' })
-      console.log('-> canUndo, canRedo', canUndo, canRedo)
     }
     return { ...toRefs(state), handleUndo, redo, canUndo, canRedo }
   }

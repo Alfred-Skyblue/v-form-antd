@@ -29,6 +29,7 @@ export const baseComponents: IEFormComponent[] = [
     type: 'input',
     label: '输入框',
     icon: 'icon-shurukuang',
+    field: '',
     rules: [
       {
         required: false,
@@ -39,9 +40,9 @@ export const baseComponents: IEFormComponent[] = [
     col: {
       span: 0
     },
+    span: 24,
     props: {
       type: 'text'
-    },
-    options: {}
+    }
   }
 ]

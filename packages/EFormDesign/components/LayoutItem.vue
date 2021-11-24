@@ -4,20 +4,23 @@
  * @Description: 表单项布局控件
 -->
 <template>
-  <div>
-    <form-node
-      :key="record.key"
-      :record="record"
-      :data="data"
-      :current-item="currentItem"
-      @handleCopy="$emit('handleCopy')"
-      @handleDelete="$emit('handleDelete')"
-      @handleShowRightMenu="$emit('handleShowRightMenu')"
-    />
-  </div>
+  <form-node
+    :key="record.key"
+    :record="record"
+    :data="data"
+    :current-item="currentItem"
+    @handleCopy="$emit('handleCopy')"
+    @handleDelete="$emit('handleDelete')"
+    @handleShowRightMenu="$emit('handleShowRightMenu')"
+  />
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import {
+  computed,
+  defineComponent,
+  reactive,
+  toRefs
+} from '@vue/composition-api'
 import FormNode from './FormNode.vue'
 export default defineComponent({
   name: 'LayoutItem',
@@ -38,9 +41,13 @@ export default defineComponent({
   components: {
     FormNode
   },
-  setup() {
+  setup(props) {
     const state = reactive({})
-    return { ...toRefs(state) }
+    const colProps = computed(() => {
+      const { span } = props.record
+      return { span }
+    })
+    return { ...toRefs(state), colProps }
   }
 })
 </script>

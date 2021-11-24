@@ -26,7 +26,7 @@
         <div class="node-panel">
           <Toolbar @handleOpenJsonModal="handleOpenJsonModal"></Toolbar>
           <FormComponentPanel
-            :current-item="currentItem"
+            :current-item="formConfig.currentItem"
             :data="formConfig"
             @handleSetSelectItem="handleSetSelectItem"
           ></FormComponentPanel>
@@ -62,7 +62,6 @@ import { IJsonModalMethods } from '@pack/EFormDesign/components/JsonModal.vue'
 import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
 
 interface IState {
-  currentItem: IEFormComponent
   locale: any
   baseComponents: IEFormComponent[]
   propsPanel: Ref<null | IPropsPanel>
@@ -95,15 +94,21 @@ export default defineComponent({
     const propsPanel = ref<null | IPropsPanel>(null)
     const jsonModal = ref<null | IJsonModalMethods>(null)
     // endregion
+    const currentItem = ref<IEFormComponent>({ type: '' })
     const formConfig = ref<IFormConfig>({
       // 表单配置
       formItems: [],
-      config: { labelLayout: 'flex', labelCol: {}, wrapperCol: {} }
+      config: {
+        layout: 'horizontal',
+        labelLayout: 'flex',
+        labelCol: {},
+        wrapperCol: {}
+      },
+      currentItem: { type: '' }
     })
     const state = reactive<IState>({
       locale: zhCN, // 国际化
       baseComponents, // 基础控件列表
-      currentItem: { type: '' }, // 当前选中的控件
       propsPanel,
       jsonModal
     })
@@ -112,9 +117,13 @@ export default defineComponent({
      * @param record 当前选中的表单项
      */
     const handleSetSelectItem = (record: IEFormComponent) => {
-      state.currentItem = record
+      formConfig.value.currentItem = record
       state.propsPanel?.changeTab(record.key ? 2 : 1)
     }
+
+    // watchEffect(state.currentItem, (newVal, oldVal) => {
+    //   console.log('-> newVal,oldVal', newVal, oldVal)
+    // })
 
     /**
      * 添加属性
@@ -133,7 +142,7 @@ export default defineComponent({
     const handleListPush = (item: IEFormComponent) => {
       const formItem = cloneDeep(item)
       generateKey(formItem)
-      if (!state.currentItem.key) {
+      if (!formConfig.value.currentItem.key) {
         formConfig.value.formItems.push(formItem)
         handleSetSelectItem(formItem)
         return
@@ -147,7 +156,7 @@ export default defineComponent({
      * @param isCopy {boolean} 是否复制
      */
     const handleCopy = (
-      item: IEFormComponent = state.currentItem,
+      item: IEFormComponent = formConfig.value.currentItem,
       isCopy = true
     ) => {
       /**
@@ -157,7 +166,7 @@ export default defineComponent({
       const traverse = (formItems: IEFormComponent[]) => {
         // 使用some遍历，找到目标后停止遍历
         formItems.some((formItem: IEFormComponent, index: number) => {
-          if (formItem.key === state.currentItem.key) {
+          if (formItem.key === formConfig.value.currentItem.key) {
             // 判断是不是复制
             isCopy
               ? formItems.splice(index + 1, 0, cloneDeep(formItem))
@@ -197,11 +206,14 @@ export default defineComponent({
     }
     const historyReturn = useRefHistory(formConfig, { deep: true })
 
+    // region 注入给子组件的属性
+    provide<IEFormComponent>('currentItem', formConfig.value.currentItem)
     // 把表单配置项注入到子组件中，子组件可通过inject获取，获取到的数据为响应式
     provide<Ref<IFormConfig>>('formConfig', formConfig)
 
     // 注入历史记录
     provide<UseRefHistoryReturn<any, any>>('historyReturn', historyReturn)
+
     // 把祖先组件的方法项注入到子组件中，子组件可通过inject获取
     provide<IFormDesignMethods>('formDesignMethods', {
       handleColAdd,
@@ -210,6 +222,7 @@ export default defineComponent({
       handleSetSelectItem,
       handleAddAttrs
     })
+    // endregion
 
     return {
       ...toRefs(state),

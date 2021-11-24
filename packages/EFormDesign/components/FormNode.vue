@@ -7,15 +7,15 @@
   <div
     class="drag-move-box"
     @click.stop="handleSelectItem"
-    :class="{ active: record.key === currentItem.key }"
+    :class="{ active: record.key === formConfig.currentItem.key }"
   >
     <div class="form-item-box">
-      <EFormItem :data="data" :record="record" />
+      <EFormItem :data="formConfig" :record="record" />
     </div>
     <div class="show-key-box">
       {{ record.label + (record.field ? '/' + record.field : '') }}
     </div>
-    <FormNodeOperate :record="record" :currentItem="currentItem" />
+    <FormNodeOperate :record="record" :currentItem="formConfig.currentItem" />
   </div>
 </template>
 <script lang="ts">
@@ -23,12 +23,11 @@ import {
   defineComponent,
   reactive,
   toRefs,
-  PropType,
-  inject
+  PropType
 } from '@vue/composition-api'
-import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { IEFormComponent } from '@pack/typings/EFormComponent'
 import FormNodeOperate from './FormNodeOperate.vue'
-import { IFormDesignMethods } from '@pack/EFormDesign/index.vue'
+import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
 export default defineComponent({
   name: 'FormNode',
@@ -36,30 +35,23 @@ export default defineComponent({
     FormNodeOperate
   },
   props: {
-    data: {
-      type: Object as PropType<IFormConfig>,
-      required: true
-    },
     record: {
-      type: Object as PropType<IEFormComponent>,
-      required: true
-    },
-    currentItem: {
       type: Object as PropType<IEFormComponent>,
       required: true
     }
   },
   setup(props) {
+    const { formConfig, formDesignMethods } = useFormDesignState()
     const state = reactive({})
     // 获取 formDesignMethods
-    const formDesignMethods = inject<IFormDesignMethods>('formDesignMethods')
     const handleSelectItem = () => {
       // 调用 formDesignMethods
-      formDesignMethods!.handleSetSelectItem(props.record)
+      formDesignMethods.handleSetSelectItem(props.record)
     }
     return {
       ...toRefs(state),
-      handleSelectItem
+      handleSelectItem,
+      formConfig
     }
   }
 })
