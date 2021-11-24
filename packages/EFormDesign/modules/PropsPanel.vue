@@ -41,6 +41,7 @@ export default defineComponent({
       activeKey: 1
     })
     const changeTab = (e: number) => {
+      if (e === state.activeKey) return false
       state.activeKey = e
     }
     return { ...toRefs(state), changeTab, formConfig }

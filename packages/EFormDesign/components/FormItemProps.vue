@@ -6,7 +6,12 @@
 <template>
   <div class="properties-content">
     <div class="properties-body">
-      <a-form-model layout="horizontal">
+      <AEmpty
+        class="hint-box"
+        v-if="!formConfig.currentItem['key']"
+        description="未选择控件"
+      />
+      <a-form-model v-else layout="horizontal">
         <a-form-model-item
           v-for="props of basePropsConfig"
           :key="props.name"
@@ -49,15 +54,17 @@ export default defineComponent({
     overflow: auto;
     height: 100%;
     padding: 8px 16px;
-  }
+    .hint-box {
+      margin-top: 200px;
+    }
+    .ant-form-item {
+      margin-bottom: 0;
+      padding: 6px 0;
+      border-bottom: 1px solid @border-color;
 
-  .ant-form-item {
-    margin-bottom: 0;
-    padding: 6px 0;
-    border-bottom: 1px solid @border-color;
-
-    .ant-form-item-label {
-      line-height: 2;
+      .ant-form-item-label {
+        line-height: 2;
+      }
     }
   }
 }

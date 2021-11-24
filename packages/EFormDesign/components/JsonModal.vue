@@ -33,6 +33,11 @@ export interface IJsonModalMethods {
   showModal: (jsonData: IObject) => void
 }
 
+/**
+ * 打开json模态框时删除当前项属性
+ * @param formConfig {IFormConfig}
+ * @returns {IFormConfig}
+ */
 const removeAttrs = (formConfig: IFormConfig) => {
   const copyFormConfig = cloneDeep(formConfig)
   delete copyFormConfig.currentItem
