@@ -34,5 +34,13 @@ export const basePropsConfig: IBasePropsConfig[] = [
       max: 24,
       min: 0
     }
+  },
+  {
+    name: 'width',
+    label: '宽度',
+    tag: 'AInput',
+    props: {
+      placeholder: '请输入数据字段'
+    }
   }
 ]
