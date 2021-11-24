@@ -28,7 +28,7 @@ export const baseComponents: IEFormComponent[] = [
   {
     type: 'input',
     label: '输入框',
-    icon: 'icon-shurukuang',
+    icon: 'icon-input',
     field: '',
     rules: [
       {

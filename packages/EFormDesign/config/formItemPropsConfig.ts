@@ -1,10 +1,15 @@
 import { IObject } from '@pack/typings/baseType'
 
 interface IBasePropsConfig {
-  name: string
-  label: string
-  tag: string
-  props: IObject
+  name: string // 字段名
+  label: string // 字段标签
+  tag?: string // 属性控件
+  props?: IObject // 传递给控件的属性
+  exclude?: string[] // 需要排除的控件
+}
+
+interface IBaseHandle extends IBasePropsConfig {
+  target?: 'props' | 'options' // 绑定到对象下的某个目标key中
 }
 
 export const basePropsConfig: IBasePropsConfig[] = [
@@ -42,5 +47,18 @@ export const basePropsConfig: IBasePropsConfig[] = [
     props: {
       placeholder: '请输入数据字段'
     }
+  }
+]
+
+export const baseHandleProps: IBaseHandle[] = [
+  {
+    name: 'hidden',
+    label: '隐藏',
+    exclude: ['alert']
+  },
+  {
+    name: 'disabled',
+    label: '禁用',
+    target: 'props'
   }
 ]
