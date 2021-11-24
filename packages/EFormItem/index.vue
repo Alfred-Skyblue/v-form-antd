@@ -19,13 +19,17 @@ import {
   PropType
 } from '@vue/composition-api'
 import { componentMap } from '@pack/core/formItemConfig'
-import { IEFormComponent } from '@pack/typings/EFormComponent'
+import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 
 export default defineComponent({
   name: 'EFormItem',
   props: {
     record: {
       type: Object as PropType<IEFormComponent>,
+      required: true
+    },
+    data: {
+      type: Object as PropType<IFormConfig>,
       required: true
     }
   },
@@ -36,7 +40,27 @@ export default defineComponent({
 
     const formItemProps = computed(() => {
       const { label } = props.record
-      return { label }
+      const { data } = props
+      const labelCol =
+        data.config.layout === 'horizontal'
+          ? data.config.labelLayout === 'flex'
+            ? { style: `width:${data.config.labelWidth}px` }
+            : data.config.labelCol
+          : {}
+
+      const wrapperCol =
+        data.config.layout === 'horizontal'
+          ? data.config.labelLayout === 'flex'
+            ? { style: 'width:auto;flex:1' }
+            : data.config.wrapperCol
+          : {}
+
+      const style =
+        data.config.layout === 'horizontal' &&
+        data.config.labelLayout === 'flex'
+          ? { display: 'flex' }
+          : {}
+      return { label, labelCol, wrapperCol, style }
     })
     const componentItem = computed(() => componentMap[props.record.type])
     return { ...toRefs(state), componentItem, formItemProps }

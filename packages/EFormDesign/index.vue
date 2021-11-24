@@ -45,6 +45,7 @@ import Toolbar from './modules/Toolbar.vue'
 import PropsPanel, { IPropsPanel } from './modules/PropsPanel.vue'
 
 import 'codemirror/mode/javascript/javascript'
+
 import {
   defineComponent,
   reactive,
@@ -53,6 +54,7 @@ import {
   provide,
   Ref
 } from '@vue/composition-api'
+
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { generateKey } from '@pack/utils'
@@ -94,7 +96,6 @@ export default defineComponent({
     const propsPanel = ref<null | IPropsPanel>(null)
     const jsonModal = ref<null | IJsonModalMethods>(null)
     // endregion
-    const currentItem = ref<IEFormComponent>({ type: '' })
     const formConfig = ref<IFormConfig>({
       // 表单配置
       formItems: [],
@@ -121,10 +122,6 @@ export default defineComponent({
       state.propsPanel?.changeTab(record.key ? 2 : 1)
     }
 
-    // watchEffect(state.currentItem, (newVal, oldVal) => {
-    //   console.log('-> newVal,oldVal', newVal, oldVal)
-    // })
-
     /**
      * 添加属性
      * @param formItems
@@ -142,7 +139,7 @@ export default defineComponent({
     const handleListPush = (item: IEFormComponent) => {
       const formItem = cloneDeep(item)
       generateKey(formItem)
-      if (!formConfig.value.currentItem.key) {
+      if (!formConfig.value.currentItem!.key) {
         formConfig.value.formItems.push(formItem)
         handleSetSelectItem(formItem)
         return
@@ -156,7 +153,7 @@ export default defineComponent({
      * @param isCopy {boolean} 是否复制
      */
     const handleCopy = (
-      item: IEFormComponent = formConfig.value.currentItem,
+      item: IEFormComponent = formConfig.value.currentItem as IEFormComponent,
       isCopy = true
     ) => {
       /**
@@ -166,7 +163,7 @@ export default defineComponent({
       const traverse = (formItems: IEFormComponent[]) => {
         // 使用some遍历，找到目标后停止遍历
         formItems.some((formItem: IEFormComponent, index: number) => {
-          if (formItem.key === formConfig.value.currentItem.key) {
+          if (formItem.key === formConfig.value.currentItem!.key) {
             // 判断是不是复制
             isCopy
               ? formItems.splice(index + 1, 0, cloneDeep(formItem))
@@ -204,10 +201,28 @@ export default defineComponent({
     const handleOpenJsonModal = () => {
       state.jsonModal?.showModal(formConfig.value)
     }
-    const historyReturn = useRefHistory(formConfig, { deep: true })
+    // 获取历史记录，用于撤销和重构
+    const historyReturn = useRefHistory(formConfig, {
+      deep: true,
+      parse: (val: IFormConfig) => {
+        // 使用lodash.cloneDeep重新拷贝数据，把currentItem指向选中项
+        const formConfig = cloneDeep(val)
+        const { currentItem, formItems } = formConfig
+        // 从formItems中查找选中项
+        const item = formItems.find(item => item.key === currentItem!.key)
+        // 如果有，则赋值给当前项，如果没有，则切换属性面板
+        if (item) {
+          formConfig.currentItem = item
+          state.propsPanel?.changeTab(2)
+        } else {
+          state.propsPanel?.changeTab(1)
+        }
+        return formConfig
+      }
+    })
 
     // region 注入给子组件的属性
-    provide<IEFormComponent>('currentItem', formConfig.value.currentItem)
+    provide('currentItem', formConfig.value.currentItem)
     // 把表单配置项注入到子组件中，子组件可通过inject获取，获取到的数据为响应式
     provide<Ref<IFormConfig>>('formConfig', formConfig)
 

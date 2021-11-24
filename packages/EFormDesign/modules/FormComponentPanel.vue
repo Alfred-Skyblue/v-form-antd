@@ -44,12 +44,7 @@
   </div>
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  reactive,
-  toRefs,
-  computed
-} from '@vue/composition-api'
+import { defineComponent, computed } from '@vue/composition-api'
 import LayoutItem from '../components/LayoutItem.vue'
 import { cloneDeep } from 'lodash-es'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
@@ -62,7 +57,6 @@ export default defineComponent({
   setup(props, { emit }) {
     const { formConfig } = useFormDesignState()
 
-    const state = reactive({})
     /**
      * 拖拽完成事件
      * @param newIndex
@@ -90,7 +84,6 @@ export default defineComponent({
     return {
       addItem,
       handleDragStart,
-      ...toRefs(state),
       formConfig,
       layoutTag
     }
@@ -101,15 +94,17 @@ export default defineComponent({
 <style lang="less" scoped>
 .form-panel {
   position: relative;
+  height: 100%;
   .empty-text {
     color: #aaa;
     height: 150px;
-    top: 0;
+    top: -10%;
     left: 0;
     right: 0;
     bottom: 0;
     margin: auto;
     position: absolute;
+    z-index: 100;
   }
   .draggable-box {
     .drag-move {

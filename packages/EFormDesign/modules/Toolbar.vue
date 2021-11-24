@@ -43,6 +43,7 @@ import { defineComponent, inject, reactive, toRefs } from '@vue/composition-api'
 import { UseRefHistoryReturn } from '@vueuse/core'
 import { IFormDesignMethods } from '@pack/EFormDesign/index.vue'
 import { IFormConfig } from '@pack/typings/EFormComponent'
+import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
 interface IToolbarsConfig {
   type: string
@@ -94,7 +95,7 @@ export default defineComponent({
       IFormConfig,
       IFormConfig
     >
-    const formDesignMethods = inject<IFormDesignMethods>('formDesignMethods')
+
     const { undo, redo, canUndo, canRedo } = historyRef
     const handleUndo = () => {
       undo()

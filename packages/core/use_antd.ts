@@ -37,7 +37,8 @@ import vuedraggable from 'vuedraggable'
   Modal,
   Row,
   Col,
-  Slider
+  Slider,
+  Empty
 ].forEach(component => {
   Vue.use(component)
 })
