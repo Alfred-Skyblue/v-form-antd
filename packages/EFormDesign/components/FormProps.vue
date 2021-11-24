@@ -40,6 +40,11 @@
           <a-slider v-model="formConfig.config.wrapperCol.span" :max="24" />
         </a-form-model-item>
       </div>
+      <a-form-model-item label="表单属性">
+        <a-checkbox v-model="formConfig.config.hideRequiredMark">
+          隐藏必选标记
+        </a-checkbox>
+      </a-form-model-item>
     </a-form-model>
   </div>
 </template>
@@ -51,7 +56,6 @@ export default defineComponent({
   name: 'FormProps',
   setup() {
     const formConfig = inject('formConfig') as Ref<IFormConfig>
-
     return { formConfig }
   }
 })

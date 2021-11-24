@@ -61,6 +61,7 @@ export interface IFormConfig {
     labelWidth?: number
     labelCol?: ICol
     wrapperCol?: ICol
+    hideRequiredMark: boolean
   }
   currentItem?: IEFormComponent
 }

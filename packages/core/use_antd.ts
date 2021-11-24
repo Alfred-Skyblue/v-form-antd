@@ -15,7 +15,8 @@ import {
   Tooltip,
   Divider,
   Modal,
-  Col
+  Col,
+  Checkbox
 } from 'ant-design-vue'
 import vuedraggable from 'vuedraggable'
 ;[
@@ -38,7 +39,8 @@ import vuedraggable from 'vuedraggable'
   Row,
   Col,
   Slider,
-  Empty
+  Empty,
+  Checkbox
 ].forEach(component => {
   Vue.use(component)
 })
