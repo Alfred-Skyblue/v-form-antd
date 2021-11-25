@@ -5,7 +5,7 @@
 -->
 <template>
   <div class="form-props-content">
-    <a-form-model class="props-body">
+    <a-form-model class="properties-body">
       <a-form-model-item label="表单布局">
         <a-radio-group buttonStyle="solid" v-model="formConfig.config.layout">
           <a-radio-button value="horizontal">水平</a-radio-button>
@@ -68,7 +68,7 @@ export default defineComponent({
   overflow: hidden;
   background: #fff;
 
-  .props-body {
+  .properties-body {
     overflow: auto;
     height: 100%;
     padding: 8px 16px;

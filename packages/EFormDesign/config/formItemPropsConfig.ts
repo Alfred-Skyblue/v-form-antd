@@ -8,7 +8,7 @@ interface IBasePropsConfig {
   exclude?: string[] // 需要排除的控件
 }
 
-interface IBaseHandle extends IBasePropsConfig {
+export interface IBaseHandle extends IBasePropsConfig {
   target?: 'props' | 'options' // 绑定到对象下的某个目标key中
 }
 
@@ -37,7 +37,8 @@ export const basePropsConfig: IBasePropsConfig[] = [
     tag: 'ASlider',
     props: {
       max: 24,
-      min: 0
+      min: 0,
+      marks: { 12: '' }
     }
   },
   {

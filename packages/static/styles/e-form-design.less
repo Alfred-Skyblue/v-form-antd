@@ -17,6 +17,21 @@
       width: @left-right-width;
       height: 100%;
       box-shadow: 0 0 1px 1px #ccc;
+      & > div {
+        height: 100%;
+      }
+      .ant-tabs {
+        height: 100%;
+
+        .ant-tabs-content {
+          height: 100%;
+
+          .ant-tabs-tabpane {
+            height: calc(100% - 100px);
+            overflow: auto;
+          }
+        }
+      }
     }
     .left {
       .ant-collapse {
@@ -205,7 +220,7 @@
               }
 
               > .delete {
-                right: 0px;
+                right: 0;
                 background: @primary-color;
               }
             }
@@ -351,7 +366,7 @@
             > .copy,
             > .delete {
               position: absolute;
-              top: 0px;
+              top: 0;
               width: 30px;
               height: 30px;
               line-height: 30px;

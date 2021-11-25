@@ -30,13 +30,6 @@ export const baseComponents: IEFormComponent[] = [
     label: '输入框',
     icon: 'icon-input',
     field: '',
-    rules: [
-      {
-        required: false,
-        message: '必填项',
-        trigger: 'change'
-      }
-    ],
     span: 24,
     props: {
       type: 'text'
