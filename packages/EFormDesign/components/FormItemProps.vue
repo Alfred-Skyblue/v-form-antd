@@ -1,7 +1,7 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/11/24
- * @Description: $END$
+ * @Description: 表单项属性
 -->
 <template>
   <div class="properties-content">
@@ -23,6 +23,19 @@
             v-model="formConfig.currentItem[props.name]"
           ></component>
         </a-form-model-item>
+
+        <a-form-model-item label="操作属性">
+          <a-checkbox
+            v-for="item of baseHandleProps"
+            :key="item.name"
+            @change="baseHandleChange($event, item)"
+          >
+            {{ item.label }}
+          </a-checkbox>
+        </a-form-model-item>
+        <a-form-model-item label="校验规则">
+          <RuleProps></RuleProps>
+        </a-form-model-item>
       </a-form-model>
     </div>
   </div>
@@ -30,15 +43,38 @@
 <script lang="ts">
 import { defineComponent, inject, Ref } from '@vue/composition-api'
 import { IFormConfig } from '@pack/typings/EFormComponent'
-import { basePropsConfig } from '@pack/EFormDesign/config/formItemPropsConfig'
+import {
+  baseHandleProps,
+  basePropsConfig,
+  IBaseHandle
+} from '@pack/EFormDesign/config/formItemPropsConfig'
+import { IInputEvent } from '@pack/typings/baseType'
+
+import RuleProps from './RuleProps.vue'
 
 export default defineComponent({
   name: 'FormItemProps',
   props: {},
+  components: {
+    RuleProps
+  },
   setup() {
     const formConfig = inject('formConfig') as Ref<IFormConfig>
-
-    return { basePropsConfig, formConfig }
+    /**
+     * 由于属性映射的目标可能存在嵌套，所以使用函数处理
+     * @param e 事件对象
+     * @param props 属性
+     */
+    const baseHandleChange = (e: IInputEvent, props: IBaseHandle) => {
+      const { target, name } = props
+      const currentItem = formConfig.value.currentItem
+      if (currentItem) {
+        // 判断是否有target，如果有，则获取target，没有则绑定到currentItem上
+        let source = target ? currentItem[target] : currentItem
+        source && (source[name] = e.target.checked)
+      }
+    }
+    return { basePropsConfig, formConfig, baseHandleProps, baseHandleChange }
   }
 })
 </script>

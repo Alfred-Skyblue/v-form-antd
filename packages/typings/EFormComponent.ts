@@ -8,9 +8,11 @@ type labelLayout = 'flex' | 'grid'
  * 校验属性 由于 ant-design-vue 官方提供的接口，只对字符串进行了约束，这里采取省略trigger继承后扩展
  */
 
-export interface IValidationRule extends Omit<ValidationRule, 'trigger'> {
+export interface IValidationRule
+  extends Omit<ValidationRule, 'trigger' | 'pattern'> {
   // 校验触发的时机
   trigger?: 'change' | 'blur' | ['change', 'blur']
+  pattern?: RegExp | string
 }
 
 /**

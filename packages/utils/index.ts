@@ -1,6 +1,6 @@
 import { VueConstructor } from 'vue'
 import { IEFormComponent } from '../typings/EFormComponent'
-import { isNumber, uniqueId } from 'lodash-es'
+import { isArray, isNumber, uniqueId } from 'lodash-es'
 /**
  * 组件install方法
  * @param comp 需要挂载install方法的组件
@@ -39,6 +39,7 @@ export function remove<T>(
   value: number | ((item: T, index: number, array: Array<T>) => boolean)
 ): T | undefined {
   let removeVal: Array<T | undefined> = []
+  if (!isArray(array)) return undefined
   if (isNumber(value)) {
     removeVal = array.splice(value, 1)
   } else {
