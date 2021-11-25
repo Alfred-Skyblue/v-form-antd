@@ -24,13 +24,13 @@ import {
   reactive,
   toRefs
 } from '@vue/composition-api'
-import { IObject } from '@pack/typings/baseType'
+import { IAnyObject } from '@pack/typings/baseType'
 import PreviewCode from './PreviewCode.vue'
 import { cloneDeep } from 'lodash-es'
 import { IFormConfig } from '@pack/typings/EFormComponent'
 
 export interface IJsonModalMethods {
-  showModal: (jsonData: IObject) => void
+  showModal: (jsonData: IAnyObject) => void
 }
 
 /**

@@ -5,10 +5,10 @@
  * @description：$END$
  */
 import { IEFormComponent } from '@pack/typings/EFormComponent'
-import { IObject } from '@pack/typings/baseType'
+import { IAnyObject } from '@pack/typings/baseType'
 import ACmp from './use_antd'
 import { isArray } from 'lodash-es'
-export const componentMap: IObject = {
+export const componentMap: IAnyObject = {
   ...ACmp
 }
 
@@ -37,9 +37,6 @@ export const baseComponents: IEFormComponent[] = [
         trigger: 'change'
       }
     ],
-    col: {
-      span: 0
-    },
     span: 24,
     props: {
       type: 'text'
