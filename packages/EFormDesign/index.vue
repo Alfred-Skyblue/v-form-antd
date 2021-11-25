@@ -105,7 +105,16 @@ export default defineComponent({
         labelCol: {},
         wrapperCol: {}
       },
-      currentItem: { type: '' }
+      currentItem: {
+        type: '',
+        rules: [
+          {
+            message: '',
+            max: 0,
+            trigger: 'change'
+          }
+        ]
+      }
     })
     const state = reactive<IState>({
       locale: zhCN, // 国际化

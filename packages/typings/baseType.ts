@@ -1,1 +1,3 @@
-export type IObject = Record<string, any>
+export interface IAnyObject<T = any> {
+  [key: string]: T
+}
