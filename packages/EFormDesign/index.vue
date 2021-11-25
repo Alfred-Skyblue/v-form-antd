@@ -169,7 +169,7 @@ export default defineComponent({
     const handleListPush = (item: IEFormComponent) => {
       const formItem = cloneDeep(item)
       generateKey(formItem)
-      if (!formConfig.value.currentItem!.key) {
+      if (!formConfig.value.currentItem?.key) {
         formConfig.value.formItems.push(formItem)
         handleSetSelectItem(formItem)
         return
@@ -186,6 +186,7 @@ export default defineComponent({
       item: IEFormComponent = formConfig.value.currentItem as IEFormComponent,
       isCopy = true
     ) => {
+      const key = formConfig.value.currentItem?.key
       /**
        * 遍历当表单项配置，如果是复制，则复制一份表单项，如果不是复制，则直接添加到表单项中
        * @param formItems
@@ -193,7 +194,7 @@ export default defineComponent({
       const traverse = (formItems: IEFormComponent[]) => {
         // 使用some遍历，找到目标后停止遍历
         formItems.some((formItem: IEFormComponent, index: number) => {
-          if (formItem.key === formConfig.value.currentItem!.key) {
+          if (formItem.key === key) {
             // 判断是不是复制
             isCopy
               ? formItems.splice(index + 1, 0, cloneDeep(formItem))
@@ -252,7 +253,7 @@ export default defineComponent({
         const formConfig = cloneDeep(val)
         const { currentItem, formItems } = formConfig
         // 从formItems中查找选中项
-        const item = formItems.find(item => item.key === currentItem!.key)
+        const item = formItems.find(item => item.key === currentItem?.key)
         // 如果有，则赋值给当前项，如果没有，则切换属性面板
         if (item) {
           formConfig.currentItem = item
