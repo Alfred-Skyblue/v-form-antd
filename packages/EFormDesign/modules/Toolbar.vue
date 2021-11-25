@@ -19,19 +19,13 @@
       </a-tooltip>
       <a-divider type="vertical" />
       <a-tooltip title="撤销">
-        <a
-          :class="{ disabled: !canUndo }"
-          :disabled="!canUndo"
-          @click="handleUndo"
-        >
+        <a :class="{ disabled: !canUndo }" :disabled="!canUndo" @click="undo">
           <a-icon type="undo" />
-          <span>撤销</span>
         </a>
       </a-tooltip>
       <a-tooltip title="重做">
         <a :class="{ disabled: !canRedo }" :disabled="!canRedo" @click="redo">
           <a-icon type="redo" />
-          <span>重做</span>
         </a>
       </a-tooltip>
     </div>
@@ -41,9 +35,7 @@
 <script lang="ts">
 import { defineComponent, inject, reactive, toRefs } from '@vue/composition-api'
 import { UseRefHistoryReturn } from '@vueuse/core'
-import { IFormDesignMethods } from '@pack/EFormDesign/index.vue'
 import { IFormConfig } from '@pack/typings/EFormComponent'
-import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
 interface IToolbarsConfig {
   type: string
@@ -86,7 +78,7 @@ export default defineComponent({
         {
           title: '清空',
           type: 'reset',
-          event: 'handleReset',
+          event: 'handleClearFormItems',
           icon: 'delete'
         }
       ]
@@ -97,11 +89,7 @@ export default defineComponent({
     >
 
     const { undo, redo, canUndo, canRedo } = historyRef
-    const handleUndo = () => {
-      undo()
-      // const formItems = source.value.formItems
-    }
-    return { ...toRefs(state), handleUndo, redo, canUndo, canRedo }
+    return { ...toRefs(state), undo, redo, canUndo, canRedo }
   }
 })
 </script>
