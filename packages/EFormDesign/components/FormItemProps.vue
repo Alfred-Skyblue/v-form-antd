@@ -97,8 +97,7 @@ export default defineComponent({
       margin-bottom: 0;
       padding: 6px 0;
       border-bottom: 1px solid @border-color;
-
-      .ant-form-item-label {
+      /deep/ .ant-form-item-label {
         line-height: 2;
       }
     }

@@ -78,7 +78,7 @@ export default defineComponent({
 <style lang="less" scoped>
 .rule-props-content {
   /deep/ .ant-form-item {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
   .rule-props-item {
     position: relative;
