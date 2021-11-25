@@ -5,9 +5,10 @@ type LayoutType = 'horizontal' | 'vertical' | 'inline'
 type labelLayout = 'flex' | 'grid'
 
 /**
- * 校验属性 由于 ant-design-vue 官方提供的接口，只对字符串进行了约束，这里采取排除继承后扩展
+ * 校验属性 由于 ant-design-vue 官方提供的接口，只对字符串进行了约束，这里采取省略trigger继承后扩展
  */
-interface IValidationRule extends Omit<ValidationRule, 'trigger'> {
+
+export interface IValidationRule extends Omit<ValidationRule, 'trigger'> {
   // 校验触发的时机
   trigger?: 'change' | 'blur' | ['change', 'blur']
 }
@@ -46,7 +47,9 @@ export interface IEFormComponent {
  * 表单配置
  */
 export interface IFormConfig {
+  // 表单项配置列表
   formItems: IEFormComponent[]
+  // 表单配置
   config: {
     layout?: LayoutType
     labelLayout?: labelLayout
@@ -55,5 +58,6 @@ export interface IFormConfig {
     wrapperCol?: Partial<Col>
     hideRequiredMark?: boolean
   }
+  // 当前选中项
   currentItem?: IEFormComponent
 }

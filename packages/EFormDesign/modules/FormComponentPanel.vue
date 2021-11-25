@@ -66,6 +66,7 @@ export default defineComponent({
       formItems[newIndex] = cloneDeep(formItems[newIndex])
       emit('handleSetSelectItem', formItems[newIndex])
     }
+
     /**
      * 拖拽开始事件
      * @param e {Object} 事件对象
