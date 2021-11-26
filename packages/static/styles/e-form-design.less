@@ -33,6 +33,33 @@
         }
       }
     }
+    & > .right {
+      width: 330px;
+      .properties-content {
+        height: 100%;
+        overflow: hidden;
+        background: #fff;
+
+        .properties-body {
+          overflow: auto;
+          height: 100%;
+          padding: 8px 16px;
+          .hint-box {
+            margin-top: 200px;
+          }
+          .ant-form-item {
+            width: 100%;
+            margin-bottom: 0;
+            padding: 6px 0;
+            border-bottom: 1px solid @border-color;
+            .ant-form-item-label {
+              line-height: 2;
+              vertical-align: text-top;
+            }
+          }
+        }
+      }
+    }
     .left {
       .ant-collapse {
         border: 0;
@@ -44,20 +71,6 @@
         }
       }
 
-      > .right {
-        .ant-tabs {
-          height: 100%;
-
-          .ant-tabs-content {
-            height: 100%;
-
-            .ant-tabs-tabpane {
-              height: calc(100% - 45px);
-              overflow: auto;
-            }
-          }
-        }
-      }
       ul {
         padding: 5px;
         list-style: none;

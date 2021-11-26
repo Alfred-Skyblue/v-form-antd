@@ -3,7 +3,7 @@ import { Col } from 'ant-design-vue'
 import { ValidationRule } from 'ant-design-vue/types/form-model/form'
 type LayoutType = 'horizontal' | 'vertical' | 'inline'
 type labelLayout = 'flex' | 'grid'
-
+export type PropsTabKey = 1 | 2 | 3
 /**
  * 校验属性 由于 ant-design-vue 官方提供的接口，只对字符串进行了约束，这里采取省略trigger继承后扩展
  */
@@ -59,7 +59,9 @@ export interface IFormConfig {
     labelCol?: Partial<Col>
     wrapperCol?: Partial<Col>
     hideRequiredMark?: boolean
+    ruleTargetConfig?: boolean
   }
   // 当前选中项
   currentItem?: IEFormComponent
+  activeKey: PropsTabKey
 }

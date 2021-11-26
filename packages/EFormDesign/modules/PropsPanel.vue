@@ -5,24 +5,24 @@
 -->
 <template>
   <div>
-    <a-tabs
-      :activeKey="activeKey"
-      @change="changeTab"
-      :tabBarStyle="{ margin: 0 }"
-    >
-      <a-tab-pane :key="1" tab="表单属性设置">
+    <a-tabs v-model="formConfig.activeKey" :tabBarStyle="{ margin: 0 }">
+      <a-tab-pane :key="1" tab="表单属性">
         <FormProps></FormProps>
       </a-tab-pane>
-      <a-tab-pane :key="2" tab="控件属性设置">
+      <a-tab-pane :key="2" tab="控件属性">
         <FormItemProps></FormItemProps>
+      </a-tab-pane>
+      <a-tab-pane :key="3" tab="组件属性">
+        <ComponentProps></ComponentProps>
       </a-tab-pane>
     </a-tabs>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { defineComponent } from '@vue/composition-api'
 import FormProps from '../components/FormProps.vue'
 import FormItemProps from '../components/FormItemProps.vue'
+import ComponentProps from '../components/ComponentProps.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
 type ChangeTabKey = 1 | 2
@@ -33,18 +33,12 @@ export default defineComponent({
   name: 'PropsPanel',
   components: {
     FormProps,
-    FormItemProps
+    FormItemProps,
+    ComponentProps
   },
   setup() {
     const { formConfig } = useFormDesignState()
-    const state = reactive({
-      activeKey: 1
-    })
-    const changeTab = (e: number) => {
-      if (e === state.activeKey) return false
-      state.activeKey = e
-    }
-    return { ...toRefs(state), changeTab, formConfig }
+    return { formConfig }
   }
 })
 </script>

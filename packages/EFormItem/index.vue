@@ -6,7 +6,11 @@
 <template>
   <div>
     <a-form-model-item v-bind="formItemProps">
-      <component :is="componentItem"></component>
+      <component
+        :is="componentItem"
+        v-bind="record.props"
+        v-on="record.on"
+      ></component>
     </a-form-model-item>
   </div>
 </template>
