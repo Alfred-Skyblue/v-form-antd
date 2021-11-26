@@ -49,7 +49,8 @@ import vuedraggable from 'vuedraggable'
   Slider,
   Empty,
   Checkbox,
-  Select
+  Select,
+  Upload
 ].forEach(component => {
   Vue.use(component)
 })

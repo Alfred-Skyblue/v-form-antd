@@ -9,11 +9,11 @@ import {
   Slider,
   Switch,
   TimePicker,
-  TreeSelect,
-  Upload
+  TreeSelect
 } from 'ant-design-vue'
 
 import EInput from './EInput.vue'
+import EUpload from './EUpload.vue'
 
 export default {
   input: EInput,
@@ -26,7 +26,7 @@ export default {
   time: TimePicker,
   slider: Slider,
   rate: Rate,
-  upload: Upload,
+  upload: EUpload,
   treeSelect: TreeSelect,
   cascader: Cascader,
   switch: Switch

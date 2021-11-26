@@ -207,6 +207,12 @@ export default defineComponent({
             handleBeforeColAdd(event, formItems, isCopy)
             return true
           }
+          if (['grid', 'tabs'].includes(formItem.type)) {
+            // 栅格布局
+            formItem.columns?.forEach(item => {
+              traverse(item.children)
+            })
+          }
         })
       }
       traverse(formConfig.value.formItems)

@@ -138,5 +138,24 @@ export const baseComponents: IEFormComponent[] = [
     field: '',
     span: 24,
     props: {}
+  },
+  {
+    type: 'grid',
+    label: '栅格布局',
+    icon: 'icon-grid',
+    props: {},
+    columns: [
+      {
+        span: 12,
+        children: []
+      },
+      {
+        span: 12,
+        children: []
+      }
+    ],
+    options: {
+      gutter: 0
+    }
   }
 ]

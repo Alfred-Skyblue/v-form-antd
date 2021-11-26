@@ -4,7 +4,7 @@
  * @Description: 节点操作复制删除控件
 -->
 <template>
-  <div>
+  <div class="copy-delete-box">
     <a class="copy" :class="activeClass" @click.stop="handleCopy">
       <a-icon type="copy" />
     </a>

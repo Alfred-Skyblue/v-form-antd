@@ -311,10 +311,7 @@
             }
           }
 
-          .batch-box,
-          .select-input-list-box,
-          .grid-box,
-          .table-box {
+          .grid-box {
             position: relative;
             box-sizing: border-box;
             padding: 5px;
@@ -322,11 +319,9 @@
             width: 100%;
             transition: all 0.3s;
             overflow: hidden;
-
             .form-item-box {
               position: relative;
               box-sizing: border-box;
-
               .ant-form-item {
                 // 修改ant form-item的margin为padding
                 margin: 0;
@@ -334,10 +329,8 @@
               }
             }
 
-            .grid-row,
-            .table-layout {
+            .grid-row {
               background: @layout-background-color;
-
               .grid-col,
               .table-td {
                 .draggable-box {
@@ -376,38 +369,39 @@
               background: @layout-hover-bg-color;
               outline-offset: 0;
             }
+            // 选择时 end
+            .copy-delete-box {
+              > .copy,
+              > .delete {
+                position: absolute;
+                top: 0;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                color: #fff;
+                z-index: 989;
+                transition: all 0.3s;
 
-            > .copy,
-            > .delete {
-              position: absolute;
-              top: 0;
-              width: 30px;
-              height: 30px;
-              line-height: 30px;
-              text-align: center;
-              color: #fff;
-              z-index: 989;
-              transition: all 0.3s;
+                &.unactivated {
+                  opacity: 0 !important;
+                  pointer-events: none;
+                }
 
-              &.unactivated {
-                opacity: 0 !important;
-                pointer-events: none;
+                &.active {
+                  opacity: 1 !important;
+                }
+              }
+              > .copy {
+                border-radius: 0 0 0 8px;
+                right: 30px;
+                background: @layout-color;
               }
 
-              &.active {
-                opacity: 1 !important;
+              > .delete {
+                right: 0;
+                background: @layout-color;
               }
-            }
-
-            > .copy {
-              border-radius: 0 0 0 8px;
-              right: 30px;
-              background: @layout-color;
-            }
-
-            > .delete {
-              right: 0px;
-              background: @layout-color;
             }
           }
         }
