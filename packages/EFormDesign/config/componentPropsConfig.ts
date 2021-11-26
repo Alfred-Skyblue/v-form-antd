@@ -89,5 +89,72 @@ export const baseComponentAttrs: IBaseComponentProps = {
         placeholder: '请输入最大长度'
       }
     }
+  ],
+  number: [
+    {
+      name: 'placeholder',
+      label: '占位符',
+      tag: 'AInput',
+      props: {
+        type: 'text',
+        placeholder: '请输入占位符'
+      }
+    },
+    {
+      name: 'defaultValue',
+      label: '默认值',
+      tag: 'AInputNumber',
+      props: {
+        type: 'text',
+        placeholder: '请输入默认值'
+      }
+    },
+    {
+      name: 'min',
+      label: '最小值',
+      tag: 'AInputNumber',
+      props: {
+        type: 'text',
+        placeholder: '请输入最小值'
+      }
+    },
+    {
+      name: 'max',
+      label: '最大值',
+      tag: 'AInputNumber',
+      props: {
+        type: 'text',
+        placeholder: '请输入最大值'
+      }
+    },
+    {
+      name: 'step',
+      label: '步长',
+      tag: 'AInputNumber',
+      props: {
+        type: 'text',
+        placeholder: '请输入步长'
+      }
+    }
+  ],
+  textarea: [
+    {
+      name: 'placeholder',
+      label: '占位符',
+      tag: 'AInput',
+      props: {
+        type: 'text',
+        placeholder: '请输入占位符'
+      }
+    },
+    {
+      name: 'defaultValue',
+      label: '默认值',
+      tag: 'AInput',
+      props: {
+        type: 'text',
+        placeholder: '请输入默认值'
+      }
+    }
   ]
 }

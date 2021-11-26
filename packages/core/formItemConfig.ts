@@ -6,7 +6,7 @@
  */
 import { IEFormComponent } from '@pack/typings/EFormComponent'
 import { IAnyObject } from '@pack/typings/baseType'
-import ACmp from './use_antd'
+import ACmp from '../components'
 import { isArray } from 'lodash-es'
 export const componentMap: IAnyObject = {
   ...ACmp
@@ -39,6 +39,102 @@ export const baseComponents: IEFormComponent[] = [
     type: 'number',
     label: '数字输入框',
     icon: 'icon-number',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'textarea',
+    label: '文本域',
+    icon: 'icon-textarea',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'select',
+    label: '下拉选择',
+    icon: 'icon-select',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'checkbox',
+    label: '复选框',
+    icon: 'icon-checkbox',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'radio',
+    label: '单选框',
+    icon: 'icon-radio',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'date',
+    label: '日期选择',
+    icon: 'icon-date-picker',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'time',
+    label: '时间选择',
+    icon: 'icon-time-picker',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'slider',
+    label: '时间选择',
+    icon: 'icon-slider',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'rate',
+    label: '评分',
+    icon: 'icon-rate',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'switch',
+    label: '开关',
+    icon: 'icon-switch',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'treeSelect',
+    label: '树形选择',
+    icon: 'icon-tree-select',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'upload',
+    label: '上传',
+    icon: 'icon-upload',
+    field: '',
+    span: 24,
+    props: {}
+  },
+  {
+    type: 'cascader',
+    label: '级联选择',
+    icon: 'icon-cascader',
     field: '',
     span: 24,
     props: {}

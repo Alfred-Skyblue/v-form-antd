@@ -7,7 +7,6 @@
   <div>
     <a-form-model-item v-bind="formItemProps">
       <component
-        class="component-box"
         :is="componentItem"
         v-bind="record.props"
         v-on="record.on"
@@ -72,9 +71,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="less" scoped>
-.component-box {
-  width: 100%;
-}
-</style>
