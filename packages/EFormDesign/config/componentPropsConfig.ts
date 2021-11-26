@@ -1,9 +1,21 @@
-import { IBaseFormProps } from './formItemPropsConfig'
+import { IBaseFormAttrs } from './formItemPropsConfig'
 
 interface IBaseComponentProps {
-  [key: string]: IBaseFormProps[]
+  [key: string]: IBaseFormAttrs[]
 }
-export const baseComponentProps: IBaseComponentProps = {
+
+export const baseComponentControlAttrs: Omit<IBaseFormAttrs, 'tag'>[] = [
+  {
+    name: 'disabled',
+    label: '禁用'
+  },
+  {
+    name: 'allowClear',
+    label: '可清除'
+  }
+]
+
+export const baseComponentAttrs: IBaseComponentProps = {
   input: [
     {
       name: 'type',
@@ -24,6 +36,33 @@ export const baseComponentProps: IBaseComponentProps = {
       }
     },
     {
+      name: 'defaultValue',
+      label: '默认值',
+      tag: 'AInput',
+      props: {
+        type: 'text',
+        placeholder: '请输入默认值'
+      }
+    },
+    {
+      name: 'prefix',
+      label: '前缀',
+      tag: 'AInput',
+      props: {
+        type: 'text',
+        placeholder: '请输入前缀'
+      }
+    },
+    {
+      name: 'suffix',
+      label: '后缀',
+      tag: 'AInput',
+      props: {
+        type: 'text',
+        placeholder: '请输入后缀'
+      }
+    },
+    {
       name: 'addonBefore',
       label: '前置标签',
       tag: 'AInput',
@@ -41,7 +80,6 @@ export const baseComponentProps: IBaseComponentProps = {
         placeholder: '请输入后置标签'
       }
     },
-
     {
       name: 'maxLength',
       label: '最大长度',
