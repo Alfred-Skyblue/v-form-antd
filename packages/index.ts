@@ -1,4 +1,4 @@
-import './core/use_antd'
+import './core'
 import './mini'
 import EFormDesign from './EFormDesign'
 import EFormItem from './EFormItem'

@@ -1,6 +1,6 @@
 import { IAnyObject } from '@pack/typings/baseType'
 
-interface IBasePropsConfig {
+export interface IBaseFormProps {
   name: string // 字段名
   label: string // 字段标签
   tag?: string // 属性控件
@@ -8,11 +8,11 @@ interface IBasePropsConfig {
   exclude?: string[] // 需要排除的控件
 }
 
-export interface IBaseHandle extends IBasePropsConfig {
+export interface IBaseFormItemHandle extends IBaseFormProps {
   target?: 'props' | 'options' // 绑定到对象下的某个目标key中
 }
 
-export const basePropsConfig: IBasePropsConfig[] = [
+export const baseFormItemProps: IBaseFormProps[] = [
   {
     name: 'label',
     label: '标签',
@@ -51,7 +51,7 @@ export const basePropsConfig: IBasePropsConfig[] = [
   }
 ]
 
-export const baseHandleProps: IBaseHandle[] = [
+export const baseFormItemHandleProps: IBaseFormItemHandle[] = [
   {
     name: 'hidden',
     label: '隐藏',

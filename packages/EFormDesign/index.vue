@@ -34,7 +34,12 @@
             @handleSetSelectItem="handleSetSelectItem"
           ></FormComponentPanel>
         </div>
-        <div class="right"><PropsPanel ref="propsPanel"></PropsPanel></div>
+        <div class="right" onselectstart="return false">
+          <PropsPanel
+            ref="propsPanel"
+            :activeKey="formConfig.activeKey"
+          ></PropsPanel>
+        </div>
       </section>
       <JsonModal ref="jsonModal"></JsonModal>
     </div>
@@ -59,7 +64,11 @@ import {
 } from '@vue/composition-api'
 
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
-import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import {
+  IEFormComponent,
+  IFormConfig,
+  PropsTabKey
+} from '@pack/typings/EFormComponent'
 import { generateKey } from '@pack/utils'
 import { cloneDeep } from 'lodash-es'
 import { baseComponents } from '@pack/core/formItemConfig'
@@ -68,9 +77,13 @@ import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
 
 interface IState {
   locale: any
+  // 公用组件
   baseComponents: IEFormComponent[]
+  // 属性面板实例
   propsPanel: Ref<null | IPropsPanel>
+  // json模态框实例
   jsonModal: Ref<null | IJsonModalMethods>
+  // 当前激活的属性面板
 }
 
 export interface IFormDesignMethods {
@@ -115,7 +128,8 @@ export default defineComponent({
       },
       currentItem: {
         type: ''
-      }
+      },
+      activeKey: 1
     })
     const state = reactive<IState>({
       locale: zhCN, // 国际化
@@ -129,7 +143,13 @@ export default defineComponent({
      */
     const handleSetSelectItem = (record: IEFormComponent) => {
       formConfig.value.currentItem = record
-      state.propsPanel?.changeTab(record.key ? 2 : 1)
+      handleChangePropsTabs(
+        record.key
+          ? formConfig.value.activeKey === 1
+            ? 2
+            : formConfig.value.activeKey
+          : 1
+      )
     }
 
     /**
@@ -213,6 +233,9 @@ export default defineComponent({
       state.jsonModal?.showModal(formConfig.value)
     }
 
+    const handleChangePropsTabs = (key: PropsTabKey) => {
+      formConfig.value.activeKey = key
+    }
     /**
      * 清空表单项列表
      */
@@ -233,16 +256,13 @@ export default defineComponent({
         // 如果有，则赋值给当前项，如果没有，则切换属性面板
         if (item) {
           formConfig.currentItem = item
-          state.propsPanel?.changeTab(2)
-        } else {
-          state.propsPanel?.changeTab(1)
         }
         return formConfig
       }
     })
 
     // region 注入给子组件的属性
-    provide('currentItem', formConfig.value.currentItem)
+    // provide('currentItem', formConfig.value.currentItem)
 
     // 把表单配置项注入到子组件中，子组件可通过inject获取，获取到的数据为响应式
     provide<Ref<IFormConfig>>('formConfig', formConfig)

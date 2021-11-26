@@ -4,7 +4,7 @@
  * @Description: 右侧属性面板控件
 -->
 <template>
-  <div class="form-props-content">
+  <div class="properties-content">
     <a-form-model class="properties-body">
       <a-form-model-item label="表单布局">
         <a-radio-group buttonStyle="solid" v-model="formConfig.config.layout">
@@ -27,6 +27,7 @@
         v-show="formConfig.config.labelLayout === 'flex'"
       >
         <a-input-number
+          :style="{ width: '100%' }"
           v-model="formConfig.config.labelWidth"
           :min="0"
           :step="1"
@@ -44,43 +45,34 @@
         <a-checkbox v-model="formConfig.config.hideRequiredMark">
           隐藏必选标记
         </a-checkbox>
+        <a-checkbox v-model="formConfig.config.ruleTargetConfig">
+          校验规则映射到表单配置中
+        </a-checkbox>
       </a-form-model-item>
     </a-form-model>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, inject, Ref } from '@vue/composition-api'
-import { IFormConfig } from '@pack/typings/EFormComponent'
+import { defineComponent } from '@vue/composition-api'
+import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
 export default defineComponent({
   name: 'FormProps',
   setup() {
-    const formConfig = inject('formConfig') as Ref<IFormConfig>
+    const { formConfig } = useFormDesignState()
     return { formConfig }
   }
 })
 </script>
 
 <style lang="less" scoped>
-@import '~@pack/static/styles/variable.less';
-.form-props-content {
-  height: 100%;
-  overflow: hidden;
-  background: #fff;
-
-  .properties-body {
-    overflow: auto;
-    height: 100%;
-    padding: 8px 16px;
-  }
-
-  .ant-form-item {
-    margin-bottom: 0;
-    padding: 6px 0;
-    border-bottom: 1px solid @border-color;
-
-    /deep/ .ant-form-item-label {
-      line-height: 2;
+.properties-content {
+  /deep/ .properties-body {
+    .ant-checkbox-wrapper {
+      margin: 0;
+    }
+    .ant-form-item {
+      width: 100%;
     }
   }
 }

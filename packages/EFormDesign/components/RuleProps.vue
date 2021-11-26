@@ -86,6 +86,9 @@ export default defineComponent({
     padding: 3px 2px;
     border-radius: 5px;
     margin-bottom: 5px;
+    /deep/ .ant-form-item {
+      border: 0 !important;
+    }
     &-close {
       position: absolute;
       top: -5px;

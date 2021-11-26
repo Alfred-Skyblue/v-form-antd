@@ -19,6 +19,7 @@ import {
   Checkbox
 } from 'ant-design-vue'
 import vuedraggable from 'vuedraggable'
+import RadioButtonGroup from '@pack/components/RadioButtonGroup.vue'
 ;[
   Input,
   ConfigProvider,
@@ -40,7 +41,8 @@ import vuedraggable from 'vuedraggable'
   Col,
   Slider,
   Empty,
-  Checkbox
+  Checkbox,
+  Radio
 ].forEach(component => {
   Vue.use(component)
 })

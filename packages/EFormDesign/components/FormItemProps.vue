@@ -11,29 +11,33 @@
         v-if="!formConfig.currentItem['key']"
         description="未选择控件"
       />
-      <a-form-model v-else layout="horizontal">
+      <a-form-model v-else layout="inline">
         <a-form-model-item
-          v-for="props of basePropsConfig"
+          v-for="props of baseFormItemProps"
           :key="props.name"
           :label="props.label"
         >
           <component
+            class="component-props"
             v-bind="props.props"
             :is="props.tag"
             v-model="formConfig.currentItem[props.name]"
           ></component>
         </a-form-model-item>
 
-        <a-form-model-item label="操作属性">
+        <a-form-model-item label="控制属性">
           <a-checkbox
-            v-for="item of baseHandleProps"
+            v-for="item of baseFormItemHandleProps"
             :key="item.name"
             @change="baseHandleChange($event, item)"
           >
             {{ item.label }}
           </a-checkbox>
         </a-form-model-item>
-        <a-form-model-item label="校验规则">
+        <a-form-model-item
+          label="校验规则"
+          :class="{ 'form-rule-props': !!formConfig.currentItem.rules }"
+        >
           <RuleProps></RuleProps>
         </a-form-model-item>
       </a-form-model>
@@ -41,16 +45,16 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, inject, Ref } from '@vue/composition-api'
-import { IFormConfig } from '@pack/typings/EFormComponent'
+import { defineComponent } from '@vue/composition-api'
 import {
-  baseHandleProps,
-  basePropsConfig,
-  IBaseHandle
+  baseFormItemHandleProps,
+  baseFormItemProps,
+  IBaseFormItemHandle
 } from '@pack/EFormDesign/config/formItemPropsConfig'
 import { IInputEvent } from '@pack/typings/baseType'
 
 import RuleProps from './RuleProps.vue'
+import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
 export default defineComponent({
   name: 'FormItemProps',
@@ -59,13 +63,13 @@ export default defineComponent({
     RuleProps
   },
   setup() {
-    const formConfig = inject('formConfig') as Ref<IFormConfig>
+    const { formConfig } = useFormDesignState()
     /**
      * 由于属性映射的目标可能存在嵌套，所以使用函数处理
      * @param e 事件对象
      * @param props 属性
      */
-    const baseHandleChange = (e: IInputEvent, props: IBaseHandle) => {
+    const baseHandleChange = (e: IInputEvent, props: IBaseFormItemHandle) => {
       const { target, name } = props
       const currentItem = formConfig.value.currentItem
       if (currentItem) {
@@ -74,33 +78,36 @@ export default defineComponent({
         source && (source[name] = e.target.checked)
       }
     }
-    return { basePropsConfig, formConfig, baseHandleProps, baseHandleChange }
+    return {
+      baseFormItemProps,
+      formConfig,
+      baseFormItemHandleProps,
+      baseHandleChange
+    }
   }
 })
 </script>
 
 <style lang="less" scoped>
-@import '~@pack/static/styles/variable.less';
-.properties-content {
-  height: 100%;
-  overflow: hidden;
-  background: #fff;
-
-  .properties-body {
-    overflow: auto;
-    height: 100%;
-    padding: 8px 16px;
-    .hint-box {
-      margin-top: 200px;
+.properties-body {
+  /deep/ .ant-form-item {
+    display: flex;
+    align-items: center;
+    .ant-form-item-label {
+      width: 80px;
     }
-    .ant-form-item {
-      margin-bottom: 0;
-      padding: 6px 0;
-      border-bottom: 1px solid @border-color;
-      /deep/ .ant-form-item-label {
-        line-height: 2;
-      }
+    .ant-form-item-control-wrapper {
+      flex: auto;
     }
+    .ant-slider-with-marks {
+      margin-bottom: 14px;
+    }
+  }
+  .form-rule-props {
+    display: block;
+  }
+  .component-props {
+    flex: auto;
   }
 }
 </style>
