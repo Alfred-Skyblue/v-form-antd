@@ -20,7 +20,8 @@ export const baseFormItemProps: IBaseFormAttrs[] = [
     props: {
       type: 'text',
       placeholder: '请输入标签'
-    }
+    },
+    exclude: ['grid']
   },
   {
     name: 'field',
@@ -29,7 +30,8 @@ export const baseFormItemProps: IBaseFormAttrs[] = [
     props: {
       type: 'text',
       placeholder: '请输入数据字段'
-    }
+    },
+    exclude: ['grid']
   },
   {
     name: 'span',
@@ -47,7 +49,8 @@ export const baseFormItemProps: IBaseFormAttrs[] = [
     tag: 'AInput',
     props: {
       placeholder: '请输入数据字段'
-    }
+    },
+    exclude: ['grid']
   }
 ]
 

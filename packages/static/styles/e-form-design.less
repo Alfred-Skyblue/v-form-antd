@@ -111,6 +111,7 @@
         overflow: auto;
 
         .list-main {
+          overflow: hidden;
           min-height: 100%;
           padding: 5px;
           position: relative;
@@ -240,77 +241,6 @@
             }
           }
 
-          // 动态表格设计面板样式
-          .batch-box,
-          .select-input-list-box {
-            > .batch-label {
-              font-size: 16px;
-              font-weight: 500;
-              padding: 10px 10px;
-            }
-
-            .draggable-box {
-              min-height: 60px;
-              width: 100%;
-              border: 1px #ccc dashed;
-              background: #fff;
-
-              .list-main {
-                min-height: 60px;
-                position: relative;
-                border: 1px #ccc dashed;
-                overflow-x: auto;
-                overflow-y: auto;
-                white-space: nowrap;
-
-                .moving {
-                  // 拖放移动中
-                  width: 175px;
-                  min-height: 94px;
-                  display: inline-block;
-                }
-
-                > div {
-                  min-width: 185px;
-                  display: inline-block;
-                  vertical-align: top;
-
-                  .ant-form-item > .ant-form-item-label,
-                  .ant-form-item > .ant-form-item-control-wrapper {
-                    text-align: left;
-                    display: block;
-                  }
-
-                  .ant-col {
-                    width: 100%;
-                  }
-                }
-              }
-            }
-          }
-
-          .select-input-list-box {
-            .column-box {
-              display: flex;
-              width: 100%;
-
-              .check-box {
-                width: 80px;
-              }
-
-              .draggable-box {
-                flex: 1;
-              }
-            }
-
-            // 隐藏选择输入列的所有组件的label
-            .draggable-box {
-              .ant-form-item-label {
-                display: none !important;
-              }
-            }
-          }
-
           .grid-box {
             position: relative;
             box-sizing: border-box;
@@ -331,8 +261,7 @@
 
             .grid-row {
               background: @layout-background-color;
-              .grid-col,
-              .table-td {
+              .grid-col {
                 .draggable-box {
                   min-height: 60px;
                   min-width: 50px;
@@ -340,7 +269,7 @@
                   background: #fff;
 
                   .list-main {
-                    min-height: 60px;
+                    min-height: 83px;
                     position: relative;
                     border: 1px #ccc dashed;
                   }
@@ -370,7 +299,7 @@
               outline-offset: 0;
             }
             // 选择时 end
-            .copy-delete-box {
+            > .copy-delete-box {
               > .copy,
               > .delete {
                 position: absolute;
