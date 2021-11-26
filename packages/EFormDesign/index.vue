@@ -83,7 +83,6 @@ interface IState {
   propsPanel: Ref<null | IPropsPanel>
   // json模态框实例
   jsonModal: Ref<null | IJsonModalMethods>
-  // 当前激活的属性面板
 }
 
 export interface IFormDesignMethods {
@@ -123,11 +122,13 @@ export default defineComponent({
       config: {
         layout: 'horizontal',
         labelLayout: 'flex',
+        labelWidth: 100,
         labelCol: {},
         wrapperCol: {}
       },
       currentItem: {
-        type: ''
+        type: '',
+        props: {}
       },
       activeKey: 1
     })

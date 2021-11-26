@@ -15,10 +15,11 @@
           v-if="!formConfig.currentItem['key']"
           description="未选择组件"
         />
-        <a-form-model v-else layout="inline">
+        <a-form-model
+          v-else-if="!!baseComponentAttrs[formConfig.currentItem.type]"
+        >
           <a-form-model-item
-            class="form-item-box"
-            v-for="item in baseComponentProps[currentItem.type]"
+            v-for="item in baseComponentAttrs[formConfig.currentItem.type]"
             :key="item.name"
             :label="item.label"
           >
@@ -26,8 +27,18 @@
               class="component-prop"
               v-bind="item.props"
               :is="item.tag"
-              v-model="currentItem.props[item.name]"
+              v-model="formConfig.currentItem['props'][item.name]"
             ></component>
+          </a-form-model-item>
+
+          <a-form-model-item label="控制属性">
+            <a-checkbox
+              v-for="item in baseComponentControlAttrs"
+              :key="item.name"
+              v-model="formConfig.currentItem['props'][item.name]"
+            >
+              {{ item.label }}
+            </a-checkbox>
           </a-form-model-item>
         </a-form-model>
       </div>
@@ -37,26 +48,27 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
-import { baseComponentProps } from '@pack/EFormDesign/config/componentPropsConfig'
+import {
+  baseComponentControlAttrs,
+  baseComponentAttrs
+} from '@pack/EFormDesign/config/componentPropsConfig'
 
 export default defineComponent({
   name: 'ComponentProps',
   setup() {
     const { formConfig } = useFormDesignState()
-    const currentItem = formConfig.value.currentItem
 
-    return { formConfig, baseComponentProps, currentItem }
+    return {
+      formConfig,
+      baseComponentAttrs,
+      baseComponentControlAttrs
+    }
   }
 })
 </script>
 
 <style lang="less" scoped>
 .properties-body {
-  .form-item-box {
-    /deep/ .ant-form-item-label {
-      width: 80px;
-    }
-  }
   .component-prop {
     width: 100%;
   }

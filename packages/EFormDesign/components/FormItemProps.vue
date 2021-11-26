@@ -11,7 +11,7 @@
         v-if="!formConfig.currentItem['key']"
         description="未选择控件"
       />
-      <a-form-model v-else layout="inline">
+      <a-form-model v-else>
         <a-form-model-item
           v-for="props of baseFormItemProps"
           :key="props.name"
@@ -27,9 +27,9 @@
 
         <a-form-model-item label="控制属性">
           <a-checkbox
-            v-for="item of baseFormItemHandleProps"
+            v-for="item of baseFormItemControlAttrs"
             :key="item.name"
-            @change="baseHandleChange($event, item)"
+            @change="handleControlChange($event, item)"
           >
             {{ item.label }}
           </a-checkbox>
@@ -47,9 +47,9 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 import {
-  baseFormItemHandleProps,
+  baseFormItemControlAttrs,
   baseFormItemProps,
-  IBaseFormItemHandle
+  IBaseFormItemControlAttrs
 } from '@pack/EFormDesign/config/formItemPropsConfig'
 import { IInputEvent } from '@pack/typings/baseType'
 
@@ -69,7 +69,10 @@ export default defineComponent({
      * @param e 事件对象
      * @param props 属性
      */
-    const baseHandleChange = (e: IInputEvent, props: IBaseFormItemHandle) => {
+    const handleControlChange = (
+      e: IInputEvent,
+      props: IBaseFormItemControlAttrs
+    ) => {
       const { target, name } = props
       const currentItem = formConfig.value.currentItem
       if (currentItem) {
@@ -81,8 +84,8 @@ export default defineComponent({
     return {
       baseFormItemProps,
       formConfig,
-      baseFormItemHandleProps,
-      baseHandleChange
+      baseFormItemControlAttrs,
+      handleControlChange
     }
   }
 })
@@ -91,23 +94,9 @@ export default defineComponent({
 <style lang="less" scoped>
 .properties-body {
   /deep/ .ant-form-item {
-    display: flex;
-    align-items: center;
-    .ant-form-item-label {
-      width: 80px;
-    }
-    .ant-form-item-control-wrapper {
-      flex: auto;
-    }
     .ant-slider-with-marks {
       margin-bottom: 14px;
     }
-  }
-  .form-rule-props {
-    display: block;
-  }
-  .component-props {
-    flex: auto;
   }
 }
 </style>

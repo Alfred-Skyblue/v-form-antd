@@ -19,7 +19,6 @@ import {
   Checkbox
 } from 'ant-design-vue'
 import vuedraggable from 'vuedraggable'
-import RadioButtonGroup from '@pack/components/RadioButtonGroup.vue'
 ;[
   Input,
   ConfigProvider,
@@ -48,7 +47,8 @@ import RadioButtonGroup from '@pack/components/RadioButtonGroup.vue'
 })
 
 export default {
-  input: Input
+  input: Input,
+  number: InputNumber
 }
 
 Vue.component(vuedraggable.name, vuedraggable)

@@ -34,5 +34,13 @@ export const baseComponents: IEFormComponent[] = [
     props: {
       type: 'text'
     }
+  },
+  {
+    type: 'number',
+    label: '数字输入框',
+    icon: 'icon-number',
+    field: '',
+    span: 24,
+    props: {}
   }
 ]
