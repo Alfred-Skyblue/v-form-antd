@@ -48,7 +48,7 @@ export default defineComponent({
           const { type, key } = formItem
           // 处理栅格和标签页布局
           ;['grid', 'tabs'].includes(type) &&
-            formItem.columns!.forEach(item => traverse(item.children))
+            formItem.columns?.forEach(item => traverse(item.children))
           if (key === props.currentItem.key) {
             let params: IEFormComponent =
               formItems.length === 1
