@@ -57,7 +57,18 @@ export const baseComponents: IEFormComponent[] = [
     icon: 'icon-select',
     field: '',
     span: 24,
-    props: {}
+    props: {
+      options: [
+        {
+          label: '选项一',
+          value: '1'
+        },
+        {
+          label: '选项二',
+          value: '2'
+        }
+      ]
+    }
   },
   {
     type: 'checkbox',
@@ -65,7 +76,18 @@ export const baseComponents: IEFormComponent[] = [
     icon: 'icon-checkbox',
     field: '',
     span: 24,
-    props: {}
+    props: {
+      options: [
+        {
+          label: '选项一',
+          value: '1'
+        },
+        {
+          label: '选项二',
+          value: '2'
+        }
+      ]
+    }
   },
   {
     type: 'radio',
@@ -154,6 +176,7 @@ export const baseComponents: IEFormComponent[] = [
         children: []
       }
     ],
+    span: 24,
     options: {
       gutter: 0
     }

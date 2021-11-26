@@ -12,18 +12,19 @@
         description="未选择控件"
       />
       <a-form-model v-else>
-        <a-form-model-item
-          v-for="props of baseFormItemProps"
-          :key="props.name"
-          :label="props.label"
-        >
-          <component
-            class="component-props"
-            v-bind="props.props"
-            :is="props.tag"
-            v-model="formConfig.currentItem[props.name]"
-          ></component>
-        </a-form-model-item>
+        <div v-for="props of baseFormItemProps" :key="props.name">
+          <a-form-model-item
+            :label="props.label"
+            v-if="showProps(props.exclude)"
+          >
+            <component
+              class="component-props"
+              v-bind="props.props"
+              :is="props.tag"
+              v-model="formConfig.currentItem[props.name]"
+            ></component>
+          </a-form-model-item>
+        </div>
 
         <a-form-model-item label="控制属性">
           <a-checkbox
@@ -35,6 +36,7 @@
           </a-checkbox>
         </a-form-model-item>
         <a-form-model-item
+          v-if="!['grid'].includes(formConfig.currentItem.type)"
           label="校验规则"
           :class="{ 'form-rule-props': !!formConfig.currentItem.rules }"
         >
@@ -55,6 +57,7 @@ import { IInputEvent } from '@pack/typings/baseType'
 
 import RuleProps from './RuleProps.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
+import { isArray } from 'lodash-es'
 
 export default defineComponent({
   name: 'FormItemProps',
@@ -81,11 +84,18 @@ export default defineComponent({
         source && (source[name] = e.target.checked)
       }
     }
+    const showProps = (exclude: string[]) => {
+      if (isArray(exclude)) {
+        return !exclude.includes(formConfig.value.currentItem!.type)
+      }
+      return true
+    }
     return {
       baseFormItemProps,
       formConfig,
       baseFormItemControlAttrs,
-      handleControlChange
+      handleControlChange,
+      showProps
     }
   }
 })

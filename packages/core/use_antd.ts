@@ -60,7 +60,7 @@ export default {
   number: InputNumber,
   textarea: 'ATextarea',
   select: Select,
-  checkbox: Checkbox,
+  checkbox: 'ACheckboxGroup',
   radio: Radio,
   date: DatePicker,
   time: TimePicker,

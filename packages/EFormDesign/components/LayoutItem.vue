@@ -4,7 +4,7 @@
  * @Description: 表单项布局控件
 -->
 <template>
-  <div>
+  <component :is="layoutTag" :span="record.span">
     <template v-if="['grid'].includes(record.type)">
       <div
         class="grid-box"
@@ -56,7 +56,7 @@
       @handleCopy="$emit('handleCopy')"
       @handleDelete="$emit('handleDelete')"
     />
-  </div>
+  </component>
 </template>
 <script lang="ts">
 import {
@@ -88,16 +88,26 @@ export default defineComponent({
   },
   setup(props) {
     const {
-      formDesignMethods: { handleSetSelectItem }
+      formDesignMethods: { handleSetSelectItem },
+      formConfig
     } = useFormDesignState()
     const state = reactive({})
     const colProps = computed(() => {
       const { span } = props.record
       return { span }
     })
-    return { ...toRefs(state), colProps, handleSetSelectItem }
+    // 计算布局元素，水平模式下为ACol，非水平模式下为div
+    const layoutTag = computed(() => {
+      return formConfig.value.config.layout === 'horizontal' ? 'ACol' : 'div'
+    })
+
+    return { ...toRefs(state), colProps, handleSetSelectItem, layoutTag }
   }
 })
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.layout-width {
+  width: 100%;
+}
+</style>

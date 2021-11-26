@@ -156,5 +156,17 @@ export const baseComponentAttrs: IBaseComponentProps = {
         placeholder: '请输入默认值'
       }
     }
-  ]
+  ],
+  select: [
+    {
+      name: 'placeholder',
+      label: '占位符',
+      tag: 'AInput',
+      props: {
+        type: 'text',
+        placeholder: '请输入占位符'
+      }
+    }
+  ],
+  checkbox: []
 }
