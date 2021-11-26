@@ -16,7 +16,15 @@ import {
   Divider,
   Modal,
   Col,
-  Checkbox
+  Checkbox,
+  Select,
+  DatePicker,
+  TimePicker,
+  Rate,
+  Upload,
+  TreeSelect,
+  Cascader,
+  Switch
 } from 'ant-design-vue'
 import vuedraggable from 'vuedraggable'
 ;[
@@ -41,14 +49,26 @@ import vuedraggable from 'vuedraggable'
   Slider,
   Empty,
   Checkbox,
-  Radio
+  Select
 ].forEach(component => {
   Vue.use(component)
 })
 
 export default {
   input: Input,
-  number: InputNumber
+  number: InputNumber,
+  textarea: 'ATextarea',
+  select: Select,
+  checkbox: Checkbox,
+  radio: Radio,
+  date: DatePicker,
+  time: TimePicker,
+  slider: Slider,
+  rate: Rate,
+  upload: Upload,
+  treeSelect: TreeSelect,
+  cascader: Cascader,
+  switch: Switch
 }
 
 Vue.component(vuedraggable.name, vuedraggable)
