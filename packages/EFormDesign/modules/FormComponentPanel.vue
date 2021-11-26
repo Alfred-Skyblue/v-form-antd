@@ -11,35 +11,33 @@
       description="从左侧选择控件添加"
     />
     <a-form-model v-bind="formConfig.config">
-      <a-row>
-        <draggable
-          tag="div"
-          class="draggable-box"
-          group="form-draggable"
-          ghostClass="moving"
-          :animation="180"
-          handle=".drag-move"
-          v-model="formConfig.formItems"
-          @add="addItem"
-          @start="handleDragStart"
-        >
-          <transition-group tag="div" name="list" class="list-main">
-            <component
-              :is="layoutTag"
-              v-for="record in formConfig.formItems"
-              :key="record.key"
-              :span="record.span"
-            >
-              <LayoutItem
-                class="drag-move"
-                :record="record"
-                :data="formConfig"
-                :current-item="formConfig.currentItem"
-              ></LayoutItem>
-            </component>
-          </transition-group>
-        </draggable>
-      </a-row>
+      <draggable
+        tag="div"
+        class="draggable-box"
+        group="form-draggable"
+        ghostClass="moving"
+        :animation="180"
+        handle=".drag-move"
+        v-model="formConfig.formItems"
+        @add="addItem"
+        @start="handleDragStart"
+      >
+        <transition-group tag="div" name="list" class="list-main">
+          <component
+            :is="layoutTag"
+            v-for="record in formConfig.formItems"
+            :key="record.key"
+            :span="record.span"
+          >
+            <LayoutItem
+              class="drag-move"
+              :record="record"
+              :data="formConfig"
+              :current-item="formConfig.currentItem"
+            ></LayoutItem>
+          </component>
+        </transition-group>
+      </draggable>
     </a-form-model>
   </div>
 </template>
