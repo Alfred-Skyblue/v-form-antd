@@ -56,3 +56,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="less" scoped>
+svg {
+  display: inline !important;
+}
+</style>
