@@ -71,7 +71,7 @@ export const baseComponents: IEFormComponent[] = [
     }
   },
   {
-    type: 'checkbox',
+    type: 'checkboxGroup',
     label: '复选框',
     icon: 'icon-checkbox',
     field: '',
@@ -90,12 +90,23 @@ export const baseComponents: IEFormComponent[] = [
     }
   },
   {
-    type: 'radio',
+    type: 'radioGroup',
     label: '单选框',
     icon: 'icon-radio',
     field: '',
     span: 24,
-    props: {}
+    props: {
+      options: [
+        {
+          label: '选项一',
+          value: '1'
+        },
+        {
+          label: '选项二',
+          value: '2'
+        }
+      ]
+    }
   },
   {
     type: 'date',
@@ -104,6 +115,36 @@ export const baseComponents: IEFormComponent[] = [
     field: '',
     span: 24,
     props: {}
+  },
+  {
+    type: 'dateRange',
+    label: '日期范围',
+    icon: 'icon-date-range',
+    field: '',
+    span: 24,
+    props: {
+      placeholder: ['开始日期', '结束日期']
+    }
+  },
+  {
+    type: 'month',
+    label: '月份选择',
+    icon: 'icon-month',
+    field: '',
+    span: 24,
+    props: {
+      placeholder: '请选择月份'
+    }
+  },
+  {
+    type: 'monthRange',
+    label: '月份范围',
+    icon: 'icon-month-range',
+    field: '',
+    span: 24,
+    props: {
+      placeholder: ['开始月份', '结束月份']
+    }
   },
   {
     type: 'time',

@@ -1,11 +1,13 @@
 import { IAnyObject } from '@pack/typings/baseType'
 
 export interface IBaseFormAttrs {
-  name: string // 字段名
-  label: string // 字段标签
+  name?: string // 字段名
+  label?: string // 字段标签
   tag?: string // 属性控件
   props?: IAnyObject // 传递给控件的属性
   exclude?: string[] // 需要排除的控件
+  includes?: string[] // 符合条件的组件
+  children?: IBaseFormAttrs[]
 }
 
 export interface IBaseFormItemControlAttrs extends IBaseFormAttrs {

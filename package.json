@@ -1,7 +1,7 @@
 {
   "name": "form-design-ts",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.2",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -16,6 +16,7 @@
     "ant-design-vue": "^1.7.8",
     "core-js": "^3.6.5",
     "lodash-es": "^4.17.21",
+    "moment": "^2.29.1",
     "vue": "^2.6.11",
     "vue-codemirror-lite": "^1.0.4",
     "vue-router": "^3.5.3",

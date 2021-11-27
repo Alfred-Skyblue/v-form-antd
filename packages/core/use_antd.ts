@@ -24,7 +24,9 @@ import {
   Upload,
   TreeSelect,
   Cascader,
-  Switch
+  Switch,
+  Space,
+  Popover
 } from 'ant-design-vue'
 import vuedraggable from 'vuedraggable'
 ;[
@@ -50,7 +52,10 @@ import vuedraggable from 'vuedraggable'
   Empty,
   Checkbox,
   Select,
-  Upload
+  Upload,
+  Space,
+  DatePicker,
+  Popover
 ].forEach(component => {
   Vue.use(component)
 })

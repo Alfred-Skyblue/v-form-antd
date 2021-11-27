@@ -1,9 +1,8 @@
 import {
   Cascader,
-  Checkbox,
   DatePicker,
+  Input,
   InputNumber,
-  Radio,
   Rate,
   Select,
   Slider,
@@ -12,22 +11,33 @@ import {
   TreeSelect
 } from 'ant-design-vue'
 
-import EInput from './EInput.vue'
 import EUpload from './EUpload.vue'
+import EMonthRange from './EMonthRange.vue'
+import EIconPicker from './EIconPicker.vue'
+import Vue from 'vue'
+import RadioButtonGroup from '@pack/components/RadioButtonGroup.vue'
+
+Vue.component(RadioButtonGroup.name, RadioButtonGroup)
+Vue.component(EMonthRange.name, EMonthRange)
+Vue.component(EIconPicker.name, EIconPicker)
 
 export default {
-  input: EInput,
+  input: Input,
   number: InputNumber,
   textarea: 'ATextarea',
   select: Select,
-  checkbox: 'ACheckboxGroup',
-  radio: Radio,
+  checkboxGroup: 'ACheckboxGroup',
+  radioGroup: 'ARadioGroup',
   date: DatePicker,
+  dateRange: 'ARangePicker',
+  month: 'AMonthPicker',
+  monthRange: EMonthRange,
   time: TimePicker,
   slider: Slider,
   rate: Rate,
   upload: EUpload,
   treeSelect: TreeSelect,
   cascader: Cascader,
-  switch: Switch
+  switch: Switch,
+  iconPicker: EIconPicker
 }

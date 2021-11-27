@@ -6,6 +6,8 @@
 <template>
   <div class="properties-content">
     <a-form-model class="properties-body">
+      <e-icon-picker v-model="icon"></e-icon-picker>
+
       <a-form-model-item label="表单布局">
         <a-radio-group buttonStyle="solid" v-model="formConfig.config.layout">
           <a-radio-button value="horizontal">水平</a-radio-button>
@@ -53,14 +55,15 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent, ref } from '@vue/composition-api'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
 export default defineComponent({
   name: 'FormProps',
   setup() {
     const { formConfig } = useFormDesignState()
-    return { formConfig }
+    const icon = ref('')
+    return { formConfig, icon }
   }
 })
 </script>

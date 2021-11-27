@@ -11,7 +11,27 @@ export const baseComponentControlAttrs: Omit<IBaseFormAttrs, 'tag'>[] = [
   },
   {
     name: 'allowClear',
-    label: '可清除'
+    label: '可清除',
+    includes: [
+      'input',
+      'select',
+      'textarea',
+      'number',
+      'date',
+      'dateRange',
+      'month',
+      'monthRange'
+    ]
+  },
+  {
+    name: 'showSearch',
+    label: '可搜索',
+    includes: ['select']
+  },
+  {
+    name: 'showTime',
+    label: '显示时间',
+    includes: ['date', 'dateRange', 'month', 'monthRange']
   }
 ]
 
@@ -159,6 +179,15 @@ export const baseComponentAttrs: IBaseComponentProps = {
   ],
   select: [
     {
+      name: 'defaultValue',
+      label: '默认值',
+      tag: 'AInput',
+      props: {
+        type: 'text',
+        placeholder: '请输入默认值'
+      }
+    },
+    {
       name: 'placeholder',
       label: '占位符',
       tag: 'AInput',
@@ -166,7 +195,123 @@ export const baseComponentAttrs: IBaseComponentProps = {
         type: 'text',
         placeholder: '请输入占位符'
       }
+    },
+    {
+      name: 'mode',
+      label: '选择模式',
+      tag: 'RadioButtonGroup',
+      props: {
+        options: [
+          { label: '单选', value: 'default' },
+          { label: '多选', value: 'multiple' },
+          { label: '标签', value: 'tags' },
+          { label: '组合', value: 'combobox' }
+        ]
+      }
     }
   ],
-  checkbox: []
+  checkboxGroup: [],
+  radioGroup: [
+    {
+      name: 'defaultValue',
+      label: '默认值',
+      tag: 'AInput',
+      props: {
+        placeholder: '请输入默认值'
+      }
+    }
+  ],
+  date: [
+    {
+      name: 'placeholder',
+      label: '占位符',
+      tag: 'AInput',
+      props: {
+        placeholder: '请输入占位符'
+      }
+    },
+    {
+      name: 'format',
+      label: '展示格式（format）',
+      tag: 'AInput',
+      props: {
+        placeholder: 'YYYY-MM-DD'
+      }
+    },
+    {
+      name: 'valueFormat',
+      label: '绑定值格式（valueFormat）',
+      tag: 'AInput',
+      props: {
+        placeholder: 'YYYY-MM-DD'
+      }
+    }
+  ],
+
+  dateRange: [
+    {
+      name: 'placeholder',
+      label: '占位符',
+      children: [
+        {
+          tag: 'AInput'
+        },
+        {
+          tag: 'AInput'
+        }
+      ]
+    },
+    {
+      name: 'format',
+      label: '展示格式（format）',
+      tag: 'AInput',
+      props: {
+        placeholder: 'YYYY-MM-DD HH:mm:ss'
+      }
+    },
+    {
+      name: 'valueFormat',
+      label: '绑定值格式（valueFormat）',
+      tag: 'AInput',
+      props: {
+        placeholder: 'YYYY-MM-DD'
+      }
+    }
+  ],
+  month: [
+    {
+      name: 'placeholder',
+      label: '占位符',
+      tag: 'AInput',
+      props: {
+        placeholder: '请输入占位符'
+      }
+    },
+    {
+      name: 'format',
+      label: '展示格式（format）',
+      tag: 'AInput',
+      props: {
+        placeholder: 'YYYY-MM'
+      }
+    },
+    {
+      name: 'valueFormat',
+      label: '绑定值格式（valueFormat）',
+      tag: 'AInput',
+      props: {
+        placeholder: 'YYYY-MM'
+      }
+    }
+  ],
+  time: [
+    {
+      name: 'placeholder',
+      label: '占位符',
+      tag: 'AInput',
+      props: {
+        placeholder: '请输入占位符'
+      }
+    }
+  ]
 }

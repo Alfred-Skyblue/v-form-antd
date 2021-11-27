@@ -81,14 +81,13 @@ export default defineComponent({
       if (currentItem) {
         // 判断是否有target，如果有，则获取target，没有则绑定到currentItem上
         let source = target ? currentItem[target] : currentItem
-        source && (source[name] = e.target.checked)
+        source && (source[name!] = e.target.checked)
       }
     }
     const showProps = (exclude: string[]) => {
-      if (isArray(exclude)) {
-        return !exclude.includes(formConfig.value.currentItem!.type)
-      }
-      return true
+      return isArray(exclude)
+        ? !exclude.includes(formConfig.value.currentItem!.type)
+        : true
     }
     return {
       baseFormItemProps,
