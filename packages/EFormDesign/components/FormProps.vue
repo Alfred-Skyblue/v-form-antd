@@ -6,7 +6,7 @@
 <template>
   <div class="properties-content">
     <a-form-model class="properties-body">
-      <e-icon-picker v-model="icon"></e-icon-picker>
+      <e-upload v-model="fileList"></e-upload>
 
       <a-form-model-item label="表单布局">
         <a-radio-group buttonStyle="solid" v-model="formConfig.config.layout">
@@ -62,8 +62,9 @@ export default defineComponent({
   name: 'FormProps',
   setup() {
     const { formConfig } = useFormDesignState()
-    const icon = ref('')
-    return { formConfig, icon }
+    const fileList = ref('[]')
+    console.log('-> fileList', fileList)
+    return { formConfig, fileList }
   }
 })
 </script>

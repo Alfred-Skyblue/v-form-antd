@@ -4,6 +4,7 @@ import router from './router'
 import VueCompositionAPI from '@vue/composition-api'
 import EFormDesign from '../packages/index'
 Vue.use(VueCompositionAPI)
+
 Vue.use(EFormDesign)
 Vue.config.productionTip = false
 Vue.prototype.$log = console.log

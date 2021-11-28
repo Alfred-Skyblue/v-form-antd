@@ -20,7 +20,8 @@ export const baseComponentControlAttrs: Omit<IBaseFormAttrs, 'tag'>[] = [
       'date',
       'dateRange',
       'month',
-      'monthRange'
+      'monthRange',
+      'time'
     ]
   },
   {
@@ -32,6 +33,11 @@ export const baseComponentControlAttrs: Omit<IBaseFormAttrs, 'tag'>[] = [
     name: 'showTime',
     label: '显示时间',
     includes: ['date', 'dateRange', 'month', 'monthRange']
+  },
+  {
+    name: 'range',
+    label: '双向滑动',
+    includes: ['slider']
   }
 ]
 
@@ -311,6 +317,59 @@ export const baseComponentAttrs: IBaseComponentProps = {
       tag: 'AInput',
       props: {
         placeholder: '请输入占位符'
+      }
+    },
+    {
+      name: 'format',
+      label: '展示格式（format）',
+      tag: 'AInput',
+      props: {
+        placeholder: 'YYYY-MM'
+      }
+    },
+    {
+      name: 'valueFormat',
+      label: '绑定值格式（valueFormat）',
+      tag: 'AInput',
+      props: {
+        placeholder: 'YYYY-MM'
+      }
+    }
+  ],
+  slider: [
+    {
+      name: 'defaultValue',
+      label: '默认值',
+      tag: 'AInputNumber',
+      props: {
+        placeholder: '请输入默认值'
+      }
+    },
+    {
+      name: 'min',
+      label: '最小值',
+      tag: 'AInputNumber',
+      props: {
+        type: 'text',
+        placeholder: '请输入最小值'
+      }
+    },
+    {
+      name: 'max',
+      label: '最大值',
+      tag: 'AInputNumber',
+      props: {
+        type: 'text',
+        placeholder: '请输入最大值'
+      }
+    },
+    {
+      name: 'step',
+      label: '步长',
+      tag: 'AInputNumber',
+      props: {
+        type: 'text',
+        placeholder: '请输入步长'
       }
     }
   ]

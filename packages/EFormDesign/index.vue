@@ -9,7 +9,8 @@
       <header class="e-form-design-header"></header>
       <section class="content">
         <div class="left">
-          <a-collapse>
+          <a-collapse :defaultActiveKey="['1', '2']">
+            <!--     基础控件start       -->
             <a-collapse-panel
               v-if="baseComponents.length > 0"
               header="基础控件"
@@ -21,6 +22,21 @@
                 @handleListPush="handleListPush"
               ></CollapseItem>
             </a-collapse-panel>
+            <!--    基础控件end      -->
+
+            <!--    布局控件start        -->
+            <a-collapse-panel
+              v-if="layoutComponents.length > 0"
+              header="布局控件"
+              key="2"
+            >
+              <CollapseItem
+                :list="layoutComponents"
+                @addAttrs="handleAddAttrs"
+                @handleListPush="handleListPush"
+              ></CollapseItem>
+            </a-collapse-panel>
+            <!--   布局控件end       -->
           </a-collapse>
         </div>
         <div class="node-panel" onselectstart="return false">
@@ -71,7 +87,7 @@ import {
 } from '@pack/typings/EFormComponent'
 import { generateKey } from '@pack/utils'
 import { cloneDeep } from 'lodash-es'
-import { baseComponents } from '@pack/core/formItemConfig'
+import { baseComponents, layoutComponents } from '@pack/core/formItemConfig'
 import { IJsonModalMethods } from '@pack/EFormDesign/components/JsonModal.vue'
 import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
 
@@ -79,6 +95,8 @@ interface IState {
   locale: any
   // 公用组件
   baseComponents: IEFormComponent[]
+  // 布局组件
+  layoutComponents: IEFormComponent[]
   // 属性面板实例
   propsPanel: Ref<null | IPropsPanel>
   // json模态框实例
@@ -135,6 +153,7 @@ export default defineComponent({
     const state = reactive<IState>({
       locale: zhCN, // 国际化
       baseComponents, // 基础控件列表
+      layoutComponents, // 布局组件列表
       propsPanel,
       jsonModal
     })
