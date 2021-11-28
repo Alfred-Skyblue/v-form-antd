@@ -156,7 +156,7 @@ export const baseComponents: IEFormComponent[] = [
   },
   {
     type: 'slider',
-    label: '时间选择',
+    label: '滑动输入条',
     icon: 'icon-slider',
     field: '',
     span: 24,
@@ -201,7 +201,10 @@ export const baseComponents: IEFormComponent[] = [
     field: '',
     span: 24,
     props: {}
-  },
+  }
+]
+
+export const layoutComponents: IEFormComponent[] = [
   {
     type: 'grid',
     label: '栅格布局',

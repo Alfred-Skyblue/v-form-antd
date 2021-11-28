@@ -20,6 +20,7 @@ import RadioButtonGroup from '@pack/components/RadioButtonGroup.vue'
 Vue.component(RadioButtonGroup.name, RadioButtonGroup)
 Vue.component(EMonthRange.name, EMonthRange)
 Vue.component(EIconPicker.name, EIconPicker)
+Vue.component(EUpload.name, EUpload)
 
 export default {
   input: Input,

@@ -58,3 +58,14 @@ export function remove<T>(
 export function getType(value: any): string {
   return Object.prototype.toString.call(value).slice(8, -1)
 }
+
+/**
+ * 生成唯一guid
+ * @returns {String} 唯一id标识符
+ */
+export function guid(): string {
+  function S4() {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+  }
+  return `${S4() + S4()}-${S4()}-${S4()}-${S4()}-${S4() + S4() + S4()}`
+}
