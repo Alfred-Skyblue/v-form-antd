@@ -10,6 +10,8 @@
         <!--          <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">-->
         <!--            <slot :name="slot" v-bind="scope" />-->
         <!--          </template>-->
+        <e-icon-font-picker v-model="dateValue"></e-icon-font-picker>
+
         <AEmpty
           class="hint-box"
           v-if="!formConfig.currentItem['key']"
@@ -89,7 +91,7 @@ export default defineComponent({
   },
   setup() {
     const { formConfig } = useFormDesignState()
-    const dateValue = ref(null)
+    const dateValue = ref('')
     const showControlAttrs = (includes: string[]) => {
       if (!includes) return true
       return includes.includes(formConfig.value.currentItem!.type)

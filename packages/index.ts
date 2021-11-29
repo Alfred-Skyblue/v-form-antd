@@ -1,10 +1,9 @@
 import './core'
 import './mini'
 import EFormDesign from './EFormDesign'
+import EIconPicker from './EIconPicker'
 import EFormItem from './EFormItem'
 import { VueConstructor } from 'vue'
-import { Icon } from 'ant-design-vue'
-console.log('-> antIcons', Icon)
 const components = [EFormDesign, EFormItem]
 const install = (Vue: VueConstructor) => {
   components.forEach(component => {
@@ -12,5 +11,5 @@ const install = (Vue: VueConstructor) => {
   })
 }
 
-export { EFormDesign, EFormItem }
-export default { install, EFormDesign, EFormItem }
+export { EFormDesign, EFormItem, EIconPicker }
+export default { install, EFormDesign, EFormItem, EIconPicker }
