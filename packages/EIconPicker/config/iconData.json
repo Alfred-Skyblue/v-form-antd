@@ -1,0 +1,205 @@
+{
+  "id": "2957630",
+  "name": "EFormDesign",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "13177754",
+      "name": "月份",
+      "font_class": "month",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "16221883",
+      "name": "日期范围",
+      "font_class": "date-range",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "23462655",
+      "name": "月范围",
+      "font_class": "month-range",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "4347520",
+      "name": "icon_添加",
+      "font_class": "plus",
+      "unicode": "eb89",
+      "unicode_decimal": 60297
+    },
+    {
+      "icon_id": "1026708",
+      "name": "input",
+      "font_class": "input",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "109799",
+      "name": "upload",
+      "font_class": "upload",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "124495",
+      "name": "警告",
+      "font_class": "alert",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "637485",
+      "name": "单选框",
+      "font_class": "radio",
+      "unicode": "e69c",
+      "unicode_decimal": 59036
+    },
+    {
+      "icon_id": "815872",
+      "name": "按钮-开",
+      "font_class": "switch",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "1646229",
+      "name": "评分",
+      "font_class": "rate",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "1766470",
+      "name": "符号-按钮",
+      "font_class": "button",
+      "unicode": "e690",
+      "unicode_decimal": 59024
+    },
+    {
+      "icon_id": "2357392",
+      "name": "颜色选择",
+      "font_class": "picker-color",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "2471358",
+      "name": "富文本框",
+      "font_class": "editor",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "4933389",
+      "name": "时间选择器",
+      "font_class": "time-picker",
+      "unicode": "e750",
+      "unicode_decimal": 59216
+    },
+    {
+      "icon_id": "5052456",
+      "name": "uploadImage",
+      "font_class": "uploadImage",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "5881147",
+      "name": "多选框",
+      "font_class": "checkbox",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "7566788",
+      "name": "滑动输入条",
+      "font_class": "slider",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "10064728",
+      "name": "文字",
+      "font_class": "txt",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "11523547",
+      "name": "可视化平台icon_数字输入",
+      "font_class": "number",
+      "unicode": "e6f1",
+      "unicode_decimal": 59121
+    },
+    {
+      "icon_id": "15126397",
+      "name": "icon_栅格布局",
+      "font_class": "grid",
+      "unicode": "e736",
+      "unicode_decimal": 59190
+    },
+    {
+      "icon_id": "18941504",
+      "name": "输入框",
+      "font_class": "shurukuang",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "19102482",
+      "name": "下拉选择",
+      "font_class": "select",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "19457218",
+      "name": "cascader",
+      "font_class": "cascader",
+      "unicode": "e6ae",
+      "unicode_decimal": 59054
+    },
+    {
+      "icon_id": "19788464",
+      "name": "树形选择器",
+      "font_class": "tree-select",
+      "unicode": "e77c",
+      "unicode_decimal": 59260
+    },
+    {
+      "icon_id": "20594647",
+      "name": "标签页",
+      "font_class": "tabs",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "24472240",
+      "name": "插槽",
+      "font_class": "slot",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "25131256",
+      "name": "日期选择框",
+      "font_class": "date-picker",
+      "unicode": "e85d",
+      "unicode_decimal": 59485
+    },
+    {
+      "icon_id": "25221498",
+      "name": "文本域",
+      "font_class": "textarea",
+      "unicode": "e6c2",
+      "unicode_decimal": 59074
+    }
+  ]
+}
