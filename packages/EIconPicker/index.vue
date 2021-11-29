@@ -29,7 +29,9 @@
           :key="item.icon_id"
           @click="handleClick(item)"
           class="icon-content"
-          :style="{ background: value === item ? '#268961' : '' }"
+          :style="{
+            background: value === prefix + item.font_class ? '#268961' : ''
+          }"
         >
           <svg class="icon" aria-hidden="true">
             <use :xlink:href="`#${prefix + item.font_class}`"></use>
@@ -105,9 +107,7 @@ export default defineComponent({
     const filterIcon = () => {
       if (state.searchValue) {
         state.iconArr = iconFontConfig.iconData.glyphs.filter(item =>
-          item.font_class
-            .toLowerCase()
-            .includes(state.searchValue.toLowerCase())
+          item.name.toLowerCase().includes(state.searchValue.toLowerCase())
         )
       } else {
         state.iconArr = iconFontConfig.iconData.glyphs
@@ -118,6 +118,7 @@ export default defineComponent({
       () => state.visible,
       () => {
         state.searchValue = ''
+        state.iconArr = iconFontConfig.iconData.glyphs
       }
     )
 

@@ -1,7 +1,7 @@
 import EIconFontPicker from './index.vue'
 import { VueConstructor } from 'vue'
 
-import { iconFontConfig } from '@pack/EIconPicker/config'
+import { iconFontConfig, IIconFont } from '@pack/EIconPicker/config'
 
 /**
  * 动态加载js文件
@@ -14,13 +14,17 @@ function addScript(url: string) {
   document.getElementsByTagName('head')[0].appendChild(script)
 }
 
-const setIconConfig = (scriptUrl: string, jsonUrl: string) => {
+const setIconConfig = (scriptUrl: string, json: string | IIconFont) => {
   addScript(scriptUrl)
-  fetch(jsonUrl).then(res => {
-    res.json().then(data => {
-      iconFontConfig.iconData = data
+  if (typeof json === 'string') {
+    fetch(json).then(res => {
+      res.json().then(data => {
+        iconFontConfig.iconData = data
+      })
     })
-  })
+  } else {
+    iconFontConfig.iconData = json
+  }
 }
 
 export default Object.assign(EIconFontPicker, {
