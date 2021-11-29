@@ -55,7 +55,8 @@ import vuedraggable from 'vuedraggable'
   Upload,
   Space,
   DatePicker,
-  Popover
+  Popover,
+  Switch
 ].forEach(component => {
   Vue.use(component)
 })

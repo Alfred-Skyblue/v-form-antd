@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-for="(item, index) of formConfig.currentItem.props.options"
+      v-for="(item, index) of formConfig.currentItem.props[key]"
       :key="item.value"
     >
       <div class="options-box">
@@ -32,16 +32,19 @@ export default defineComponent({
     const state = reactive({})
     const { formConfig } = useFormDesignState()
     const currentItem = formConfig.value.currentItem
+    const key = currentItem?.props?.options ? 'options' : 'treeData'
     const addOptions = () => {
-      currentItem?.props?.options.push({
-        label: '',
-        value: ''
-      })
+      if (currentItem?.props?.[key]) {
+        currentItem.props[key].push({
+          label: '',
+          value: ''
+        })
+      }
     }
     const deleteOptions = (index: number) => {
-      remove(currentItem?.props?.options, index)
+      remove(currentItem?.props?.[key], index)
     }
-    return { ...toRefs(state), formConfig, addOptions, deleteOptions }
+    return { ...toRefs(state), formConfig, addOptions, deleteOptions, key }
   }
 })
 </script>
