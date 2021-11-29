@@ -184,7 +184,24 @@ export const baseComponents: IEFormComponent[] = [
     icon: 'icon-tree-select',
     field: '',
     span: 24,
-    props: {}
+    props: {
+      treeData: [
+        {
+          label: '选项一',
+          value: '1',
+          children: [
+            {
+              label: '选项三',
+              value: '1-1'
+            }
+          ]
+        },
+        {
+          label: '选项二',
+          value: '2'
+        }
+      ]
+    }
   },
   {
     type: 'upload',
@@ -200,7 +217,24 @@ export const baseComponents: IEFormComponent[] = [
     icon: 'icon-cascader',
     field: '',
     span: 24,
-    props: {}
+    props: {
+      options: [
+        {
+          label: '选项一',
+          value: '1',
+          children: [
+            {
+              label: '选项三',
+              value: '1-1'
+            }
+          ]
+        },
+        {
+          label: '选项二',
+          value: '2'
+        }
+      ]
+    }
   }
 ]
 

@@ -21,13 +21,15 @@ export const baseComponentControlAttrs: Omit<IBaseFormAttrs, 'tag'>[] = [
       'dateRange',
       'month',
       'monthRange',
-      'time'
+      'time',
+      'cascader',
+      'treeSelect'
     ]
   },
   {
     name: 'showSearch',
     label: '可搜索',
-    includes: ['select']
+    includes: ['select', 'treeSelect', 'cascader']
   },
   {
     name: 'showTime',
@@ -38,6 +40,27 @@ export const baseComponentControlAttrs: Omit<IBaseFormAttrs, 'tag'>[] = [
     name: 'range',
     label: '双向滑动',
     includes: ['slider']
+  },
+  {
+    name: 'allowHalf',
+    label: '允许半选',
+    includes: ['rate']
+  },
+  {
+    name: 'multiple',
+    label: '多选',
+    includes: ['treeSelect']
+  },
+  {
+    name: 'treeDefaultExpandAll',
+    label: '展开所有',
+    includes: ['treeSelect']
+  },
+
+  {
+    name: 'treeCheckable',
+    label: '可勾选',
+    includes: ['treeSelect']
   }
 ]
 
@@ -204,7 +227,7 @@ export const baseComponentAttrs: IBaseComponentProps = {
     },
     {
       name: 'mode',
-      label: '选择模式',
+      label: '选择模式（默认单选）',
       tag: 'RadioButtonGroup',
       props: {
         options: [
@@ -350,7 +373,6 @@ export const baseComponentAttrs: IBaseComponentProps = {
       label: '最小值',
       tag: 'AInputNumber',
       props: {
-        type: 'text',
         placeholder: '请输入最小值'
       }
     },
@@ -359,7 +381,6 @@ export const baseComponentAttrs: IBaseComponentProps = {
       label: '最大值',
       tag: 'AInputNumber',
       props: {
-        type: 'text',
         placeholder: '请输入最大值'
       }
     },
@@ -368,8 +389,132 @@ export const baseComponentAttrs: IBaseComponentProps = {
       label: '步长',
       tag: 'AInputNumber',
       props: {
-        type: 'text',
         placeholder: '请输入步长'
+      }
+    }
+  ],
+  rate: [
+    {
+      name: 'defaultValue',
+      label: '默认值',
+      tag: 'AInputNumber',
+      props: {
+        placeholder: '请输入默认值'
+      }
+    },
+    {
+      name: 'character',
+      label: '自定义字符',
+      tag: 'AInput',
+      props: {
+        placeholder: '请输入自定义字符'
+      }
+    },
+    {
+      name: 'count',
+      label: 'start 总数',
+      tag: 'AInputNumber',
+      props: {
+        placeholder: '请输入自定义字符'
+      }
+    }
+  ],
+  switch: [
+    {
+      name: 'defaultValue',
+      label: '默认值',
+      tag: 'ASwitch',
+      props: {}
+    },
+    {
+      name: 'checkedChildren',
+      label: '选中时的内容',
+      tag: 'AInput',
+      props: {
+        placeholder: '选中时的内容'
+      }
+    },
+    {
+      name: 'unCheckedChildren',
+      label: '非选中时的内容',
+      tag: 'AInput',
+      props: {
+        placeholder: '非选中时的内容'
+      }
+    },
+    {
+      name: 'size',
+      label: '尺寸',
+      tag: 'RadioButtonGroup',
+      props: {
+        options: [
+          {
+            label: '默认',
+            value: 'default'
+          },
+          {
+            label: '小',
+            value: 'small'
+          }
+        ]
+      }
+    }
+  ],
+  treeSelect: [
+    {
+      name: 'placeholder',
+      label: '占位符',
+      tag: 'AInputNumber',
+      props: {
+        placeholder: '请输入占位符'
+      }
+    }
+  ],
+  cascader: [
+    {
+      name: 'placeholder',
+      label: '占位符',
+      tag: 'AInputNumber',
+      props: {
+        placeholder: '请输入占位符'
+      }
+    },
+    {
+      name: 'expandTrigger',
+      label: '次级展开方式(默认click)',
+      tag: 'RadioButtonGroup',
+      props: {
+        options: [
+          {
+            label: 'click',
+            value: 'click'
+          },
+          {
+            label: 'hover',
+            value: 'hover'
+          }
+        ]
+      }
+    },
+    {
+      name: 'size',
+      label: '尺寸',
+      tag: 'RadioButtonGroup',
+      props: {
+        options: [
+          {
+            label: '默认',
+            value: 'default'
+          },
+          {
+            label: '大',
+            value: 'large'
+          },
+          {
+            label: '小',
+            value: 'small'
+          }
+        ]
       }
     }
   ]

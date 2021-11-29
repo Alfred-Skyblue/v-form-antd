@@ -57,9 +57,13 @@
           <a-form-model-item
             label="选项"
             v-if="
-              ['select', 'checkboxGroup', 'radioGroup'].includes(
-                formConfig.currentItem['type']
-              )
+              [
+                'select',
+                'checkboxGroup',
+                'radioGroup',
+                'treeSelect',
+                'cascader'
+              ].includes(formConfig.currentItem['type'])
             "
           >
             <FormOptions></FormOptions>
