@@ -41,7 +41,8 @@
         </div>
         <div class="node-panel" onselectstart="return false">
           <Toolbar
-            @handleOpenJsonModal="handleOpenJsonModal"
+            @handleOpenJsonModal="handleOpenModal(jsonModal)"
+            @handlePreview="handleOpenModal(eFormPreview)"
             @handleClearFormItems="handleClearFormItems"
           ></Toolbar>
           <FormComponentPanel
@@ -58,6 +59,7 @@
         </div>
       </section>
       <JsonModal ref="jsonModal"></JsonModal>
+      <EFormPreview ref="eFormPreview" :formConfig="formConfig" />
     </div>
   </a-config-provider>
 </template>
@@ -65,6 +67,7 @@
 import CollapseItem from './modules/CollapseItem.vue'
 import FormComponentPanel from './modules/FormComponentPanel.vue'
 import JsonModal from './components/JsonModal.vue'
+import EFormPreview from '@pack/EFormPreview/index.vue'
 import Toolbar from './modules/Toolbar.vue'
 import PropsPanel, { IPropsPanel } from './modules/PropsPanel.vue'
 
@@ -88,9 +91,12 @@ import {
 import { generateKey } from '@pack/utils'
 import { cloneDeep } from 'lodash-es'
 import { baseComponents, layoutComponents } from '@pack/core/formItemConfig'
-import { IJsonModalMethods } from '@pack/EFormDesign/components/JsonModal.vue'
 import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
+import { IAnyObject } from '@pack/typings/baseType'
 
+export interface IToolbarMethods {
+  showModal: (jsonData: IAnyObject) => void
+}
 interface IState {
   locale: any
   // 公用组件
@@ -100,7 +106,8 @@ interface IState {
   // 属性面板实例
   propsPanel: Ref<null | IPropsPanel>
   // json模态框实例
-  jsonModal: Ref<null | IJsonModalMethods>
+  jsonModal: Ref<null | IToolbarMethods>
+  eFormPreview: Ref<null | IToolbarMethods>
 }
 
 export interface IFormDesignMethods {
@@ -127,12 +134,14 @@ export default defineComponent({
     FormComponentPanel,
     PropsPanel,
     Toolbar,
-    JsonModal
+    JsonModal,
+    EFormPreview
   },
   setup() {
     // 子组件实例
     const propsPanel = ref<null | IPropsPanel>(null)
-    const jsonModal = ref<null | IJsonModalMethods>(null)
+    const jsonModal = ref<null | IToolbarMethods>(null)
+    const eFormPreview = ref<null | IToolbarMethods>(null)
     // endregion
     const formConfig = ref<IFormConfig>({
       // 表单配置
@@ -155,7 +164,8 @@ export default defineComponent({
       baseComponents, // 基础控件列表
       layoutComponents, // 布局组件列表
       propsPanel,
-      jsonModal
+      jsonModal,
+      eFormPreview
     })
     /**
      * 选中表单项
@@ -254,10 +264,11 @@ export default defineComponent({
     }
 
     /**
-     * 打开 JSON 数据模态框
+     * 打开模态框
+     * @param Modal {IToolbarMethods}
      */
-    const handleOpenJsonModal = () => {
-      state.jsonModal?.showModal(formConfig.value)
+    const handleOpenModal = (Modal: IToolbarMethods) => {
+      Modal?.showModal(formConfig.value)
     }
 
     const handleChangePropsTabs = (key: PropsTabKey) => {
@@ -313,7 +324,7 @@ export default defineComponent({
       handleAddAttrs,
       handleListPush,
       handleCopy,
-      handleOpenJsonModal,
+      handleOpenModal,
       formConfig,
       handleClearFormItems
     }
