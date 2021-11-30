@@ -20,7 +20,7 @@ export function withInstall<T extends { name: string }>(comp: T) {
  */
 export function generateKey(formItem?: IEFormComponent): string | boolean {
   if (formItem) {
-    const key = uniqueId(`${formItem.type}_`)
+    const key = uniqueId(`${toLine(formItem.type)}_`)
     formItem.key = key
     formItem.field = key
     return true
@@ -68,4 +68,12 @@ export function randomUUID(): string {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
   }
   return `${S4() + S4()}-${S4()}-${S4()}-${S4()}-${S4() + S4() + S4()}`
+}
+
+/**
+ * 驼峰转下划线
+ * @param str
+ */
+export function toLine(str: string) {
+  return str.replace(/([A-Z])/g, '_$1').toLowerCase()
 }
