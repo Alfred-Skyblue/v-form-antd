@@ -45,6 +45,9 @@ export interface IEFormComponent {
   key?: string
   // 对应的字段
   field?: string
+  // 联动字段
+  link?: string[]
+  update?: () => void
   // 控件栅格数
   span?: number
   // 子控件

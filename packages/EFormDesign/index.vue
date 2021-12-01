@@ -79,8 +79,7 @@ import {
   toRefs,
   ref,
   provide,
-  Ref,
-  set
+  Ref
 } from '@vue/composition-api'
 
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'

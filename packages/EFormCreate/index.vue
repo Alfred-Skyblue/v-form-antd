@@ -17,6 +17,7 @@
         :record="record"
         :formConfig="formConfig"
         :formData="formData"
+        @change="handleChange"
       >
         <template :slot="record.props.slotName">
           <slot
@@ -31,10 +32,12 @@
 <script lang="ts">
 import { defineComponent, PropType, ref, watch } from '@vue/composition-api'
 import FormRender from './components/FormRender.vue'
-import { IFormConfig } from '@pack/typings/EFormComponent'
+import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { useFormInstanceMethods } from '@pack/hooks/useFormInstanceMethods'
 import { useEFormMethods } from '@pack/hooks/useEFormMethods'
+import { isFunction } from 'lodash-es'
+import { formItemsForEach } from '@pack/utils'
 
 export default defineComponent({
   name: 'EFormCreate',
@@ -58,20 +61,34 @@ export default defineComponent({
     const eFormModel = ref<FormModel | null>(null)
     const { submit, validate, validateField, resetFields, clearValidate } =
       useFormInstanceMethods(props, context, eFormModel)
-    useEFormMethods(props, context, eFormModel, {
+    useEFormMethods(props, context, eFormModel, props.formConfig, {
       submit,
       validate,
       validateField,
       resetFields,
       clearValidate
     })
-    watch(
-      () => props.formData.name,
-      (newVal, oldVal) => {
-        console.log('-> newVal,oldVal', newVal, oldVal)
-      },
-      { deep: true }
-    )
+    const linkOn: { [key: string]: Array<() => void> } = {}
+    const initLink = () => {
+      function traverse(formItems: IEFormComponent[]) {
+        // 首次遍历，查找需要关联字段的表单
+        formItemsForEach(formItems, formItem => {
+          // 如果需要关联，则进行第二层遍历，查找表单中关联的字段，存到数组中
+          formItemsForEach(formItems, item => {
+            if (formItem.link?.includes(item.field!)) {
+              if (!linkOn[item.field!]) linkOn[item.field!] = []
+              isFunction(formItem.update) &&
+                linkOn[item.field!].push(formItem.update!)
+            }
+          })
+        })
+      }
+      traverse(props.formConfig.formItems)
+    }
+    initLink()
+    const handleChange = (event: any) => {
+      linkOn[event.field] && linkOn[event.field].forEach(cb => cb())
+    }
     emit('getFormInstance', eFormModel)
 
     return {
@@ -80,7 +97,8 @@ export default defineComponent({
       validate,
       validateField,
       resetFields,
-      clearValidate
+      clearValidate,
+      handleChange
     }
   }
 })

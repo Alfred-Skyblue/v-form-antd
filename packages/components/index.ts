@@ -26,7 +26,7 @@ Vue.component(EUpload.name, EUpload)
 export default {
   input: Input,
   number: InputNumber,
-  textarea: 'ATextarea',
+  textarea: Input.TextArea,
   select: Select,
   checkboxGroup: 'ACheckboxGroup',
   radioGroup: 'ARadioGroup',

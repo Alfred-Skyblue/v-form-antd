@@ -44,9 +44,9 @@
           ></a-input>
         </a-form-model-item>
         <a-form-model-item
-          v-if="!['grid'].includes(formConfig.currentItem.type)"
+          v-if="!['grid'].includes(formConfig.currentItem['type'])"
           label="校验规则"
-          :class="{ 'form-rule-props': !!formConfig.currentItem.rules }"
+          :class="{ 'form-rule-props': !!formConfig.currentItem['rules'] }"
         >
           <RuleProps></RuleProps>
         </a-form-model-item>
@@ -58,10 +58,8 @@
 import { defineComponent } from '@vue/composition-api'
 import {
   baseFormItemControlAttrs,
-  baseFormItemProps,
-  IBaseFormItemControlAttrs
+  baseFormItemProps
 } from '@pack/EFormDesign/config/formItemPropsConfig'
-import { IInputEvent } from '@pack/typings/baseType'
 
 import RuleProps from './RuleProps.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
