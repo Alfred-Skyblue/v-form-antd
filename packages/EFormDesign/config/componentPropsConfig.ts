@@ -517,5 +517,12 @@ export const baseComponentAttrs: IBaseComponentProps = {
         ]
       }
     }
+  ],
+  slot: [
+    {
+      name: 'slotName',
+      label: '插槽名称',
+      tag: 'AInput'
+    }
   ]
 }

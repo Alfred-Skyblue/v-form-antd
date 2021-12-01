@@ -235,6 +235,15 @@ export const baseComponents: IEFormComponent[] = [
         }
       ]
     }
+  },
+  {
+    type: 'slot',
+    label: '插槽',
+    icon: 'icon-slot',
+    field: '',
+    props: {
+      slotName: 'slotName'
+    }
   }
 ]
 

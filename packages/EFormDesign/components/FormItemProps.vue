@@ -30,10 +30,18 @@
           <a-checkbox
             v-for="item of baseFormItemControlAttrs"
             :key="item.name"
-            @change="handleControlChange($event, item)"
+            v-model="formConfig.currentItem[item.name]"
           >
             {{ item.label }}
           </a-checkbox>
+        </a-form-model-item>
+        <a-form-model-item label="是否必选">
+          <a-switch v-model="formConfig.currentItem['required']"></a-switch>
+          <a-input
+            v-if="formConfig.currentItem['required']"
+            v-model="formConfig.currentItem['message']"
+            placeholder="请输入必选提示"
+          ></a-input>
         </a-form-model-item>
         <a-form-model-item
           v-if="!['grid'].includes(formConfig.currentItem.type)"
@@ -67,23 +75,6 @@ export default defineComponent({
   },
   setup() {
     const { formConfig } = useFormDesignState()
-    /**
-     * 由于属性映射的目标可能存在嵌套，所以使用函数处理
-     * @param e 事件对象
-     * @param props 属性
-     */
-    const handleControlChange = (
-      e: IInputEvent,
-      props: IBaseFormItemControlAttrs
-    ) => {
-      const { target, name } = props
-      const currentItem = formConfig.value.currentItem
-      if (currentItem) {
-        // 判断是否有target，如果有，则获取target，没有则绑定到currentItem上
-        let source = target ? currentItem[target] : currentItem
-        source && (source[name!] = e.target.checked)
-      }
-    }
     const showProps = (exclude: string[]) => {
       return isArray(exclude)
         ? !exclude.includes(formConfig.value.currentItem!.type)
@@ -93,7 +84,6 @@ export default defineComponent({
       baseFormItemProps,
       formConfig,
       baseFormItemControlAttrs,
-      handleControlChange,
       showProps
     }
   }
