@@ -15,7 +15,7 @@
     :destroyOnClose="true"
     :width="800"
   >
-    <e-form-create ref="eFormCreate" :form-config="formConfig">
+    <e-form-create ref="eFormCreate" :form-config="formValue">
       <template slot="slotName" slot-scope="{ formModel, field, record }">
         {{ $log('作用域', formModel, field, record) }}
         <a-input v-model="formModel[field]"></a-input>
@@ -30,7 +30,9 @@ import { IAnyObject } from '@pack/typings/baseType'
 import { cloneDeep } from 'lodash-es'
 import EFormCreate from '../EFormCreate/index.vue'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
-
+interface IFormSubmit extends FormModel {
+  submit: () => IAnyObject
+}
 export default defineComponent({
   name: 'EFormPreview',
   components: {
@@ -43,7 +45,83 @@ export default defineComponent({
       formConfig: IFormConfig
     }>({ formData: {}, formConfig: {} as IFormConfig, visible: false })
 
-    const eFormCreate = ref<FormModel | null>(null)
+    const formValue = {
+      formItems: [
+        {
+          type: 'input',
+          label: '数字输入框',
+          icon: 'icon-number',
+          field: 'number_1',
+          span: 24,
+          props: {},
+          on: {},
+          key: 'number_1'
+        },
+        {
+          type: 'textarea',
+          label: '文本域',
+          icon: 'icon-number',
+          field: 'textarea_1',
+          span: 24,
+          props: {},
+          on: {},
+          key: 'number_1'
+        },
+        {
+          type: 'radioGroup',
+          label: '单选框',
+          icon: 'icon-radio',
+          field: 'radio_group_2',
+          link: ['number_1', 'select_3', 'textarea_1'],
+          update() {
+            console.log('联动成功')
+          },
+          span: 24,
+          props: {
+            options: [
+              {
+                label: '选项一',
+                value: '1'
+              },
+              {
+                label: '选项二',
+                value: '2'
+              }
+            ]
+          },
+          key: 'radio_group_2'
+        },
+        {
+          type: 'select',
+          label: '下拉选择',
+          icon: 'icon-select',
+          field: 'select_3',
+          span: 24,
+          props: {
+            options: [
+              {
+                label: '选项一',
+                value: '1'
+              },
+              {
+                label: '选项二',
+                value: '2'
+              }
+            ]
+          },
+          key: 'select_3'
+        }
+      ],
+      config: {
+        layout: 'horizontal',
+        labelLayout: 'flex',
+        labelWidth: 100,
+        labelCol: {},
+        wrapperCol: {}
+      },
+      activeKey: 2
+    }
+    const eFormCreate = ref<IFormSubmit | null>(null)
 
     // ;(getCurrentInstance()!.parent as IAnyObject)!.$formModel = eFormModel
 
@@ -56,10 +134,9 @@ export default defineComponent({
       state.visible = true
     }
 
-    const handleGetData = () => {
-      eFormCreate.value!.validate(val => {
-        console.log('-> val', val)
-      })
+    const handleGetData = async () => {
+      const data = await eFormCreate.value!.submit()
+      console.log('-> data', data)
     }
     const handleCancel = () => {
       state.visible = false
@@ -73,7 +150,8 @@ export default defineComponent({
       handleSubmit,
       ...toRefs(state),
       showModal,
-      eFormCreate
+      eFormCreate,
+      formValue
     }
   }
 })

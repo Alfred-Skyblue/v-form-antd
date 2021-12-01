@@ -1,6 +1,6 @@
 import { VueConstructor } from 'vue'
 import { IEFormComponent } from '../typings/EFormComponent'
-import { isArray, isNumber, uniqueId } from 'lodash-es'
+import { cloneDeep, isArray, isNumber, uniqueId } from 'lodash-es'
 /**
  * 组件install方法
  * @param comp 需要挂载install方法的组件
@@ -76,4 +76,22 @@ export function randomUUID(): string {
  */
 export function toLine(str: string) {
   return str.replace(/([A-Z])/g, '_$1').toLowerCase()
+}
+
+export function formItemsForEach(
+  array: IEFormComponent[],
+  cb: (item: IEFormComponent) => void
+) {
+  const traverse = (formItems: IEFormComponent[]) => {
+    // 使用some遍历，找到目标后停止遍历
+    formItems.forEach((formItem: IEFormComponent) => {
+      if (['grid'].includes(formItem.type)) {
+        // 栅格布局
+        formItem.columns?.forEach(item => traverse(item.children))
+      } else {
+        cb(formItem)
+      }
+    })
+  }
+  traverse(array)
 }

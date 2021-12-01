@@ -32,6 +32,7 @@
           :is="componentItem"
           v-bind="record.props"
           v-on="record.on"
+          @change="handleChange"
           v-model="formData[record.field]"
         ></component>
       </slot>
@@ -94,7 +95,10 @@ export default defineComponent({
       return { labelCol, wrapperCol, style, prop: field, required }
     })
     const componentItem = computed(() => componentMap[props.record.type])
-    return { ...toRefs(state), componentItem, formItemProps }
+    const handleChange = (e: any, record: any) => {
+      console.log('-> e,record', e, record)
+    }
+    return { ...toRefs(state), componentItem, formItemProps, handleChange }
   }
 })
 </script>

@@ -1,22 +1,17 @@
 import { IAnyObject } from '@pack/typings/baseType'
-import { Ref, SetupContext, watch } from '@vue/composition-api'
+import { Ref, SetupContext } from '@vue/composition-api'
 import { FormModel } from 'ant-design-vue'
+import { IFormConfig } from '@pack/typings/EFormComponent'
 interface IFormInstanceMethods extends FormModel {
   submit: () => Promise<any>
 }
+
 export function useEFormMethods(
   props: IAnyObject,
   context: SetupContext,
   formInstance: Ref<FormModel | null>,
+  formConfig: IFormConfig,
   formInstanceMethods: Partial<IFormInstanceMethods>
 ) {
-  watch(
-    () => props.formData,
-    (newVal, oldVal) => {
-      console.log('-> newVal,oldVal', newVal, oldVal)
-    },
-    { deep: true }
-  )
-
   return {}
 }

@@ -16,7 +16,12 @@
       </a-col>
     </a-row>
     <component v-else :is="layoutTag" :span="record.span">
-      <EFormItem :data="formConfig" :record="record" :formData="formData">
+      <EFormItem
+        :data="formConfig"
+        :record="record"
+        :formData="formData"
+        @change="$emit('change', $event)"
+      >
         <template :slot="record.props.slotName">
           <slot :name="record.props.slotName"></slot>
         </template>
