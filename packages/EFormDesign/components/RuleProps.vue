@@ -7,7 +7,7 @@
   <div class="rule-props-content">
     <a-form-model>
       <div
-        v-for="(item, index) of currentItem['rules']"
+        v-for="(item, index) of formConfig.currentItem['rules'] || []"
         :key="index"
         class="rule-props-item"
       >
@@ -70,7 +70,7 @@ export default defineComponent({
       if (currentItem.rules?.length === 0) del(currentItem, 'rules')
     }
 
-    return { addRules, removeRule, currentItem }
+    return { addRules, removeRule, formConfig }
   }
 })
 </script>

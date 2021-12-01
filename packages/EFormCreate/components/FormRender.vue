@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!record.hidden" class="e-form-render-item">
     <a-row v-if="['grid'].includes(record.type)" class="grid-row">
       <a-col
         class="grid-col"
@@ -16,7 +16,11 @@
       </a-col>
     </a-row>
     <component v-else :is="layoutTag" :span="record.span">
-      <EFormItem :data="formConfig" :record="record" />
+      <EFormItem :data="formConfig" :record="record" :formData="formData">
+        <template :slot="record.props.slotName">
+          <slot :name="record.props.slotName"></slot>
+        </template>
+      </EFormItem>
     </component>
   </div>
 </template>
@@ -27,6 +31,10 @@ import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 export default defineComponent({
   name: 'FormRender',
   props: {
+    formData: {
+      type: Object,
+      default: () => ({})
+    },
     record: {
       type: Object as PropType<IEFormComponent>,
       default: 0
@@ -44,3 +52,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+.e-form-render-item {
+  overflow: hidden;
+}
+</style>

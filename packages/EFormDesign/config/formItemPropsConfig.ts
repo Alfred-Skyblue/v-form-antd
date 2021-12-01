@@ -53,6 +53,14 @@ export const baseFormItemProps: IBaseFormAttrs[] = [
       placeholder: '请输入数据字段'
     },
     exclude: ['grid']
+  },
+  {
+    name: 'help',
+    label: '提示信息',
+    tag: 'AInput',
+    props: {
+      placeholder: '请输入提示信息'
+    }
   }
 ]
 

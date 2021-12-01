@@ -15,15 +15,21 @@
     :destroyOnClose="true"
     :width="800"
   >
-    <e-form-create :form-config="formConfig"></e-form-create>
+    <e-form-create ref="eFormCreate" :form-config="formConfig">
+      <template slot="slotName" slot-scope="{ formModel, field, record }">
+        {{ $log('作用域', formModel, field, record) }}
+        <a-input v-model="formModel[field]"></a-input>
+      </template>
+    </e-form-create>
   </a-modal>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { defineComponent, reactive, ref, toRefs } from '@vue/composition-api'
 import { IFormConfig } from '@pack/typings/EFormComponent'
 import { IAnyObject } from '@pack/typings/baseType'
 import { cloneDeep } from 'lodash-es'
 import EFormCreate from '../EFormCreate/index.vue'
+import { FormModel } from 'ant-design-vue/types/form-model/form'
 
 export default defineComponent({
   name: 'EFormPreview',
@@ -37,6 +43,10 @@ export default defineComponent({
       formConfig: IFormConfig
     }>({ formData: {}, formConfig: {} as IFormConfig, visible: false })
 
+    const eFormCreate = ref<FormModel | null>(null)
+
+    // ;(getCurrentInstance()!.parent as IAnyObject)!.$formModel = eFormModel
+
     /**
      * 显示Json数据弹框
      * @param jsonData
@@ -47,7 +57,9 @@ export default defineComponent({
     }
 
     const handleGetData = () => {
-      console.log('handleGetData')
+      eFormCreate.value!.validate(val => {
+        console.log('-> val', val)
+      })
     }
     const handleCancel = () => {
       state.visible = false
@@ -60,7 +72,8 @@ export default defineComponent({
       handleCancel,
       handleSubmit,
       ...toRefs(state),
-      showModal
+      showModal,
+      eFormCreate
     }
   }
 })

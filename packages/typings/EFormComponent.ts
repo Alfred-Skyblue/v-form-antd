@@ -29,6 +29,12 @@ export interface IEFormComponent {
   rules?: Partial<IValidationRule>[]
   // 组件布局属性
   col?: Partial<Col>
+  // 是否隐藏
+  hidden?: boolean
+  // 是否必选
+  required?: boolean
+  // 提示信息
+  help?: string
   // 传给给组件的属性，默认会吧所有的props都传递给控件
   props?: IAnyObject
   // 监听组件事件对象，以v-on方式传递给控件
@@ -60,6 +66,7 @@ export interface IFormConfig {
     wrapperCol?: Partial<Col>
     hideRequiredMark?: boolean
     ruleTargetConfig?: boolean
+    submit?: (formData: IAnyObject) => void
   }
   // 当前选中项
   currentItem?: IEFormComponent

@@ -10,7 +10,6 @@
         <!--          <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">-->
         <!--            <slot :name="slot" v-bind="scope" />-->
         <!--          </template>-->
-        <e-icon-font-picker v-model="dateValue"></e-icon-font-picker>
 
         <AEmpty
           class="hint-box"

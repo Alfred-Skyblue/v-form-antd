@@ -79,7 +79,8 @@ import {
   toRefs,
   ref,
   provide,
-  Ref
+  Ref,
+  set
 } from '@vue/composition-api'
 
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
@@ -270,7 +271,10 @@ export default defineComponent({
     const handleOpenModal = (Modal: IToolbarMethods) => {
       Modal?.showModal(formConfig.value)
     }
-
+    /**
+     * 切换属性面板
+     * @param key
+     */
     const handleChangePropsTabs = (key: PropsTabKey) => {
       formConfig.value.activeKey = key
     }

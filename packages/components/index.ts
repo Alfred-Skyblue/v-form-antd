@@ -16,6 +16,7 @@ import EMonthRange from './EMonthRange.vue'
 import EIconPicker from './EIconPicker.vue'
 import Vue from 'vue'
 import RadioButtonGroup from '@pack/components/RadioButtonGroup.vue'
+import { CreateElement } from 'vue/types/vue'
 
 Vue.component(RadioButtonGroup.name, RadioButtonGroup)
 Vue.component(EMonthRange.name, EMonthRange)
@@ -40,5 +41,10 @@ export default {
   treeSelect: TreeSelect,
   cascader: Cascader,
   switch: Switch,
-  iconPicker: EIconPicker
+  iconPicker: EIconPicker,
+  slot: {
+    render(h: CreateElement) {
+      return h('span', '插槽')
+    }
+  }
 }

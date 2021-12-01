@@ -6,11 +6,35 @@
 <template>
   <div>
     <a-form-model-item v-bind="formItemProps">
-      <component
-        :is="componentItem"
-        v-bind="record.props"
-        v-on="record.on"
-      ></component>
+      <template slot="label">
+        <a-tooltip>
+          <span>{{ record.label }}</span>
+          <span v-if="record.help" slot="title">{{ record.help }}</span>
+          <a-icon v-if="record.help" class="ml-5" type="question-circle-o" />
+        </a-tooltip>
+      </template>
+
+      <slot :name="record.props.slotName">
+        <component
+          :class="{
+            'w-full': [
+              'number',
+              'time',
+              'date',
+              'dateRange',
+              'month',
+              'monthRange',
+              'select',
+              'treeSelect'
+            ].includes(record.type)
+          }"
+          class="e-form-item-wrapper"
+          :is="componentItem"
+          v-bind="record.props"
+          v-on="record.on"
+          v-model="formData[record.field]"
+        ></component>
+      </slot>
     </a-form-model-item>
   </div>
 </template>
@@ -24,10 +48,13 @@ import {
 } from '@vue/composition-api'
 import { componentMap } from '@pack/core/formItemConfig'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
-
 export default defineComponent({
   name: 'EFormItem',
   props: {
+    formData: {
+      type: Object,
+      default: () => ({})
+    },
     record: {
       type: Object as PropType<IEFormComponent>,
       required: true
@@ -43,8 +70,8 @@ export default defineComponent({
     })
 
     const formItemProps = computed(() => {
-      const { label } = props.record
       const { data } = props
+      const { field, required } = props.record
       const labelCol =
         data.config.layout === 'horizontal'
           ? data.config.labelLayout === 'flex'
@@ -64,10 +91,12 @@ export default defineComponent({
         data.config.labelLayout === 'flex'
           ? { display: 'flex' }
           : {}
-      return { label, labelCol, wrapperCol, style }
+      return { labelCol, wrapperCol, style, prop: field, required }
     })
     const componentItem = computed(() => componentMap[props.record.type])
     return { ...toRefs(state), componentItem, formItemProps }
   }
 })
 </script>
+
+<style></style>
