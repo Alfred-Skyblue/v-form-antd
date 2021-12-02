@@ -4,12 +4,8 @@
  * @Description: 中间表单布局面板
 -->
 <template>
-  <div class="form-panel">
-    <a-empty
-      class="empty-text"
-      v-show="formConfig.formItems.length === 0"
-      description="从左侧选择控件添加"
-    />
+  <div class="form-panel e-form-container">
+    <a-empty class="empty-text" v-show="formConfig.formItems.length === 0" description="从左侧选择控件添加" />
     <a-form-model v-bind="formConfig.config">
       <a-row :style="{ height: '100%' }">
         <draggable
@@ -127,24 +123,6 @@ export default defineComponent({
       .list-enter {
         height: 30px;
       }
-    }
-  }
-
-  // 行内组件宽度默认175px
-  .ant-form-inline {
-    .list-main {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      align-content: flex-start;
-
-      .layout-width {
-        width: 100%;
-      }
-    }
-
-    .ant-form-item-control-wrapper {
-      width: 175px !important;
     }
   }
 }
