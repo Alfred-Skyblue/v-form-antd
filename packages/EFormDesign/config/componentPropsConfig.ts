@@ -61,6 +61,15 @@ export const baseComponentControlAttrs: Omit<IBaseFormAttrs, 'tag'>[] = [
     name: 'treeCheckable',
     label: '可勾选',
     includes: ['treeSelect']
+  },
+  {
+    name: 'directory',
+    label: '上传文件',
+    includes: ['upload']
+  },
+  {
+    name: 'withCredentials',
+    label: '携带cookie'
   }
 ]
 
@@ -556,6 +565,18 @@ export const baseComponentAttrs: IBaseComponentProps = {
           }
         ]
       }
+    }
+  ],
+  upload: [
+    {
+      name: 'action',
+      label: '上传地址',
+      tag: 'AInput'
+    },
+    {
+      name: 'name',
+      label: '附件参数名（name）',
+      tag: 'AInput'
     }
   ],
   slot: [

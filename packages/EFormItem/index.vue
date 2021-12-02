@@ -30,7 +30,7 @@
         }"
         class="e-form-item-wrapper"
         :is="componentItem"
-        v-bind="record.props"
+        v-bind="cmpProps"
         :style="record.width ? { width: record.width } : {}"
         v-on="record.on"
         @change="$emit('change', record)"
@@ -52,6 +52,8 @@ import {
 } from '@vue/composition-api'
 import { componentMap } from '@pack/core/formItemConfig'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { asyncComputed } from '@vueuse/core'
+import { isFunction } from 'lodash-es'
 export default defineComponent({
   name: 'EFormItem',
   props: {
@@ -108,7 +110,15 @@ export default defineComponent({
     const handleClick = (record: IEFormComponent) => {
       if (record.type === 'button' && record.props!.handle) emit(record.props!.handle)
     }
-    return { ...toRefs(state), componentItem, formItemProps, handleClick }
+    const cmpProps = asyncComputed(async () => {
+      let { options, treeData, ...attrs } = props.record.props!
+      return {
+        ...attrs,
+        options: isFunction(options) ? await options() : options,
+        treeData: isFunction(treeData) ? await options() : options
+      }
+    })
+    return { ...toRefs(state), componentItem, formItemProps, handleClick, cmpProps }
   }
 })
 </script>
