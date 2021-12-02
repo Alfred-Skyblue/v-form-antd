@@ -1,6 +1,8 @@
 <template>
   <div>
-    <EFormDesign></EFormDesign>
+    <EFormDesign>
+      <template slot="customProps">123456</template>
+    </EFormDesign>
   </div>
 </template>
 

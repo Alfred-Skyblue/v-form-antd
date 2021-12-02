@@ -9,13 +9,9 @@
       <header class="e-form-design-header"></header>
       <section class="content">
         <div class="left">
-          <a-collapse :defaultActiveKey="['1', '2']">
+          <a-collapse :defaultActiveKey="['1', '2', '3']">
             <!--     基础控件start       -->
-            <a-collapse-panel
-              v-if="baseComponents.length > 0"
-              header="基础控件"
-              key="1"
-            >
+            <a-collapse-panel v-if="baseComponents.length > 0" header="基础控件" key="1">
               <CollapseItem
                 :list="baseComponents"
                 @addAttrs="handleAddAttrs"
@@ -24,11 +20,25 @@
             </a-collapse-panel>
             <!--    基础控件end      -->
 
+            <!--     自定义控件start       -->
+            <a-collapse-panel
+              v-if="customComponents.length > 0"
+              header="基础控件"
+              key="2"
+            >
+              <CollapseItem
+                :list="customComponents"
+                @addAttrs="handleAddAttrs"
+                @handleListPush="handleListPush"
+              ></CollapseItem>
+            </a-collapse-panel>
+            <!--    自定义控件end      -->
+
             <!--    布局控件start        -->
             <a-collapse-panel
               v-if="layoutComponents.length > 0"
               header="布局控件"
-              key="2"
+              key="3"
             >
               <CollapseItem
                 :list="layoutComponents"
@@ -52,10 +62,11 @@
           ></FormComponentPanel>
         </div>
         <div class="right" onselectstart="return false">
-          <PropsPanel
-            ref="propsPanel"
-            :activeKey="formConfig.activeKey"
-          ></PropsPanel>
+          <PropsPanel ref="propsPanel" :activeKey="formConfig.activeKey">
+            <template v-for="item of formConfig.formItems" :slot="item.type + 'Props'">
+              <slot :name="item.type + 'Props'" :formItem="item"></slot>
+            </template>
+          </PropsPanel>
         </div>
       </section>
       <JsonModal ref="jsonModal"></JsonModal>
@@ -83,14 +94,14 @@ import {
 } from '@vue/composition-api'
 
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
-import {
-  IEFormComponent,
-  IFormConfig,
-  PropsTabKey
-} from '@pack/typings/EFormComponent'
+import { IEFormComponent, IFormConfig, PropsTabKey } from '@pack/typings/EFormComponent'
 import { generateKey } from '@pack/utils'
 import { cloneDeep } from 'lodash-es'
-import { baseComponents, layoutComponents } from '@pack/core/formItemConfig'
+import {
+  baseComponents,
+  customComponents,
+  layoutComponents
+} from '@pack/core/formItemConfig'
 import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
 import { IAnyObject } from '@pack/typings/baseType'
 
@@ -98,9 +109,12 @@ export interface IToolbarMethods {
   showModal: (jsonData: IAnyObject) => void
 }
 interface IState {
+  // 语言
   locale: any
   // 公用组件
   baseComponents: IEFormComponent[]
+  // 自定义组件
+  customComponents: IEFormComponent[]
   // 布局组件
   layoutComponents: IEFormComponent[]
   // 属性面板实例
@@ -163,6 +177,7 @@ export default defineComponent({
       locale: zhCN, // 国际化
       baseComponents, // 基础控件列表
       layoutComponents, // 布局组件列表
+      customComponents,
       propsPanel,
       jsonModal,
       eFormPreview
