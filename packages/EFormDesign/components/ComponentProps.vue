@@ -11,7 +11,11 @@
         <!--            <slot :name="slot" v-bind="scope" />-->
         <!--          </template>-->
 
-        <AEmpty class="hint-box" v-if="!formConfig.currentItem['key']" description="未选择组件" />
+        <AEmpty
+          class="hint-box"
+          v-if="!formConfig.currentItem['key']"
+          description="未选择组件"
+        />
         <a-form-model v-else-if="!!baseComponentAttrs[formConfig.currentItem['type']]">
           <!--    循环遍历渲染组件属性      -->
           <a-form-model-item
@@ -60,9 +64,13 @@
           <a-form-model-item
             label="选项"
             v-if="
-              ['select', 'checkboxGroup', 'radioGroup', 'treeSelect', 'cascader'].includes(
-                formConfig.currentItem['type']
-              )
+              [
+                'select',
+                'checkboxGroup',
+                'radioGroup',
+                'treeSelect',
+                'cascader'
+              ].includes(formConfig.currentItem['type'])
             "
           >
             <FormOptions></FormOptions>
@@ -75,7 +83,10 @@
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from '@vue/composition-api'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
-import { baseComponentControlAttrs, baseComponentAttrs } from '@pack/EFormDesign/config/componentPropsConfig'
+import {
+  baseComponentControlAttrs,
+  baseComponentAttrs
+} from '@pack/EFormDesign/config/componentPropsConfig'
 import FormOptions from './FormOptions.vue'
 import { formItemsForEach, remove } from '@pack/utils'
 
