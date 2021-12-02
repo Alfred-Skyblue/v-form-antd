@@ -69,5 +69,9 @@ export const baseFormItemControlAttrs: IBaseFormItemControlAttrs[] = [
     name: 'hidden',
     label: '隐藏',
     exclude: ['alert']
+  },
+  {
+    name: 'hiddenLabel',
+    label: '隐藏标签'
   }
 ]

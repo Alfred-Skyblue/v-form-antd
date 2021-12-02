@@ -19,9 +19,14 @@
         :formConfig="formConfig"
         :formData="formData"
         @change="handleChange"
+        @submit="handleSubmit"
+        @reset="resetFields"
       >
         <template :slot="record.props.slotName">
-          <slot :name="record.props.slotName" v-bind="{ formModel: formData, field: record.field, record }" />
+          <slot
+            :name="record.props.slotName"
+            v-bind="{ formModel: formData, field: record.field, record }"
+          />
         </template>
       </FormRender>
     </a-form-model>
@@ -55,11 +60,9 @@ export default defineComponent({
   setup(props, context) {
     const { emit } = context
     const eFormModel = ref<FormModel | null>(null)
-    const { submit, validate, validateField, resetFields, clearValidate } = useFormInstanceMethods(
-      props,
-      context,
-      eFormModel
-    )
+    const { submit, validate, validateField, resetFields, clearValidate } =
+      useFormInstanceMethods(props, context, eFormModel)
+
     const { linkOn } = useEFormMethods(props, context, eFormModel, props.formConfig, {
       submit,
       validate,
@@ -68,13 +71,17 @@ export default defineComponent({
       clearValidate
     })
 
-    const handleChange = (event: any) => linkOn[event.field] && linkOn[event.field].forEach(cb => cb())
+    const handleChange = (event: any) =>
+      linkOn[event.field] && linkOn[event.field].forEach(cb => cb(event))
     const formModelProps = computed(() => {
       const { layout } = props.formConfig.config
       return { layout }
     })
     emit('getFormInstance', eFormModel)
 
+    const handleSubmit = () => {
+      submit()
+    }
     return {
       eFormModel,
       submit,
@@ -83,7 +90,8 @@ export default defineComponent({
       resetFields,
       clearValidate,
       handleChange,
-      formModelProps
+      formModelProps,
+      handleSubmit
     }
   }
 })

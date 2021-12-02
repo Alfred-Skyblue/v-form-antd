@@ -5,7 +5,7 @@
 -->
 <template>
   <a-form-model-item v-bind="formItemProps">
-    <template slot="label">
+    <template slot="label" v-if="!record.hiddenLabel">
       <a-tooltip>
         <span>{{ record.label }}</span>
         <span v-if="record.help" slot="title">{{ record.help }}</span>
@@ -16,29 +16,40 @@
     <slot :name="record.props.slotName">
       <component
         :class="{
-          'w-full': [
-            'number',
-            'time',
-            'date',
-            'dateRange',
-            'month',
-            'monthRange',
-            'select',
-            'treeSelect'
-          ].includes(record.type)
+          'w-full':
+            [
+              'number',
+              'time',
+              'date',
+              'dateRange',
+              'month',
+              'monthRange',
+              'select',
+              'treeSelect'
+            ].includes(record.type) && !record.width
         }"
         class="e-form-item-wrapper"
         :is="componentItem"
         v-bind="record.props"
+        :style="record.width ? { width: record.width } : {}"
         v-on="record.on"
         @change="$emit('change', record)"
+        @click="handleClick(record, $event)"
         v-model="formData[record.field]"
-      ></component>
+      >
+        <span v-if="['button'].includes(record.type)">{{ record.label }}</span>
+      </component>
     </slot>
   </a-form-model-item>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs, computed, PropType } from '@vue/composition-api'
+import {
+  defineComponent,
+  reactive,
+  toRefs,
+  computed,
+  PropType
+} from '@vue/composition-api'
 import { componentMap } from '@pack/core/formItemConfig'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 export default defineComponent({
@@ -57,7 +68,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const state = reactive({
       componentMap
     })
@@ -80,12 +91,24 @@ export default defineComponent({
           : {}
 
       const style =
-        data.config.layout === 'horizontal' && data.config.labelLayout === 'flex' ? { display: 'flex' } : {}
-      return { labelCol, wrapperCol, style, prop: field, required, rules }
+        data.config.layout === 'horizontal' && data.config.labelLayout === 'flex'
+          ? { display: 'flex' }
+          : {}
+      return {
+        labelCol,
+        wrapperCol,
+        style: { ...style },
+        prop: field,
+        required,
+        rules
+      }
     })
     const componentItem = computed(() => componentMap[props.record.type])
 
-    return { ...toRefs(state), componentItem, formItemProps }
+    const handleClick = (record: IEFormComponent) => {
+      if (record.type === 'button' && record.props!.handle) emit(record.props!.handle)
+    }
+    return { ...toRefs(state), componentItem, formItemProps, handleClick }
   }
 })
 </script>
