@@ -394,3 +394,23 @@
     padding: 12px;
   }
 }
+
+.e-form-container {
+  // 内联布局样式
+  .ant-form-inline {
+    .list-main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+
+      .layout-width {
+        width: 100%;
+      }
+    }
+
+    .ant-form-item-control-wrapper {
+      min-width: 175px !important;
+    }
+  }
+}

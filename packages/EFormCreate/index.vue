@@ -4,12 +4,13 @@
  * @Description: 根据json生成表单
 -->
 <template>
-  <div>
+  <div class="e-form-container">
     <a-form-model
       class="e-form-model"
       ref="eFormModel"
       :model="formData"
       v-on="$listeners"
+      v-bind="formModelProps"
     >
       <FormRender
         v-for="(record, index) of formConfig.formItems"
@@ -20,24 +21,19 @@
         @change="handleChange"
       >
         <template :slot="record.props.slotName">
-          <slot
-            :name="record.props.slotName"
-            v-bind="{ formModel: formData, field: record.field, record }"
-          />
+          <slot :name="record.props.slotName" v-bind="{ formModel: formData, field: record.field, record }" />
         </template>
       </FormRender>
     </a-form-model>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from '@vue/composition-api'
+import { computed, defineComponent, PropType, ref } from '@vue/composition-api'
 import FormRender from './components/FormRender.vue'
-import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { IFormConfig } from '@pack/typings/EFormComponent'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { useFormInstanceMethods } from '@pack/hooks/useFormInstanceMethods'
 import { useEFormMethods } from '@pack/hooks/useEFormMethods'
-import { isFunction } from 'lodash-es'
-import { formItemsForEach } from '@pack/utils'
 
 export default defineComponent({
   name: 'EFormCreate',
@@ -59,36 +55,24 @@ export default defineComponent({
   setup(props, context) {
     const { emit } = context
     const eFormModel = ref<FormModel | null>(null)
-    const { submit, validate, validateField, resetFields, clearValidate } =
-      useFormInstanceMethods(props, context, eFormModel)
-    useEFormMethods(props, context, eFormModel, props.formConfig, {
+    const { submit, validate, validateField, resetFields, clearValidate } = useFormInstanceMethods(
+      props,
+      context,
+      eFormModel
+    )
+    const { linkOn } = useEFormMethods(props, context, eFormModel, props.formConfig, {
       submit,
       validate,
       validateField,
       resetFields,
       clearValidate
     })
-    const linkOn: { [key: string]: Array<() => void> } = {}
-    const initLink = () => {
-      function traverse(formItems: IEFormComponent[]) {
-        // 首次遍历，查找需要关联字段的表单
-        formItemsForEach(formItems, formItem => {
-          // 如果需要关联，则进行第二层遍历，查找表单中关联的字段，存到数组中
-          formItemsForEach(formItems, item => {
-            if (formItem.link?.includes(item.field!)) {
-              if (!linkOn[item.field!]) linkOn[item.field!] = []
-              isFunction(formItem.update) &&
-                linkOn[item.field!].push(formItem.update!)
-            }
-          })
-        })
-      }
-      traverse(props.formConfig.formItems)
-    }
-    initLink()
-    const handleChange = (event: any) => {
-      linkOn[event.field] && linkOn[event.field].forEach(cb => cb())
-    }
+
+    const handleChange = (event: any) => linkOn[event.field] && linkOn[event.field].forEach(cb => cb())
+    const formModelProps = computed(() => {
+      const { layout } = props.formConfig.config
+      return { layout }
+    })
     emit('getFormInstance', eFormModel)
 
     return {
@@ -98,7 +82,8 @@ export default defineComponent({
       validateField,
       resetFields,
       clearValidate,
-      handleChange
+      handleChange,
+      formModelProps
     }
   }
 })

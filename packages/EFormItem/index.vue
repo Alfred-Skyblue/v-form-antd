@@ -4,49 +4,41 @@
  * @Description:
 -->
 <template>
-  <div>
-    <a-form-model-item v-bind="formItemProps">
-      <template slot="label">
-        <a-tooltip>
-          <span>{{ record.label }}</span>
-          <span v-if="record.help" slot="title">{{ record.help }}</span>
-          <a-icon v-if="record.help" class="ml-5" type="question-circle-o" />
-        </a-tooltip>
-      </template>
+  <a-form-model-item v-bind="formItemProps">
+    <template slot="label">
+      <a-tooltip>
+        <span>{{ record.label }}</span>
+        <span v-if="record.help" slot="title">{{ record.help }}</span>
+        <a-icon v-if="record.help" class="ml-5" type="question-circle-o" />
+      </a-tooltip>
+    </template>
 
-      <slot :name="record.props.slotName">
-        <component
-          :class="{
-            'w-full': [
-              'number',
-              'time',
-              'date',
-              'dateRange',
-              'month',
-              'monthRange',
-              'select',
-              'treeSelect'
-            ].includes(record.type)
-          }"
-          class="e-form-item-wrapper"
-          :is="componentItem"
-          v-bind="record.props"
-          v-on="record.on"
-          @change="handleChange"
-          v-model="formData[record.field]"
-        ></component>
-      </slot>
-    </a-form-model-item>
-  </div>
+    <slot :name="record.props.slotName">
+      <component
+        :class="{
+          'w-full': [
+            'number',
+            'time',
+            'date',
+            'dateRange',
+            'month',
+            'monthRange',
+            'select',
+            'treeSelect'
+          ].includes(record.type)
+        }"
+        class="e-form-item-wrapper"
+        :is="componentItem"
+        v-bind="record.props"
+        v-on="record.on"
+        @change="$emit('change', record)"
+        v-model="formData[record.field]"
+      ></component>
+    </slot>
+  </a-form-model-item>
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  reactive,
-  toRefs,
-  computed,
-  PropType
-} from '@vue/composition-api'
+import { defineComponent, reactive, toRefs, computed, PropType } from '@vue/composition-api'
 import { componentMap } from '@pack/core/formItemConfig'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 export default defineComponent({
@@ -72,7 +64,7 @@ export default defineComponent({
 
     const formItemProps = computed(() => {
       const { data } = props
-      const { field, required } = props.record
+      const { field, required, rules } = props.record
       const labelCol =
         data.config.layout === 'horizontal'
           ? data.config.labelLayout === 'flex'
@@ -88,17 +80,12 @@ export default defineComponent({
           : {}
 
       const style =
-        data.config.layout === 'horizontal' &&
-        data.config.labelLayout === 'flex'
-          ? { display: 'flex' }
-          : {}
-      return { labelCol, wrapperCol, style, prop: field, required }
+        data.config.layout === 'horizontal' && data.config.labelLayout === 'flex' ? { display: 'flex' } : {}
+      return { labelCol, wrapperCol, style, prop: field, required, rules }
     })
     const componentItem = computed(() => componentMap[props.record.type])
-    const handleChange = (e: any, record: any) => {
-      console.log('-> e,record', e, record)
-    }
-    return { ...toRefs(state), componentItem, formItemProps, handleChange }
+
+    return { ...toRefs(state), componentItem, formItemProps }
   }
 })
 </script>

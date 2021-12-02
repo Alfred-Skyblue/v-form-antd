@@ -11,14 +11,8 @@
         <!--            <slot :name="slot" v-bind="scope" />-->
         <!--          </template>-->
 
-        <AEmpty
-          class="hint-box"
-          v-if="!formConfig.currentItem['key']"
-          description="未选择组件"
-        />
-        <a-form-model
-          v-else-if="!!baseComponentAttrs[formConfig.currentItem['type']]"
-        >
+        <AEmpty class="hint-box" v-if="!formConfig.currentItem['key']" description="未选择组件" />
+        <a-form-model v-else-if="!!baseComponentAttrs[formConfig.currentItem['type']]">
           <!--    循环遍历渲染组件属性      -->
           <a-form-model-item
             v-for="item in baseComponentAttrs[formConfig.currentItem['type']]"
@@ -55,16 +49,20 @@
             </span>
           </a-form-model-item>
 
+          <a-form-model-item label="关联字段">
+            <a-select
+              mode="multiple"
+              v-model="formConfig.currentItem['link']"
+              :options="linkOptions"
+            ></a-select>
+          </a-form-model-item>
+
           <a-form-model-item
             label="选项"
             v-if="
-              [
-                'select',
-                'checkboxGroup',
-                'radioGroup',
-                'treeSelect',
-                'cascader'
-              ].includes(formConfig.currentItem['type'])
+              ['select', 'checkboxGroup', 'radioGroup', 'treeSelect', 'cascader'].includes(
+                formConfig.currentItem['type']
+              )
             "
           >
             <FormOptions></FormOptions>
@@ -75,13 +73,11 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
+import { computed, defineComponent, ref, watch } from '@vue/composition-api'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
-import {
-  baseComponentControlAttrs,
-  baseComponentAttrs
-} from '@pack/EFormDesign/config/componentPropsConfig'
+import { baseComponentControlAttrs, baseComponentAttrs } from '@pack/EFormDesign/config/componentPropsConfig'
 import FormOptions from './FormOptions.vue'
+import { formItemsForEach, remove } from '@pack/utils'
 
 export default defineComponent({
   name: 'ComponentProps',
@@ -95,12 +91,31 @@ export default defineComponent({
       if (!includes) return true
       return includes.includes(formConfig.value.currentItem!.type)
     }
+
+    watch(
+      () => formConfig.value.currentItem?.field,
+      (newValue, oldValue) => {
+        formItemsForEach(formConfig.value.formItems, item => {
+          if (item.link) {
+            const index = item.link.findIndex(linkItem => linkItem === oldValue)
+            index !== -1 && remove(item.link, index)
+          }
+        })
+      }
+    )
+
+    const linkOptions = computed(() => {
+      return formConfig.value.formItems
+        .filter(item => item.key !== formConfig.value.currentItem!.key)
+        .map(({ label, field }) => ({ label, value: field }))
+    })
     return {
       formConfig,
       baseComponentAttrs,
       baseComponentControlAttrs,
       showControlAttrs,
-      dateValue
+      dateValue,
+      linkOptions
     }
   }
 })

@@ -1,7 +1,7 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/11/29
- * @Description: $END$
+ * @Description: 表单预览组件
 -->
 <template>
   <a-modal
@@ -13,9 +13,9 @@
     cancelText="关闭"
     style="top: 20px"
     :destroyOnClose="true"
-    :width="800"
+    :width="900"
   >
-    <e-form-create ref="eFormCreate" :form-config="formValue">
+    <e-form-create ref="eFormCreate" :form-config="formConfig">
       <template slot="slotName" slot-scope="{ formModel, field, record }">
         {{ $log('作用域', formModel, field, record) }}
         <a-input v-model="formModel[field]"></a-input>
@@ -24,12 +24,13 @@
   </a-modal>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref, toRefs } from '@vue/composition-api'
+import { defineComponent, del, reactive, ref, toRefs } from '@vue/composition-api'
 import { IFormConfig } from '@pack/typings/EFormComponent'
 import { IAnyObject } from '@pack/typings/baseType'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, isArray } from 'lodash-es'
 import EFormCreate from '../EFormCreate/index.vue'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
+import { formItemsForEach } from '@pack/utils'
 interface IFormSubmit extends FormModel {
   submit: () => IAnyObject
 }
@@ -45,82 +46,6 @@ export default defineComponent({
       formConfig: IFormConfig
     }>({ formData: {}, formConfig: {} as IFormConfig, visible: false })
 
-    const formValue = {
-      formItems: [
-        {
-          type: 'input',
-          label: '数字输入框',
-          icon: 'icon-number',
-          field: 'number_1',
-          span: 24,
-          props: {},
-          on: {},
-          key: 'number_1'
-        },
-        {
-          type: 'textarea',
-          label: '文本域',
-          icon: 'icon-number',
-          field: 'textarea_1',
-          span: 24,
-          props: {},
-          on: {},
-          key: 'number_1'
-        },
-        {
-          type: 'radioGroup',
-          label: '单选框',
-          icon: 'icon-radio',
-          field: 'radio_group_2',
-          link: ['number_1', 'select_3', 'textarea_1'],
-          update() {
-            console.log('联动成功')
-          },
-          span: 24,
-          props: {
-            options: [
-              {
-                label: '选项一',
-                value: '1'
-              },
-              {
-                label: '选项二',
-                value: '2'
-              }
-            ]
-          },
-          key: 'radio_group_2'
-        },
-        {
-          type: 'select',
-          label: '下拉选择',
-          icon: 'icon-select',
-          field: 'select_3',
-          span: 24,
-          props: {
-            options: [
-              {
-                label: '选项一',
-                value: '1'
-              },
-              {
-                label: '选项二',
-                value: '2'
-              }
-            ]
-          },
-          key: 'select_3'
-        }
-      ],
-      config: {
-        layout: 'horizontal',
-        labelLayout: 'flex',
-        labelWidth: 100,
-        labelCol: {},
-        wrapperCol: {}
-      },
-      activeKey: 2
-    }
     const eFormCreate = ref<IFormSubmit | null>(null)
 
     // ;(getCurrentInstance()!.parent as IAnyObject)!.$formModel = eFormModel
@@ -130,7 +55,16 @@ export default defineComponent({
      * @param jsonData
      */
     const showModal = (jsonData: IFormConfig) => {
-      state.formConfig = cloneDeep(jsonData)
+      const formConfig = cloneDeep(jsonData)
+      formItemsForEach(formConfig.formItems, item => {
+        if ('required' in item) {
+          !isArray(item.rules) && (item.rules = [])
+          item.rules.push({ required: true, message: item.message })
+          del(item, 'required')
+          del(item, 'message')
+        }
+      })
+      state.formConfig = formConfig
       state.visible = true
     }
 
@@ -150,8 +84,7 @@ export default defineComponent({
       handleSubmit,
       ...toRefs(state),
       showModal,
-      eFormCreate,
-      formValue
+      eFormCreate
     }
   }
 })
