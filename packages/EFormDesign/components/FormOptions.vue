@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      v-for="(item, index) of formConfig.currentItem.props[key]"
-      :key="item.value"
-    >
+    <div v-for="(item, index) of formConfig.currentItem.props[key]" :key="index">
       <div class="options-box">
         <a-input v-model="item.label" />
         <a-input v-model="item.value" class="options-value" />
@@ -22,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { defineComponent, reactive, set, toRefs } from '@vue/composition-api'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 import { remove } from '@pack/utils'
 
@@ -32,14 +29,14 @@ export default defineComponent({
     const state = reactive({})
     const { formConfig } = useFormDesignState()
     const currentItem = formConfig.value.currentItem
-    const key = currentItem?.props?.options ? 'options' : 'treeData'
+    const key = currentItem?.type === 'treeSelect' ? 'treeData' : 'options'
     const addOptions = () => {
-      if (currentItem?.props?.[key]) {
-        currentItem.props[key].push({
-          label: '',
-          value: ''
-        })
-      }
+      if (!currentItem?.props?.[key]) set(formConfig.value.currentItem!.props!, key, [])
+      const len = currentItem?.props?.[key].length + 1
+      currentItem!.props![key].push({
+        label: `选项${len}`,
+        value: '' + len
+      })
     }
     const deleteOptions = (index: number) => {
       remove(currentItem?.props?.[key], index)

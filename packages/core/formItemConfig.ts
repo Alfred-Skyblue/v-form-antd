@@ -58,11 +58,11 @@ export const baseComponents: IEFormComponent[] = [
     props: {
       options: [
         {
-          label: '选项一',
+          label: '选项1',
           value: '1'
         },
         {
-          label: '选项二',
+          label: '选项2',
           value: '2'
         }
       ]
@@ -77,11 +77,11 @@ export const baseComponents: IEFormComponent[] = [
     props: {
       options: [
         {
-          label: '选项一',
+          label: '选项1',
           value: '1'
         },
         {
-          label: '选项二',
+          label: '选项2',
           value: '2'
         }
       ]
@@ -96,11 +96,11 @@ export const baseComponents: IEFormComponent[] = [
     props: {
       options: [
         {
-          label: '选项一',
+          label: '选项1',
           value: '1'
         },
         {
-          label: '选项二',
+          label: '选项2',
           value: '2'
         }
       ]
@@ -185,7 +185,7 @@ export const baseComponents: IEFormComponent[] = [
     props: {
       treeData: [
         {
-          label: '选项一',
+          label: '选项1',
           value: '1',
           children: [
             {
@@ -195,7 +195,7 @@ export const baseComponents: IEFormComponent[] = [
           ]
         },
         {
-          label: '选项二',
+          label: '选项2',
           value: '2'
         }
       ]
@@ -218,7 +218,7 @@ export const baseComponents: IEFormComponent[] = [
     props: {
       options: [
         {
-          label: '选项一',
+          label: '选项1',
           value: '1',
           children: [
             {
@@ -228,7 +228,7 @@ export const baseComponents: IEFormComponent[] = [
           ]
         },
         {
-          label: '选项二',
+          label: '选项2',
           value: '2'
         }
       ]

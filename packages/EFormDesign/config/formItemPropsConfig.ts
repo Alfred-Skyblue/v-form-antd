@@ -1,4 +1,5 @@
 import { IAnyObject } from '@pack/typings/baseType'
+import { baseComponents } from '@pack/core/formItemConfig'
 
 export interface IBaseFormAttrs {
   name?: string // 字段名
@@ -15,6 +16,14 @@ export interface IBaseFormItemControlAttrs extends IBaseFormAttrs {
 }
 
 export const baseFormItemProps: IBaseFormAttrs[] = [
+  {
+    name: 'type',
+    label: '组件',
+    tag: 'ASelect',
+    props: {
+      options: baseComponents.map(item => ({ value: item.type, label: item.label }))
+    }
+  },
   {
     name: 'label',
     label: '标签',

@@ -1,7 +1,7 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/11/26
- * @Description: $END$
+ * @Description: 附件上传组件
 -->
 <template>
   <a-upload
@@ -42,11 +42,8 @@ export default defineComponent({
   setup(props: any, { emit }: any) {
     const data = useVModel(props, 'modelValue', emit)
     const fileList = ref<Array<UploadFile>>(
-      props.props.valueFormat === 'JSON'
-        ? JSON.parse(props.modelValue)
-        : props.modelValue
+      props.props.valueFormat === 'JSON' ? JSON.parse(props.modelValue) : props.modelValue
     )
-    console.log(randomUUID())
     // 设置value值
     const setFileList = () => {
       data.value = fileList.value
@@ -73,10 +70,8 @@ export default defineComponent({
         .filter(file => file.status !== 'error')
     }
     // 我昨天想着，你一个人，
-    const handleChange = (info: {
-      file: UploadFile
-      fileList: UploadFile[]
-    }) => {
+
+    const handleChange = (info: { file: UploadFile; fileList: UploadFile[] }) => {
       const { file } = info
       fileList.value = info.fileList
 
