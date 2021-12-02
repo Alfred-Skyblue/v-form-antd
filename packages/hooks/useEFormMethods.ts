@@ -15,7 +15,7 @@ export function useEFormMethods(
   formConfig: IFormConfig,
   formInstanceMethods: Partial<IFormInstanceMethods>
 ) {
-  const linkOn: { [key: string]: Set<() => void> } = {}
+  const linkOn: { [key: string]: Set<(...arg: any[]) => void> } = {}
 
   const initLink = (formItems: IEFormComponent[]) => {
     // 首次遍历，查找需要关联字段的表单

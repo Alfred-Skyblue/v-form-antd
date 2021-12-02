@@ -30,6 +30,10 @@ export interface IEFormComponent {
   col?: Partial<Col>
   // 是否隐藏
   hidden?: boolean
+  // 隐藏label
+  hiddenLabel?: boolean
+  // 组件宽度
+  width?: string
   // 是否必选
   required?: boolean
   // 必选提示
@@ -48,7 +52,7 @@ export interface IEFormComponent {
   field?: string
   // 联动字段
   link?: string[]
-  update?: () => void
+  update?: (...arg: any[]) => void
   // 控件栅格数
   span?: number
   // 子控件

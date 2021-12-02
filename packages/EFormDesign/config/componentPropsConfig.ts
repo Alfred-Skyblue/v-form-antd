@@ -518,6 +518,46 @@ export const baseComponentAttrs: IBaseComponentProps = {
       }
     }
   ],
+  button: [
+    {
+      name: 'size',
+      label: '尺寸',
+      tag: 'RadioButtonGroup',
+      props: {
+        options: [
+          {
+            label: '默认',
+            value: 'default'
+          },
+          {
+            label: '大',
+            value: 'large'
+          },
+          {
+            label: '小',
+            value: 'small'
+          }
+        ]
+      }
+    },
+    {
+      name: 'handle',
+      label: '操作',
+      tag: 'RadioButtonGroup',
+      props: {
+        options: [
+          {
+            label: '提交',
+            value: 'submit'
+          },
+          {
+            label: '重置',
+            value: 'reset'
+          }
+        ]
+      }
+    }
+  ],
   slot: [
     {
       name: 'slotName',

@@ -19,6 +19,7 @@
         <a-radio-group
           buttonStyle="solid"
           v-model="formConfig.config.labelLayout"
+          @change="lableLayoutChange"
         >
           <a-radio-button value="flex">固定</a-radio-button>
           <a-radio-button value="grid">栅格</a-radio-button>
@@ -44,9 +45,7 @@
         </a-form-model-item>
       </div>
       <a-form-model-item label="表单属性">
-        <a-checkbox v-model="formConfig.config.hideRequiredMark">
-          隐藏必选标记
-        </a-checkbox>
+        <a-checkbox v-model="formConfig.config.hideRequiredMark">隐藏必选标记</a-checkbox>
         <a-checkbox v-model="formConfig.config.ruleTargetConfig">
           校验规则映射到表单配置中
         </a-checkbox>
@@ -57,6 +56,7 @@
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
+import { IInputEvent } from '@pack/typings/baseType'
 
 export default defineComponent({
   name: 'FormProps',
@@ -64,7 +64,12 @@ export default defineComponent({
     const { formConfig } = useFormDesignState()
     const fileList = ref('[]')
     console.log('-> fileList', fileList)
-    return { formConfig, fileList }
+    const lableLayoutChange = (e: IInputEvent) => {
+      if (e.target.value === 'grid') {
+        formConfig.value.config.layout = 'horizontal'
+      }
+    }
+    return { formConfig, fileList, lableLayoutChange }
   }
 })
 </script>

@@ -1,6 +1,6 @@
 import { VueConstructor } from 'vue'
 import { IEFormComponent } from '../typings/EFormComponent'
-import { cloneDeep, isArray, isNumber, uniqueId } from 'lodash-es'
+import { isArray, isNumber, uniqueId } from 'lodash-es'
 /**
  * 组件install方法
  * @param comp 需要挂载install方法的组件
@@ -78,12 +78,16 @@ export function toLine(str: string) {
   return str.replace(/([A-Z])/g, '_$1').toLowerCase()
 }
 
+/**
+ * 遍历表单项
+ * @param array
+ * @param cb
+ */
 export function formItemsForEach(
   array: IEFormComponent[],
   cb: (item: IEFormComponent) => void
 ) {
   const traverse = (formItems: IEFormComponent[]) => {
-    // 使用some遍历，找到目标后停止遍历
     formItems.forEach((formItem: IEFormComponent) => {
       if (['grid'].includes(formItem.type)) {
         // 栅格布局
@@ -94,4 +98,27 @@ export function formItemsForEach(
     })
   }
   traverse(array)
+}
+
+/**
+ * 查找表单项
+ */
+export const findFormItem = (
+  formItems: IEFormComponent[],
+  cb: (formItem: IEFormComponent) => boolean
+) => {
+  let res
+  const traverse = (formItems: IEFormComponent[]): boolean => {
+    return formItems.some((formItem: IEFormComponent) => {
+      const { type } = formItem
+      // 处理栅格
+      if (['grid'].includes(type)) {
+        return formItem.columns?.some(item => traverse(item.children))
+      }
+      if (cb(formItem)) res = formItem
+      return cb(formItem)
+    })
+  }
+  traverse(formItems)
+  return res
 }

@@ -1,4 +1,5 @@
 import {
+  Button,
   Cascader,
   DatePicker,
   Input,
@@ -42,6 +43,7 @@ export default {
   cascader: Cascader,
   switch: Switch,
   iconPicker: EIconPicker,
+  button: Button,
   slot: {
     render(h: CreateElement) {
       return h('span', '插槽')

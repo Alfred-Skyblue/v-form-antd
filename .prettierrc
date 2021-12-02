@@ -7,4 +7,5 @@
   "htmlWhitespaceSensitivity": "ignore",
   "trailingComma": "none",
   "arrowParens": "avoid",
+  "printWidth": 90
 }

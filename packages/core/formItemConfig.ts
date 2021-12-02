@@ -12,9 +12,7 @@ export const componentMap: IAnyObject = {
   ...ACmp
 }
 
-export function setFormDesignConfig(
-  config: IEFormComponent | IEFormComponent[]
-) {
+export function setFormDesignConfig(config: IEFormComponent | IEFormComponent[]) {
   if (isArray(config)) {
     config.forEach(item => {
       componentMap[item.type] = item
@@ -237,6 +235,15 @@ export const baseComponents: IEFormComponent[] = [
     }
   },
   {
+    type: 'button',
+    label: '按钮',
+    icon: 'icon-button',
+    field: '',
+    span: 24,
+    hiddenLabel: true,
+    props: {}
+  },
+  {
     type: 'slot',
     label: '插槽',
     icon: 'icon-slot',
@@ -244,6 +251,14 @@ export const baseComponents: IEFormComponent[] = [
     props: {
       slotName: 'slotName'
     }
+  }
+]
+
+export const customComponents: IEFormComponent[] = [
+  {
+    type: 'custom',
+    label: '自定义组件',
+    props: {}
   }
 ]
 
