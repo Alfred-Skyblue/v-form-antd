@@ -9,6 +9,7 @@
     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
     :fileList="fileList"
     @change="handleChange"
+    :remove="handleRemove"
   >
     <a-button>
       <a-icon type="upload"></a-icon>
@@ -17,64 +18,101 @@
   </a-upload>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent, PropType, ref } from '@vue/composition-api'
 import { vModelMixin } from '@pack/mixins/v-model-mixni'
-import { useVModel } from '@vueuse/core'
+import { toReactive, useVModel } from '@vueuse/core'
 import { message } from 'ant-design-vue'
-import { UploadFile } from 'ant-design-vue/types/upload'
-import { isUndefined } from 'lodash-es'
+import { Upload, UploadFile } from 'ant-design-vue/types/upload'
+import { isFunction } from 'lodash-es'
 import { randomUUID } from '@pack/utils'
+interface EUpload extends Partial<Upload> {
+  valueFormat: 'JSON' | 'Array'
+  replaceFields: { [key in keyof UploadFile]: string }
+}
 
 export default defineComponent({
   name: 'EUpload',
   mixins: [vModelMixin],
   props: {
     props: {
-      type: Object,
+      type: Object as PropType<EUpload>,
       default() {
         return {
-          valueFormat: 'JSON'
+          valueFormat: 'JSON',
+          replaceFields: {
+            name: 'name',
+            status: 'status',
+            uid: 'uid',
+            url: 'url',
+            type: 'file',
+            thumbUrl: 'thumbUrl',
+            size: 'size'
+          }
         }
       }
     },
+    str: String,
     modelValue: [String, Array]
   },
   setup(props: any, { emit }: any) {
     const data = useVModel(props, 'modelValue', emit)
-    const fileList = ref<Array<UploadFile>>(
-      props.props.valueFormat === 'JSON' ? JSON.parse(props.modelValue) : props.modelValue
-    )
+    const attrs = toReactive<EUpload>(props.props)
+    // TODO 附件上传数据格式化
+    const formatFileList: () => Array<UploadFile> = () => {
+      const { replaceFields } = attrs
+      const list = [{ name: 'file' }]
+      return list.map((item: { [key: string]: any }) => {
+        return Object.keys(replaceFields).reduce((total, key) => {
+          console.log('-> total', total)
+          total[key] = item[replaceFields[key]]
+          return total
+        }, {})
+        // return {
+        //   name: item[name],
+        //   status: item[status!],
+        //   uid: item[uid],
+        //   url: item[url!],
+        //   type: item[type],
+        //   size: item[size]
+        // }
+      })
+    }
+    const fileList = ref<Array<UploadFile>>(formatFileList())
+
+    // attrs.valueFormat = '改变了'
     // 设置value值
-    const setFileList = () => {
+    const setFileList = async () => {
+      const {
+        replaceFields: { name, status, uid, url }
+      } = attrs
+
       data.value = fileList.value
         .map(file => {
-          if (!isUndefined(file.response)) {
-            const res = file.response
-            return {
-              type: 'file',
-              name: file.name,
-              status: file.status,
-              uid: res.data.fileId || randomUUID(),
-              url: res.data.url || ''
-            }
-          } else {
-            return {
-              type: 'file',
-              name: file.name,
-              status: file.status,
-              uid: file.uid,
-              url: file.url || ''
-            }
+          const res = file.response
+          return {
+            [name]: file.name,
+            [status]: file.status,
+            [uid]: file.uid,
+            [url]: file.url || '',
+            ...(!!res && {
+              [uid]: res.data.fileId || randomUUID(),
+              [url]: res.data.url || ''
+            })
           }
         })
         .filter(file => file.status !== 'error')
+      return true
     }
-    // 我昨天想着，你一个人，
-
+    const handleRemove = async (file: UploadFile) => {
+      if (isFunction(attrs.remove)) {
+        const removeFlag = await attrs.remove(file)
+        return removeFlag && setFileList()
+      }
+      return setFileList()
+    }
     const handleChange = (info: { file: UploadFile; fileList: UploadFile[] }) => {
       const { file } = info
       fileList.value = info.fileList
-
       if (file.status === 'done') {
         const { response } = file
         // 上传完成
@@ -93,7 +131,7 @@ export default defineComponent({
         message.error('附件上传失败')
       }
     }
-    return { fileList, handleChange }
+    return { fileList, handleChange, handleRemove }
   }
 })
 </script>

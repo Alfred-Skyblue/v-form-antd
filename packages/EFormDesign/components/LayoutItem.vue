@@ -4,7 +4,11 @@
  * @Description: 表单项布局控件
 -->
 <template>
-  <component :is="layoutTag" :span="record.span">
+  <component
+    :is="layoutTag"
+    :span="record.span"
+    :class="{ 'hidden-item': record.hidden }"
+  >
     <template v-if="['grid'].includes(record.type)">
       <div
         class="grid-box"
@@ -109,5 +113,9 @@ export default defineComponent({
 <style lang="less" scoped>
 .layout-width {
   width: 100%;
+}
+.hidden-item {
+  background-color: rgb(240, 191, 195);
+  //opacity: 0.5;
 }
 </style>
