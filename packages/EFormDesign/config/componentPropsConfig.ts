@@ -49,7 +49,7 @@ export const baseComponentControlAttrs: Omit<IBaseFormAttrs, 'tag'>[] = [
   {
     name: 'multiple',
     label: '多选',
-    includes: ['treeSelect']
+    includes: ['treeSelect', 'upload']
   },
   {
     name: 'treeDefaultExpandAll',
@@ -64,7 +64,7 @@ export const baseComponentControlAttrs: Omit<IBaseFormAttrs, 'tag'>[] = [
   },
   {
     name: 'directory',
-    label: '上传文件',
+    label: '文件夹',
     includes: ['upload']
   },
   {
