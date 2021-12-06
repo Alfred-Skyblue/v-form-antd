@@ -18,7 +18,7 @@
   </a-upload>
 </template>
 <script lang="ts">
-import { computed, defineComponent, PropType, ref, set } from '@vue/composition-api'
+import { defineComponent, PropType, ref, set } from '@vue/composition-api'
 import { vModelMixin } from '@pack/mixins/v-model-mixni'
 import { toReactive, useVModel } from '@vueuse/core'
 import { message } from 'ant-design-vue'
@@ -61,7 +61,6 @@ export default defineComponent({
       data.value = fileList.value
         .map(file => {
           const res = file.response
-          debugger
           return {
             name: file.name,
             status: file.status,
