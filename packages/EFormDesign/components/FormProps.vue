@@ -62,7 +62,30 @@ export default defineComponent({
   name: 'FormProps',
   setup() {
     const { formConfig } = useFormDesignState()
-    const fileList = ref('[]')
+    const fileList = ref([
+      {
+        fileName: '901621322355_.pic_thumb.jpg',
+        status: 'done',
+        uid: 'vc-upload-1638777318739-2',
+        url: '__vue_devtool_undefined__',
+        file: 'image/jpeg',
+        thumbUrl: '__vue_devtool_undefined__',
+        size: 2521,
+        name: '901621322355_.pic_thumb.jpg',
+        type: 'image/jpeg'
+      },
+      {
+        fileName: '2891634278897_.pic_thumb.jpg',
+        status: 'done',
+        uid: 'vc-upload-1638777318739-4',
+        url: '__vue_devtool_undefined__',
+        file: 'image/jpeg',
+        thumbUrl: '__vue_devtool_undefined__',
+        size: 2559,
+        name: '2891634278897_.pic_thumb.jpg',
+        type: 'image/jpeg'
+      }
+    ])
     console.log('-> fileList', fileList)
     const lableLayoutChange = (e: IInputEvent) => {
       if (e.target.value === 'grid') {
