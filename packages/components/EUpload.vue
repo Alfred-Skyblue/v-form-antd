@@ -23,8 +23,9 @@ import { vModelMixin } from '@pack/mixins/v-model-mixni'
 import { toReactive, useVModel } from '@vueuse/core'
 import { message } from 'ant-design-vue'
 import { Upload, UploadFile } from 'ant-design-vue/types/upload'
-import { isFunction } from 'lodash-es'
+import { isEmpty, isFunction } from 'lodash-es'
 import { randomUUID } from '@pack/utils'
+
 interface EUpload extends Partial<Upload> {
   valueFormat: 'JSON' | 'Array'
   replaceFields: { [key in keyof UploadFile]: string }
@@ -61,22 +62,22 @@ export default defineComponent({
     const formatFileList: () => Array<UploadFile> = () => {
       const { replaceFields } = attrs
       const list = [{ name: 'file' }]
+      const replaceFieldsKeys = Object.keys(replaceFields) as Array<keyof UploadFile>
+      if (isEmpty(replaceFieldsKeys)) return list
       return list.map((item: { [key: string]: any }) => {
-        return Object.keys(replaceFields).reduce((total, key) => {
-          console.log('-> total', total)
-          total[key] = item[replaceFields[key]]
-          return total
-        }, {})
-        // return {
-        //   name: item[name],
-        //   status: item[status!],
-        //   uid: item[uid],
-        //   url: item[url!],
-        //   type: item[type],
-        //   size: item[size]
-        // }
+        const newItem = replaceFieldsKeys.reduce(
+          (total, key) => {
+            // total[replaceFields[key]] = item[key]
+            total[key] = item[replaceFields[key]!]
+            delete total[replaceFields[key]!]
+            return total
+          },
+          { ...item }
+        ) as UploadFile
+        return newItem
       })
     }
+
     const fileList = ref<Array<UploadFile>>(formatFileList())
 
     // attrs.valueFormat = '改变了'
