@@ -19,14 +19,19 @@
     <div class="y-json-box">
       <codemirror style="height: 100%" ref="myEditor" v-model="json"></codemirror>
     </div>
-    <a-upload
-      action="/abc"
-      :beforeUpload="beforeUpload"
-      :showUploadList="false"
-      accept="application/json"
-    >
-      <a-button type="primary">导入json文件</a-button>
-    </a-upload>
+
+    <template slot="footer">
+      <a-button>取消</a-button>
+      <a-upload
+        class="upload-button"
+        :beforeUpload="beforeUpload"
+        :showUploadList="false"
+        accept="application/json"
+      >
+        <a-button type="primary">导入json文件</a-button>
+      </a-upload>
+      <a-button type="primary">确定</a-button>
+    </template>
   </a-modal>
 </template>
 <script lang="ts">
@@ -120,3 +125,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="less" scoped>
+.upload-button {
+  margin: 0 10px;
+}
+</style>
