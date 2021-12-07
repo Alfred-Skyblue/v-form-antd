@@ -58,6 +58,10 @@ export interface IEFormComponent {
   update?: (...arg: any[]) => void
   // 控件栅格数
   span?: number | string
+  // 标签布局
+  labelCol?: IAnyObject
+  // 组件布局
+  wrapperCol?: IAnyObject
   // 子控件
   columns?: Array<{ span: number; children: IEFormComponent[] }>
 }

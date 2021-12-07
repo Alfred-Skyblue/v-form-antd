@@ -15,12 +15,13 @@
     :destroyOnClose="true"
     :width="900"
   >
-    <e-form-create ref="eFormCreate" :form-config="formConfig">
+    <e-form-create ref="eFormCreate" :form-config="formConfig" v-model="fApi">
       <template slot="slotName" slot-scope="{ formModel, field, record }">
         {{ $log('作用域', formModel, field, record) }}
         <a-input v-model="formModel[field]" placeholder="我是插槽渲染的"></a-input>
       </template>
     </e-form-create>
+    <a-button @click="handleClick">按钮</a-button>
   </a-modal>
 </template>
 <script lang="ts">
@@ -31,6 +32,7 @@ import { cloneDeep, isArray } from 'lodash-es'
 import EFormCreate from '../EFormCreate/index.vue'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { formItemsForEach } from '@pack/utils'
+import { IEFormMethods } from '@pack/hooks/useEFormMethods'
 interface IFormSubmit extends FormModel {
   submit: () => IAnyObject
 }
@@ -44,7 +46,8 @@ export default defineComponent({
       formData: IAnyObject
       visible: boolean
       formConfig: IFormConfig
-    }>({ formData: {}, formConfig: {} as IFormConfig, visible: false })
+      fApi: Partial<IEFormMethods>
+    }>({ formData: {}, formConfig: {} as IFormConfig, visible: false, fApi: {} })
 
     const eFormCreate = ref<IFormSubmit | null>(null)
 
@@ -64,7 +67,32 @@ export default defineComponent({
           del(item, 'message')
         }
       })
-      state.formConfig = formConfig
+      state.formConfig = {
+        formItems: [
+          {
+            type: 'input',
+            label: '输入框',
+            icon: 'icon-input',
+            field: 'name',
+            span: 24,
+            update(...arg) {
+              console.log('arg', arg)
+            },
+            props: {
+              type: 'text'
+            },
+            key: 'input_1'
+          }
+        ],
+        config: {
+          layout: 'horizontal',
+          labelLayout: 'flex',
+          labelWidth: 100,
+          labelCol: {},
+          wrapperCol: {}
+        },
+        activeKey: 3
+      }
       state.visible = true
     }
 
@@ -78,13 +106,18 @@ export default defineComponent({
     const handleSubmit = () => {
       console.log('handleSubmit')
     }
+    const handleClick = () => {
+      state.fApi.setValue!('name', '李四')
+    }
+
     return {
       handleGetData,
       handleCancel,
       handleSubmit,
       ...toRefs(state),
       showModal,
-      eFormCreate
+      eFormCreate,
+      handleClick
     }
   }
 })

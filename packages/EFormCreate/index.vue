@@ -35,17 +35,24 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from '@vue/composition-api'
 import FormRender from './components/FormRender.vue'
-import { IFormConfig } from '@pack/typings/EFormComponent'
+import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { useFormInstanceMethods } from '@pack/hooks/useFormInstanceMethods'
 import { useEFormMethods } from '@pack/hooks/useEFormMethods'
+import { useVModel } from '@vueuse/core'
+import { cloneDeep } from 'lodash-es'
 
 export default defineComponent({
   name: 'EFormCreate',
   components: {
     FormRender
   },
+  model: {
+    prop: 'fApi',
+    event: 'update:fApi'
+  },
   props: {
+    fApi: {},
     formData: {
       type: Object,
       default: () => ({
@@ -60,24 +67,28 @@ export default defineComponent({
   setup(props, context) {
     const { emit } = context
     const eFormModel = ref<FormModel | null>(null)
+    const fApi = useVModel(props, 'fApi', emit)
     const { submit, validate, validateField, resetFields, clearValidate } =
       useFormInstanceMethods(props, context, eFormModel)
 
-    const { linkOn } = useEFormMethods(props, context, eFormModel, props.formConfig, {
+    const { linkOn, ...methods } = useEFormMethods(props, context, eFormModel, {
       submit,
       validate,
       validateField,
       resetFields,
       clearValidate
     })
-
-    const handleChange = (event: any) =>
-      linkOn[event.field] && linkOn[event.field].forEach(cb => cb(event))
+    fApi.value = methods
+    const handleChange = (record: IEFormComponent) => {
+      linkOn[record.field!] &&
+        linkOn[record.field!].forEach(cb =>
+          cb(record.field, cloneDeep(props.formData[record.field!]), record, fApi.value)
+        )
+    }
     const formModelProps = computed(() => {
       const { layout } = props.formConfig.config
       return { layout }
     })
-    emit('getFormInstance', eFormModel)
 
     const handleSubmit = () => {
       submit()

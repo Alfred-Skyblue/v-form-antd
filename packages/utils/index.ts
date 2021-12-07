@@ -1,6 +1,6 @@
 import { VueConstructor } from 'vue'
-import { IEFormComponent } from '../typings/EFormComponent'
-import { isArray, isNumber, uniqueId } from 'lodash-es'
+import { IEFormComponent, IFormConfig } from '../typings/EFormComponent'
+import { cloneDeep, isArray, isNumber, uniqueId } from 'lodash-es'
 /**
  * 组件install方法
  * @param comp 需要挂载install方法的组件
@@ -88,6 +88,7 @@ export function formItemsForEach(
   array: IEFormComponent[],
   cb: (item: IEFormComponent) => void
 ) {
+  if (!isArray(array)) return
   const traverse = (formItems: IEFormComponent[]) => {
     formItems.forEach((formItem: IEFormComponent) => {
       if (['grid'].includes(formItem.type)) {
@@ -104,10 +105,10 @@ export function formItemsForEach(
 /**
  * 查找表单项
  */
-export const findFormItem = (
+export const findFormItem: (
   formItems: IEFormComponent[],
   cb: (formItem: IEFormComponent) => boolean
-) => {
+) => IEFormComponent | undefined = (formItems, cb) => {
   let res
   const traverse = (formItems: IEFormComponent[]): boolean => {
     return formItems.some((formItem: IEFormComponent) => {
@@ -122,4 +123,20 @@ export const findFormItem = (
   }
   traverse(formItems)
   return res
+}
+
+/**
+ * 打开json模态框时删除当前项属性
+ * @param formConfig {IFormConfig}
+ * @returns {IFormConfig}
+ */
+export const removeAttrs = (formConfig: IFormConfig) => {
+  const copyFormConfig = cloneDeep(formConfig)
+  delete copyFormConfig.currentItem
+  delete copyFormConfig.activeKey
+  formItemsForEach(copyFormConfig.formItems, item => {
+    delete item.icon
+    delete item.key
+  })
+  return copyFormConfig
 }

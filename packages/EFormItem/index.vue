@@ -33,7 +33,7 @@
         v-bind="cmpProps"
         :style="record.width ? { width: record.width } : {}"
         v-on="record.on"
-        @change="$emit('change', record)"
+        @change="$emit('change', record, $event)"
         @click="handleClick(record, $event)"
         v-model="formData[record.field]"
       >
@@ -77,20 +77,22 @@ export default defineComponent({
 
     const formItemProps = computed(() => {
       const { data } = props
-      const { field, required, rules } = props.record
-      const labelCol =
-        data.config.layout === 'horizontal'
-          ? data.config.labelLayout === 'flex'
-            ? { style: `width:${data.config.labelWidth}px` }
-            : data.config.labelCol
-          : {}
+      let { field, required, rules, labelCol, wrapperCol } = props.record
+      labelCol = labelCol
+        ? labelCol
+        : data.config.layout === 'horizontal'
+        ? data.config.labelLayout === 'flex'
+          ? { style: `width:${data.config.labelWidth}px` }
+          : data.config.labelCol
+        : {}
 
-      const wrapperCol =
-        data.config.layout === 'horizontal'
-          ? data.config.labelLayout === 'flex'
-            ? { style: 'width:auto;flex:1' }
-            : data.config.wrapperCol
-          : {}
+      wrapperCol = wrapperCol
+        ? wrapperCol
+        : data.config.layout === 'horizontal'
+        ? data.config.labelLayout === 'flex'
+          ? { style: 'width:auto;flex:1' }
+          : data.config.wrapperCol
+        : {}
 
       const style =
         data.config.layout === 'horizontal' && data.config.labelLayout === 'flex'
