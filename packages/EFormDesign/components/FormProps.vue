@@ -6,7 +6,7 @@
 <template>
   <div class="properties-content">
     <a-form-model class="properties-body">
-      <e-upload v-model="fileList"></e-upload>
+      <!--      <e-upload v-model="fileList"></e-upload>-->
 
       <a-form-model-item label="表单布局">
         <a-radio-group buttonStyle="solid" v-model="formConfig.config.layout">
@@ -46,15 +46,12 @@
       </div>
       <a-form-model-item label="表单属性">
         <a-checkbox v-model="formConfig.config.hideRequiredMark">隐藏必选标记</a-checkbox>
-        <a-checkbox v-model="formConfig.config.ruleTargetConfig">
-          校验规则映射到表单配置中
-        </a-checkbox>
       </a-form-model-item>
     </a-form-model>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent } from '@vue/composition-api'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 import { IInputEvent } from '@pack/typings/baseType'
 
@@ -62,37 +59,12 @@ export default defineComponent({
   name: 'FormProps',
   setup() {
     const { formConfig } = useFormDesignState()
-    const fileList = ref([
-      {
-        fileName: '901621322355_.pic_thumb.jpg',
-        status: 'done',
-        uid: 'vc-upload-1638777318739-2',
-        url: '__vue_devtool_undefined__',
-        file: 'image/jpeg',
-        thumbUrl: '__vue_devtool_undefined__',
-        size: 2521,
-        name: '901621322355_.pic_thumb.jpg',
-        type: 'image/jpeg'
-      },
-      {
-        fileName: '2891634278897_.pic_thumb.jpg',
-        status: 'done',
-        uid: 'vc-upload-1638777318739-4',
-        url: '__vue_devtool_undefined__',
-        file: 'image/jpeg',
-        thumbUrl: '__vue_devtool_undefined__',
-        size: 2559,
-        name: '2891634278897_.pic_thumb.jpg',
-        type: 'image/jpeg'
-      }
-    ])
-    console.log('-> fileList', fileList)
     const lableLayoutChange = (e: IInputEvent) => {
       if (e.target.value === 'grid') {
         formConfig.value.config.layout = 'horizontal'
       }
     }
-    return { formConfig, fileList, lableLayoutChange }
+    return { formConfig, lableLayoutChange }
   }
 })
 </script>

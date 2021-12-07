@@ -34,9 +34,13 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from '@vue/composition-api'
 import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import EFormItem from '@pack/EFormItem'
 
 export default defineComponent({
   name: 'FormRender',
+  components: {
+    EFormItem
+  },
   props: {
     formData: {
       type: Object,

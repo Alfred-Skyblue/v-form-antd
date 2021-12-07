@@ -23,7 +23,7 @@
             <!--     自定义控件start       -->
             <a-collapse-panel
               v-if="customComponents.length > 0"
-              header="基础控件"
+              header="自定义控件"
               key="2"
             >
               <CollapseItem
@@ -52,7 +52,9 @@
         <div class="node-panel" onselectstart="return false">
           <Toolbar
             @handleOpenJsonModal="handleOpenModal(jsonModal)"
+            @handleOpenImportJsonModal="handleOpenModal(importJsonModal)"
             @handlePreview="handleOpenModal(eFormPreview)"
+            @handleOpenCodeModal="handleOpenModal(codeModal)"
             @handleClearFormItems="handleClearFormItems"
           ></Toolbar>
           <FormComponentPanel
@@ -70,6 +72,8 @@
         </div>
       </section>
       <JsonModal ref="jsonModal"></JsonModal>
+      <CodeModal ref="codeModal"></CodeModal>
+      <ImportJsonModal ref="importJsonModal"></ImportJsonModal>
       <EFormPreview ref="eFormPreview" :formConfig="formConfig" />
     </div>
   </a-config-provider>
@@ -81,6 +85,8 @@ import JsonModal from './components/JsonModal.vue'
 import EFormPreview from '@pack/EFormPreview/index.vue'
 import Toolbar from './modules/Toolbar.vue'
 import PropsPanel, { IPropsPanel } from './modules/PropsPanel.vue'
+import ImportJsonModal from '@pack/EFormDesign/components/ImportJsonModal.vue'
+import CodeModal from '@pack/EFormDesign/components/CodeModal.vue'
 
 import 'codemirror/mode/javascript/javascript'
 
@@ -104,6 +110,7 @@ import {
 } from '@pack/core/formItemConfig'
 import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
 import { IAnyObject } from '@pack/typings/baseType'
+import { globalConfigState } from '@pack/EFormDesign/config/formItemPropsConfig'
 
 export interface IToolbarMethods {
   showModal: (jsonData: IAnyObject) => void
@@ -121,6 +128,11 @@ interface IState {
   propsPanel: Ref<null | IPropsPanel>
   // json模态框实例
   jsonModal: Ref<null | IToolbarMethods>
+  // 导入json数据模态框
+  importJsonModal: Ref<null | IToolbarMethods>
+  // 代码预览模态框
+  codeModal: Ref<null | IToolbarMethods>
+  // 预览模态框
   eFormPreview: Ref<null | IToolbarMethods>
 }
 
@@ -133,6 +145,7 @@ export interface IFormDesignMethods {
   handleCopy(item?: IEFormComponent, isCopy?: boolean): void
   // 添加控件属性
   handleAddAttrs(formItems: IEFormComponent[], index: number): void
+  setFormConfig(config: IFormConfig): void
   // 添加到表单中之前触发
   handleBeforeColAdd(
     event: { newIndex: string },
@@ -144,6 +157,8 @@ export interface IFormDesignMethods {
 export default defineComponent({
   name: 'EFormDesign',
   components: {
+    CodeModal,
+    ImportJsonModal,
     CollapseItem,
     FormComponentPanel,
     PropsPanel,
@@ -155,7 +170,9 @@ export default defineComponent({
     // 子组件实例
     const propsPanel = ref<null | IPropsPanel>(null)
     const jsonModal = ref<null | IToolbarMethods>(null)
+    const importJsonModal = ref<null | IToolbarMethods>(null)
     const eFormPreview = ref<null | IToolbarMethods>(null)
+    const codeModal = ref<null | IToolbarMethods>(null)
     // endregion
     const formConfig = ref<IFormConfig>({
       // 表单配置
@@ -180,8 +197,30 @@ export default defineComponent({
       customComponents,
       propsPanel,
       jsonModal,
-      eFormPreview
+      eFormPreview,
+      importJsonModal,
+      codeModal
     })
+    const setFormConfig = (config: IFormConfig) => {
+      formConfig.value = config
+    }
+    // 获取历史记录，用于撤销和重构
+    const historyReturn = useRefHistory(formConfig, {
+      deep: true,
+      parse: (val: IFormConfig) => {
+        // 使用lodash.cloneDeep重新拷贝数据，把currentItem指向选中项
+        const formConfig = cloneDeep(val)
+        const { currentItem, formItems } = formConfig
+        // 从formItems中查找选中项
+        const item = formItems.find(item => item.key === currentItem?.key)
+        // 如果有，则赋值给当前项，如果没有，则切换属性面板
+        if (item) {
+          formConfig.currentItem = item
+        }
+        return formConfig
+      }
+    })
+
     /**
      * 选中表单项
      * @param record 当前选中的表单项
@@ -190,11 +229,15 @@ export default defineComponent({
       formConfig.value.currentItem = record
       handleChangePropsTabs(
         record.key
-          ? formConfig.value.activeKey === 1
+          ? formConfig.value.activeKey! === 1
             ? 2
-            : formConfig.value.activeKey
+            : formConfig.value.activeKey!
           : 1
       )
+    }
+
+    const setGlobalConfigState = (formItem: IEFormComponent) => {
+      formItem.span = globalConfigState.span
     }
 
     /**
@@ -204,6 +247,7 @@ export default defineComponent({
      */
     const handleAddAttrs = (formItems: IEFormComponent[], index: number) => {
       const item = formItems[index]
+      setGlobalConfigState(item)
       generateKey(item)
     }
 
@@ -213,6 +257,7 @@ export default defineComponent({
      */
     const handleListPush = (item: IEFormComponent) => {
       const formItem = cloneDeep(item)
+      setGlobalConfigState(formItem)
       generateKey(formItem)
       if (!formConfig.value.currentItem?.key) {
         formConfig.value.formItems.push(formItem)
@@ -300,23 +345,6 @@ export default defineComponent({
       handleSetSelectItem({ type: '' })
     }
 
-    // 获取历史记录，用于撤销和重构
-    const historyReturn = useRefHistory(formConfig, {
-      deep: true,
-      parse: (val: IFormConfig) => {
-        // 使用lodash.cloneDeep重新拷贝数据，把currentItem指向选中项
-        const formConfig = cloneDeep(val)
-        const { currentItem, formItems } = formConfig
-        // 从formItems中查找选中项
-        const item = formItems.find(item => item.key === currentItem?.key)
-        // 如果有，则赋值给当前项，如果没有，则切换属性面板
-        if (item) {
-          formConfig.currentItem = item
-        }
-        return formConfig
-      }
-    })
-
     // region 注入给子组件的属性
     // provide('currentItem', formConfig.value.currentItem)
 
@@ -332,7 +360,8 @@ export default defineComponent({
       handleCopy,
       handleListPush,
       handleSetSelectItem,
-      handleAddAttrs
+      handleAddAttrs,
+      setFormConfig
     })
     // endregion
 

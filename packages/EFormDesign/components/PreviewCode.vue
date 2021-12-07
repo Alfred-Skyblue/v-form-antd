@@ -1,11 +1,7 @@
 <template>
   <div>
     <div class="y-json-box">
-      <codemirror
-        style="height: 100%"
-        ref="myEditor"
-        :value="editorJson"
-      ></codemirror>
+      <codemirror style="height: 100%" ref="myEditor" :value="editorJson"></codemirror>
     </div>
     <div class="copy-btn-box">
       <a-button
@@ -24,8 +20,9 @@
 
 <script lang="ts">
 import { codemirror } from 'vue-codemirror-lite'
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
-
+import { defineComponent, reactive, toRefs, nextTick } from '@vue/composition-api'
+import Clipboard from 'clipboard'
+import { message } from 'ant-design-vue'
 export default defineComponent({
   name: 'PreviewCode',
   components: {
@@ -46,10 +43,7 @@ export default defineComponent({
       visible: false
     })
 
-    const exportData = (
-      data: string,
-      fileName = `file.${props.fileFormat}`
-    ) => {
+    const exportData = (data: string, fileName = `file.${props.fileFormat}`) => {
       let content = 'data:text/csv;charset=utf-8,'
       content += data
       const encodedUri = encodeURI(content)
@@ -64,8 +58,18 @@ export default defineComponent({
     }
 
     const handleCopyJson = () => {
-      console.log('copy')
+      // 复制数据
+      const clipboard = new Clipboard('.copy-btn')
+      clipboard.on('success', () => {
+        message.success('复制成功')
+        clipboard.destroy()
+      })
+      clipboard.on('error', () => {
+        message.error('复制失败')
+        clipboard.destroy()
+      })
     }
+
     return {
       ...toRefs(state),
       exportData,

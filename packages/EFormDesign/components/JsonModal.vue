@@ -18,20 +18,10 @@
   </a-modal>
 </template>
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  reactive,
-  toRefs
-} from '@vue/composition-api'
-import { IAnyObject } from '@pack/typings/baseType'
+import { computed, defineComponent, reactive, toRefs } from '@vue/composition-api'
 import PreviewCode from './PreviewCode.vue'
 import { cloneDeep } from 'lodash-es'
 import { IFormConfig } from '@pack/typings/EFormComponent'
-
-export interface IJsonModalMethods {
-  showModal: (jsonData: IAnyObject) => void
-}
 
 /**
  * 打开json模态框时删除当前项属性

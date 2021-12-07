@@ -35,9 +35,7 @@ export default defineComponent({
   setup(props) {
     const { formConfig, formDesignMethods } = useFormDesignState()
     const activeClass = computed(() => {
-      return props.record.key === props.currentItem.key
-        ? 'active'
-        : 'unactivated'
+      return props.record.key === props.currentItem.key ? 'active' : 'unactivated'
     })
     /**
      * 删除当前项

@@ -13,11 +13,9 @@
       />
       <a-form-model v-else>
         <div v-for="props of baseFormItemProps" :key="props.name">
-          <a-form-model-item
-            :label="props.label"
-            v-if="showProps(props.exclude)"
-          >
+          <a-form-model-item :label="props.label" v-if="showProps(props.exclude)">
             <component
+              v-on="props.on"
               class="component-props"
               v-bind="props.props"
               :is="props.tag"

@@ -5,7 +5,11 @@
 -->
 <template>
   <div class="form-panel e-form-container">
-    <a-empty class="empty-text" v-show="formConfig.formItems.length === 0" description="从左侧选择控件添加" />
+    <a-empty
+      class="empty-text"
+      v-show="formConfig.formItems.length === 0"
+      description="从左侧选择控件添加"
+    />
     <a-form-model v-bind="formConfig.config">
       <a-row :style="{ height: '100%' }">
         <draggable

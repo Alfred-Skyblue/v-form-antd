@@ -3,6 +3,10 @@ declare module '*.vue' {
   export default Vue
 }
 
+declare module 'clipboard' {
+  export default clipboard
+}
+
 interface zhCN {
   [key: string]: any
 }

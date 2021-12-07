@@ -8,12 +8,7 @@
 </template>
 
 <script lang="ts">
-import {
-  reactive,
-  toRefs,
-  defineComponent,
-  PropType
-} from '@vue/composition-api'
+import { reactive, toRefs, defineComponent, PropType } from '@vue/composition-api'
 import { vModelMixin } from '@pack/mixins/v-model-mixni'
 import { useVModel } from '@vueuse/core'
 

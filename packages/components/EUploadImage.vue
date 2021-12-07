@@ -48,9 +48,7 @@ export default defineComponent({
   setup(props: any, { emit }: any) {
     const data = useVModel(props, 'modelValue', emit)
     const fileList = ref<Array<UploadFile>>(
-      props.props.valueFormat === 'JSON'
-        ? JSON.parse(props.modelValue)
-        : props.modelValue
+      props.props.valueFormat === 'JSON' ? JSON.parse(props.modelValue) : props.modelValue
     )
     const previewVisible = ref(false)
     const previewImage = ref<string | undefined>('')
@@ -80,10 +78,7 @@ export default defineComponent({
         .filter(file => file.status !== 'error')
     }
 
-    const handleChange = (info: {
-      file: UploadFile
-      fileList: UploadFile[]
-    }) => {
+    const handleChange = (info: { file: UploadFile; fileList: UploadFile[] }) => {
       const { file } = info
       fileList.value = info.fileList
 

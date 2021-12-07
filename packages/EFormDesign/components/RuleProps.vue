@@ -6,12 +6,24 @@
 <template>
   <div class="rule-props-content">
     <a-form-model v-if="formConfig.currentItem['rules']">
-      <div v-for="(item, index) of formConfig.currentItem['rules']" :key="index" class="rule-props-item">
+      <div
+        v-for="(item, index) of formConfig.currentItem['rules']"
+        :key="index"
+        class="rule-props-item"
+      >
         <a-icon type="close" class="rule-props-item-close" @click="removeRule(index)" />
-        <a-form-model-item label="正则" :labelCol="{ span: 6 }" :wrapperCol="{ span: 16 }">
+        <a-form-model-item
+          label="正则"
+          :labelCol="{ span: 6 }"
+          :wrapperCol="{ span: 16 }"
+        >
           <a-input v-model="item.pattern" placeholder="请输入正则表达式" />
         </a-form-model-item>
-        <a-form-model-item label="文案" :labelCol="{ span: 6 }" :wrapperCol="{ span: 16 }">
+        <a-form-model-item
+          label="文案"
+          :labelCol="{ span: 6 }"
+          :wrapperCol="{ span: 16 }"
+        >
           <a-input v-model="item.message" placeholder="请输入提示文案" />
         </a-form-model-item>
       </div>
@@ -40,7 +52,8 @@ export default defineComponent({
      * 添加正则校验，判断当前组件的rules是不是数组，如果不是数组，使用set方法重置成数组，然后添加正则校验
      */
     const addRules = () => {
-      if (!isArray(formConfig.value.currentItem!.rules)) set(formConfig.value.currentItem!, 'rules', [])
+      if (!isArray(formConfig.value.currentItem!.rules))
+        set(formConfig.value.currentItem!, 'rules', [])
       formConfig.value.currentItem!.rules?.push({ pattern: '', message: '' })
     }
     /**
@@ -49,7 +62,8 @@ export default defineComponent({
      */
     const removeRule = (index: number) => {
       remove(formConfig.value.currentItem!.rules as Array<any>, index)
-      if (formConfig.value.currentItem!.rules?.length === 0) del(formConfig.value.currentItem!, 'rules')
+      if (formConfig.value.currentItem!.rules?.length === 0)
+        del(formConfig.value.currentItem!, 'rules')
     }
 
     return { addRules, removeRule, formConfig }

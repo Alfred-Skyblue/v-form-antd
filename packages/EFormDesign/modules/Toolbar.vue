@@ -8,11 +8,7 @@
     <!-- 头部操作按钮区域 start -->
     <!-- 操作左侧区域 start -->
     <div class="left-btn-box">
-      <a-tooltip
-        v-for="item in toolbarsConfigs"
-        :title="item.title"
-        :key="item.icon"
-      >
+      <a-tooltip v-for="item in toolbarsConfigs" :title="item.title" :key="item.icon">
         <a @click="$emit(item.event)">
           <a-icon :type="item.icon" />
         </a>

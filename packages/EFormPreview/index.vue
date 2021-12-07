@@ -18,7 +18,7 @@
     <e-form-create ref="eFormCreate" :form-config="formConfig">
       <template slot="slotName" slot-scope="{ formModel, field, record }">
         {{ $log('作用域', formModel, field, record) }}
-        <a-input v-model="formModel[field]"></a-input>
+        <a-input v-model="formModel[field]" placeholder="我是插槽渲染的"></a-input>
       </template>
     </e-form-create>
   </a-modal>

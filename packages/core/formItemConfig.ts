@@ -8,6 +8,7 @@ import { IEFormComponent } from '@pack/typings/EFormComponent'
 import { IAnyObject } from '@pack/typings/baseType'
 import ACmp from '../components'
 import { isArray } from 'lodash-es'
+
 export const componentMap: IAnyObject = {
   ...ACmp
 }
@@ -15,12 +16,24 @@ export const componentMap: IAnyObject = {
 export function setFormDesignConfig(config: IEFormComponent | IEFormComponent[]) {
   if (isArray(config)) {
     config.forEach(item => {
-      componentMap[item.type] = item
+      const { component, ...rest } = item
+      componentMap[item.type] = component
+      customComponents.push(rest)
     })
   } else {
-    componentMap[config.type] = config
+    const { component, ...rest } = config
+    componentMap[config.type] = component
+    customComponents.push(rest)
   }
 }
+
+export const customComponents: IEFormComponent[] = [
+  {
+    type: 'custom',
+    label: '自定义组件',
+    props: {}
+  }
+]
 
 export const baseComponents: IEFormComponent[] = [
   {
@@ -248,17 +261,10 @@ export const baseComponents: IEFormComponent[] = [
     label: '插槽',
     icon: 'icon-slot',
     field: '',
+    span: 24,
     props: {
       slotName: 'slotName'
     }
-  }
-]
-
-export const customComponents: IEFormComponent[] = [
-  {
-    type: 'custom',
-    label: '自定义组件',
-    props: {}
   }
 ]
 

@@ -5,17 +5,8 @@
 -->
 <template>
   <div>
-    <a-radio-group
-      v-bind="props"
-      v-on="$listeners"
-      buttonStyle="solid"
-      v-model="value"
-    >
-      <a-radio-button
-        v-for="item of options"
-        :key="item.value"
-        :value="item.value"
-      >
+    <a-radio-group v-bind="props" v-on="$listeners" buttonStyle="solid" v-model="value">
+      <a-radio-button v-for="item of options" :key="item.value" :value="item.value">
         {{ item.label }}
       </a-radio-button>
     </a-radio-group>

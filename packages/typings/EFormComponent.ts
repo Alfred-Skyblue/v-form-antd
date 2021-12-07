@@ -1,6 +1,7 @@
 import { IAnyObject } from './baseType'
 import { Col } from 'ant-design-vue'
 import { ValidationRule } from 'ant-design-vue/types/form-model/form'
+import { ComponentOptions } from 'vue/types/options'
 type LayoutType = 'horizontal' | 'vertical' | 'inline'
 type labelLayout = 'flex' | 'grid'
 export type PropsTabKey = 1 | 2 | 3
@@ -22,6 +23,8 @@ export interface IEFormComponent {
   type: string
   // 组件label
   label?: string
+  // 自定义组件控件实例
+  component?: ComponentOptions<any>
   // 组件icon
   icon?: string
   // 组件校验规则
@@ -54,7 +57,7 @@ export interface IEFormComponent {
   link?: string[]
   update?: (...arg: any[]) => void
   // 控件栅格数
-  span?: number
+  span?: number | string
   // 子控件
   columns?: Array<{ span: number; children: IEFormComponent[] }>
 }
@@ -73,10 +76,8 @@ export interface IFormConfig {
     labelCol?: Partial<Col>
     wrapperCol?: Partial<Col>
     hideRequiredMark?: boolean
-    ruleTargetConfig?: boolean
-    submit?: (formData: IAnyObject) => void
   }
   // 当前选中项
   currentItem?: IEFormComponent
-  activeKey: PropsTabKey
+  activeKey?: PropsTabKey
 }

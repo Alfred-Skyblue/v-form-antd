@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import VueCompositionAPI from '@vue/composition-api'
 import EFormDesign, { EIconPicker } from '../packages/index'
+
 Vue.use(VueCompositionAPI)
 EIconPicker.setIconConfig(
   'https://at.alicdn.com/t/font_2957630_ikh28lbrtj.js',
