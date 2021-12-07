@@ -23,6 +23,7 @@ export function generateKey(formItem?: IEFormComponent): string | boolean {
     const key = uniqueId(`${toLine(formItem.type)}_`)
     formItem.key = key
     formItem.field = key
+
     return true
   }
   return uniqueId('key_')

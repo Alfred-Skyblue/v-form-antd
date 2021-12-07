@@ -19,12 +19,7 @@
   </div>
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  reactive,
-  toRefs,
-  PropType
-} from '@vue/composition-api'
+import { defineComponent, reactive, toRefs, PropType } from '@vue/composition-api'
 import { IEFormComponent } from '@pack/typings/EFormComponent'
 import FormNodeOperate from './FormNodeOperate.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'

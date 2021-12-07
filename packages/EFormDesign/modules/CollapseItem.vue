@@ -18,13 +18,13 @@
       @add="handleAdd"
     >
       <li
-        class="bs-box"
+        class="bs-box text-ellipsis"
         v-for="(item, index) in list"
         :key="index"
         @dragstart="$emit('addAttrs', list, index)"
         @click="$emit('handleListPush', item)"
       >
-        <svg class="icon" aria-hidden="true">
+        <svg v-if="item.icon" class="icon" aria-hidden="true">
           <use :xlink:href="`#${item.icon}`"></use>
         </svg>
         {{ item.label }}

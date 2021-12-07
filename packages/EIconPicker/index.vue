@@ -44,13 +44,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  watch,
-  reactive,
-  toRefs,
-  computed
-} from '@vue/composition-api'
+import { defineComponent, watch, reactive, toRefs, computed } from '@vue/composition-api'
 import { useVModel } from '@vueuse/core'
 import { vModelMixin } from '@pack/mixins/v-model-mixni'
 

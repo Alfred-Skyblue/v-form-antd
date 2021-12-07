@@ -1,6 +1,9 @@
 import { IAnyObject } from '@pack/typings/baseType'
 import { baseComponents } from '@pack/core/formItemConfig'
 
+export const globalConfigState: { span: number | string } = {
+  span: 24
+}
 export interface IBaseFormAttrs {
   name?: string // 字段名
   label?: string // 字段标签
@@ -8,6 +11,7 @@ export interface IBaseFormAttrs {
   props?: IAnyObject // 传递给控件的属性
   exclude?: string[] // 需要排除的控件
   includes?: string[] // 符合条件的组件
+  on?: IAnyObject
   children?: IBaseFormAttrs[]
 }
 
@@ -48,6 +52,11 @@ export const baseFormItemProps: IBaseFormAttrs[] = [
     name: 'span',
     label: '栅格数',
     tag: 'ASlider',
+    on: {
+      change(value: string | number) {
+        globalConfigState.span = value
+      }
+    },
     props: {
       max: 24,
       min: 0,

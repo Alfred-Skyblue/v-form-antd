@@ -46,9 +46,7 @@ export default defineComponent({
      */
     const handlePanelChange = (value: any[]) => {
       if (props.props.valueFormat) {
-        return (month.value = value.map(item =>
-          item.format(props.props.valueFormat)
-        ))
+        return (month.value = value.map(item => item.format(props.props.valueFormat)))
       }
       month.value = value
     }
