@@ -20,19 +20,9 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs } from '@vue/composition-api'
 import PreviewCode from './PreviewCode.vue'
-import { cloneDeep } from 'lodash-es'
 import { IFormConfig } from '@pack/typings/EFormComponent'
+import { removeAttrs } from '@pack/utils'
 
-/**
- * 打开json模态框时删除当前项属性
- * @param formConfig {IFormConfig}
- * @returns {IFormConfig}
- */
-const removeAttrs = (formConfig: IFormConfig) => {
-  const copyFormConfig = cloneDeep(formConfig)
-  delete copyFormConfig.currentItem
-  return copyFormConfig
-}
 export default defineComponent({
   name: 'JsonModal',
   components: {
@@ -54,14 +44,17 @@ export default defineComponent({
       state.visible = true
       state.jsonData = jsonData
     }
+
     // 计算json数据
     const editorJson = computed(() => {
       return JSON.stringify(removeAttrs(state.jsonData), null, '\t')
     })
+
     // 关闭弹框
     const handleCancel = () => {
       state.visible = false
     }
+
     return { ...toRefs(state), editorJson, handleCancel, showModal }
   }
 })

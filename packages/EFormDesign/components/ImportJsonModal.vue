@@ -95,8 +95,7 @@ export default defineComponent({
         // this.handleSetSelectItem({ key: '' })
         // formDesignMethods.handleSetSelectItem({ type: '' })
         message.success('导入成功')
-      } catch (error) {
-        console.error(error)
+      } catch {
         message.error('导入失败，数据格式不对')
       }
     }

@@ -18,20 +18,19 @@
   </a-modal>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs, watch } from '@vue/composition-api'
-import { useFormDesignState } from '@pack/hooks/useFormDesignState'
-import { cloneDeep } from 'lodash-es'
-import { formItemsForEach } from '@pack/utils'
+import { computed, defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { removeAttrs } from '@pack/utils'
 import PreviewCode from '@pack/EFormDesign/components/PreviewCode.vue'
+import { IFormConfig } from '@pack/typings/EFormComponent'
 
 const codeVueFront = `<template>
   <div>
     <e-form-create
-      :value="jsonData"
-      ref="KFB"
-      @submit="handleSubmit"
+      :formConfig="jsonData"
+      :formData="formData"
+      v-model="fApi"
     />
-    <button @click="getData">提交</button>
+    <button @click="submit">提交</button>
   </div>
 </template>
 <script>
@@ -40,31 +39,17 @@ export default {
   name: 'Demo',
   data () {
     return {
-      jsonData: `
+      fApi:{},
+      formData:{}
+      formConfig: `
 /* eslint-disable */
 let codeVueLast = `
     }
   },
   methods: {
-    handleSubmit(p) {
-       // 通过表单提交按钮触发，获取promise对象
-       p().then(res => {
-         // 获取数据成功
-         alert(JSON.stringify(res))
-       })
-         .catch(err => {
-           console.log(err, '校验失败')
-         })
-     },
-     getData() {
-       // 通过函数获取数据
-       this.$refs.KFB.getData().then(res => {
-         // 获取数据成功
-         alert(JSON.stringify(res))
-       })
-         .catch(err => {
-           console.log(err, '校验失败')
-         })
+    async submit() {
+      const data = await this.fApi.submit()
+      console.log(data)
      }
   }
 }
@@ -76,31 +61,23 @@ export default defineComponent({
   setup() {
     const state = reactive({
       visible: false,
-      editorVueJson: {}
+      jsonData: {} as IFormConfig
     })
-    const { formConfig } = useFormDesignState()
 
-    const showModal = () => {
+    const showModal = (formConfig: IFormConfig) => {
       state.visible = true
+      state.jsonData = formConfig
     }
 
-    watch(
-      () => state.visible,
-      newVal => {
-        if (newVal) {
-          const jsonData = cloneDeep(formConfig.value)
-          formItemsForEach(jsonData.formItems, formItem => {
-            delete formItem.icon
-            delete formItem.key
-          })
-          delete jsonData.currentItem
-          delete jsonData.activeKey
-          state.editorVueJson =
-            codeVueFront + JSON.stringify(jsonData, null, '\t') + codeVueLast
-        }
-      }
-    )
-    return { ...toRefs(state), showModal }
+    const editorVueJson = computed(() => {
+      return (
+        codeVueFront +
+        JSON.stringify(removeAttrs(state.jsonData), null, '\t') +
+        codeVueLast
+      )
+    })
+
+    return { ...toRefs(state), editorVueJson, showModal }
   }
 })
 </script>

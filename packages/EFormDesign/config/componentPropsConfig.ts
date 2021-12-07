@@ -69,7 +69,8 @@ export const baseComponentControlAttrs: Omit<IBaseFormAttrs, 'tag'>[] = [
   },
   {
     name: 'withCredentials',
-    label: '携带cookie'
+    label: '携带cookie',
+    includes: ['upload']
   }
 ]
 

@@ -1,6 +1,7 @@
 import { IAnyObject } from '@pack/typings/baseType'
 import { Ref, SetupContext } from '@vue/composition-api'
 import { FormModel } from 'ant-design-vue'
+import { cloneDeep } from 'lodash-es'
 
 export function useFormInstanceMethods(
   props: IAnyObject,
@@ -39,7 +40,7 @@ export function useFormInstanceMethods(
     await validate()
     emit('submit', props.formData)
     props.formConfig.config.submit?.(props.formData)
-    return props.formData
+    return cloneDeep(props.formData)
   }
 
   return {
