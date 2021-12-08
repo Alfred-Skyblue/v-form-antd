@@ -32,7 +32,7 @@ import { isUndefined } from 'lodash-es'
 import { randomUUID } from '@pack/utils'
 
 export default defineComponent({
-  name: 'EUpload',
+  name: 'VUpload',
   mixins: [vModelMixin],
   props: {
     props: {

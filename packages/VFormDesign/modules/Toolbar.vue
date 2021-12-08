@@ -31,7 +31,7 @@
 <script lang="ts">
 import { defineComponent, inject, reactive, toRefs } from '@vue/composition-api'
 import { UseRefHistoryReturn } from '@vueuse/core'
-import { IFormConfig } from '@pack/typings/EFormComponent'
+import { IFormConfig } from '@pack/typings/v-form-component'
 
 interface IToolbarsConfig {
   type: string

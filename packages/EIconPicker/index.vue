@@ -48,7 +48,7 @@ import { defineComponent, watch, reactive, toRefs, computed } from '@vue/composi
 import { useVModel } from '@vueuse/core'
 import { vModelMixin } from '@pack/mixins/v-model-mixni'
 
-import { IAnyObject } from '@pack/typings/baseType'
+import { IAnyObject } from '@pack/typings/base-type'
 import { iconFontConfig, IIconItem } from '@pack/EIconPicker/config'
 
 interface IEIconPickerState {

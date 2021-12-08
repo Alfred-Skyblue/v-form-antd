@@ -11,12 +11,12 @@
     @cancel="handleCancel"
     cancelText="关闭"
     :destroyOnClose="true"
-    wrapClassName="y-code-modal"
+    wrapClassName="v-code-modal"
     style="top: 20px"
     width="850px"
   >
     <p class="hint-box">导入格式如下:</p>
-    <div class="y-json-box">
+    <div class="v-json-box">
       <codemirror style="height: 100%" ref="myEditor" v-model="json"></codemirror>
     </div>
 
@@ -39,7 +39,7 @@ import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 import { message } from 'ant-design-vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 import { codemirror } from 'vue-codemirror-lite'
-import { IFormConfig } from '@pack/typings/EFormComponent'
+import { IFormConfig } from '@pack/typings/v-form-component'
 import { formItemsForEach, generateKey } from '@pack/utils'
 
 export default defineComponent({

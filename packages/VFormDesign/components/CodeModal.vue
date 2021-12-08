@@ -9,7 +9,7 @@
     :footer="null"
     :visible="visible"
     @cancel="visible = false"
-    wrapClassName="y-code-modal"
+    wrapClassName="v-code-modal"
     style="top: 20px"
     width="850px"
     :destroyOnClose="true"
@@ -21,7 +21,7 @@
 import { computed, defineComponent, reactive, toRefs } from '@vue/composition-api'
 import { removeAttrs } from '@pack/utils'
 import PreviewCode from '@pack/VFormDesign/components/PreviewCode.vue'
-import { IFormConfig } from '@pack/typings/EFormComponent'
+import { IFormConfig } from '@pack/typings/v-form-component'
 
 const codeVueFront = `<template>
   <div>

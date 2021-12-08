@@ -1,5 +1,5 @@
 import { inject, Ref } from '@vue/composition-api'
-import { IFormConfig } from '@pack/typings/EFormComponent'
+import { IFormConfig } from '@pack/typings/v-form-component'
 import { IFormDesignMethods } from '@pack/VFormDesign/index.vue'
 
 export function useFormDesignState() {

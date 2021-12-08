@@ -1,4 +1,4 @@
-import { IAnyObject } from '@pack/typings/baseType'
+import { IAnyObject } from '@pack/typings/base-type'
 import { Ref, SetupContext } from '@vue/composition-api'
 import { FormModel } from 'ant-design-vue'
 import { cloneDeep } from 'lodash-es'

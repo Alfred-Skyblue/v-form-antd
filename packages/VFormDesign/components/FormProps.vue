@@ -53,7 +53,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
-import { IInputEvent } from '@pack/typings/baseType'
+import { IInputEvent } from '@pack/typings/base-type'
 
 export default defineComponent({
   name: 'FormProps',

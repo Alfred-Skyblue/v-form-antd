@@ -1,4 +1,4 @@
-import { IAnyObject } from '@pack/typings/baseType'
+import { IAnyObject } from '@pack/typings/base-type'
 import { baseComponents } from '@pack/core/formItemConfig'
 
 export const globalConfigState: { span: number | string } = {

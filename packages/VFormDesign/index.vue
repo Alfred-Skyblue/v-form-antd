@@ -100,7 +100,7 @@ import {
 } from '@vue/composition-api'
 
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
-import { IVFormComponent, IFormConfig, PropsTabKey } from '@pack/typings/EFormComponent'
+import { IVFormComponent, IFormConfig, PropsTabKey } from '@pack/typings/v-form-component'
 import { generateKey } from '@pack/utils'
 import { cloneDeep } from 'lodash-es'
 import {
@@ -109,7 +109,7 @@ import {
   layoutComponents
 } from '@pack/core/formItemConfig'
 import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
-import { IAnyObject } from '@pack/typings/baseType'
+import { IAnyObject } from '@pack/typings/base-type'
 import { globalConfigState } from '@pack/VFormDesign/config/formItemPropsConfig'
 
 export interface IToolbarMethods {

@@ -51,7 +51,7 @@ import {
   PropType
 } from '@vue/composition-api'
 import { componentMap } from '@pack/core/formItemConfig'
-import { IVFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { IVFormComponent, IFormConfig } from '@pack/typings/v-form-component'
 import { asyncComputed } from '@vueuse/core'
 import { isFunction } from 'lodash-es'
 export default defineComponent({

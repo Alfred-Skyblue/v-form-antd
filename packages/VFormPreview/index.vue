@@ -26,13 +26,13 @@
 </template>
 <script lang="ts">
 import { defineComponent, del, reactive, ref, toRefs } from '@vue/composition-api'
-import { IFormConfig } from '@pack/typings/EFormComponent'
-import { IAnyObject } from '@pack/typings/baseType'
+import { IFormConfig } from '@pack/typings/v-form-component'
+import { IAnyObject } from '@pack/typings/base-type'
 import { cloneDeep, isArray } from 'lodash-es'
 import VFormCreate from '../VFormCreate/index.vue'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { formItemsForEach } from '@pack/utils'
-import { IEFormMethods } from '@pack/hooks/useEFormMethods'
+import { IVFormMethods } from '@pack/hooks/useEFormMethods'
 interface IFormSubmit extends FormModel {
   submit: () => IAnyObject
 }
@@ -46,7 +46,7 @@ export default defineComponent({
       formData: IAnyObject
       visible: boolean
       formConfig: IFormConfig
-      fApi: Partial<IEFormMethods>
+      fApi: Partial<IVFormMethods>
     }>({ formData: {}, formConfig: {} as IFormConfig, visible: false, fApi: {} })
 
     const eFormCreate = ref<IFormSubmit | null>(null)

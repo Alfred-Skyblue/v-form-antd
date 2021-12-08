@@ -1,9 +1,9 @@
 import { Ref, SetupContext, set as setRef } from '@vue/composition-api'
 import { FormModel } from 'ant-design-vue'
-import { IVFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { IVFormComponent, IFormConfig } from '@pack/typings/v-form-component'
 import { findFormItem, formItemsForEach } from '@pack/utils'
 import { cloneDeep, isFunction } from 'lodash-es'
-import { IAnyObject } from '@pack/typings/baseType'
+import { IAnyObject } from '@pack/typings/base-type'
 
 interface IFormInstanceMethods extends FormModel {
   submit: () => Promise<any>
@@ -30,7 +30,7 @@ interface ILinkOn {
   [key: string]: Set<(...arg: any[]) => void>
 }
 
-export interface IEFormMethods extends Partial<IFormInstanceMethods> {
+export interface IVFormMethods extends Partial<IFormInstanceMethods> {
   set: ISet
   get: IGet
   getValue: IGetValue
@@ -46,7 +46,7 @@ export function useEFormMethods(
   context: SetupContext,
   formInstance: Ref<FormModel | null>,
   formInstanceMethods: Partial<IFormInstanceMethods>
-): IEFormMethods {
+): IVFormMethods {
   /**
    * 监听表单字段联动时触发
    * @type {{}}

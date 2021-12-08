@@ -20,7 +20,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, toRefs, PropType } from '@vue/composition-api'
-import { IVFormComponent } from '@pack/typings/EFormComponent'
+import { IVFormComponent } from '@pack/typings/v-form-component'
 import FormNodeOperate from './FormNodeOperate.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 

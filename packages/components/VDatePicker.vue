@@ -13,7 +13,7 @@ import { vModelMixin } from '@pack/mixins/v-model-mixni'
 import { useVModel } from '@vueuse/core'
 
 export default defineComponent({
-  name: 'EDatePicker',
+  name: 'VDatePicker',
   mixins: [vModelMixin],
   props: {
     props: {

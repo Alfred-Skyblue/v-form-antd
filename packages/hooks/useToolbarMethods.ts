@@ -1,5 +1,5 @@
 import { ref } from '@vue/composition-api'
-import { IAnyObject } from '@pack/typings/baseType'
+import { IAnyObject } from '@pack/typings/base-type'
 export interface IToolbarMethods {
   showModal: (jsonData: IAnyObject) => void
 }
