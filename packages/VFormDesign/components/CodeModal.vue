@@ -20,12 +20,12 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs } from '@vue/composition-api'
 import { removeAttrs } from '@pack/utils'
-import PreviewCode from '@pack/EFormDesign/components/PreviewCode.vue'
+import PreviewCode from '@pack/VFormDesign/components/PreviewCode.vue'
 import { IFormConfig } from '@pack/typings/EFormComponent'
 
 const codeVueFront = `<template>
   <div>
-    <e-form-create
+    <v-form-create
       :formConfig="jsonData"
       :formData="formData"
       v-model="fApi"

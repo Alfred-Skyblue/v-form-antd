@@ -15,12 +15,12 @@
     :destroyOnClose="true"
     :width="900"
   >
-    <e-form-create ref="eFormCreate" :form-config="formConfig" v-model="fApi">
+    <v-form-create ref="eFormCreate" :form-config="formConfig" v-model="fApi">
       <template slot="slotName" slot-scope="{ formModel, field, record }">
         {{ $log('作用域', formModel, field, record) }}
         <a-input v-model="formModel[field]" placeholder="我是插槽渲染的"></a-input>
       </template>
-    </e-form-create>
+    </v-form-create>
     <a-button @click="handleClick">按钮</a-button>
   </a-modal>
 </template>
@@ -29,7 +29,7 @@ import { defineComponent, del, reactive, ref, toRefs } from '@vue/composition-ap
 import { IFormConfig } from '@pack/typings/EFormComponent'
 import { IAnyObject } from '@pack/typings/baseType'
 import { cloneDeep, isArray } from 'lodash-es'
-import EFormCreate from '../EFormCreate/index.vue'
+import VFormCreate from '../VFormCreate/index.vue'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { formItemsForEach } from '@pack/utils'
 import { IEFormMethods } from '@pack/hooks/useEFormMethods'
@@ -37,9 +37,9 @@ interface IFormSubmit extends FormModel {
   submit: () => IAnyObject
 }
 export default defineComponent({
-  name: 'EFormPreview',
+  name: 'VFormPreview',
   components: {
-    EFormCreate
+    VFormCreate
   },
   setup() {
     const state = reactive<{

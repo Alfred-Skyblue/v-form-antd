@@ -28,7 +28,7 @@
               'treeSelect'
             ].includes(record.type) && !record.width
         }"
-        class="e-form-item-wrapper"
+        class="v-form-item-wrapper"
         :is="componentItem"
         v-bind="cmpProps"
         :style="record.width ? { width: record.width } : {}"
@@ -51,18 +51,18 @@ import {
   PropType
 } from '@vue/composition-api'
 import { componentMap } from '@pack/core/formItemConfig'
-import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { IVFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { asyncComputed } from '@vueuse/core'
 import { isFunction } from 'lodash-es'
 export default defineComponent({
-  name: 'EFormItem',
+  name: 'VFormItem',
   props: {
     formData: {
       type: Object,
       default: () => ({})
     },
     record: {
-      type: Object as PropType<IEFormComponent>,
+      type: Object as PropType<IVFormComponent>,
       required: true
     },
     data: {
@@ -109,7 +109,7 @@ export default defineComponent({
     })
     const componentItem = computed(() => componentMap[props.record.type])
 
-    const handleClick = (record: IEFormComponent) => {
+    const handleClick = (record: IVFormComponent) => {
       if (record.type === 'button' && record.props!.handle) emit(record.props!.handle)
     }
     const cmpProps = asyncComputed(async () => {

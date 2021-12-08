@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from '@vue/composition-api'
-import { IEFormComponent } from '@pack/typings/EFormComponent'
+import { IVFormComponent } from '@pack/typings/EFormComponent'
 import { remove } from '@pack/utils'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
@@ -41,14 +41,14 @@ export default defineComponent({
      * 删除当前项
      */
     const handleDelete = () => {
-      const traverse = (formItems: IEFormComponent[]) => {
+      const traverse = (formItems: IVFormComponent[]) => {
         formItems.some((formItem, index) => {
           const { type, key } = formItem
           // 处理栅格和标签页布局
           ;['grid', 'tabs'].includes(type) &&
             formItem.columns?.forEach(item => traverse(item.children))
           if (key === props.currentItem.key) {
-            let params: IEFormComponent =
+            let params: IVFormComponent =
               formItems.length === 1
                 ? { type: '' }
                 : formItems.length - 1 > index

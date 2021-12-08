@@ -57,7 +57,7 @@ import { defineComponent } from '@vue/composition-api'
 import {
   baseFormItemControlAttrs,
   baseFormItemProps
-} from '@pack/EFormDesign/config/formItemPropsConfig'
+} from '@pack/VFormDesign/config/formItemPropsConfig'
 
 import RuleProps from './RuleProps.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'

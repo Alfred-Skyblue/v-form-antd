@@ -1,5 +1,5 @@
 <template>
-  <span v-if="!record.hidden" class="e-form-render-item">
+  <span v-if="!record.hidden" class="v-form-render-item">
     <a-row v-if="['grid'].includes(record.type)" class="grid-row">
       <a-col
         class="grid-col"
@@ -16,7 +16,7 @@
       </a-col>
     </a-row>
     <component v-else :is="layoutTag" :span="record.span">
-      <EFormItem
+      <VFormItem
         :data="formConfig"
         :record="record"
         :formData="formData"
@@ -27,19 +27,19 @@
         <template :slot="record.props.slotName">
           <slot :name="record.props.slotName"></slot>
         </template>
-      </EFormItem>
+      </VFormItem>
     </component>
   </span>
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType } from '@vue/composition-api'
-import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
-import EFormItem from '@pack/EFormItem'
+import { IVFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import VFormItem from '@pack/VFormItem'
 
 export default defineComponent({
   name: 'FormRender',
   components: {
-    EFormItem
+    VFormItem
   },
   props: {
     formData: {
@@ -47,7 +47,7 @@ export default defineComponent({
       default: () => ({})
     },
     record: {
-      type: Object as PropType<IEFormComponent>,
+      type: Object as PropType<IVFormComponent>,
       default: 0
     },
     formConfig: {
@@ -67,7 +67,7 @@ export default defineComponent({
 </script>
 
 <style>
-.e-form-render-item {
+.v-form-render-item {
   overflow: hidden;
 }
 </style>

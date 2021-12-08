@@ -1,6 +1,6 @@
 import { Ref, SetupContext, set as setRef } from '@vue/composition-api'
 import { FormModel } from 'ant-design-vue'
-import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { IVFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { findFormItem, formItemsForEach } from '@pack/utils'
 import { cloneDeep, isFunction } from 'lodash-es'
 import { IAnyObject } from '@pack/typings/baseType'
@@ -14,12 +14,12 @@ interface IProps {
   formData: IAnyObject
 }
 
-type ISet = <T extends keyof IEFormComponent>(
+type ISet = <T extends keyof IVFormComponent>(
   field: string,
   key: T,
-  value: IEFormComponent[T]
+  value: IVFormComponent[T]
 ) => void
-type IGet = (field: string) => IEFormComponent | undefined
+type IGet = (field: string) => IVFormComponent | undefined
 type IGetValue = (field: string) => any
 type ISetValue = (field: string, value: any) => void
 type IHidden = (field: string) => void
@@ -52,7 +52,7 @@ export function useEFormMethods(
    * @type {{}}
    */
   const linkOn: ILinkOn = {}
-  const initLink = (formItems: IEFormComponent[]) => {
+  const initLink = (formItems: IVFormComponent[]) => {
     // 首次遍历，查找需要关联字段的表单
     formItemsForEach(formItems, formItem => {
       // 如果需要关联，则进行第二层遍历，查找表单中关联的字段，存到Set中
@@ -71,7 +71,7 @@ export function useEFormMethods(
   /**
    * 根据field获取表单项
    * @param {string} field
-   * @return {IEFormComponent | undefined}
+   * @return {IVFormComponent | undefined}
    */
   const get: IGet = field =>
     cloneDeep(findFormItem(props.formConfig.formItems, item => item.field === field))
@@ -79,7 +79,7 @@ export function useEFormMethods(
   /**
    * 根据表单field设置表单项字段值
    * @param {string} field
-   * @param {keyof IEFormComponent} key
+   * @param {keyof IVFormComponent} key
    * @param {never} value
    */
   const set: ISet = (field, key, value) => {

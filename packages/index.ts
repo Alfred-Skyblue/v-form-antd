@@ -1,15 +1,15 @@
 import './core'
 import './mini'
-import EFormDesign from './EFormDesign'
+import VFormDesign from './VFormDesign'
 import EIconPicker from './EIconPicker'
-import EFormItem from './EFormItem'
+import VFormItem from './VFormItem'
 import { VueConstructor } from 'vue'
 import { setFormDesignConfig } from '@pack/core/formItemConfig'
-const components = [EFormDesign, EFormItem]
+const components = [VFormDesign, VFormItem]
 const install = (Vue: VueConstructor) => {
   components.forEach(component => {
     Vue.component(component.name, component)
   })
 }
-export { EFormDesign, EFormItem, EIconPicker, setFormDesignConfig }
-export default { install, EFormDesign, EFormItem, EIconPicker, setFormDesignConfig }
+export { VFormDesign, VFormItem, EIconPicker, setFormDesignConfig }
+export default { install, VFormDesign, VFormItem, EIconPicker, setFormDesignConfig }

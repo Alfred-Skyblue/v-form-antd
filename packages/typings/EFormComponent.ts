@@ -18,7 +18,7 @@ export interface IValidationRule extends Omit<ValidationRule, 'trigger' | 'patte
 /**
  * 组件属性
  */
-export interface IEFormComponent {
+export interface IVFormComponent {
   // 组件类型
   type: string
   // 组件label
@@ -63,7 +63,7 @@ export interface IEFormComponent {
   // 组件布局
   wrapperCol?: IAnyObject
   // 子控件
-  columns?: Array<{ span: number; children: IEFormComponent[] }>
+  columns?: Array<{ span: number; children: IVFormComponent[] }>
 }
 
 /**
@@ -71,7 +71,7 @@ export interface IEFormComponent {
  */
 export interface IFormConfig {
   // 表单项配置列表
-  formItems: IEFormComponent[]
+  formItems: IVFormComponent[]
   // 表单配置
   config: {
     layout?: LayoutType
@@ -82,6 +82,6 @@ export interface IFormConfig {
     hideRequiredMark?: boolean
   }
   // 当前选中项
-  currentItem?: IEFormComponent
+  currentItem?: IVFormComponent
   activeKey?: PropsTabKey
 }

@@ -1,6 +1,6 @@
 import { inject, Ref } from '@vue/composition-api'
 import { IFormConfig } from '@pack/typings/EFormComponent'
-import { IFormDesignMethods } from '@pack/EFormDesign/index.vue'
+import { IFormDesignMethods } from '@pack/VFormDesign/index.vue'
 
 export function useFormDesignState() {
   const formConfig = inject('formConfig') as Ref<IFormConfig>

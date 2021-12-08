@@ -73,12 +73,12 @@ import {
 import FormNode from './FormNode.vue'
 import FormNodeOperate from './FormNodeOperate.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
-import { IEFormComponent } from '@pack/typings/EFormComponent'
+import { IVFormComponent } from '@pack/typings/EFormComponent'
 export default defineComponent({
   name: 'LayoutItem',
   props: {
     record: {
-      type: Object as PropType<IEFormComponent>,
+      type: Object as PropType<IVFormComponent>,
       required: true
     },
     currentItem: {
