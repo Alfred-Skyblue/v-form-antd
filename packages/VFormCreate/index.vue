@@ -4,9 +4,9 @@
  * @Description: 根据json生成表单
 -->
 <template>
-  <div class="e-form-container">
+  <div class="v-form-container">
     <a-form-model
-      class="e-form-model"
+      class="v-form-model"
       ref="eFormModel"
       :model="formData"
       v-on="$listeners"
@@ -35,7 +35,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from '@vue/composition-api'
 import FormRender from './components/FormRender.vue'
-import { IEFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { IVFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { useFormInstanceMethods } from '@pack/hooks/useFormInstanceMethods'
 import { useEFormMethods } from '@pack/hooks/useEFormMethods'
@@ -43,7 +43,7 @@ import { useVModel } from '@vueuse/core'
 import { cloneDeep } from 'lodash-es'
 
 export default defineComponent({
-  name: 'EFormCreate',
+  name: 'VFormCreate',
   components: {
     FormRender
   },
@@ -79,7 +79,7 @@ export default defineComponent({
       clearValidate
     })
     fApi.value = methods
-    const handleChange = (record: IEFormComponent) => {
+    const handleChange = (record: IVFormComponent) => {
       linkOn[record.field!] &&
         linkOn[record.field!].forEach(cb =>
           cb(record.field, cloneDeep(props.formData[record.field!]), record, fApi.value)
@@ -109,7 +109,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.e-form-model {
+.v-form-model {
   overflow: hidden;
 }
 </style>

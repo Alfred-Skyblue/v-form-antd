@@ -1,8 +1,8 @@
 <template>
   <div>
-    <EFormDesign>
+    <VFormDesign>
       <template slot="customProps">123456</template>
-    </EFormDesign>
+    </VFormDesign>
   </div>
 </template>
 

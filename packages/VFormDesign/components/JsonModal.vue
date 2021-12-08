@@ -10,7 +10,7 @@
     :visible="visible"
     @cancel="handleCancel"
     :destroyOnClose="true"
-    wrapClassName="e-code-modal"
+    wrapClassName="v-code-modal"
     style="top: 20px"
     width="850px"
   >

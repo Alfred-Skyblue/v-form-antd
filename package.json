@@ -1,14 +1,14 @@
 {
-  "name": "form-design-ts",
+  "name": "v-form-antd",
   "version": "0.1.2",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name e-form-design --dest lib packages/index.ts && npm run mini",
+    "lib": "vue-cli-service build --target lib --name v-form-design --dest lib packages/index.ts && npm run mini",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue packages/",
-    "mini": "vue-cli-service build --target lib --name e-form-design-mini --dest lib packages/mini.ts --no-clean"
+    "mini": "vue-cli-service build --target lib --name v-form-design-mini --dest lib packages/mini.ts --no-clean"
   },
   "dependencies": {
     "@vue/composition-api": "^1.4.0",

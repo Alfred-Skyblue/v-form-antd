@@ -5,8 +5,8 @@
 -->
 <template>
   <a-config-provider :locale="locale">
-    <div class="e-form-design-container">
-      <header class="e-form-design-header"></header>
+    <div class="v-form-design-container">
+      <header class="v-form-design-header"></header>
       <section class="content">
         <div class="left">
           <a-collapse :defaultActiveKey="['1', '2', '3']">
@@ -74,7 +74,7 @@
       <JsonModal ref="jsonModal"></JsonModal>
       <CodeModal ref="codeModal"></CodeModal>
       <ImportJsonModal ref="importJsonModal"></ImportJsonModal>
-      <EFormPreview ref="eFormPreview" :formConfig="formConfig" />
+      <VFormPreview ref="eFormPreview" :formConfig="formConfig" />
     </div>
   </a-config-provider>
 </template>
@@ -82,11 +82,11 @@
 import CollapseItem from './modules/CollapseItem.vue'
 import FormComponentPanel from './modules/FormComponentPanel.vue'
 import JsonModal from './components/JsonModal.vue'
-import EFormPreview from '@pack/EFormPreview/index.vue'
+import VFormPreview from '@pack/VFormPreview/index.vue'
 import Toolbar from './modules/Toolbar.vue'
 import PropsPanel, { IPropsPanel } from './modules/PropsPanel.vue'
-import ImportJsonModal from '@pack/EFormDesign/components/ImportJsonModal.vue'
-import CodeModal from '@pack/EFormDesign/components/CodeModal.vue'
+import ImportJsonModal from '@pack/VFormDesign/components/ImportJsonModal.vue'
+import CodeModal from '@pack/VFormDesign/components/CodeModal.vue'
 
 import 'codemirror/mode/javascript/javascript'
 
@@ -100,7 +100,7 @@ import {
 } from '@vue/composition-api'
 
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
-import { IEFormComponent, IFormConfig, PropsTabKey } from '@pack/typings/EFormComponent'
+import { IVFormComponent, IFormConfig, PropsTabKey } from '@pack/typings/EFormComponent'
 import { generateKey } from '@pack/utils'
 import { cloneDeep } from 'lodash-es'
 import {
@@ -110,7 +110,7 @@ import {
 } from '@pack/core/formItemConfig'
 import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
 import { IAnyObject } from '@pack/typings/baseType'
-import { globalConfigState } from '@pack/EFormDesign/config/formItemPropsConfig'
+import { globalConfigState } from '@pack/VFormDesign/config/formItemPropsConfig'
 
 export interface IToolbarMethods {
   showModal: (jsonData: IAnyObject) => void
@@ -119,11 +119,11 @@ interface IState {
   // 语言
   locale: any
   // 公用组件
-  baseComponents: IEFormComponent[]
+  baseComponents: IVFormComponent[]
   // 自定义组件
-  customComponents: IEFormComponent[]
+  customComponents: IVFormComponent[]
   // 布局组件
-  layoutComponents: IEFormComponent[]
+  layoutComponents: IVFormComponent[]
   // 属性面板实例
   propsPanel: Ref<null | IPropsPanel>
   // json模态框实例
@@ -138,24 +138,24 @@ interface IState {
 
 export interface IFormDesignMethods {
   // 设置当前选中的控件
-  handleSetSelectItem(item: IEFormComponent): void
+  handleSetSelectItem(item: IVFormComponent): void
   // 添加控件到formConfig.formItems中
-  handleListPush(item: IEFormComponent): void
+  handleListPush(item: IVFormComponent): void
   // 复制控件
-  handleCopy(item?: IEFormComponent, isCopy?: boolean): void
+  handleCopy(item?: IVFormComponent, isCopy?: boolean): void
   // 添加控件属性
-  handleAddAttrs(formItems: IEFormComponent[], index: number): void
+  handleAddAttrs(formItems: IVFormComponent[], index: number): void
   setFormConfig(config: IFormConfig): void
   // 添加到表单中之前触发
   handleBeforeColAdd(
     event: { newIndex: string },
-    formItems: IEFormComponent[],
+    formItems: IVFormComponent[],
     isCopy?: boolean
   ): void
 }
 
 export default defineComponent({
-  name: 'EFormDesign',
+  name: 'VFormDesign',
   components: {
     CodeModal,
     ImportJsonModal,
@@ -164,7 +164,7 @@ export default defineComponent({
     PropsPanel,
     Toolbar,
     JsonModal,
-    EFormPreview
+    VFormPreview
   },
   setup() {
     // 子组件实例
@@ -225,7 +225,7 @@ export default defineComponent({
      * 选中表单项
      * @param record 当前选中的表单项
      */
-    const handleSetSelectItem = (record: IEFormComponent) => {
+    const handleSetSelectItem = (record: IVFormComponent) => {
       formConfig.value.currentItem = record
       handleChangePropsTabs(
         record.key
@@ -236,7 +236,7 @@ export default defineComponent({
       )
     }
 
-    const setGlobalConfigState = (formItem: IEFormComponent) => {
+    const setGlobalConfigState = (formItem: IVFormComponent) => {
       formItem.span = globalConfigState.span
     }
 
@@ -245,7 +245,7 @@ export default defineComponent({
      * @param formItems
      * @param index
      */
-    const handleAddAttrs = (formItems: IEFormComponent[], index: number) => {
+    const handleAddAttrs = (formItems: IVFormComponent[], index: number) => {
       const item = formItems[index]
       setGlobalConfigState(item)
       generateKey(item)
@@ -253,9 +253,9 @@ export default defineComponent({
 
     /**
      * 单击控件时添加到面板中
-     * @param item {IEFormComponent} 当前点击的组件
+     * @param item {IVFormComponent} 当前点击的组件
      */
-    const handleListPush = (item: IEFormComponent) => {
+    const handleListPush = (item: IVFormComponent) => {
       const formItem = cloneDeep(item)
       setGlobalConfigState(formItem)
       generateKey(formItem)
@@ -269,11 +269,11 @@ export default defineComponent({
 
     /**
      * 复制或者添加表单，isCopy为true时则复制表单
-     * @param item {IEFormComponent} 当前点击的组件
+     * @param item {IVFormComponent} 当前点击的组件
      * @param isCopy {boolean} 是否复制
      */
     const handleCopy = (
-      item: IEFormComponent = formConfig.value.currentItem as IEFormComponent,
+      item: IVFormComponent = formConfig.value.currentItem as IVFormComponent,
       isCopy = true
     ) => {
       const key = formConfig.value.currentItem?.key
@@ -281,9 +281,9 @@ export default defineComponent({
        * 遍历当表单项配置，如果是复制，则复制一份表单项，如果不是复制，则直接添加到表单项中
        * @param formItems
        */
-      const traverse = (formItems: IEFormComponent[]) => {
+      const traverse = (formItems: IVFormComponent[]) => {
         // 使用some遍历，找到目标后停止遍历
-        formItems.some((formItem: IEFormComponent, index: number) => {
+        formItems.some((formItem: IVFormComponent, index: number) => {
           if (formItem.key === key) {
             // 判断是不是复制
             isCopy
@@ -310,12 +310,12 @@ export default defineComponent({
     /**
      * 添加到表单中
      * @param newIndex {object} 事件对象
-     * @param formItems {IEFormComponent[]} 表单项列表
+     * @param formItems {IVFormComponent[]} 表单项列表
      * @param isCopy {boolean} 是否复制
      */
     const handleBeforeColAdd = (
       { newIndex }: any,
-      formItems: IEFormComponent[],
+      formItems: IVFormComponent[],
       isCopy = false
     ) => {
       const item = formItems[newIndex]

@@ -1,5 +1,5 @@
 import { VueConstructor } from 'vue'
-import { IEFormComponent, IFormConfig } from '../typings/EFormComponent'
+import { IVFormComponent, IFormConfig } from '../typings/EFormComponent'
 import { cloneDeep, isArray, isNumber, uniqueId } from 'lodash-es'
 /**
  * 组件install方法
@@ -18,7 +18,7 @@ export function withInstall<T extends { name: string }>(comp: T) {
  * @param [formItem] 需要生成 key 的控件，可选，如果不传，默认返回一个唯一 key
  * @returns {string|boolean} 返回一个唯一 id 或者 false
  */
-export function generateKey(formItem?: IEFormComponent): string | boolean {
+export function generateKey(formItem?: IVFormComponent): string | boolean {
   if (formItem) {
     const key = uniqueId(`${toLine(formItem.type)}_`)
     formItem.key = key
@@ -85,12 +85,12 @@ export function toLine(str: string) {
  * @param cb
  */
 export function formItemsForEach(
-  array: IEFormComponent[],
-  cb: (item: IEFormComponent) => void
+  array: IVFormComponent[],
+  cb: (item: IVFormComponent) => void
 ) {
   if (!isArray(array)) return
-  const traverse = (formItems: IEFormComponent[]) => {
-    formItems.forEach((formItem: IEFormComponent) => {
+  const traverse = (formItems: IVFormComponent[]) => {
+    formItems.forEach((formItem: IVFormComponent) => {
       if (['grid'].includes(formItem.type)) {
         // 栅格布局
         formItem.columns?.forEach(item => traverse(item.children))
@@ -106,12 +106,12 @@ export function formItemsForEach(
  * 查找表单项
  */
 export const findFormItem: (
-  formItems: IEFormComponent[],
-  cb: (formItem: IEFormComponent) => boolean
-) => IEFormComponent | undefined = (formItems, cb) => {
+  formItems: IVFormComponent[],
+  cb: (formItem: IVFormComponent) => boolean
+) => IVFormComponent | undefined = (formItems, cb) => {
   let res
-  const traverse = (formItems: IEFormComponent[]): boolean => {
-    return formItems.some((formItem: IEFormComponent) => {
+  const traverse = (formItems: IVFormComponent[]): boolean => {
+    return formItems.some((formItem: IVFormComponent) => {
       const { type } = formItem
       // 处理栅格
       if (['grid'].includes(type)) {

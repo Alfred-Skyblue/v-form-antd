@@ -86,7 +86,7 @@ import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 import {
   baseComponentControlAttrs,
   baseComponentAttrs
-} from '@pack/EFormDesign/config/componentPropsConfig'
+} from '@pack/VFormDesign/config/componentPropsConfig'
 import FormOptions from './FormOptions.vue'
 import { formItemsForEach, remove } from '@pack/utils'
 

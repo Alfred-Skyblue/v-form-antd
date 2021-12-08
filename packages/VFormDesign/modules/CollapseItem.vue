@@ -34,7 +34,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from '@vue/composition-api'
-import { IEFormComponent } from '../../typings/EFormComponent'
+import { IVFormComponent } from '../../typings/EFormComponent'
 
 export default defineComponent({
   name: 'CollapseItem',
@@ -46,7 +46,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const state = reactive({})
-    const handleStart = (e: any, list: IEFormComponent[]) => {
+    const handleStart = (e: any, list: IVFormComponent[]) => {
       emit('start', list[e.oldIndex].type)
     }
     const handleAdd = (e: any) => {

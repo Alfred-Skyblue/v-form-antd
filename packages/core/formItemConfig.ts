@@ -4,7 +4,7 @@
  * @date: 2021/11/18 16:25
  * @description：$END$
  */
-import { IEFormComponent } from '@pack/typings/EFormComponent'
+import { IVFormComponent } from '@pack/typings/EFormComponent'
 import { IAnyObject } from '@pack/typings/baseType'
 import ACmp from '../components'
 import { isArray } from 'lodash-es'
@@ -13,7 +13,7 @@ export const componentMap: IAnyObject = {
   ...ACmp
 }
 
-export function setFormDesignConfig(config: IEFormComponent | IEFormComponent[]) {
+export function setFormDesignConfig(config: IVFormComponent | IVFormComponent[]) {
   if (isArray(config)) {
     config.forEach(item => {
       const { component, ...rest } = item
@@ -27,7 +27,7 @@ export function setFormDesignConfig(config: IEFormComponent | IEFormComponent[])
   }
 }
 
-export const customComponents: IEFormComponent[] = [
+export const customComponents: IVFormComponent[] = [
   {
     type: 'custom',
     label: '自定义组件',
@@ -35,7 +35,7 @@ export const customComponents: IEFormComponent[] = [
   }
 ]
 
-export const baseComponents: IEFormComponent[] = [
+export const baseComponents: IVFormComponent[] = [
   {
     type: 'input',
     label: '输入框',
@@ -268,7 +268,7 @@ export const baseComponents: IEFormComponent[] = [
   }
 ]
 
-export const layoutComponents: IEFormComponent[] = [
+export const layoutComponents: IVFormComponent[] = [
   {
     type: 'grid',
     label: '栅格布局',

@@ -4,7 +4,7 @@
  * @Description: 中间表单布局面板
 -->
 <template>
-  <div class="form-panel e-form-container">
+  <div class="form-panel v-form-container">
     <a-empty
       class="empty-text"
       v-show="formConfig.formItems.length === 0"

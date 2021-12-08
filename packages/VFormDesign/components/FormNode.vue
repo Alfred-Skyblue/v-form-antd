@@ -10,7 +10,7 @@
     :class="{ active: record.key === formConfig.currentItem.key }"
   >
     <div class="form-item-box">
-      <EFormItem :data="formConfig" :record="record" />
+      <VFormItem :data="formConfig" :record="record" />
     </div>
     <div class="show-key-box">
       {{ record.label + (record.field ? '/' + record.field : '') }}
@@ -20,7 +20,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, toRefs, PropType } from '@vue/composition-api'
-import { IEFormComponent } from '@pack/typings/EFormComponent'
+import { IVFormComponent } from '@pack/typings/EFormComponent'
 import FormNodeOperate from './FormNodeOperate.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 
@@ -31,7 +31,7 @@ export default defineComponent({
   },
   props: {
     record: {
-      type: Object as PropType<IEFormComponent>,
+      type: Object as PropType<IVFormComponent>,
       required: true
     }
   },
