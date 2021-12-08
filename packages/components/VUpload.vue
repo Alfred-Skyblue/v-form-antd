@@ -48,15 +48,7 @@ export default defineComponent({
     },
     modelValue: {
       type: [String, Array],
-      default: () => [
-        {
-          name: 'TNT包使用教程.webloc',
-          status: 'done',
-          uid: '2',
-          url: 'http://jugrxhex.zr/lhjmljnkl',
-          thumbUrl: 'http://jvhfhfl.re/vod'
-        }
-      ]
+      default: () => []
     }
   },
   setup(props: any, { emit }: any) {

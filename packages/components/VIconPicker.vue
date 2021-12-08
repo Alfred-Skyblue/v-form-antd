@@ -52,7 +52,7 @@ import iconConfig from '@pack/core/iconConfig'
 import { IAnyObject, IInputEvent } from '@pack/typings/base-type'
 type themeType = 'filled' | 'outlined' | 'twoTone'
 
-interface IEIconPickerState {
+interface IVIconPickerState {
   searchValue: string
   visible: boolean
   iconArr: string[]
@@ -85,7 +85,7 @@ export default defineComponent({
   },
   setup(props: IAnyObject, { emit }: IAnyObject) {
     const value = useVModel(props, 'modelValue', emit)
-    const state = reactive<IEIconPickerState>({
+    const state = reactive<IVIconPickerState>({
       searchValue: '',
       visible: false,
       iconArr: iconConfig['outlined'],
