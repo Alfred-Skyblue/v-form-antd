@@ -12,34 +12,38 @@
         <a-icon v-if="record.help" class="ml-5" type="question-circle-o" />
       </a-tooltip>
     </template>
-
-    <slot :name="record.props.slotName">
-      <component
-        :class="{
-          'w-full':
-            [
-              'number',
-              'time',
-              'date',
-              'dateRange',
-              'month',
-              'monthRange',
-              'select',
-              'treeSelect'
-            ].includes(record.type) && !record.width
-        }"
-        class="v-form-item-wrapper"
-        :is="componentItem"
-        v-bind="cmpProps"
-        :style="record.width ? { width: record.width } : {}"
-        v-on="record.on"
-        @change="$emit('change', record, $event)"
-        @click="handleClick(record, $event)"
-        v-model="formData[record.field]"
-      >
-        <span v-if="['button'].includes(record.type)">{{ record.label }}</span>
-      </component>
-    </slot>
+    <slot
+      v-if="record.props.slotName"
+      :name="record.props.slotName"
+      v-bind="record"
+    ></slot>
+    <component
+      v-else
+      :class="{
+        'w-full':
+          [
+            'number',
+            'time',
+            'date',
+            'dateRange',
+            'month',
+            'monthRange',
+            'select',
+            'treeSelect'
+          ].includes(record.type) && !record.width
+      }"
+      class="v-form-item-wrapper"
+      :is="componentItem"
+      v-bind="cmpProps"
+      :record="record"
+      :style="record.width ? { width: record.width } : {}"
+      v-on="record.on"
+      @change="$emit('change', record, $event)"
+      @click="handleClick(record, $event)"
+      v-model="formData[record.field]"
+    >
+      <span v-if="['button'].includes(record.type)">{{ record.label }}</span>
+    </component>
   </a-form-model-item>
 </template>
 <script lang="ts">
@@ -114,10 +118,24 @@ export default defineComponent({
     }
     const cmpProps = asyncComputed(async () => {
       let { options, treeData, ...attrs } = props.record.props!
+      if (props.record.type === 'upload') return { props: props.record.props }
+
+      try {
+        if (options) options = isFunction(options) ? await options() : options
+      } catch {
+        options = []
+      }
+
+      try {
+        if (treeData) treeData = isFunction(treeData) ? await options() : options
+      } catch {
+        treeData = []
+      }
+
       return {
         ...attrs,
-        options: isFunction(options) ? await options() : options,
-        treeData: isFunction(treeData) ? await options() : options
+        options,
+        treeData
       }
     })
     return { ...toRefs(state), componentItem, formItemProps, handleClick, cmpProps }

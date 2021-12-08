@@ -1,11 +1,5 @@
 const debug = process.env.NODE_ENV !== 'production'
 const path = require('path')
-let devWebpackConfig = {}
-if (debug) {
-  devWebpackConfig = {
-    devtool: 'source-map'
-  }
-}
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -36,8 +30,9 @@ module.exports = {
     }
   },
   configureWebpack: {
-    // plugins: [...buildPlugins]
-    ...devWebpackConfig,
+    ...(debug && {
+      devtool: 'source-map'
+    }),
     resolve: {
       alias: {
         '@': resolve('examples'),

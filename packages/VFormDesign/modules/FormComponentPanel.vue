@@ -108,6 +108,7 @@ export default defineComponent({
       cursor: move;
     }
     .list-main {
+      overflow: auto;
       height: 100vh;
       // 列表动画
       .list-enter-active {

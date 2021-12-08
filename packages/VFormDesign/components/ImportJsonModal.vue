@@ -13,7 +13,7 @@
     :destroyOnClose="true"
     wrapClassName="v-code-modal"
     style="top: 20px"
-    width="850px"
+    :width="850"
   >
     <p class="hint-box">导入格式如下:</p>
     <div class="v-json-box">
@@ -96,9 +96,6 @@ export default defineComponent({
           currentItem: { type: '' }
         })
         handleCancel()
-        // 导入之后，需要清除已选择key
-        // this.handleSetSelectItem({ key: '' })
-        // formDesignMethods.handleSetSelectItem({ type: '' })
         message.success('导入成功')
       } catch {
         message.error('导入失败，数据格式不对')

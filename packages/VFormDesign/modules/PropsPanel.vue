@@ -14,11 +14,11 @@
       </a-tab-pane>
       <a-tab-pane :key="3" tab="组件属性">
         <slot
+          v-if="customComponents[formConfig.currentItem['type']]"
           :name="formConfig.currentItem['type'] + 'Props'"
           v-bind="{ formItem: formConfig.currentItem }"
-        >
-          <ComponentProps></ComponentProps>
-        </slot>
+        ></slot>
+        <ComponentProps v-else></ComponentProps>
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -29,6 +29,7 @@ import FormProps from '../components/FormProps.vue'
 import FormItemProps from '../components/FormItemProps.vue'
 import ComponentProps from '../components/ComponentProps.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
+import { customComponents } from '@pack/core/formItemConfig'
 
 type ChangeTabKey = 1 | 2
 export interface IPropsPanel {
@@ -43,7 +44,7 @@ export default defineComponent({
   },
   setup() {
     const { formConfig } = useFormDesignState()
-    return { formConfig }
+    return { formConfig, customComponents }
   }
 })
 </script>

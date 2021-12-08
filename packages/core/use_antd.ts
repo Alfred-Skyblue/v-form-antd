@@ -19,16 +19,15 @@ import {
   Checkbox,
   Select,
   DatePicker,
-  TimePicker,
-  Rate,
   Upload,
-  TreeSelect,
-  Cascader,
   Switch,
   Space,
-  Popover
+  Popover,
+  Cascader,
+  Rate,
+  TimePicker,
+  TreeSelect
 } from 'ant-design-vue'
-import vuedraggable from 'vuedraggable'
 ;[
   Input,
   ConfigProvider,
@@ -56,26 +55,11 @@ import vuedraggable from 'vuedraggable'
   Space,
   DatePicker,
   Popover,
-  Switch
+  Switch,
+  Cascader,
+  Rate,
+  TimePicker,
+  TreeSelect
 ].forEach(component => {
   Vue.use(component)
 })
-
-export default {
-  input: Input,
-  number: InputNumber,
-  textarea: 'ATextarea',
-  select: Select,
-  checkbox: 'ACheckboxGroup',
-  radio: Radio,
-  date: DatePicker,
-  time: TimePicker,
-  slider: Slider,
-  rate: Rate,
-  upload: Upload,
-  treeSelect: TreeSelect,
-  cascader: Cascader,
-  switch: Switch
-}
-
-Vue.component(vuedraggable.name, vuedraggable)

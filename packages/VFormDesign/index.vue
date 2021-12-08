@@ -6,7 +6,7 @@
 <template>
   <a-config-provider :locale="locale">
     <div class="v-form-design-container">
-      <header class="v-form-design-header"></header>
+      <header class="v-form-design-header">{{ title }}</header>
       <section class="content">
         <div class="left">
           <a-collapse :defaultActiveKey="['1', '2', '3']">
@@ -156,6 +156,12 @@ export interface IFormDesignMethods {
 
 export default defineComponent({
   name: 'VFormDesign',
+  props: {
+    title: {
+      type: String,
+      default: 'v-form-design表单设计器'
+    }
+  },
   components: {
     CodeModal,
     ImportJsonModal,
