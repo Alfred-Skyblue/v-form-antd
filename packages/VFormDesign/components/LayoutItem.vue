@@ -73,7 +73,7 @@ import {
 import FormNode from './FormNode.vue'
 import FormNodeOperate from './FormNodeOperate.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
-import { IVFormComponent } from '@pack/typings/EFormComponent'
+import { IVFormComponent } from '@pack/typings/v-form-component'
 export default defineComponent({
   name: 'LayoutItem',
   props: {

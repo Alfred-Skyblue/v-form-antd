@@ -34,7 +34,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from '@vue/composition-api'
-import { IVFormComponent } from '../../typings/EFormComponent'
+import { IVFormComponent } from '../../typings/v-form-component'
 
 export default defineComponent({
   name: 'CollapseItem',

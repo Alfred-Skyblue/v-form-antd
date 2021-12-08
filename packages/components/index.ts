@@ -12,17 +12,17 @@ import {
   TreeSelect
 } from 'ant-design-vue'
 
-import EUpload from './EUpload.vue'
-import EMonthRange from './EMonthRange.vue'
-import EIconPicker from './EIconPicker.vue'
+import VUpload from './VUpload.vue'
+import VMonthRange from './VMonthRange.vue'
+import EIconPicker from './VIconPicker.vue'
 import Vue from 'vue'
 import RadioButtonGroup from '@pack/components/RadioButtonGroup.vue'
 import { CreateElement } from 'vue/types/vue'
 
 Vue.component(RadioButtonGroup.name, RadioButtonGroup)
-Vue.component(EMonthRange.name, EMonthRange)
+Vue.component(VMonthRange.name, VMonthRange)
 Vue.component(EIconPicker.name, EIconPicker)
-Vue.component(EUpload.name, EUpload)
+Vue.component(VUpload.name, VUpload)
 
 export default {
   input: Input,
@@ -34,11 +34,11 @@ export default {
   date: DatePicker,
   dateRange: 'ARangePicker',
   month: 'AMonthPicker',
-  monthRange: EMonthRange,
+  monthRange: VMonthRange,
   time: TimePicker,
   slider: Slider,
   rate: Rate,
-  upload: EUpload,
+  upload: VUpload,
   treeSelect: TreeSelect,
   cascader: Cascader,
   switch: Switch,

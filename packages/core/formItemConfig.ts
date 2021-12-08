@@ -4,8 +4,8 @@
  * @date: 2021/11/18 16:25
  * @description：$END$
  */
-import { IVFormComponent } from '@pack/typings/EFormComponent'
-import { IAnyObject } from '@pack/typings/baseType'
+import { IVFormComponent } from '@pack/typings/v-form-component'
+import { IAnyObject } from '@pack/typings/base-type'
 import ACmp from '../components'
 import { isArray } from 'lodash-es'
 

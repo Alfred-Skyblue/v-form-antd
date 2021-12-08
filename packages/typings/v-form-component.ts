@@ -1,4 +1,4 @@
-import { IAnyObject } from './baseType'
+import { IAnyObject } from './base-type'
 import { Col } from 'ant-design-vue'
 import { ValidationRule } from 'ant-design-vue/types/form-model/form'
 import { ComponentOptions } from 'vue/types/options'

@@ -35,7 +35,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from '@vue/composition-api'
 import FormRender from './components/FormRender.vue'
-import { IVFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { IVFormComponent, IFormConfig } from '@pack/typings/v-form-component'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { useFormInstanceMethods } from '@pack/hooks/useFormInstanceMethods'
 import { useEFormMethods } from '@pack/hooks/useEFormMethods'

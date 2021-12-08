@@ -21,7 +21,7 @@ import { vModelMixin } from '@pack/mixins/v-model-mixni'
 import { useVModel } from '@vueuse/core'
 
 export default defineComponent({
-  name: 'EMonthRange',
+  name: 'VMonthRange',
   mixins: [vModelMixin],
   props: {
     mode: {

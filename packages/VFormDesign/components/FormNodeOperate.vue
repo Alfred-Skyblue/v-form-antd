@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from '@vue/composition-api'
-import { IVFormComponent } from '@pack/typings/EFormComponent'
+import { IVFormComponent } from '@pack/typings/v-form-component'
 import { remove } from '@pack/utils'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 

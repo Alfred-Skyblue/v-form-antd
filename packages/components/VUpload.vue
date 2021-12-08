@@ -27,16 +27,16 @@ import { isFunction } from 'lodash-es'
 import { randomUUID } from '@pack/utils'
 // import { randomUUID } from '@pack/utils'
 
-interface EUpload extends Partial<Upload> {
+interface VUpload extends Partial<Upload> {
   valueFormat: 'JSON' | 'Array'
 }
 
 export default defineComponent({
-  name: 'EUpload',
+  name: 'VUpload',
   mixins: [vModelMixin],
   props: {
     props: {
-      type: Object as PropType<EUpload>,
+      type: Object as PropType<VUpload>,
       default() {
         return {
           valueFormat: 'Array'
@@ -48,7 +48,7 @@ export default defineComponent({
   },
   setup(props: any, { emit }: any) {
     const data = useVModel(props, 'modelValue', emit)
-    const attrs = toReactive<EUpload>(props.props)
+    const attrs = toReactive<VUpload>(props.props)
 
     // 格式化附件值
     const fileList = ref<Array<UploadFile>>(

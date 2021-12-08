@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="y-json-box">
+    <div class="v-json-box">
       <codemirror style="height: 100%" ref="myEditor" :value="editorJson"></codemirror>
     </div>
     <div class="copy-btn-box">
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { codemirror } from 'vue-codemirror-lite'
-import { defineComponent, reactive, toRefs, nextTick } from '@vue/composition-api'
+import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 import Clipboard from 'clipboard'
 import { message } from 'ant-design-vue'
 export default defineComponent({

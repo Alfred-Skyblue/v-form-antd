@@ -33,7 +33,7 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType } from '@vue/composition-api'
-import { IVFormComponent, IFormConfig } from '@pack/typings/EFormComponent'
+import { IVFormComponent, IFormConfig } from '@pack/typings/v-form-component'
 import VFormItem from '@pack/VFormItem'
 
 export default defineComponent({

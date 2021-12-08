@@ -1,5 +1,5 @@
 import { VueConstructor } from 'vue'
-import { IVFormComponent, IFormConfig } from '../typings/EFormComponent'
+import { IVFormComponent, IFormConfig } from '../typings/v-form-component'
 import { cloneDeep, isArray, isNumber, uniqueId } from 'lodash-es'
 /**
  * 组件install方法

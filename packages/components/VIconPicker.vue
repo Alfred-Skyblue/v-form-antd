@@ -49,7 +49,7 @@ import { defineComponent, watch, reactive, toRefs } from '@vue/composition-api'
 import { useVModel } from '@vueuse/core'
 import { vModelMixin } from '@pack/mixins/v-model-mixni'
 import iconConfig from '@pack/core/iconConfig'
-import { IAnyObject, IInputEvent } from '@pack/typings/baseType'
+import { IAnyObject, IInputEvent } from '@pack/typings/base-type'
 type themeType = 'filled' | 'outlined' | 'twoTone'
 
 interface IEIconPickerState {
@@ -63,7 +63,7 @@ interface IEIconPickerState {
   }[]
 }
 export default defineComponent({
-  name: 'EIconPicker',
+  name: 'VIconPicker',
   mixins: [vModelMixin],
   props: {
     showThemeOptions: {
