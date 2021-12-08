@@ -1,17 +1,4 @@
-import {
-  Button,
-  Cascader,
-  DatePicker,
-  Input,
-  InputNumber,
-  Rate,
-  Select,
-  Slider,
-  Switch,
-  TimePicker,
-  TreeSelect
-} from 'ant-design-vue'
-
+import vuedraggable from 'vuedraggable'
 import VUpload from './VUpload.vue'
 import VMonthRange from './VMonthRange.vue'
 import EIconPicker from './VIconPicker.vue'
@@ -23,27 +10,28 @@ Vue.component(RadioButtonGroup.name, RadioButtonGroup)
 Vue.component(VMonthRange.name, VMonthRange)
 Vue.component(EIconPicker.name, EIconPicker)
 Vue.component(VUpload.name, VUpload)
+Vue.component(vuedraggable.name, vuedraggable)
 
 export default {
-  input: Input,
-  number: InputNumber,
-  textarea: Input.TextArea,
-  select: Select,
+  input: 'AInput',
+  number: 'AInputNumber',
+  textarea: 'ATextarea',
+  select: 'ASelect',
   checkboxGroup: 'ACheckboxGroup',
   radioGroup: 'ARadioGroup',
-  date: DatePicker,
+  date: 'ADatePicker',
   dateRange: 'ARangePicker',
   month: 'AMonthPicker',
   monthRange: VMonthRange,
-  time: TimePicker,
-  slider: Slider,
-  rate: Rate,
+  time: 'ATimePicker',
+  slider: 'ASlider',
+  rate: 'ARate',
   upload: VUpload,
-  treeSelect: TreeSelect,
-  cascader: Cascader,
-  switch: Switch,
+  treeSelect: 'ATreeSelect',
+  cascader: 'ACascader',
+  switch: 'ASwitch',
   iconPicker: EIconPicker,
-  button: Button,
+  button: 'AButton',
   slot: {
     render(h: CreateElement) {
       return h('span', '插槽')

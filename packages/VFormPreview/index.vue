@@ -16,12 +16,10 @@
     :width="900"
   >
     <v-form-create ref="eFormCreate" :form-config="formConfig" v-model="fApi">
-      <template slot="slotName" slot-scope="{ formModel, field, record }">
-        {{ $log('作用域', formModel, field, record) }}
-        <a-input v-model="formModel[field]" placeholder="我是插槽渲染的"></a-input>
+      <template slot="slotName" slot-scope="{ formModel, field }">
+        <a-input v-model="formModel[field]"></a-input>
       </template>
     </v-form-create>
-    <a-button @click="handleClick">按钮</a-button>
   </a-modal>
 </template>
 <script lang="ts">
@@ -51,8 +49,6 @@ export default defineComponent({
 
     const eFormCreate = ref<IFormSubmit | null>(null)
 
-    // ;(getCurrentInstance()!.parent as IAnyObject)!.$formModel = eFormModel
-
     /**
      * 显示Json数据弹框
      * @param jsonData
@@ -67,32 +63,7 @@ export default defineComponent({
           del(item, 'message')
         }
       })
-      state.formConfig = {
-        formItems: [
-          {
-            type: 'input',
-            label: '输入框',
-            icon: 'icon-input',
-            field: 'name',
-            span: 24,
-            update(...arg) {
-              console.log('arg', arg)
-            },
-            props: {
-              type: 'text'
-            },
-            key: 'input_1'
-          }
-        ],
-        config: {
-          layout: 'horizontal',
-          labelLayout: 'flex',
-          labelWidth: 100,
-          labelCol: {},
-          wrapperCol: {}
-        },
-        activeKey: 3
-      }
+      state.formConfig = formConfig
       state.visible = true
     }
 

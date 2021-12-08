@@ -27,13 +27,7 @@ export function setFormDesignConfig(config: IVFormComponent | IVFormComponent[])
   }
 }
 
-export const customComponents: IVFormComponent[] = [
-  {
-    type: 'custom',
-    label: '自定义组件',
-    props: {}
-  }
-]
+export const customComponents: IVFormComponent[] = []
 
 export const baseComponents: IVFormComponent[] = [
   {
