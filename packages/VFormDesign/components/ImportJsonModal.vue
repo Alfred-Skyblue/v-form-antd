@@ -21,7 +21,7 @@
     </div>
 
     <template slot="footer">
-      <a-button>取消</a-button>
+      <a-button @click="handleCancel">取消</a-button>
       <a-upload
         class="upload-button"
         :beforeUpload="beforeUpload"
@@ -30,7 +30,7 @@
       >
         <a-button type="primary">导入json文件</a-button>
       </a-upload>
-      <a-button type="primary">确定</a-button>
+      <a-button type="primary" @click="handleImportJson">确定</a-button>
     </template>
   </a-modal>
 </template>

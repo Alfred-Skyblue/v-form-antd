@@ -41,7 +41,7 @@ export interface IVFormMethods extends Partial<IFormInstanceMethods> {
   linkOn: ILinkOn
   getData: IGetData
 }
-export function useEFormMethods(
+export function useVFormMethods(
   props: IProps,
   context: SetupContext,
   formInstance: Ref<FormModel | null>,

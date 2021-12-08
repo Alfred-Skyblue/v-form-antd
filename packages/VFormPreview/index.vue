@@ -32,7 +32,7 @@ import { cloneDeep, isArray } from 'lodash-es'
 import VFormCreate from '../VFormCreate/index.vue'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { formItemsForEach } from '@pack/utils'
-import { IVFormMethods } from '@pack/hooks/useEFormMethods'
+import { IVFormMethods } from '@pack/hooks/useVFormMethods'
 interface IFormSubmit extends FormModel {
   submit: () => IAnyObject
 }

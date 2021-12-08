@@ -38,7 +38,7 @@ import FormRender from './components/FormRender.vue'
 import { IVFormComponent, IFormConfig } from '@pack/typings/v-form-component'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { useFormInstanceMethods } from '@pack/hooks/useFormInstanceMethods'
-import { useEFormMethods } from '@pack/hooks/useEFormMethods'
+import { useVFormMethods } from '@pack/hooks/useVFormMethods'
 import { useVModel } from '@vueuse/core'
 import { cloneDeep } from 'lodash-es'
 
@@ -71,7 +71,7 @@ export default defineComponent({
     const { submit, validate, validateField, resetFields, clearValidate } =
       useFormInstanceMethods(props, context, eFormModel)
 
-    const { linkOn, ...methods } = useEFormMethods(props, context, eFormModel, {
+    const { linkOn, ...methods } = useVFormMethods(props, context, eFormModel, {
       submit,
       validate,
       validateField,
