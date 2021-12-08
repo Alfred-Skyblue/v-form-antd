@@ -49,16 +49,16 @@ import { useVModel } from '@vueuse/core'
 import { vModelMixin } from '@pack/mixins/v-model-mixni'
 
 import { IAnyObject } from '@pack/typings/base-type'
-import { iconFontConfig, IIconItem } from '@pack/EIconPicker/config'
+import { iconFontConfig, IIconItem } from '@pack/VIconPicker/config'
 
-interface IEIconPickerState {
+interface IVIconPickerState {
   searchValue: string
   visible: boolean
   iconArr: IIconItem[]
   prefix: string
 }
 export default defineComponent({
-  name: 'EIconFontPicker',
+  name: 'VIconPicker',
   mixins: [vModelMixin],
   props: {
     showThemeOptions: {
@@ -80,7 +80,7 @@ export default defineComponent({
   },
   setup(props: IAnyObject, { emit }: IAnyObject) {
     const value = useVModel(props, 'modelValue', emit)
-    const state = reactive<IEIconPickerState>({
+    const state = reactive<IVIconPickerState>({
       searchValue: '',
       visible: false,
       prefix: iconFontConfig.iconData.css_prefix_text,

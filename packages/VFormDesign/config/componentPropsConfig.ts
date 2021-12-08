@@ -431,12 +431,6 @@ export const baseComponentAttrs: IBaseComponentProps = {
   ],
   switch: [
     {
-      name: 'defaultValue',
-      label: '默认值',
-      tag: 'ASwitch',
-      props: {}
-    },
-    {
       name: 'checkedChildren',
       label: '选中时的内容',
       tag: 'AInput',

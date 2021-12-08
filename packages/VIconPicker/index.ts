@@ -1,7 +1,7 @@
 import EIconFontPicker from './index.vue'
 import { VueConstructor } from 'vue'
 
-import { iconFontConfig, IIconFont } from '@pack/EIconPicker/config'
+import { iconFontConfig, IIconFont } from '@pack/VIconPicker/config'
 
 /**
  * 动态加载js文件

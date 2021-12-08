@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(item, index) of formConfig.currentItem.props[key]" :key="index">
+    <div v-for="(item, index) of formConfig.currentItem['props'][key]" :key="index">
       <div class="options-box">
         <a-input v-model="item.label" />
         <a-input v-model="item.value" class="options-value" />
@@ -28,18 +28,19 @@ export default defineComponent({
   setup() {
     const state = reactive({})
     const { formConfig } = useFormDesignState()
-    const currentItem = formConfig.value.currentItem
-    const key = currentItem?.type === 'treeSelect' ? 'treeData' : 'options'
+    const key =
+      formConfig.value.currentItem?.type === 'treeSelect' ? 'treeData' : 'options'
     const addOptions = () => {
-      if (!currentItem?.props?.[key]) set(formConfig.value.currentItem!.props!, key, [])
-      const len = currentItem?.props?.[key].length + 1
-      currentItem!.props![key].push({
+      if (!formConfig.value.currentItem?.props?.[key])
+        set(formConfig.value.currentItem!.props!, key, [])
+      const len = formConfig.value.currentItem?.props?.[key].length + 1
+      formConfig.value.currentItem!.props![key].push({
         label: `选项${len}`,
         value: '' + len
       })
     }
     const deleteOptions = (index: number) => {
-      remove(currentItem?.props?.[key], index)
+      remove(formConfig.value.currentItem?.props?.[key], index)
     }
     return { ...toRefs(state), formConfig, addOptions, deleteOptions, key }
   }

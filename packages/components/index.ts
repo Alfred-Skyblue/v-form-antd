@@ -1,14 +1,14 @@
 import vuedraggable from 'vuedraggable'
 import VUpload from './VUpload.vue'
 import VMonthRange from './VMonthRange.vue'
-import EIconPicker from './VIconPicker.vue'
+import VIconPicker from './VIconPicker.vue'
 import Vue from 'vue'
 import RadioButtonGroup from '@pack/components/RadioButtonGroup.vue'
 import { CreateElement } from 'vue/types/vue'
 
 Vue.component(RadioButtonGroup.name, RadioButtonGroup)
 Vue.component(VMonthRange.name, VMonthRange)
-Vue.component(EIconPicker.name, EIconPicker)
+Vue.component(VIconPicker.name, VIconPicker)
 Vue.component(VUpload.name, VUpload)
 Vue.component(vuedraggable.name, vuedraggable)
 
@@ -30,7 +30,7 @@ export default {
   treeSelect: 'ATreeSelect',
   cascader: 'ACascader',
   switch: 'ASwitch',
-  iconPicker: EIconPicker,
+  iconPicker: VIconPicker,
   button: 'AButton',
   slot: {
     render(h: CreateElement) {

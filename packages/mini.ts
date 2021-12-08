@@ -1,7 +1,7 @@
 import './static/styles/index.less'
 
 import VFormDesign from './VFormDesign'
-import EIconPicker from './EIconPicker'
+import VIconPicker from './VIconPicker'
 import VFormItem from './VFormItem'
 import { VueConstructor } from 'vue'
 import { setFormDesignConfig } from '@pack/core/formItemConfig'
@@ -11,5 +11,5 @@ const install = (Vue: VueConstructor) => {
     Vue.component(component.name, component)
   })
 }
-export { VFormDesign, VFormItem, EIconPicker, setFormDesignConfig }
-export default { install, VFormDesign, VFormItem, EIconPicker, setFormDesignConfig }
+export { VFormDesign, VFormItem, VIconPicker, setFormDesignConfig }
+export default { install, VFormDesign, VFormItem, VIconPicker, setFormDesignConfig }
