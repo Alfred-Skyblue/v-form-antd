@@ -6,8 +6,8 @@
 <template>
   <div>
     <a-range-picker
-      v-bind="props"
-      v-on="$listeners"
+      v-bind="record.props"
+      v-on="record.on"
       :value="month"
       :mode="['month', 'month']"
       @panelChange="handlePanelChange"
@@ -16,9 +16,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent, PropType } from '@vue/composition-api'
 import { vModelMixin } from '@pack/mixins/v-model-mixni'
 import { useVModel } from '@vueuse/core'
+import { IVFormComponent } from '@pack/typings/v-form-component'
 
 export default defineComponent({
   name: 'VMonthRange',
@@ -36,6 +37,9 @@ export default defineComponent({
         valueFormat: 'yyyy-MM'
       })
     },
+    record: {
+      type: Object as PropType<IVFormComponent>
+    },
     modelValue: {}
   },
   setup(props, { emit }) {
@@ -45,9 +49,8 @@ export default defineComponent({
      * @param value 面板变化的值
      */
     const handlePanelChange = (value: any[]) => {
-      if (props.props.valueFormat) {
-        return (month.value = value.map(item => item.format(props.props.valueFormat)))
-      }
+      const valueFormat = props.record?.props?.valueFormat
+      if (valueFormat) return (month.value = value.map(item => item.format(valueFormat)))
       month.value = value
     }
     return { handlePanelChange, month }

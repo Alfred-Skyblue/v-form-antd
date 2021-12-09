@@ -2,8 +2,18 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import VueCompositionAPI from '@vue/composition-api'
-import VFormDesign, { VIconPicker } from '../packages/index'
+import VFormDesign, { VIconPicker, setFormDesignConfig } from '../packages/index'
 
+setFormDesignConfig({
+  type: 'customCmp',
+  label: '自定义组件',
+  props: {},
+  component: {
+    render(h) {
+      return h('span', {}, '我是自定义组件')
+    }
+  }
+})
 Vue.use(VueCompositionAPI)
 VIconPicker.setIconConfig(
   'https://at.alicdn.com/t/font_2957630_ikh28lbrtj.js',
