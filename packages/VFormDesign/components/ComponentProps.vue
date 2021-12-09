@@ -16,6 +16,11 @@
           v-if="!formConfig.currentItem['key']"
           description="未选择组件"
         />
+        <a-form-model v-if="['grid'].includes(formConfig.currentItem['type'])">
+          <a-form-model-item>
+            <FormOptions></FormOptions>
+          </a-form-model-item>
+        </a-form-model>
         <a-form-model v-else-if="!!baseComponentAttrs[formConfig.currentItem['type']]">
           <!--    循环遍历渲染组件属性      -->
           <a-form-model-item

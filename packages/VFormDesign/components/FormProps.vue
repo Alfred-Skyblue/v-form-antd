@@ -7,7 +7,6 @@
   <div class="properties-content">
     <a-form-model class="properties-body">
       <!--      <e-upload v-model="fileList"></e-upload>-->
-
       <a-form-model-item label="表单布局">
         <a-radio-group buttonStyle="solid" v-model="formConfig.config.layout">
           <a-radio-button value="horizontal">水平</a-radio-button>

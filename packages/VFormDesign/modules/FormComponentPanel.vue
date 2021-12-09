@@ -106,6 +106,7 @@ export default defineComponent({
   .draggable-box {
     .drag-move {
       cursor: move;
+      min-height: 62px;
     }
     .list-main {
       overflow: auto;

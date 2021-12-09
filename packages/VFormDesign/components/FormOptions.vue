@@ -1,20 +1,38 @@
 <template>
   <div>
-    <div v-for="(item, index) of formConfig.currentItem['props'][key]" :key="index">
-      <div class="options-box">
-        <a-input v-model="item.label" />
-        <a-input v-model="item.value" class="options-value" />
-        <a class="options-delete" @click="deleteOptions(index)">
-          <a-icon type="delete"></a-icon>
-        </a>
+    <div v-if="['grid'].includes(formConfig.currentItem['type'])">
+      <div v-for="(item, index) of formConfig.currentItem['columns']" :key="index">
+        <div class="options-box">
+          <a-input v-model="item.span" class="options-value" />
+          <a class="options-delete" @click="deleteGridOptions(index)">
+            <a-icon type="delete"></a-icon>
+          </a>
+        </div>
       </div>
+      <a @click="addGridOptions">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-plus"></use>
+        </svg>
+        添加栅格
+      </a>
     </div>
-    <a @click="addOptions">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-plus"></use>
-      </svg>
-      添加选项
-    </a>
+    <div v-else>
+      <div v-for="(item, index) of formConfig.currentItem['props'][key]" :key="index">
+        <div class="options-box">
+          <a-input v-model="item.label" />
+          <a-input v-model="item.value" class="options-value" />
+          <a class="options-delete" @click="deleteOptions(index)">
+            <a-icon type="delete"></a-icon>
+          </a>
+        </div>
+      </div>
+      <a @click="addOptions">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-plus"></use>
+        </svg>
+        添加选项
+      </a>
+    </div>
   </div>
 </template>
 
@@ -22,9 +40,11 @@
 import { defineComponent, reactive, set, toRefs } from '@vue/composition-api'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 import { remove } from '@pack/utils'
+import { message } from 'ant-design-vue'
 
 export default defineComponent({
   name: 'FormOptions',
+  props: {},
   setup() {
     const state = reactive({})
     const { formConfig } = useFormDesignState()
@@ -42,7 +62,27 @@ export default defineComponent({
     const deleteOptions = (index: number) => {
       remove(formConfig.value.currentItem?.props?.[key], index)
     }
-    return { ...toRefs(state), formConfig, addOptions, deleteOptions, key }
+
+    const addGridOptions = () => {
+      formConfig.value.currentItem?.['columns']?.push({
+        span: 12,
+        children: []
+      })
+    }
+    const deleteGridOptions = (index: number) => {
+      if (index === 0) return message.warning('请至少保留一个栅格')
+
+      remove(formConfig.value.currentItem!['columns']!, index)
+    }
+    return {
+      ...toRefs(state),
+      formConfig,
+      addOptions,
+      deleteOptions,
+      key,
+      deleteGridOptions,
+      addGridOptions
+    }
   }
 })
 </script>

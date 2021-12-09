@@ -17,7 +17,7 @@
   >
     <v-form-create ref="eFormCreate" :form-config="formConfig" v-model="fApi">
       <template slot="slotName" slot-scope="{ formModel, field }">
-        <a-input v-model="formModel[field]"></a-input>
+        <a-input v-model="formModel[field]" placeholder="我是插槽传递的输入框"></a-input>
       </template>
     </v-form-create>
   </a-modal>

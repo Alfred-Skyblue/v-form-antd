@@ -343,6 +343,36 @@ export const baseComponentAttrs: IBaseComponentProps = {
       }
     }
   ],
+  monthRange: [
+    {
+      name: 'placeholder',
+      label: '占位符',
+      children: [
+        {
+          tag: 'AInput'
+        },
+        {
+          tag: 'AInput'
+        }
+      ]
+    },
+    {
+      name: 'format',
+      label: '展示格式（format）',
+      tag: 'AInput',
+      props: {
+        placeholder: 'YYYY-MM-DD HH:mm:ss'
+      }
+    },
+    {
+      name: 'valueFormat',
+      label: '绑定值格式（valueFormat）',
+      tag: 'AInput',
+      props: {
+        placeholder: 'YYYY-MM-DD'
+      }
+    }
+  ],
   time: [
     {
       name: 'placeholder',
