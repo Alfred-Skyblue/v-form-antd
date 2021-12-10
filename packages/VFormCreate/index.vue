@@ -55,9 +55,7 @@ export default defineComponent({
     fApi: {},
     formData: {
       type: Object,
-      default: () => ({
-        name: '张三'
-      })
+      default: () => ({})
     },
     formConfig: {
       type: Object as PropType<IFormConfig>,
