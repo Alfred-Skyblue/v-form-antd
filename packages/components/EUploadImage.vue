@@ -1,7 +1,7 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/11/26
- * @Description: $END$
+ * @Description: 图片上传组件
 -->
 <template>
   <div class="clearfix">

@@ -21,4 +21,4 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-/yarn.lock
+yarn.lock

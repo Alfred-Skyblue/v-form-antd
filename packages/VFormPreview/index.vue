@@ -15,11 +15,12 @@
     :destroyOnClose="true"
     :width="900"
   >
-    <v-form-create ref="eFormCreate" :form-config="formConfig" v-model="fApi">
+    <v-form-create :form-config="formConfig" v-model="fApi">
       <template slot="slotName" slot-scope="{ formModel, field }">
         <a-input v-model="formModel[field]" placeholder="我是插槽传递的输入框"></a-input>
       </template>
     </v-form-create>
+    <JsonModal ref="jsonModal"></JsonModal>
   </a-modal>
 </template>
 <script lang="ts">
@@ -28,26 +29,30 @@ import { IFormConfig } from '@pack/typings/v-form-component'
 import { IAnyObject } from '@pack/typings/base-type'
 import { cloneDeep, isArray } from 'lodash-es'
 import VFormCreate from '../VFormCreate/index.vue'
-import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { formItemsForEach } from '@pack/utils'
 import { IVFormMethods } from '@pack/hooks/useVFormMethods'
-interface IFormSubmit extends FormModel {
-  submit: () => IAnyObject
-}
+import JsonModal from '@pack/VFormDesign/components/JsonModal.vue'
+import { IToolbarMethods } from '@pack/VFormDesign/index.vue'
+
 export default defineComponent({
   name: 'VFormPreview',
   components: {
+    JsonModal,
     VFormCreate
   },
   setup() {
+    const jsonModal = ref<IToolbarMethods | null>(null)
     const state = reactive<{
       formData: IAnyObject
       visible: boolean
       formConfig: IFormConfig
       fApi: Partial<IVFormMethods>
-    }>({ formData: {}, formConfig: {} as IFormConfig, visible: false, fApi: {} })
-
-    const eFormCreate = ref<IFormSubmit | null>(null)
+    }>({
+      formData: {},
+      formConfig: {} as IFormConfig,
+      visible: false,
+      fApi: {}
+    })
 
     /**
      * 显示Json数据弹框
@@ -67,28 +72,24 @@ export default defineComponent({
       state.visible = true
     }
 
+    /**
+     * 获取表单数据
+     * @return {Promise<void>}
+     */
     const handleGetData = async () => {
-      const data = await eFormCreate.value!.submit()
-      console.log('-> data', data)
+      const data = await state.fApi.submit?.()
+      jsonModal.value?.showModal?.(data)
     }
     const handleCancel = () => {
       state.visible = false
-    }
-    const handleSubmit = () => {
-      console.log('handleSubmit')
-    }
-    const handleClick = () => {
-      state.fApi.setValue!('name', '李四')
     }
 
     return {
       handleGetData,
       handleCancel,
-      handleSubmit,
       ...toRefs(state),
       showModal,
-      eFormCreate,
-      handleClick
+      jsonModal
     }
   }
 })

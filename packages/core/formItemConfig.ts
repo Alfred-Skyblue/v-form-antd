@@ -2,7 +2,7 @@
  * @name: formItemConfig
  * @author: yangpanteng
  * @date: 2021/11/18 16:25
- * @description：$END$
+ * @description：表单配置
  */
 import { IVFormComponent } from '@pack/typings/v-form-component'
 import { IAnyObject } from '@pack/typings/base-type'

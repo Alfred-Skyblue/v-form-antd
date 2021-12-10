@@ -1,7 +1,7 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/11/23
- * @Description: $END$
+ * @Description: 渲染JSON数据
 -->
 <template>
   <a-modal
@@ -41,8 +41,9 @@ export default defineComponent({
      * @param jsonData
      */
     const showModal = (jsonData: IFormConfig) => {
-      state.visible = true
+      debugger
       state.jsonData = jsonData
+      state.visible = true
     }
 
     // 计算json数据
