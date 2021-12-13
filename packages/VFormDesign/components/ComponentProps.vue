@@ -1,5 +1,5 @@
 <!--
- * @Author: 杨攀腾
+ * @Author: ypt
  * @Date: 2021/11/26
  * @Description: 组件属性控件
 -->

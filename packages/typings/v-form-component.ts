@@ -80,6 +80,7 @@ export interface IFormConfig {
     labelCol?: Partial<Col>
     wrapperCol?: Partial<Col>
     hideRequiredMark?: boolean
+    disabled?: boolean
   }
   // 当前选中项
   currentItem?: IVFormComponent

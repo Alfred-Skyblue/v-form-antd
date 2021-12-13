@@ -1,5 +1,5 @@
 <!--
- * @Author: 杨攀腾
+ * @Author: ypt
  * @Date: 2021/11/19
  * @Description:
 -->
@@ -57,7 +57,7 @@ import {
 import { componentMap } from '@pack/core/formItemConfig'
 import { IVFormComponent, IFormConfig } from '@pack/typings/v-form-component'
 import { asyncComputed } from '@vueuse/core'
-import { isFunction } from 'lodash-es'
+import { handleAsyncOptions } from '@pack/utils'
 export default defineComponent({
   name: 'VFormItem',
   props: {
@@ -69,7 +69,7 @@ export default defineComponent({
       type: Object as PropType<IVFormComponent>,
       required: true
     },
-    data: {
+    formConfig: {
       type: Object as PropType<IFormConfig>,
       required: true
     }
@@ -80,26 +80,27 @@ export default defineComponent({
     })
 
     const formItemProps = computed(() => {
-      const { data } = props
+      const { formConfig } = props
       let { field, required, rules, labelCol, wrapperCol } = props.record
       labelCol = labelCol
         ? labelCol
-        : data.config.layout === 'horizontal'
-        ? data.config.labelLayout === 'flex'
-          ? { style: `width:${data.config.labelWidth}px` }
-          : data.config.labelCol
+        : formConfig.config.layout === 'horizontal'
+        ? formConfig.config.labelLayout === 'flex'
+          ? { style: `width:${formConfig.config.labelWidth}px` }
+          : formConfig.config.labelCol
         : {}
 
       wrapperCol = wrapperCol
         ? wrapperCol
-        : data.config.layout === 'horizontal'
-        ? data.config.labelLayout === 'flex'
+        : formConfig.config.layout === 'horizontal'
+        ? formConfig.config.labelLayout === 'flex'
           ? { style: 'width:auto;flex:1' }
-          : data.config.wrapperCol
+          : formConfig.config.wrapperCol
         : {}
 
       const style =
-        data.config.layout === 'horizontal' && data.config.labelLayout === 'flex'
+        formConfig.config.layout === 'horizontal' &&
+        formConfig.config.labelLayout === 'flex'
           ? { display: 'flex' }
           : {}
       return {
@@ -117,25 +118,17 @@ export default defineComponent({
       if (record.type === 'button' && record.props!.handle) emit(record.props!.handle)
     }
     const cmpProps = asyncComputed(async () => {
-      let { options, treeData, ...attrs } = props.record.props!
+      let { options, treeData, disabled, ...attrs } = props.record.props!
+      let { formConfig } = props
       if (props.record.type === 'upload') return { props: props.record.props }
-
-      try {
-        if (options) options = isFunction(options) ? await options() : options
-      } catch {
-        options = []
-      }
-
-      try {
-        if (treeData) treeData = isFunction(treeData) ? await options() : options
-      } catch {
-        treeData = []
-      }
-
+      if (options) options = await handleAsyncOptions(options)
+      if (treeData) treeData = await handleAsyncOptions(treeData)
+      disabled = formConfig.config.disabled || disabled
       return {
         ...attrs,
         options,
-        treeData
+        treeData,
+        disabled
       }
     })
     return { ...toRefs(state), componentItem, formItemProps, handleClick, cmpProps }

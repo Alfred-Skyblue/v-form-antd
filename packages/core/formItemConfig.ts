@@ -1,6 +1,6 @@
 /**
  * @name: formItemConfig
- * @author: yangpanteng
+ * @author: ypt
  * @date: 2021/11/18 16:25
  * @description：表单配置
  */

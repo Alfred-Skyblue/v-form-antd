@@ -1,5 +1,5 @@
 <!--
- * @Author: 杨攀腾
+ * @Author: ypt
  * @Date: 2021/11/19
  * @Description: 右侧属性配置面板
 -->
