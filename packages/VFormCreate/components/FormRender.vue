@@ -17,7 +17,7 @@
     </a-row>
     <component v-else :is="layoutTag" :span="record.span">
       <VFormItem
-        :data="formConfig"
+        :formConfig="formConfig"
         :record="record"
         :formData="formData"
         @change="$emit('change', $event)"

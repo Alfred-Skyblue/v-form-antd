@@ -1,5 +1,5 @@
 <!--
- * @Author: 杨攀腾
+ * @Author: ypt
  * @Date: 2021/11/23
  * @Description: 渲染JSON数据
 -->
@@ -41,7 +41,6 @@ export default defineComponent({
      * @param jsonData
      */
     const showModal = (jsonData: IFormConfig) => {
-      debugger
       state.jsonData = jsonData
       state.visible = true
     }

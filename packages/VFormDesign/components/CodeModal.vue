@@ -1,5 +1,5 @@
 <!--
- * @Author: 杨攀腾
+ * @Author: ypt
  * @Date: 2021/12/7
  * @Description: 渲染代码
 -->
@@ -26,7 +26,7 @@ import { IFormConfig } from '@pack/typings/v-form-component'
 const codeVueFront = `<template>
   <div>
     <v-form-create
-      :formConfig="jsonData"
+      :formConfig="formConfig"
       :formData="formData"
       v-model="fApi"
     />
@@ -40,7 +40,7 @@ export default {
   data () {
     return {
       fApi:{},
-      formData:{}
+      formData:{},
       formConfig: `
 /* eslint-disable */
 let codeVueLast = `

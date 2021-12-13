@@ -1,6 +1,6 @@
 import { VueConstructor } from 'vue'
 import { IVFormComponent, IFormConfig } from '../typings/v-form-component'
-import { cloneDeep, isArray, isNumber, uniqueId } from 'lodash-es'
+import { cloneDeep, isArray, isFunction, isNumber, uniqueId } from 'lodash-es'
 /**
  * 组件install方法
  * @param comp 需要挂载install方法的组件
@@ -139,4 +139,20 @@ export const removeAttrs = (formConfig: IFormConfig) => {
     delete item.key
   })
   return copyFormConfig
+}
+
+/**
+ * 处理异步选项属性，如 select treeSelect 等选项属性如果传递为函数并且返回Promise对象，获取异步返回的选项属性
+ * @param {(() => Promise<any[]>) | any[]} options
+ * @return {Promise<any[]>}
+ */
+export const handleAsyncOptions = async (
+  options: (() => Promise<any[]>) | any[]
+): Promise<any[]> => {
+  try {
+    if (isFunction(options)) return await options()
+    return options
+  } catch {
+    return []
+  }
 }

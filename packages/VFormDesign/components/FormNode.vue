@@ -1,5 +1,5 @@
 <!--
- * @Author: 杨攀腾
+ * @Author: ypt
  * @Date: 2021/11/19
  * @Description: 拖拽节点控件
 -->
@@ -10,7 +10,7 @@
     :class="{ active: record.key === formConfig.currentItem.key }"
   >
     <div class="form-item-box">
-      <VFormItem :data="formConfig" :record="record" />
+      <VFormItem :formConfig="formConfig" :record="record" />
     </div>
     <div class="show-key-box">
       {{ record.label + (record.field ? '/' + record.field : '') }}

@@ -9,9 +9,11 @@ export function useFormInstanceMethods(
   formInstance: Ref<FormModel | null>
 ) {
   const { emit } = context
+
   /**
-   * 对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise
-   * @param callback
+   * 表单校验方法
+   * @param {((boolean: boolean, object: Object) => void) | undefined} callback
+   * @return {void | Promise<any> | undefined}
    */
   const validate: FormModel['validate'] = callback =>
     formInstance.value?.validate(callback)
@@ -36,11 +38,16 @@ export function useFormInstanceMethods(
   const clearValidate: FormModel['clearValidate'] = props =>
     formInstance.value?.clearValidate(props)
 
-  const submit = async () => {
-    await validate()
-    emit('submit', props.formData)
-    props.formConfig.config.submit?.(props.formData)
-    return cloneDeep(props.formData)
+  const submit = () => {
+    return new Promise(resolve => {
+      validate(valid => {
+        if (!valid) return
+        const data = cloneDeep(props.formData)
+        emit('submit', data)
+        props.formConfig.config.submit?.(data)
+        resolve(data)
+      })
+    })
   }
 
   return {
