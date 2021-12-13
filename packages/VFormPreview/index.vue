@@ -24,12 +24,11 @@
   </a-modal>
 </template>
 <script lang="ts">
-import { defineComponent, del, reactive, ref, toRefs } from '@vue/composition-api'
+import { defineComponent, reactive, ref, toRefs } from '@vue/composition-api'
 import { IFormConfig } from '@pack/typings/v-form-component'
 import { IAnyObject } from '@pack/typings/base-type'
-import { cloneDeep, isArray } from 'lodash-es'
 import VFormCreate from '../VFormCreate/index.vue'
-import { formItemsForEach } from '@pack/utils'
+import { formatRules } from '@pack/utils'
 import { IVFormMethods } from '@pack/hooks/useVFormMethods'
 import JsonModal from '@pack/VFormDesign/components/JsonModal.vue'
 import { IToolbarMethods } from '@pack/VFormDesign/index.vue'
@@ -59,16 +58,8 @@ export default defineComponent({
      * @param jsonData
      */
     const showModal = (jsonData: IFormConfig) => {
-      const formConfig = cloneDeep(jsonData)
-      formItemsForEach(formConfig.formItems, item => {
-        if ('required' in item) {
-          !isArray(item.rules) && (item.rules = [])
-          item.rules.push({ required: true, message: item.message })
-          del(item, 'required')
-          del(item, 'message')
-        }
-      })
-      state.formConfig = formConfig
+      formatRules(jsonData.formItems)
+      state.formConfig = jsonData
       state.visible = true
     }
 
@@ -79,6 +70,7 @@ export default defineComponent({
     const handleGetData = async () => {
       const data = await state.fApi.submit?.()
       jsonModal.value?.showModal?.(data)
+      state.fApi.submit = undefined
     }
     const handleCancel = () => {
       state.visible = false

@@ -1,6 +1,7 @@
 import { VueConstructor } from 'vue'
 import { IVFormComponent, IFormConfig } from '../typings/v-form-component'
 import { cloneDeep, isArray, isFunction, isNumber, uniqueId } from 'lodash-es'
+import { del } from '@vue/composition-api'
 /**
  * 组件install方法
  * @param comp 需要挂载install方法的组件
@@ -155,4 +156,19 @@ export const handleAsyncOptions = async (
   } catch {
     return []
   }
+}
+
+/**
+ * 格式化表单项校验规则配置
+ * @param {IVFormComponent[]} formItems
+ */
+export const formatRules = (formItems: IVFormComponent[]) => {
+  formItemsForEach(formItems, item => {
+    if ('required' in item) {
+      !isArray(item.rules) && (item.rules = [])
+      item.rules.push({ required: true, message: item.message })
+      del(item, 'required')
+      del(item, 'message')
+    }
+  })
 }

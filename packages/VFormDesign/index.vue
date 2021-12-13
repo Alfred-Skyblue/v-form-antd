@@ -334,7 +334,8 @@ export default defineComponent({
      * @param Modal {IToolbarMethods}
      */
     const handleOpenModal = (Modal: IToolbarMethods) => {
-      Modal?.showModal(formConfig.value)
+      const config = cloneDeep(formConfig.value)
+      Modal?.showModal(config)
     }
     /**
      * 切换属性面板

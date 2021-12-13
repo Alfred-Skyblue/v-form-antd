@@ -41,7 +41,7 @@ import { useFormInstanceMethods } from '@pack/hooks/useFormInstanceMethods'
 import { useVFormMethods } from '@pack/hooks/useVFormMethods'
 import { useVModel } from '@vueuse/core'
 import { cloneDeep } from 'lodash-es'
-
+//
 export default defineComponent({
   name: 'VFormCreate',
   components: {
@@ -76,7 +76,9 @@ export default defineComponent({
       resetFields,
       clearValidate
     })
-    fApi.value = methods
+
+    // 暴露给父组组件可调用的操作方法并且冻结对象，不可修改
+    fApi.value = Object.freeze(methods)
     const handleChange = (record: IVFormComponent) => {
       linkOn[record.field!] &&
         linkOn[record.field!].forEach(cb =>

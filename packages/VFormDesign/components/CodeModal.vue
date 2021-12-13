@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs } from '@vue/composition-api'
-import { removeAttrs } from '@pack/utils'
+import { formatRules, removeAttrs } from '@pack/utils'
 import PreviewCode from '@pack/VFormDesign/components/PreviewCode.vue'
 import { IFormConfig } from '@pack/typings/v-form-component'
 
@@ -30,7 +30,7 @@ const codeVueFront = `<template>
       :formData="formData"
       v-model="fApi"
     />
-    <button @click="submit">提交</button>
+    <a-button @click="submit">提交</a-button>
   </div>
 </template>
 <script>
@@ -65,6 +65,7 @@ export default defineComponent({
     })
 
     const showModal = (formConfig: IFormConfig) => {
+      formatRules(formConfig.formItems)
       state.visible = true
       state.jsonData = formConfig
     }
