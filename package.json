@@ -65,6 +65,10 @@
     "typescript": "4.4.3",
     "vue-template-compiler": "^2.6.11"
   },
+  "peerDependencies": {
+    "vue": "^2.6.11",
+    "ant-design-vue": "^1.7.8"
+  },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },

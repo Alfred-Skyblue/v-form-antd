@@ -101,7 +101,7 @@ import {
 
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import { IVFormComponent, IFormConfig, PropsTabKey } from '@pack/typings/v-form-component'
-import { generateKey } from '@pack/utils'
+import { formItemsForEach, generateKey } from '@pack/utils'
 import { cloneDeep } from 'lodash-es'
 import {
   baseComponents,
@@ -274,6 +274,20 @@ export default defineComponent({
     }
 
     /**
+     * 复制表单项，如果表单项为栅格布局，则遍历所有自表单项重新生成key
+     * @param {IVFormComponent} formItem
+     * @return {IVFormComponent}
+     */
+    const copyFormItem = (formItem: IVFormComponent) => {
+      const newFormItem = cloneDeep(formItem)
+      if (newFormItem.type === 'grid') {
+        formItemsForEach([formItem], item => {
+          generateKey(item)
+        })
+      }
+      return newFormItem
+    }
+    /**
      * 复制或者添加表单，isCopy为true时则复制表单
      * @param item {IVFormComponent} 当前点击的组件
      * @param isCopy {boolean} 是否复制
@@ -293,7 +307,7 @@ export default defineComponent({
           if (formItem.key === key) {
             // 判断是不是复制
             isCopy
-              ? formItems.splice(index + 1, 0, cloneDeep(formItem))
+              ? formItems.splice(index, 0, copyFormItem(formItem))
               : formItems.splice(index + 1, 0, item)
             const event = {
               newIndex: index + 1

@@ -209,39 +209,37 @@
               color: @primary-color;
             }
 
-            > div {
-              > .copy,
-              > .delete {
-                position: absolute;
-                top: 0;
-                width: 30px;
-                height: 30px;
-                line-height: 30px;
-                text-align: center;
-                color: #fff;
-                z-index: 989;
-                transition: all 0.3s;
+            .copy,
+            .delete {
+              position: absolute;
+              top: 0;
+              width: 30px;
+              height: 30px;
+              line-height: 30px;
+              text-align: center;
+              color: #fff;
+              z-index: 989;
+              transition: all 0.3s;
 
-                &.unactivated {
-                  opacity: 0 !important;
-                  pointer-events: none;
-                }
-
-                &.active {
-                  opacity: 1 !important;
-                }
+              &.unactivated {
+                opacity: 0 !important;
+                pointer-events: none;
               }
 
-              > .copy {
-                border-radius: 0 0 0 8px;
-                right: 30px;
-                background: @primary-color;
+              &.active {
+                opacity: 1 !important;
               }
+            }
 
-              > .delete {
-                right: 0;
-                background: @primary-color;
-              }
+            .copy {
+              border-radius: 0 0 0 8px;
+              right: 30px;
+              background: @primary-color;
+            }
+
+            .delete {
+              right: 0;
+              background: @primary-color;
             }
           }
 

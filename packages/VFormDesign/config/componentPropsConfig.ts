@@ -554,6 +554,31 @@ export const baseComponentAttrs: IBaseComponentProps = {
   ],
   button: [
     {
+      name: 'type',
+      label: '类型',
+      tag: 'ARadioGroup',
+      props: {
+        options: [
+          {
+            label: 'default',
+            value: 'default'
+          },
+          {
+            label: 'primary',
+            value: 'primary'
+          },
+          {
+            label: 'danger',
+            value: 'danger'
+          },
+          {
+            label: 'dashed',
+            value: 'dashed'
+          }
+        ]
+      }
+    },
+    {
       name: 'size',
       label: '尺寸',
       tag: 'RadioButtonGroup',
