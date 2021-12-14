@@ -20,3 +20,7 @@ declare module 'vue-codemirror-lite' {
   export const codemirror: VueProxy<any, any>
   export default { codemirror }
 }
+
+declare module '*.json' {
+  export default {}
+}
