@@ -1,24 +1,88 @@
-# form-design-ts
+# v-form-antd
 
-## Project setup
-```
-yarn install
-```
+[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Alfred-Skyblue/v-form-antd)
+[![github](https://img.shields.io/badge/Author-Alfred_Skyblue-blue.svg)](https://github.com/Alfred-Skyblue)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## 使用方法
 
-### Compiles and minifies for production
-```
-yarn build
+1. 安装
+```shell
+yarn add v-form-antd
+or
+npm install v-form-antd
 ```
 
-### Lints and fixes files
-```
-yarn lint
+2. 在vue中使用
+```javascript
+import Vue from 'vue'
+import VFormAntd from 'v-form-antd'
+import 'v-form-antd/lib/v-form-design.css'
+
+Vue.use(VFormAntd)
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+3. 使用表单设计器
+```vue
+<template>
+  <v-form-design title="v-form-antd-表单设计器"/>
+</template>
+```
+
+4. 渲染表单
+```vue
+<template>
+  <div>
+    <v-form-create
+      :formConfig="formConfig"
+      :formData="formData"
+      v-model="fApi"
+    />
+    <button @click="submit">提交</button>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      fApi:{},
+      formData:{},
+      formConfig: {
+        formItems: [
+          {
+            type: 'input',
+            label: '姓名',
+            field: 'name',
+            span: 12,
+            props: {
+              type: 'text'
+            }
+          },
+          {
+            type: 'number',
+            label: '年龄',
+            field: 'age',
+            span: 12,
+            props: {}
+          }
+        ],
+        config: {
+          layout: 'horizontal',
+          labelLayout: 'flex',
+          labelWidth: 100,
+          labelCol: {},
+          wrapperCol: {}
+        }
+      }
+    }
+  },
+  methods: {
+    async submit() {
+      const data = await this.fApi.submit()
+      console.log(data)
+    }
+  }
+}
+</script>
+```
+
