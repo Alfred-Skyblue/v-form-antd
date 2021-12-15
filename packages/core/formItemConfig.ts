@@ -148,6 +148,8 @@ export const baseComponents: IVFormComponent[] = [
     field: '',
     span: 24,
     props: {
+      format: 'YYYY-MM',
+      valueFormat: 'YYYY-MM',
       placeholder: ['开始月份', '结束月份']
     }
   },
@@ -249,6 +251,17 @@ export const baseComponents: IVFormComponent[] = [
     span: 24,
     hiddenLabel: true,
     props: {}
+  },
+  {
+    type: 'colorPicker',
+    label: '颜色选择器',
+    icon: 'icon-picker-color',
+    field: '',
+    span: 24,
+    props: {
+      defaultValue: '',
+      value: ''
+    }
   },
   {
     type: 'slot',

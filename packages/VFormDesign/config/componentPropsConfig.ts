@@ -629,6 +629,13 @@ export const baseComponentAttrs: IBaseComponentProps = {
       tag: 'AInput'
     }
   ],
+  colorPicker: [
+    {
+      name: 'defaultValue',
+      label: '默认值',
+      tag: 'AColorPicker'
+    }
+  ],
   slot: [
     {
       name: 'slotName',

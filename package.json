@@ -38,6 +38,7 @@
     "clipboard": "^2.0.8",
     "core-js": "^3.6.5",
     "lodash-es": "^4.17.21",
+    "vcolorpicker": "^1.1.0",
     "vue": "^2.6.11",
     "vue-codemirror-lite": "^1.0.4",
     "vue-router": "^3.5.3",
@@ -66,8 +67,8 @@
     "vue-template-compiler": "^2.6.11"
   },
   "peerDependencies": {
-    "vue": "^2.6.11",
-    "ant-design-vue": "^1.7.8"
+    "ant-design-vue": "^1.7.8",
+    "vue": "^2.6.11"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

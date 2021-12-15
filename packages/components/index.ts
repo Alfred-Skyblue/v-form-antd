@@ -5,12 +5,14 @@ import VIconPicker from './VIconPicker.vue'
 import Vue from 'vue'
 import RadioButtonGroup from '@pack/components/RadioButtonGroup.vue'
 import { CreateElement } from 'vue/types/vue'
+import VColorPicker from '@pack/components/VColorPicker.vue'
 
 Vue.component(RadioButtonGroup.name, RadioButtonGroup)
 Vue.component(VMonthRange.name, VMonthRange)
 Vue.component(VIconPicker.name, VIconPicker)
 Vue.component(VUpload.name, VUpload)
 Vue.component(vuedraggable.name, vuedraggable)
+Vue.component(VColorPicker.name, VColorPicker)
 
 export default {
   input: 'AInput',
@@ -32,6 +34,7 @@ export default {
   switch: 'ASwitch',
   iconPicker: VIconPicker,
   button: 'AButton',
+  colorPicker: VColorPicker,
   slot: {
     render(h: CreateElement) {
       return h('span', '插槽')

@@ -14,8 +14,8 @@
       </a-tab-pane>
       <a-tab-pane :key="3" tab="组件属性">
         <slot
-          v-if="customComponents[formConfig.currentItem['type']]"
-          :name="formConfig.currentItem['type'] + 'Props'"
+          v-if="slotProps"
+          :name="slotProps['type'] + 'Props'"
           v-bind="{ formItem: formConfig.currentItem }"
         ></slot>
         <ComponentProps v-else></ComponentProps>
@@ -24,7 +24,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { computed, defineComponent } from '@vue/composition-api'
 import FormProps from '../components/FormProps.vue'
 import FormItemProps from '../components/FormItemProps.vue'
 import ComponentProps from '../components/ComponentProps.vue'
@@ -44,7 +44,12 @@ export default defineComponent({
   },
   setup() {
     const { formConfig } = useFormDesignState()
-    return { formConfig, customComponents }
+    const slotProps = computed(() => {
+      return customComponents.find(
+        item => item.type === formConfig.value.currentItem?.type
+      )
+    })
+    return { formConfig, customComponents, slotProps }
   }
 })
 </script>

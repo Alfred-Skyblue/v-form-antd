@@ -9,7 +9,7 @@
     <!-- 操作左侧区域 start -->
     <div class="left-btn-box">
       <a-tooltip v-for="item in toolbarsConfigs" :title="item.title" :key="item.icon">
-        <a @click="$emit(item.event)">
+        <a @click="$emit(item.event)" class="toolbar-text">
           <a-icon :type="item.icon" />
         </a>
       </a-tooltip>
@@ -114,7 +114,6 @@ export default defineComponent({
     &:hover {
       color: @primary-color;
     }
-
     > span {
       font-size: 14px;
       padding-left: 2px;

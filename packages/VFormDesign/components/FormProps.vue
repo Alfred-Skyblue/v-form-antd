@@ -10,8 +10,18 @@
       <a-form-model-item label="表单布局">
         <a-radio-group buttonStyle="solid" v-model="formConfig.config.layout">
           <a-radio-button value="horizontal">水平</a-radio-button>
-          <a-radio-button value="vertical">垂直</a-radio-button>
-          <a-radio-button value="inline">行内</a-radio-button>
+          <a-radio-button
+            value="vertical"
+            :disabled="formConfig.config.labelLayout === 'grid'"
+          >
+            垂直
+          </a-radio-button>
+          <a-radio-button
+            value="inline"
+            :disabled="formConfig.config.labelLayout === 'grid'"
+          >
+            行内
+          </a-radio-button>
         </a-radio-group>
       </a-form-model-item>
       <a-form-model-item label="标签布局">
@@ -21,7 +31,12 @@
           @change="lableLayoutChange"
         >
           <a-radio-button value="flex">固定</a-radio-button>
-          <a-radio-button value="grid">栅格</a-radio-button>
+          <a-radio-button
+            value="grid"
+            :disabled="formConfig.config.layout !== 'horizontal'"
+          >
+            栅格
+          </a-radio-button>
         </a-radio-group>
       </a-form-model-item>
       <a-form-model-item
@@ -63,6 +78,7 @@ export default defineComponent({
         formConfig.value.config.layout = 'horizontal'
       }
     }
+
     return { formConfig, lableLayoutChange }
   }
 })

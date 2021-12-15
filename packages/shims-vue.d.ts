@@ -2,9 +2,12 @@ declare module '*.vue' {
   import Vue from 'vue'
   export default Vue
 }
-
 declare module 'clipboard' {
   export default clipboard
+}
+declare module 'vcolorpicker' {
+  const vcolorpicker: any
+  export default vcolorpicker
 }
 
 interface zhCN {
@@ -22,5 +25,6 @@ declare module 'vue-codemirror-lite' {
 }
 
 declare module '*.json' {
-  export default {}
+  const value: any
+  export default value
 }

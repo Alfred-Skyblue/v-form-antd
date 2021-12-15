@@ -12,6 +12,7 @@
         <a-icon v-if="record.help" class="ml-5" type="question-circle-o" />
       </a-tooltip>
     </template>
+
     <slot
       v-if="record.props.slotName"
       :name="record.props.slotName"
