@@ -149,6 +149,10 @@ export function useVFormMethods(
     return formData[field]
   }
 
+  /**
+   * 获取formData中的值
+   * @return {Promise<IAnyObject<any>>}
+   */
   const getData: IGetData = async () => {
     return cloneDeep(props.formData)
   }
