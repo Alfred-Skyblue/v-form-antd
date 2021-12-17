@@ -21,7 +21,7 @@
 import { computed, defineComponent, reactive, toRefs } from '@vue/composition-api'
 import PreviewCode from './PreviewCode.vue'
 import { IFormConfig } from '@pack/typings/v-form-component'
-import { removeAttrs } from '@pack/utils'
+import { formatRules, removeAttrs } from '@pack/utils'
 
 export default defineComponent({
   name: 'JsonModal',
@@ -41,6 +41,7 @@ export default defineComponent({
      * @param jsonData
      */
     const showModal = (jsonData: IFormConfig) => {
+      formatRules(jsonData.formItems)
       state.jsonData = jsonData
       state.visible = true
     }

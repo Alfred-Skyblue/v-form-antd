@@ -66,7 +66,10 @@
         <div class="right" onselectstart="return false">
           <PropsPanel ref="propsPanel" :activeKey="formConfig.activeKey">
             <template v-for="item of formConfig.formItems" :slot="`${item.type}Props`">
-              <slot :name="`${item.type}Props`" :formItem="item"></slot>
+              <slot
+                :name="`${item.type}Props`"
+                v-bind="{ formItem: item, props: item.props }"
+              ></slot>
             </template>
           </PropsPanel>
         </div>

@@ -13,11 +13,7 @@
         <FormItemProps></FormItemProps>
       </a-tab-pane>
       <a-tab-pane :key="3" tab="组件属性">
-        <slot
-          v-if="slotProps"
-          :name="slotProps['type'] + 'Props'"
-          v-bind="{ formItem: formConfig.currentItem }"
-        ></slot>
+        <slot v-if="slotProps" :name="slotProps['type'] + 'Props'"></slot>
         <ComponentProps v-else></ComponentProps>
       </a-tab-pane>
     </a-tabs>

@@ -43,7 +43,7 @@ export function useFormInstanceMethods(
       validate(valid => {
         if (!valid) return
         const data = cloneDeep(props.formData)
-        emit('submit', data)
+        emit('onSubmit', data)
         props.formConfig.config.submit?.(data)
         resolve(data)
       })

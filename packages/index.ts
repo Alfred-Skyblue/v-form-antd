@@ -4,6 +4,6 @@ import * as all from './mini'
 
 export default all.default
 
-const { VFormDesign, VFormItem, VIconPicker, setFormDesignConfig } = all
+const { VFormDesign, VFormItem, VIconPicker, setFormDesignComponents } = all
 
-export { VFormDesign, VFormItem, VIconPicker, setFormDesignConfig }
+export { VFormDesign, VFormItem, VIconPicker, setFormDesignComponents }

@@ -118,20 +118,23 @@ export default defineComponent({
     const handleClick = (record: IVFormComponent) => {
       if (record.type === 'button' && record.props!.handle) emit(record.props!.handle)
     }
-    const cmpProps = asyncComputed(async () => {
-      let { options, treeData, disabled, ...attrs } = props.record.props!
-      let { formConfig } = props
-      if (props.record.type === 'upload') return { props: props.record.props }
-      if (options) options = await handleAsyncOptions(options)
-      if (treeData) treeData = await handleAsyncOptions(treeData)
-      disabled = formConfig.config.disabled || disabled
-      return {
-        ...attrs,
-        options,
-        treeData,
-        disabled
-      }
-    })
+    const cmpProps = asyncComputed(
+      async () => {
+        let { options, treeData, disabled, ...attrs } = props.record.props!
+        disabled = props.formConfig.config.disabled || disabled
+        if (options) options = await handleAsyncOptions(options)
+        if (treeData) treeData = await handleAsyncOptions(treeData)
+
+        return {
+          ...attrs,
+          options,
+          treeData,
+          disabled
+        }
+      },
+      null,
+      { lazy: true }
+    )
     return { ...toRefs(state), componentItem, formItemProps, handleClick, cmpProps }
   }
 })

@@ -2,15 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import VueCompositionAPI from '@vue/composition-api'
-import VFormDesign, { VIconPicker, setFormDesignConfig } from '../packages/index'
+import VFormDesign, { VIconPicker, setFormDesignComponents } from '../packages/index'
 
-setFormDesignConfig({
+setFormDesignComponents({
   type: 'customCmp',
   label: '自定义组件',
-  props: {},
   component: {
     render(h) {
-      return h('span', {}, '我是自定义组件')
+      return h('input', {}, '我是自定义组件')
     }
   }
 })

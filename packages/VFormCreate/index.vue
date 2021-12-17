@@ -80,9 +80,10 @@ export default defineComponent({
     // 暴露给父组组件可调用的操作方法并且冻结对象，不可修改
     fApi.value = Object.freeze(methods)
     const handleChange = (record: IVFormComponent) => {
-      linkOn[record.field!] &&
-        linkOn[record.field!].forEach(cb =>
-          cb(record.field, cloneDeep(props.formData[record.field!]), record, fApi.value)
+      const { field } = record
+      linkOn[field!] &&
+        linkOn[field!].forEach(cb =>
+          cb(field, cloneDeep(props.formData[field!]), record, fApi.value)
         )
     }
     const formModelProps = computed(() => {

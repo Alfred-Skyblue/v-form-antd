@@ -15,11 +15,13 @@
     :destroyOnClose="true"
     :width="900"
   >
-    <v-form-create :form-config="formConfig" v-model="fApi">
+    <v-form-create :form-config="formConfig" v-model="fApi" @onSubmit="onSubmit">
       <template slot="slotName" slot-scope="{ formModel, field }">
         <a-input v-model="formModel[field]" placeholder="我是插槽传递的输入框"></a-input>
       </template>
     </v-form-create>
+    <a-button @click="handleDisabled">禁用</a-button>
+    <a-button @click="handleDisabled(false)">使用</a-button>
     <JsonModal ref="jsonModal"></JsonModal>
   </a-modal>
 </template>
@@ -45,12 +47,12 @@ export default defineComponent({
       formData: IAnyObject
       visible: boolean
       formConfig: IFormConfig
-      fApi: Partial<IVFormMethods>
+      fApi: IVFormMethods
     }>({
       formData: {},
       formConfig: {} as IFormConfig,
       visible: false,
-      fApi: {}
+      fApi: {} as IVFormMethods
     })
 
     /**
@@ -70,18 +72,24 @@ export default defineComponent({
     const handleGetData = async () => {
       const data = await state.fApi.submit?.()
       jsonModal.value?.showModal?.(data)
-      state.fApi.submit = undefined
     }
     const handleCancel = () => {
       state.visible = false
     }
-
+    const onSubmit = (data: IAnyObject) => {
+      console.log('-> data', data)
+    }
+    const handleDisabled = (disabled: boolean) => {
+      state.fApi.disable(disabled)
+    }
     return {
       handleGetData,
       handleCancel,
       ...toRefs(state),
       showModal,
-      jsonModal
+      jsonModal,
+      onSubmit,
+      handleDisabled
     }
   }
 })

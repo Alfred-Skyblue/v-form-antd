@@ -5,7 +5,7 @@
 -->
 <template>
   <a-upload
-    v-bind="props"
+    v-bind="record.props"
     v-on="record.on"
     :fileList="fileList"
     @change="handleChange"
@@ -38,14 +38,6 @@ export default defineComponent({
     record: {
       type: Object as PropType<IVFormComponent>
     },
-    props: {
-      type: Object as PropType<VUpload>,
-      default() {
-        return {
-          valueFormat: 'Array'
-        }
-      }
-    },
     modelValue: {
       type: [String, Array],
       default: () => []
@@ -53,7 +45,7 @@ export default defineComponent({
   },
   setup(props: any, { emit }: any) {
     const data = useVModel(props, 'modelValue', emit)
-    const attrs = toReactive<VUpload>(props.props)
+    const attrs = toReactive<VUpload>(props.record?.props)
     // 格式化附件值
     const fileList = ref<Array<UploadFile>>(
       attrs.valueFormat === 'JSON' ? JSON.parse(props.modelValue) : props.modelValue

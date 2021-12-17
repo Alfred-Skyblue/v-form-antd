@@ -13,17 +13,17 @@ export const componentMap: IAnyObject = {
   ...ACmp
 }
 
-export function setFormDesignConfig(config: IVFormComponent | IVFormComponent[]) {
+export function setFormDesignComponents(config: IVFormComponent | IVFormComponent[]) {
   if (isArray(config)) {
     config.forEach(item => {
       const { component, ...rest } = item
       componentMap[item.type] = component
-      customComponents.push(rest)
+      customComponents.push(Object.assign({ props: {} }, rest))
     })
   } else {
     const { component, ...rest } = config
     componentMap[config.type] = component
-    customComponents.push(rest)
+    customComponents.push(Object.assign({ props: {} }, rest))
   }
 }
 

@@ -29,8 +29,6 @@ export interface IVFormComponent {
   icon?: string
   // 组件校验规则
   rules?: Partial<IValidationRule>[]
-  // 组件布局属性
-  col?: Partial<Col>
   // 是否隐藏
   hidden?: boolean
   // 隐藏label
@@ -55,6 +53,7 @@ export interface IVFormComponent {
   field?: string
   // 联动字段
   link?: string[]
+  // 联动属性变化的回调
   update?: (...arg: any[]) => void
   // 控件栅格数
   span?: number | string

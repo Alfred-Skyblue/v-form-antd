@@ -19,13 +19,24 @@ type ISet = <T extends keyof IVFormComponent>(
   key: T,
   value: IVFormComponent[T]
 ) => void
+// 获取当前field绑定的表单项
 type IGet = (field: string) => IVFormComponent | undefined
+// 获取field在formData中的值
 type IGetValue = (field: string) => any
-type ISetValue = (field: string, value: any) => void
+// 设置field在formData中的值并且触发校验
+type ISetValue = (field: string | IAnyObject, value?: any) => void
+// 隐藏field对应的表单项
 type IHidden = (field: string) => void
+// 显示field对应的表单项
 type IShow = (field: string) => void
+// 设置field对应的表单项绑定的props属性
 type ISetProps = (field: string, key: string, value: any) => void
+// 获取formData中的值
 type IGetData = () => Promise<IAnyObject>
+// 禁用表单，如果field为空，则禁用整个表单
+type IDisable = (field?: string | boolean) => void
+// 设置表单配置方法
+type ISetFormConfig = (key: string, value: any) => void
 interface ILinkOn {
   [key: string]: Set<(...arg: any[]) => void>
 }
@@ -40,6 +51,7 @@ export interface IVFormMethods extends Partial<IFormInstanceMethods> {
   setProps: ISetProps
   linkOn: ILinkOn
   getData: IGetData
+  disable: IDisable
 }
 export function useVFormMethods(
   props: IProps,
@@ -74,7 +86,7 @@ export function useVFormMethods(
    * @return {IVFormComponent | undefined}
    */
   const get: IGet = field =>
-    cloneDeep(findFormItem(props.formConfig.formItems, item => item.field === field))
+    findFormItem(props.formConfig.formItems, item => item.field === field)
 
   /**
    * 根据表单field设置表单项字段值
@@ -96,7 +108,10 @@ export function useVFormMethods(
   const setProps: ISetProps = (field, key, value) => {
     const formItem = get(field)
     if (formItem) {
-      if (formItem.props) setRef(formItem.props, key, value)
+      if (formItem.props) {
+        ;['options', 'treeData'].includes(key) && setValue(field, undefined)
+        setRef(formItem.props, key, value)
+      }
     }
   }
   /**
@@ -105,11 +120,26 @@ export function useVFormMethods(
    * @param value  需要设置的值
    */
   const setValue: ISetValue = (field, value) => {
-    // props.formData[field] = value
-    setRef(props.formData, field, value)
-    formInstance.value?.validateField(field, errorMessage => errorMessage)
+    if (typeof field === 'string') {
+      // props.formData[field] = value
+      setRef(props.formData, field, value)
+      formInstance.value?.validateField(field, errorMessage => errorMessage)
+    } else {
+      const keys = Object.keys(field)
+      keys.forEach(key => {
+        setRef(props.formData, key, field[key])
+      })
+      formInstance.value?.validateField(keys, errorMessage => errorMessage)
+    }
   }
-
+  /**
+   * 设置表单配置方法
+   * @param {string} key
+   * @param value
+   */
+  const setFormConfig: ISetFormConfig = (key, value) => {
+    setRef(props.formConfig.config, key, value)
+  }
   /**
    * 根据表单项field获取字段值，如果field为空，则
    * @param {string} field  需要设置的字段
@@ -131,6 +161,16 @@ export function useVFormMethods(
   }
 
   /**
+   * 禁用表单
+   * @param {string | undefined} field
+   */
+  const disable: IDisable = field => {
+    typeof field === 'string'
+      ? setProps(field, 'disabled', true)
+      : setFormConfig('disabled', field !== false)
+  }
+
+  /**
    * 显示表单项
    * @param {string} field 需要显示的表单项的field
    */
@@ -148,6 +188,7 @@ export function useVFormMethods(
     get,
     setProps,
     getData,
+    disable,
     ...formInstanceMethods
   }
 }
