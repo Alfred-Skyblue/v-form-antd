@@ -2,6 +2,7 @@
 
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Alfred-Skyblue/v-form-antd)
 [![github](https://img.shields.io/badge/Author-Alfred_Skyblue-blue.svg)](https://github.com/Alfred-Skyblue)
+[![CompositionAPI](https://img.shields.io/badge/Composition-API-green.svg)](https://github.com/vuejs/composition-api)
 
 ## 使用方法
 

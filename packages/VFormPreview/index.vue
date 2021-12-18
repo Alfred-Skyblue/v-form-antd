@@ -20,8 +20,6 @@
         <a-input v-model="formModel[field]" placeholder="我是插槽传递的输入框"></a-input>
       </template>
     </v-form-create>
-    <a-button @click="handleDisabled">禁用</a-button>
-    <a-button @click="handleDisabled(false)">使用</a-button>
     <JsonModal ref="jsonModal"></JsonModal>
   </a-modal>
 </template>
@@ -79,17 +77,13 @@ export default defineComponent({
     const onSubmit = (data: IAnyObject) => {
       console.log('-> data', data)
     }
-    const handleDisabled = (disabled: boolean) => {
-      state.fApi.disable(disabled)
-    }
     return {
       handleGetData,
       handleCancel,
       ...toRefs(state),
       showModal,
       jsonModal,
-      onSubmit,
-      handleDisabled
+      onSubmit
     }
   }
 })

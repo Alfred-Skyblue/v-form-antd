@@ -107,11 +107,10 @@ export function useVFormMethods(
    */
   const setProps: ISetProps = (field, key, value) => {
     const formItem = get(field)
-    if (formItem) {
-      if (formItem.props) {
-        ;['options', 'treeData'].includes(key) && setValue(field, undefined)
-        setRef(formItem.props, key, value)
-      }
+    if (formItem?.props) {
+      ;['options', 'treeData'].includes(key) && setValue(field, undefined)
+
+      setRef(formItem.props, key, value)
     }
   }
   /**
