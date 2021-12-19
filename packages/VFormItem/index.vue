@@ -35,7 +35,7 @@
       }"
       class="v-form-item-wrapper"
       :is="componentItem"
-      v-bind="cmpProps"
+      v-bind="{ ...cmpProps, ...asyncProps }"
       :record="record"
       :style="record.width ? { width: record.width } : {}"
       v-on="record.on"
@@ -77,7 +77,8 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const state = reactive({
-      componentMap
+      componentMap,
+      defaultValue: '123'
     })
 
     const formItemProps = computed(() => {
@@ -118,24 +119,34 @@ export default defineComponent({
     const handleClick = (record: IVFormComponent) => {
       if (record.type === 'button' && record.props!.handle) emit(record.props!.handle)
     }
-    const cmpProps = asyncComputed(
-      async () => {
-        let { options, treeData, disabled, ...attrs } = props.record.props!
-        disabled = props.formConfig.config.disabled || disabled
-        if (options) options = await handleAsyncOptions(options)
-        if (treeData) treeData = await handleAsyncOptions(treeData)
-
-        return {
-          ...attrs,
-          options,
-          treeData,
-          disabled
-        }
-      },
-      null,
-      { lazy: true }
-    )
-    return { ...toRefs(state), componentItem, formItemProps, handleClick, cmpProps }
+    /**
+     * 处理异步属性，异步属性会导致一些属性渲染错误，如defaultValue异步加载会导致渲染不出来，故而此处只处理options，treeData，同步属性在cmpProps中处理
+     */
+    const asyncProps = asyncComputed(async () => {
+      let { options, treeData } = props.record.props ?? {}
+      if (options) options = await handleAsyncOptions(options)
+      if (treeData) treeData = await handleAsyncOptions(treeData)
+      return {
+        options,
+        treeData
+      }
+    })
+    /**
+     * 处理同步属性
+     */
+    const cmpProps = computed(() => {
+      let { options, treeData, disabled, ...attrs } = props.record.props ?? {}
+      disabled = props.formConfig.config.disabled || disabled
+      return { ...attrs, disabled }
+    })
+    return {
+      ...toRefs(state),
+      componentItem,
+      formItemProps,
+      handleClick,
+      asyncProps,
+      cmpProps
+    }
   }
 })
 </script>

@@ -26,7 +26,7 @@
 import { defineComponent, ref } from '@vue/composition-api'
 import { vModelMixin } from '@pack/mixins/v-model-mixni'
 import { useVModel } from '@vueuse/core'
-import { message } from 'ant-design-vue'
+import message from '@pack/utils/message'
 import { UploadFile } from 'ant-design-vue/types/upload'
 import { isUndefined } from 'lodash-es'
 import { randomUUID } from '@pack/utils'

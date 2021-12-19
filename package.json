@@ -1,17 +1,19 @@
 {
   "name": "v-form-antd",
-  "version": "0.1.4",
+  "version": "0.1.4-beta",
   "author": {
-    "name": "ytp",
+    "name": "ypt",
     "email": "yangpanteng@gmail.com"
   },
   "private": false,
   "license": "MIT",
   "description": "基于ant-design-vue的表单设计器,可视化开发表单",
-  "main": "lib/v-form-design-mini.umd.min.js",
+  "main": "lib/v-form-antd-runtime.umd.min.js",
+  "style": "lib/index.css",
   "keywords": [
     "ant-design",
-    "v-form-design",
+    "form",
+    "v-form-antd",
     "表单设计器",
     "表单设计",
     "可视化表单设计"
@@ -23,13 +25,20 @@
     "type": "git",
     "url": "https://github.com/Alfred-Skyblue/v-form-antd"
   },
+  "files": [
+    "lib",
+    "LICENSE",
+    "README.md",
+    "styles"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name v-form-design --dest lib packages/index.ts && npm run mini",
+    "lib": "vue-cli-service build --target lib --name v-form-antd --dest lib packages/index.ts && npm run lib:runtime && node ./build/config.ts",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue packages/",
-    "mini": "vue-cli-service build --target lib --name v-form-design-mini --dest lib packages/mini.ts --no-clean"
+    "lib:runtime": "vue-cli-service build --target lib --name v-form-antd-runtime --dest lib packages/mini.ts --no-clean",
+    "test": "yalc publish"
   },
   "dependencies": {
     "@vue/composition-api": "^1.4.0",

@@ -26,7 +26,8 @@ import {
   Cascader,
   Rate,
   TimePicker,
-  TreeSelect
+  TreeSelect,
+  message
 } from 'ant-design-vue'
 ;[
   Input,
@@ -63,3 +64,5 @@ import {
 ].forEach(component => {
   Vue.use(component)
 })
+
+Vue.prototype.$message = message

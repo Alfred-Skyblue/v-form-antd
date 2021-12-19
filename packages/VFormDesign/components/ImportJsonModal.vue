@@ -36,7 +36,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from '@vue/composition-api'
-import { message } from 'ant-design-vue'
+import message from '@pack/utils/message'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 import { codemirror } from 'vue-codemirror-lite'
 import { IFormConfig } from '@pack/typings/v-form-component'

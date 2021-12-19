@@ -40,7 +40,7 @@
 import { defineComponent, reactive, set, toRefs } from '@vue/composition-api'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
 import { remove } from '@pack/utils'
-import { message } from 'ant-design-vue'
+import message from '@pack/utils/message'
 
 export default defineComponent({
   name: 'FormOptions',

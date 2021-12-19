@@ -1,10 +1,12 @@
-const debug = process.env.NODE_ENV !== 'production'
 const path = require('path')
+const debug = process.env.NODE_ENV !== 'production'
+const pkg = require('./package.json')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
 module.exports = {
+  publicPath: './',
   pages: {
     index: {
       // 页面入口
@@ -22,7 +24,6 @@ module.exports = {
         modifyVars: {
           'primary-color': '#1890ff',
           'layout-color': '#9867f7'
-          // "layout-color": "#ee88aa"
         },
         javascriptEnabled: true
       }

@@ -114,7 +114,6 @@ import {
 import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
 import { IAnyObject } from '@pack/typings/base-type'
 import { globalConfigState } from '@pack/VFormDesign/config/formItemPropsConfig'
-import { Modal } from 'ant-design-vue'
 
 export interface IToolbarMethods {
   showModal: (jsonData: IAnyObject) => void
@@ -163,7 +162,7 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      default: '表单设计器'
+      default: 'v-form-antd表单设计器'
     }
   },
   components: {
@@ -176,7 +175,8 @@ export default defineComponent({
     JsonModal,
     VFormPreview
   },
-  setup() {
+  setup(props, context) {
+    console.log(context.root.$message)
     // 子组件实例
     const propsPanel = ref<null | IPropsPanel>(null)
     const jsonModal = ref<null | IToolbarMethods>(null)
@@ -366,15 +366,8 @@ export default defineComponent({
      * 清空表单项列表
      */
     const handleClearFormItems = () => {
-      Modal.confirm({
-        title: '确认清空表单项？',
-        okText: '确认',
-        cancelText: '取消',
-        onOk() {
-          formConfig.value.formItems = []
-          handleSetSelectItem({ type: '' })
-        }
-      })
+      formConfig.value.formItems = []
+      handleSetSelectItem({ type: '' })
     }
 
     // region 注入给子组件的属性

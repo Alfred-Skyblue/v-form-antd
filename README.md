@@ -4,6 +4,13 @@
 [![github](https://img.shields.io/badge/Author-Alfred_Skyblue-blue.svg)](https://github.com/Alfred-Skyblue)
 [![CompositionAPI](https://img.shields.io/badge/Composition-API-green.svg)](https://github.com/vuejs/composition-api)
 
+![](./docs/images/v-form-antd.gif)
+
+## 简介
+本项目主要参考自[k-form-design](https://github.com/Kchengz/k-form-design)，完善了自定义组件的支持，并且支持了一些表单联动等高级功能，使用 vue2 + CompositionAPI + ts 实现伪 vue3 应用
+
+
+
 ## 使用方法
 
 1. 安装
@@ -17,7 +24,7 @@ npm install v-form-antd
 ```javascript
 import Vue from 'vue'
 import VFormAntd from 'v-form-antd'
-import 'v-form-antd/lib/v-form-design.css'
+import 'v-form-antd/lib/index.css'
 
 Vue.use(VFormAntd)
 ```

@@ -38,9 +38,9 @@ import FormRender from './components/FormRender.vue'
 import { IVFormComponent, IFormConfig } from '@pack/typings/v-form-component'
 import { FormModel } from 'ant-design-vue/types/form-model/form'
 import { useFormInstanceMethods } from '@pack/hooks/useFormInstanceMethods'
-import { useVFormMethods } from '@pack/hooks/useVFormMethods'
+import { IVFormMethods, useVFormMethods } from '@pack/hooks/useVFormMethods'
 import { useVModel } from '@vueuse/core'
-import { cloneDeep } from 'lodash-es'
+import { omit } from 'lodash-es'
 //
 export default defineComponent({
   name: 'VFormCreate',
@@ -76,20 +76,28 @@ export default defineComponent({
       resetFields,
       clearValidate
     })
-
     // 暴露给父组组件可调用的操作方法并且冻结对象，不可修改
     fApi.value = Object.freeze(methods)
     const handleChange = (record: IVFormComponent) => {
       const { field } = record
       linkOn[field!] &&
-        linkOn[field!].forEach(cb =>
-          cb(field, cloneDeep(props.formData[field!]), record, fApi.value)
+        linkOn[field!].forEach(
+          formItem => {
+            formItem.update?.(
+              props.formData[formItem.field!],
+              formItem,
+              fApi.value as IVFormMethods
+            )
+          }
+          // cb(field, cloneDeep(props.formData[field!]), record, fApi.value)
         )
     }
-    const formModelProps = computed(() => {
-      const { layout } = props.formConfig.config
-      return { layout }
-    })
+    /**
+     * 获取表单属性
+     */
+    const formModelProps = computed(() =>
+      omit(props.formConfig.config, ['disabled', 'labelWidth'])
+    )
 
     const handleSubmit = () => {
       submit()

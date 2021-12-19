@@ -1,4 +1,5 @@
-import './static/styles/index.less'
+import './assets/styles/index.less'
+import './assets/iconfont'
 
 import VFormDesign from './VFormDesign'
 import VIconPicker from './VIconPicker'

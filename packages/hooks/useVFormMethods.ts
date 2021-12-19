@@ -1,11 +1,10 @@
 import { Ref, SetupContext, set as setRef } from '@vue/composition-api'
-import { FormModel } from 'ant-design-vue'
-import { IVFormComponent, IFormConfig } from '@pack/typings/v-form-component'
+import { IVFormComponent, IFormConfig, AForm } from '@pack/typings/v-form-component'
 import { findFormItem, formItemsForEach } from '@pack/utils'
 import { cloneDeep, isFunction } from 'lodash-es'
 import { IAnyObject } from '@pack/typings/base-type'
 
-interface IFormInstanceMethods extends FormModel {
+interface IFormInstanceMethods extends AForm {
   submit: () => Promise<any>
 }
 
@@ -38,7 +37,7 @@ type IDisable = (field?: string | boolean) => void
 // 设置表单配置方法
 type ISetFormConfig = (key: string, value: any) => void
 interface ILinkOn {
-  [key: string]: Set<(...arg: any[]) => void>
+  [key: string]: Set<IVFormComponent>
 }
 
 export interface IVFormMethods extends Partial<IFormInstanceMethods> {
@@ -56,30 +55,9 @@ export interface IVFormMethods extends Partial<IFormInstanceMethods> {
 export function useVFormMethods(
   props: IProps,
   context: SetupContext,
-  formInstance: Ref<FormModel | null>,
+  formInstance: Ref<AForm | null>,
   formInstanceMethods: Partial<IFormInstanceMethods>
 ): IVFormMethods {
-  /**
-   * 监听表单字段联动时触发
-   * @type {{}}
-   */
-  const linkOn: ILinkOn = {}
-  const initLink = (formItems: IVFormComponent[]) => {
-    // 首次遍历，查找需要关联字段的表单
-    formItemsForEach(formItems, formItem => {
-      // 如果需要关联，则进行第二层遍历，查找表单中关联的字段，存到Set中
-      formItemsForEach(formItems, item => {
-        if (!linkOn[item.field!]) linkOn[item.field!] = new Set<() => void>()
-        if (formItem.link?.includes(item.field!)) {
-          isFunction(formItem.update) && linkOn[item.field!].add(formItem.update!)
-        }
-        // 如果自身存在update，则添加到Set中
-        isFunction(item.update) && linkOn[item.field!].add(formItem.update!)
-      })
-    })
-  }
-  initLink(props.formConfig.formItems)
-
   /**
    * 根据field获取表单项
    * @param {string} field
@@ -180,6 +158,26 @@ export function useVFormMethods(
   const show: IShow = field => {
     set(field, 'hidden', false)
   }
+
+  /**
+   * 监听表单字段联动时触发
+   * @type {ILinkOn}
+   */
+  const linkOn: ILinkOn = {}
+  const initLink = (formItems: IVFormComponent[]) => {
+    // 首次遍历，查找需要关联字段的表单
+    formItemsForEach(formItems, formItem => {
+      // 如果需要关联，则进行第二层遍历，查找表单中关联的字段，存到Set中
+      formItemsForEach(formItems, item => {
+        if (!linkOn[item.field!]) linkOn[item.field!] = new Set<IVFormComponent>()
+        if (formItem.link?.includes(item.field!) && isFunction(formItem.update)) {
+          linkOn[item.field!].add(formItem)
+        }
+      })
+      linkOn[formItem.field!].add(formItem)
+    })
+  }
+  initLink(props.formConfig.formItems)
 
   return {
     linkOn,

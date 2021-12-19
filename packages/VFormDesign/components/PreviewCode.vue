@@ -22,7 +22,7 @@
 import { codemirror } from 'vue-codemirror-lite'
 import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 import Clipboard from 'clipboard'
-import { message } from 'ant-design-vue'
+import message from '@pack/utils/message'
 export default defineComponent({
   name: 'PreviewCode',
   components: {

@@ -218,15 +218,6 @@ export const baseComponentAttrs: IBaseComponentProps = {
   ],
   select: [
     {
-      name: 'defaultValue',
-      label: '默认值',
-      tag: 'AInput',
-      props: {
-        type: 'text',
-        placeholder: '请输入默认值'
-      }
-    },
-    {
       name: 'placeholder',
       label: '占位符',
       tag: 'AInput',

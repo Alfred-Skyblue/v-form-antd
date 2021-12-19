@@ -1,9 +1,7 @@
 import './core'
 
-import * as all from './mini'
+import VFormAntd from './mini'
 
-export default all.default
+export { VFormDesign, VFormItem, VIconPicker, setFormDesignComponents } from './mini'
 
-const { VFormDesign, VFormItem, VIconPicker, setFormDesignComponents } = all
-
-export { VFormDesign, VFormItem, VIconPicker, setFormDesignComponents }
+export default VFormAntd

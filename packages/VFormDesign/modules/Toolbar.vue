@@ -92,7 +92,7 @@ export default defineComponent({
 
 <style lang="less" scoped>
 //noinspection CssUnknownTarget
-@import '~@pack/static/styles/variable.less';
+@import '../../assets/styles/variable.less';
 .operating-area {
   border-bottom: 2px solid @border-color;
   font-size: 16px;
