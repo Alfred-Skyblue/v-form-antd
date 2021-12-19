@@ -14,7 +14,7 @@
 + [github](https://github.com/Alfred-Skyblue/v-form-antd)
 + [码云](https://gitee.com/yuan_fangY/v-form-antd)
 + [Document](https://alfred-skyblue.github.io/v-form-antd/)
-+ [Document Gitee](https://yuan_fangy.gitee.io/v-form-antd/)
++ [国内文档地址](https://yuan_fangy.gitee.io/v-form-antd/)
 
 ## 使用方法
 
