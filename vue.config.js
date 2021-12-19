@@ -1,6 +1,5 @@
 const path = require('path')
 const debug = process.env.NODE_ENV !== 'production'
-const pkg = require('./package.json')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
