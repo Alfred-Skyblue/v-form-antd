@@ -1,4 +1,4 @@
-import './assets/styles/index.less'
+import '../styles/index.less'
 import './assets/iconfont'
 
 import VFormDesign from './VFormDesign'
