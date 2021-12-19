@@ -21,12 +21,13 @@
 1. 安装
 ```shell
 yarn add v-form-antd
-or
+# or
 npm install v-form-antd
 ```
 
 2. 在vue中使用
 ```javascript
+// main.js
 import Vue from 'vue'
 import VFormAntd from 'v-form-antd'
 import 'v-form-antd/lib/index.css'
