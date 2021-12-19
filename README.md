@@ -4,12 +4,17 @@
 [![github](https://img.shields.io/badge/Author-Alfred_Skyblue-blue.svg)](https://github.com/Alfred-Skyblue)
 [![CompositionAPI](https://img.shields.io/badge/Composition-API-green.svg)](https://github.com/vuejs/composition-api)
 
-<img src="./docs/assets/img/form_design_view.gif"/>
+![](https://photos-1301289647.cos.ap-shanghai.myqcloud.com/github/custom-cmp.gif)
+
 
 ## 简介
-本项目主要参考自[k-form-design](https://github.com/Kchengz/k-form-design)，完善了自定义组件的支持，并且支持了一些表单联动等高级功能，使用 vue2 + CompositionAPI + ts 实现伪 vue3 应用
+本项目参考自[k-form-design](https://github.com/Kchengz/k-form-design)，支持自定义组件、表单联动等高级功能，使用 vue2 + CompositionAPI + ts 实现伪 vue3 应用
 
-
++ [表单设计器](https://yuan_fangy.gitee.io/v-form-design/)
++ [github](https://github.com/Alfred-Skyblue/v-form-antd)
++ [码云](https://gitee.com/yuan_fangY/v-form-antd)
++ [Document](https://alfred-skyblue.github.io/v-form-antd/)
++ [Document Gitee](https://yuan_fangy.gitee.io/v-form-antd/)
 
 ## 使用方法
 
@@ -36,7 +41,7 @@ Vue.use(VFormAntd)
 </template>
 ```
 
-4. 渲染表单
+4. 使用v-form-create渲染表单
 ```vue
 <template>
   <div>
