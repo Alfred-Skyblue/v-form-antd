@@ -1,20 +1,10 @@
 import { IAnyObject } from './base-type'
-import { ValidationRule } from 'ant-design-vue/types/form-model/form'
 import { ComponentOptions } from 'vue/types/options'
 import { IVFormMethods } from '@pack/hooks/useVFormMethods'
 type LayoutType = 'horizontal' | 'vertical' | 'inline'
 type labelLayout = 'flex' | 'grid'
 export type PropsTabKey = 1 | 2 | 3
 type ColSpanType = number | string
-/**
- * 校验属性 由于 ant-design-vue 官方提供的接口，只对字符串进行了约束，这里采取省略trigger继承后扩展
- */
-
-export interface IValidationRule extends Omit<ValidationRule, 'trigger' | 'pattern'> {
-  // 校验触发的时机
-  trigger?: 'change' | 'blur' | ['change', 'blur']
-  pattern?: RegExp | string
-}
 
 /**
  * 组件属性
@@ -264,4 +254,76 @@ interface IACol {
    * @type { span: ColSpanType, offset: ColSpanType } | ColSpanType
    */
   xxl: { span: ColSpanType; offset: ColSpanType } | ColSpanType
+}
+
+export interface IValidationRule {
+  trigger?: 'change' | 'blur' | ['change', 'blur']
+  /**
+   * validation error message
+   * @type string | Function
+   */
+  message?: string | (() => string)
+
+  /**
+   * built-in validation type, available options: https://github.com/yiminghe/async-validator#type
+   * @default 'string'
+   * @type string
+   */
+  type?: string
+
+  /**
+   * indicates whether field is required
+   * @default false
+   * @type boolean
+   */
+  required?: boolean
+
+  /**
+   * treat required fields that only contain whitespace as errors
+   * @default false
+   * @type boolean
+   */
+  whitespace?: boolean
+
+  /**
+   * validate the exact length of a field
+   * @type number
+   */
+  len?: number
+
+  /**
+   * validate the min length of a field
+   * @type number
+   */
+  min?: number
+
+  /**
+   * validate the max length of a field
+   * @type number
+   */
+  max?: number
+
+  /**
+   * validate the value from a list of possible values
+   * @type string | string[]
+   */
+  enum?: string | string[]
+
+  /**
+   * validate from a regular expression
+   * @type boolean
+   */
+  pattern?: RegExp | string
+
+  /**
+   * transform a value before validation
+   * @type Function
+   */
+  transform?: (value: any) => any
+
+  /**
+   * custom validate function (Note: callback must be called)
+   * @type Function
+   */
+  validator?: (rule: any, value: any, callback: () => void) => any
 }

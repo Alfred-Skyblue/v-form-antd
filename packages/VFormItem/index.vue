@@ -58,7 +58,7 @@ import {
 import { componentMap } from '@pack/core/formItemConfig'
 import { IVFormComponent, IFormConfig } from '@pack/typings/v-form-component'
 import { asyncComputed } from '@vueuse/core'
-import { handleAsyncOptions } from '@pack/utils'
+import { handleAsyncOptions, runCode, strToReg } from '@pack/utils'
 export default defineComponent({
   name: 'VFormItem',
   props: {
@@ -84,6 +84,7 @@ export default defineComponent({
     const formItemProps = computed(() => {
       const { formConfig } = props
       let { field, required, rules, labelCol, wrapperCol } = props.record
+      //<editor-fold desc="布局属性">
       labelCol = labelCol
         ? labelCol
         : formConfig.config.layout === 'horizontal'
@@ -105,6 +106,11 @@ export default defineComponent({
         formConfig.config.labelLayout === 'flex'
           ? { display: 'flex' }
           : {}
+      //</editor-fold>
+      /**
+       * 将字符串正则格式化成正则表达式
+       */
+      rules = strToReg(rules ?? [])
       return {
         labelCol,
         wrapperCol,

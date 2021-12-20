@@ -35,7 +35,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name v-form-antd --dest lib packages/index.ts && npm run lib:runtime && node ./build/config.ts",
+    "lib": "vue-cli-service build --target lib --name v-form-antd --dest lib packages/index.ts && npm run lib:runtime && node build/config.js",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue packages/",
     "lib:runtime": "vue-cli-service build --target lib --name v-form-antd-runtime --dest lib packages/mini.ts --no-clean",
     "test": "yalc publish"
