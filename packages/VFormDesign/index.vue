@@ -176,7 +176,6 @@ export default defineComponent({
     VFormPreview
   },
   setup(props, context) {
-    console.log(context.root.$message)
     // 子组件实例
     const propsPanel = ref<null | IPropsPanel>(null)
     const jsonModal = ref<null | IToolbarMethods>(null)
