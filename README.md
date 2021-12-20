@@ -3,6 +3,7 @@
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Alfred-Skyblue/v-form-antd)
 [![github](https://img.shields.io/badge/Author-Alfred_Skyblue-blue.svg)](https://github.com/Alfred-Skyblue)
 [![CompositionAPI](https://img.shields.io/badge/Composition-API-green.svg)](https://github.com/vuejs/composition-api)
+[![CompositionAPI](https://img.shields.io/badge/Doc-welcome-green.svg)](https://yuan_fangy.gitee.io/v-form-antd/)
 
 ![](https://photos-1301289647.cos.ap-shanghai.myqcloud.com/github/form_design_view.gif)
 
