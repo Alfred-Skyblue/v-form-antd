@@ -10,11 +10,12 @@
 ## 简介
 本项目参考自[k-form-design](https://github.com/Kchengz/k-form-design)，支持自定义组件、表单联动等高级功能，使用 vue2 + CompositionAPI + ts 实现伪 vue3 应用
 
-+ [表单设计器](https://yuan_fangy.gitee.io/v-form-design/)
+
++ <a href="https://yuan_fangy.gitee.io/v-form-design/" target="_blank">表单设计器</a>
 + [github](https://github.com/Alfred-Skyblue/v-form-antd)
 + [码云](https://gitee.com/yuan_fangY/v-form-antd)
-+ [Document](https://alfred-skyblue.github.io/v-form-antd/)
-+ [国内文档地址](https://yuan_fangy.gitee.io/v-form-antd/)
++ <a href="https://alfred-skyblue.github.io/v-form-antd/" target="_blank">Document</a>
++ <a href="https://yuan_fangy.gitee.io/v-form-antd/" target="_blank">国内文档地址</a>
 
 ## 使用方法
 
