@@ -80,17 +80,16 @@ export default defineComponent({
     fApi.value = Object.freeze(methods)
     const handleChange = (record: IVFormComponent) => {
       const { field } = record
-      linkOn[field!] &&
-        linkOn[field!].forEach(
-          formItem => {
-            formItem.update?.(
-              props.formData[formItem.field!],
-              formItem,
-              fApi.value as IVFormMethods
-            )
-          }
-          // cb(field, cloneDeep(props.formData[field!]), record, fApi.value)
-        )
+      linkOn[field!]?.forEach(
+        formItem => {
+          formItem.update?.(
+            props.formData[formItem.field!],
+            formItem,
+            fApi.value as IVFormMethods
+          )
+        }
+        // cb(field, cloneDeep(props.formData[field!]), record, fApi.value)
+      )
     }
     /**
      * 获取表单属性
