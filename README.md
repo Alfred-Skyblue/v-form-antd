@@ -4,7 +4,7 @@
 [![github](https://img.shields.io/badge/Author-Alfred_Skyblue-blue.svg)](https://github.com/Alfred-Skyblue)
 [![CompositionAPI](https://img.shields.io/badge/Composition-API-green.svg)](https://github.com/vuejs/composition-api)
 
-![](https://photos-1301289647.cos.ap-shanghai.myqcloud.com/github/custom-cmp.gif)
+![](https://photos-1301289647.cos.ap-shanghai.myqcloud.com/github/form_design_view.gif)
 
 
 ## 简介
