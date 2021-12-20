@@ -1,5 +1,9 @@
 import { VueConstructor } from 'vue'
-import { IVFormComponent, IFormConfig } from '../typings/v-form-component'
+import {
+  IVFormComponent,
+  IFormConfig,
+  IValidationRule
+} from '../typings/v-form-component'
 import { cloneDeep, isArray, isFunction, isNumber, uniqueId } from 'lodash-es'
 import { del } from '@vue/composition-api'
 /**
@@ -171,4 +175,30 @@ export const formatRules = (formItems: IVFormComponent[]) => {
       del(item, 'message')
     }
   })
+}
+
+/**
+ * 将校验规则中的正则字符串转换为正则对象
+ * @param {IValidationRule[]} rules
+ * @return {IValidationRule[]}
+ */
+export const strToReg = (rules: IValidationRule[]) => {
+  const newRules = cloneDeep(rules)
+  return newRules.map(item => {
+    if (item.pattern) item.pattern = runCode(item.pattern)
+    return item
+  })
+}
+
+/**
+ * 执行一段字符串代码，并返回执行结果，如果执行出错，则返回该参数
+ * @param code
+ * @return {any}
+ */
+export const runCode = <T>(code: any): T => {
+  try {
+    return new Function(`return ${code}`)()
+  } catch {
+    return code
+  }
 }

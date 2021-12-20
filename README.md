@@ -8,7 +8,7 @@
 
 
 ## 简介
-本项目参考自[k-form-design](https://github.com/Kchengz/k-form-design)，支持自定义组件、表单联动等高级功能，使用 vue2 + CompositionAPI + ts 实现伪 vue3 应用
+本项目参考自<a href="https://github.com/Kchengz/k-form-design" target="_blank">k-form-design</a>，支持自定义组件、表单联动等高级功能，使用 vue2 + CompositionAPI + ts 实现伪 vue3 应用
 
 
 + <a href="https://yuan_fangy.gitee.io/v-form-design/" target="_blank">表单设计器</a>

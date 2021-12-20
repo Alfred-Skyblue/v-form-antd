@@ -27,6 +27,7 @@ import {
   Rate,
   TimePicker,
   TreeSelect,
+  AutoComplete,
   message
 } from 'ant-design-vue'
 ;[
@@ -60,7 +61,8 @@ import {
   Cascader,
   Rate,
   TimePicker,
-  TreeSelect
+  TreeSelect,
+  AutoComplete
 ].forEach(component => {
   Vue.use(component)
 })
