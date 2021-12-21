@@ -14,12 +14,13 @@ export function useFormInstanceMethods(
   const bindContext = () => {
     const vm = context.parent
     ;(props.formConfig.formItems as IVFormComponent[]).forEach(item => {
-      console.log('-> vm', vm)
+      // 绑定 props 中的上下文
       forOwn(item.props, (value: any, key) => {
         if (isFunction(value)) {
           item.props![key] = value.bind(vm)
         }
       })
+      // 绑定事件监听（v-on）的上下文
       forOwn(item.on, (value: any, key) => {
         if (isFunction(value)) {
           item.on![key] = value.bind(vm)
