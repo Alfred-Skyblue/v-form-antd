@@ -1,13 +1,34 @@
 import { IAnyObject } from '@pack/typings/base-type'
 import { Ref, SetupContext } from '@vue/composition-api'
-import { cloneDeep } from 'lodash-es'
-import { AForm } from '@pack/typings/v-form-component'
+import { cloneDeep, forOwn, isFunction } from 'lodash-es'
+import { AForm, IVFormComponent } from '@pack/typings/v-form-component'
 
 export function useFormInstanceMethods(
   props: IAnyObject,
   context: SetupContext,
   formInstance: Ref<AForm | null>
 ) {
+  /**
+   * 绑定props和on中的上下文为parent
+   */
+  const bindContext = () => {
+    const vm = context.parent
+    ;(props.formConfig.formItems as IVFormComponent[]).forEach(item => {
+      console.log('-> vm', vm)
+      forOwn(item.props, (value: any, key) => {
+        if (isFunction(value)) {
+          item.props![key] = value.bind(vm)
+        }
+      })
+      forOwn(item.on, (value: any, key) => {
+        if (isFunction(value)) {
+          item.on![key] = value.bind(vm)
+        }
+      })
+    })
+  }
+  bindContext()
+
   const { emit } = context
 
   /**
