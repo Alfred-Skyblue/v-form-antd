@@ -175,7 +175,7 @@ export default defineComponent({
     JsonModal,
     VFormPreview
   },
-  setup(props, context) {
+  setup() {
     // 子组件实例
     const propsPanel = ref<null | IPropsPanel>(null)
     const jsonModal = ref<null | IToolbarMethods>(null)

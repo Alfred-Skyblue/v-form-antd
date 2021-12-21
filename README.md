@@ -17,8 +17,42 @@
 + [码云](https://gitee.com/yuan_fangY/v-form-antd)
 + [Document](https://alfred-skyblue.github.io/v-form-antd/)
 + [国内文档地址](https://yuan_fangy.gitee.io/v-form-antd/)
-
 ## 使用方法
+
+在引入`v-form-antd`之前，请确保您已经引入`ant-design-vue`，并且在引入`v-form-antd`之前，引入`ant-design-vue`以下组件：
+
+```javascript
+import {
+  Input,
+  ConfigProvider,
+  Collapse,
+  Empty,
+  FormModel,
+  Row,
+  Tabs,
+  Button,
+  Icon,
+  Radio,
+  InputNumber,
+  Slider,
+  Tooltip,
+  Divider,
+  Modal,
+  Col,
+  Checkbox,
+  Select,
+  DatePicker,
+  Upload,
+  Switch,
+  Space,
+  Popover,
+  Cascader,
+  Rate,
+  TimePicker,
+  TreeSelect
+} from 'ant-design-vue'
+```
+
 
 1. 安装
 ```shell
