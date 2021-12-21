@@ -13,6 +13,10 @@ export const componentMap: IAnyObject = {
   ...ACmp
 }
 
+/**
+ * 设置自定义表单
+ * @param {IVFormComponent | IVFormComponent[]} config
+ */
 export function setFormDesignComponents(config: IVFormComponent | IVFormComponent[]) {
   if (isArray(config)) {
     config.forEach(item => {
