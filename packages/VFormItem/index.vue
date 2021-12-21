@@ -58,7 +58,8 @@ import {
 import { componentMap } from '@pack/core/formItemConfig'
 import { IVFormComponent, IFormConfig } from '@pack/typings/v-form-component'
 import { asyncComputed } from '@vueuse/core'
-import { handleAsyncOptions, runCode, strToReg } from '@pack/utils'
+import { handleAsyncOptions, strToReg } from '@pack/utils'
+import { omit } from 'lodash-es'
 export default defineComponent({
   name: 'VFormItem',
   props: {
@@ -141,7 +142,7 @@ export default defineComponent({
      * 处理同步属性
      */
     const cmpProps = computed(() => {
-      let { options, treeData, disabled, ...attrs } = props.record.props ?? {}
+      let { disabled, ...attrs } = omit(props.record.props, ['options', 'treeData']) ?? {}
       disabled = props.formConfig.config.disabled || disabled
       return { ...attrs, disabled }
     })
