@@ -1,6 +1,6 @@
 {
   "name": "v-form-antd",
-  "version": "0.1.4-beta",
+  "version": "0.1.5-beta",
   "author": {
     "name": "ypt",
     "email": "yangpanteng@gmail.com"
@@ -8,6 +8,7 @@
   "private": false,
   "license": "MIT",
   "description": "基于ant-design-vue的表单设计器,可视化开发表单",
+  "homepage": "https://alfred-skyblue.github.io/v-form-antd/",
   "main": "lib/v-form-antd-runtime.umd.min.js",
   "style": "lib/index.css",
   "keywords": [
@@ -37,8 +38,7 @@
     "lint": "vue-cli-service lint",
     "lib": "vue-cli-service build --target lib --name v-form-antd --dest lib packages/index.ts && npm run lib:runtime && node build/config.js",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue packages/",
-    "lib:runtime": "vue-cli-service build --target lib --name v-form-antd-runtime --dest lib packages/mini.ts --no-clean",
-    "test": "yalc publish"
+    "lib:runtime": "vue-cli-service build --target lib --name v-form-antd-runtime --dest lib packages/mini.ts --no-clean"
   },
   "dependencies": {
     "@vue/composition-api": "^1.4.0",
