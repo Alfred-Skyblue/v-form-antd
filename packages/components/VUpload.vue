@@ -93,11 +93,6 @@ export default defineComponent({
         const { response } = file
         const currentFile = fileList.value.find(item => item.uid === file.uid)
         if (response.code === 0) {
-          // const {
-          //   data: { name, ...reset }
-          // } = response
-          // console.log('-> name', name)
-          // set(fileList.value, index, { ...currentFile, ...reset })
           setFileList()
         } else {
           if (currentFile) {
