@@ -7,10 +7,6 @@
   <div>
     <div class="properties-content">
       <div class="properties-body">
-        <!--          <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">-->
-        <!--            <slot :name="slot" v-bind="scope" />-->
-        <!--          </template>-->
-
         <AEmpty
           class="hint-box"
           v-if="!formConfig.currentItem['key']"

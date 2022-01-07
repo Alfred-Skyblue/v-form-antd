@@ -1,7 +1,7 @@
 <!--
  * @Author: ypt
  * @Date: 2021/11/29
- * @Description: 根据json生成表单
+ * @Description: 表单渲染器，根据json生成表单
 -->
 <template>
   <div class="v-form-container">
@@ -80,16 +80,13 @@ export default defineComponent({
     fApi.value = Object.freeze(methods)
     const handleChange = (record: IVFormComponent) => {
       const { field } = record
-      linkOn[field!]?.forEach(
-        formItem => {
-          formItem.update?.(
-            props.formData[formItem.field!],
-            formItem,
-            fApi.value as IVFormMethods
-          )
-        }
-        // cb(field, cloneDeep(props.formData[field!]), record, fApi.value)
-      )
+      linkOn[field!]?.forEach(formItem => {
+        formItem.update?.(
+          props.formData[formItem.field!],
+          formItem,
+          fApi.value as IVFormMethods
+        )
+      })
     }
     /**
      * 获取表单属性

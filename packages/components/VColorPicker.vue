@@ -1,7 +1,7 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2021/12/15
- * @Description: $END$
+ * @Description: 颜色选择器
 -->
 <template>
   <VueColorpicker v-bind="record.props" v-model="color"></VueColorpicker>
