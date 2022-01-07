@@ -20,7 +20,7 @@
             </a-collapse-panel>
             <!--    基础控件end      -->
 
-            <!--     自定义控件start       -->
+            <!--<editor-fold desc="自定义控件">-->
             <a-collapse-panel
               v-if="customComponents.length > 0"
               header="自定义控件"
@@ -32,7 +32,7 @@
                 @handleListPush="handleListPush"
               ></CollapseItem>
             </a-collapse-panel>
-            <!--    自定义控件end      -->
+            <!--</editor-fold>-->
 
             <!--    布局控件start        -->
             <a-collapse-panel
