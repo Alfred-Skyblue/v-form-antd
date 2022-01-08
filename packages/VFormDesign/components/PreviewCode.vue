@@ -65,6 +65,7 @@ export default defineComponent({
         clipboard.destroy()
       })
       clipboard.on('error', () => {
+        // 复制失败
         message.error('复制失败')
         clipboard.destroy()
       })
