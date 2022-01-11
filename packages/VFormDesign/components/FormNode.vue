@@ -23,10 +23,12 @@ import { defineComponent, reactive, toRefs, PropType } from '@vue/composition-ap
 import { IVFormComponent } from '@pack/typings/v-form-component'
 import FormNodeOperate from './FormNodeOperate.vue'
 import { useFormDesignState } from '@pack/hooks/useFormDesignState'
+import VFormItem from '@pack/VFormItem/index.vue'
 
 export default defineComponent({
   name: 'FormNode',
   components: {
+    VFormItem,
     FormNodeOperate
   },
   props: {
