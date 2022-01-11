@@ -1,3 +1,10 @@
+/**
+ * @name: component
+ * @author: ypt
+ * @date: 2022-01-11 13:40:03
+ * @description: 公用组件
+ */
+
 import vuedraggable from 'vuedraggable'
 import VUpload from './VUpload.vue'
 import VMonthRange from './VMonthRange.vue'
