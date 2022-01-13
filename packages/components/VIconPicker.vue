@@ -74,7 +74,6 @@ export default defineComponent({
       type: String,
       default: ''
     },
-    //自定义触发方式
     trigger: {
       type: String,
       default: 'click',
