@@ -216,6 +216,7 @@ export default defineComponent({
     // 获取历史记录，用于撤销和重构
     const historyReturn = useRefHistory(formConfig, {
       deep: true,
+      capacity: 20,
       parse: (val: IFormConfig) => {
         // 使用lodash.cloneDeep重新拷贝数据，把currentItem指向选中项
         const formConfig = cloneDeep(val)
