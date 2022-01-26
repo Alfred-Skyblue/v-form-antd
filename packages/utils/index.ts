@@ -6,6 +6,7 @@ import {
 } from '../typings/v-form-component'
 import { cloneDeep, isArray, isFunction, isNumber, uniqueId } from 'lodash-es'
 import { del } from '@vue/composition-api'
+import { count } from '@pack/hooks/usePersistedstate'
 /**
  * 组件install方法
  * @param comp 需要挂载install方法的组件
@@ -24,14 +25,16 @@ export function withInstall<T extends { name: string }>(comp: T) {
  * @returns {string|boolean} 返回一个唯一 id 或者 false
  */
 export function generateKey(formItem?: IVFormComponent): string | boolean {
-  if (formItem) {
-    const key = uniqueId(`${toLine(formItem.type)}_`)
-    formItem.key = key
-    formItem.field = key
+  count.value = count.value + 1
 
+  if (formItem) {
+    const key = `${toLine(formItem.type)}_${count.value}`
+    formItem.key = `${key}+${randomUUID}`
+    formItem.field = key
     return true
   }
-  return uniqueId('key_')
+
+  return `key_${count.value}`
 }
 
 /**
