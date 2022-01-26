@@ -114,6 +114,7 @@ import {
 import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core'
 import { IAnyObject } from '@pack/typings/base-type'
 import { globalConfigState } from '@pack/VFormDesign/config/formItemPropsConfig'
+import { usePersistedstate } from '@pack/hooks/usePersistedstate'
 
 export interface IToolbarMethods {
   showModal: (jsonData: IAnyObject) => void
@@ -199,6 +200,7 @@ export default defineComponent({
       },
       activeKey: 1
     })
+    usePersistedstate(formConfig)
     const state = reactive<IState>({
       locale: zhCN, // 国际化
       baseComponents, // 基础控件列表
