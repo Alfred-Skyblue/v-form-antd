@@ -13,7 +13,6 @@ export function usePersistedstate(config: Ref<IFormConfig>) {
   watch(
     config.value,
     () => {
-      console.log('456')
       localStorage.setItem('$VFormDesignConfig', JSON.stringify(config.value))
     },
     { deep: true }
