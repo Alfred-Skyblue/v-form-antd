@@ -1,47 +1,34 @@
-<!--
- * @Author: ypt
- * @Date: 2021/12/21
- * @Description: 表单渲染器
--->
 <template>
   <div>
-    <v-form-create
-      :formData="formData"
-      v-model="fApi"
-      :formConfig="formConfig"
-    ></v-form-create>
+    <v-form-create :formConfig="formConfig" :formData="formData" v-model="fApi" />
+    <button @click="submit">提交</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index',
+  name: 'GFormCreate',
   data() {
     return {
-      formData: {},
       fApi: {},
+      formData: {},
       formConfig: {
         formItems: [
           {
-            type: 'number',
-            label: '数字输入框',
-            field: 'number_1',
-            span: 24,
-            props: {}
-          },
-          {
             type: 'input',
-            label: '输入框',
-            field: 'input_2',
-            span: 24,
+            label: '姓名',
+            field: 'name',
+            span: 12,
             props: {
               type: 'text'
-            },
-            on: {
-              change() {
-                console.log(this.formData)
-              }
             }
+          },
+          {
+            type: 'number',
+            label: '年龄',
+            field: 'age',
+            span: 12,
+            props: {}
           }
         ],
         config: {
@@ -54,8 +41,12 @@ export default {
       }
     }
   },
-  components: {},
-  methods: {}
+  methods: {
+    async submit() {
+      const data = await this.fApi.submit()
+      console.log(data)
+    }
+  }
 }
 </script>
 

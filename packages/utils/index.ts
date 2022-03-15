@@ -4,7 +4,7 @@ import {
   IFormConfig,
   IValidationRule
 } from '../typings/v-form-component'
-import { cloneDeep, isArray, isFunction, isNumber, uniqueId } from 'lodash-es'
+import { cloneDeep, isArray, isFunction, isNumber } from 'lodash-es'
 import { del } from '@vue/composition-api'
 import { count } from '@pack/hooks/usePersistedstate'
 /**
