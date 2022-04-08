@@ -11,7 +11,7 @@
         <div class="left">
           <a-collapse :defaultActiveKey="['1', '2', '3']">
             <!--     基础控件start       -->
-            <a-collapse-panel v-if="baseComponents.length > 0" header="基础控件" key="1">
+            <a-collapse-panel v-if="showBaseComponent" header="基础控件" key="1">
               <CollapseItem
                 :list="baseComponents"
                 @addAttrs="handleAddAttrs"
@@ -21,11 +21,7 @@
             <!--    基础控件end      -->
 
             <!--<editor-fold desc="自定义控件">-->
-            <a-collapse-panel
-              v-if="customComponents.length > 0"
-              header="自定义控件"
-              key="2"
-            >
+            <a-collapse-panel v-if="showCustomComponents" header="自定义控件" key="2">
               <CollapseItem
                 :list="customComponents"
                 @addAttrs="handleAddAttrs"
@@ -35,11 +31,7 @@
             <!--</editor-fold>-->
 
             <!--    布局控件start        -->
-            <a-collapse-panel
-              v-if="layoutComponents.length > 0"
-              header="布局控件"
-              key="3"
-            >
+            <a-collapse-panel v-if="showLayoutComponents" header="布局控件" key="3">
               <CollapseItem
                 :list="layoutComponents"
                 @addAttrs="handleAddAttrs"
@@ -99,7 +91,8 @@ import {
   toRefs,
   ref,
   provide,
-  Ref
+  Ref,
+  computed
 } from '@vue/composition-api'
 
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
@@ -392,6 +385,10 @@ export default defineComponent({
     })
     // endregion
 
+    const showBaseComponent = computed(() => state?.baseComponents?.length > 0)
+    const showCustomComponents = computed(() => state?.customComponents?.length > 0)
+    const showLayoutComponents = computed(() => state?.layoutComponents?.length > 0)
+
     return {
       ...toRefs(state),
       handleSetSelectItem,
@@ -400,6 +397,9 @@ export default defineComponent({
       handleCopy,
       handleOpenModal,
       formConfig,
+      showBaseComponent,
+      showCustomComponents,
+      showLayoutComponents,
       handleClearFormItems
     }
   }
