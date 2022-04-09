@@ -2,12 +2,20 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
     "baseUrl": ".",
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./packages/*"],
+      "@styles/*": ["./styles/*"],
     }
   },
-
   "references": [
     {
       "path": "./tsconfig.vite-config.json"
