@@ -5,7 +5,7 @@ export default defineComponent({
   setup() {
     return () => (
       <div>
-        <h1>hello v-form-antd</h1>
+        <h1>Hello v-form-antd</h1>
       </div>
     )
   }

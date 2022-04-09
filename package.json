@@ -1,37 +1,30 @@
 {
-  "name": "vite-plugin",
-  "private": true,
+  "name": "v-form-antd",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.ts,.tsx --fix",
-    "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}",
-    "prepare": "husky install"
+    "preview": "vite preview --port 5050",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@vueuse/core": "^8.2.5",
-    "lodash-es": "^4.17.21",
-    "vue": "^3.2.25"
+    "vue": "^3.2.31"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.6",
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "@typescript-eslint/parser": "^5.18.0",
-    "@vitejs/plugin-vue": "^2.3.0",
+    "@rushstack/eslint-patch": "^1.1.0",
+    "@types/node": "^16.11.26",
+    "@vitejs/plugin-vue": "^2.3.1",
     "@vitejs/plugin-vue-jsx": "^1.3.9",
-    "autoprefixer": "^10.4.4",
-    "eslint": "^8.12.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^8.6.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "@vue/eslint-config-typescript": "^10.0.0",
+    "@vue/tsconfig": "^0.1.3",
+    "eslint": "^8.5.0",
+    "eslint-plugin-vue": "^8.2.0",
     "husky": "^7.0.4",
-    "postcss": "^8.4.12",
-    "prettier": "^2.6.2",
-    "tailwindcss": "^3.0.23",
-    "typescript": "^4.5.4",
-    "vite": "^2.9.0",
-    "vue-tsc": "^0.29.8"
+    "prettier": "^2.5.1",
+    "typescript": "~4.6.3",
+    "vite": "^2.9.1",
+    "vue-tsc": "^0.33.9"
   }
 }
