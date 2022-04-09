@@ -14,5 +14,9 @@ module.exports = {
     node: true,
     es2021: true,
     'vue/setup-compiler-macros': true
+  },
+  rules: {
+    'vue/multi-word-component-names': 0,
+    '@typescript-eslint/ban-ts-comment': 0
   }
 }

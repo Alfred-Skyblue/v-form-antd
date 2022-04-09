@@ -5,6 +5,7 @@
     "target": "esnext",
     "module": "esnext",
     "baseUrl": ".",
+    "types":["@types/node", "@types/vue","@types/ant-design-vue"],
     "lib": [
       "esnext",
       "dom",

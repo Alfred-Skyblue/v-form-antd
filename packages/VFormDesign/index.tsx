@@ -5,11 +5,41 @@
  * @description: VFormDesign 表单设计器
  */
 
-import { defineComponent } from 'vue'
+import { defineComponent, toRefs } from 'vue'
+import Layout from '@/Layout'
 
 export default defineComponent({
   name: 'VFormDesign',
-  setup() {
-    return () => <div class={'h-50 w-300 bg-red-600 m-100'}>VFormDesign</div>
+  props: {
+    title: {
+      type: String,
+      default: 'v-form-antd表单设计器'
+    }
+  },
+  setup(props) {
+    const { title } = toRefs(props)
+    const renderCmpList = () => {
+      return <div>左侧内容</div>
+    }
+    const renderHeader = () => {
+      return <div>{title.value}</div>
+    }
+    const renderComponentPanel = () => {
+      return <div>中间内容</div>
+    }
+    const renderConfigPanel = () => {
+      return <div>右侧内容</div>
+    }
+    const layoutSlot = {
+      cmpList: renderCmpList,
+      header: renderHeader,
+      default: renderComponentPanel,
+      config: renderConfigPanel
+    }
+    return () => (
+      <div class="v-form-design light-theme v-h-screen v-bg-body">
+        <Layout>{layoutSlot}</Layout>
+      </div>
+    )
   }
 })
