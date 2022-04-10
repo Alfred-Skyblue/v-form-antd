@@ -5,7 +5,7 @@ export default defineComponent({
   components: {},
   setup() {
     return () => (
-      <div class={'h-500'}>
+      <div>
         <v-form-design />
       </div>
     )
