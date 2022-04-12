@@ -11,12 +11,14 @@
   "dependencies": {
     "@vueuse/core": "^8.2.5",
     "lodash-es": "^4.17.21",
-    "vue": "^3.2.31"
+    "vue": "^3.2.31",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^16.11.26",
+    "@types/vuedraggable": "^2.24.0",
     "@vitejs/plugin-vue": "^2.3.1",
     "@vitejs/plugin-vue-jsx": "^1.3.9",
     "@vue/eslint-config-prettier": "^7.0.0",
