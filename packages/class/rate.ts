@@ -1,7 +1,7 @@
 import { BasicFormItem } from '@/class/basic-form'
 import type { IAnyObject } from '@/types'
 
-interface IRateProps extends IAnyObject {
+interface IRate extends IAnyObject {
   /**
    * whether to allow clear when click again
    * @default true
@@ -53,7 +53,10 @@ interface IRateProps extends IAnyObject {
   tooltips: Array<string>
 }
 export class Rate extends BasicFormItem {
-  public props: Partial<IRateProps> = {
+  readonly tag = 'ARate'
+  readonly type = 'rate'
+  readonly icon = 'rate'
+  public props: Partial<IRate> = {
     allowClear: undefined,
     allowHalf: undefined,
     autoFocus: undefined,
@@ -64,7 +67,7 @@ export class Rate extends BasicFormItem {
     value: undefined,
     tooltips: undefined
   }
-  constructor(label: string, field: string) {
-    super(label, field)
+  constructor(label = '评分') {
+    super(label)
   }
 }

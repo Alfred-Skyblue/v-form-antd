@@ -1,7 +1,7 @@
 import type { StringAndSlot } from '@/types'
 import { BasicFormItem } from '@/class/basic-form'
-import type { IAnyObject, IAnyEvent } from '@/types'
-export interface InputProps extends IAnyObject {
+import type { IAnyObject } from '@/types'
+export interface IInput extends IAnyObject {
   /**
    * The label text displayed after (on the right side of) the input field.
    * @type any (string | slot)
@@ -67,14 +67,13 @@ export interface InputProps extends IAnyObject {
   allowClear?: boolean
 }
 
-/**
- * @class Input
- */
 export class Input extends BasicFormItem {
+  readonly tag = 'AInput'
+  readonly icon = 'input'
   // componentType
-  public type = 'input'
+  readonly type = 'input'
   // props
-  public props: Partial<InputProps> = {
+  public props: Partial<IInput> = {
     addonAfter: undefined,
     addonBefore: undefined,
     defaultValue: undefined,
@@ -86,7 +85,7 @@ export class Input extends BasicFormItem {
     showCount: undefined,
     allowClear: undefined
   }
-  constructor(label: string, field: string) {
-    super(label, field)
+  constructor(label = '输入框') {
+    super(label)
   }
 }

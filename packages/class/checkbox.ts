@@ -1,7 +1,7 @@
 import { BasicFormItem } from '@/class/basic-form'
 import type { IAnyObject } from '@/types'
 
-interface ICheckboxProps extends IAnyObject {
+interface ICheckbox extends IAnyObject {
   /**
    * get focus when component mounted
    * @default false
@@ -32,13 +32,16 @@ interface ICheckboxProps extends IAnyObject {
 }
 
 export class Checkbox extends BasicFormItem {
-  public props: Partial<ICheckboxProps> = {
+  readonly tag = 'ACheckbox'
+  readonly type = 'checkbox'
+  readonly icon = 'checkbox'
+  public props: Partial<ICheckbox> = {
     autoFocus: undefined,
     checked: undefined,
     disabled: undefined,
     indeterminate: undefined
   }
-  constructor(label: string, field: string) {
-    super(label, field)
+  constructor(label = '复选框') {
+    super(label)
   }
 }

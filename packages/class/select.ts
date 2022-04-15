@@ -1,8 +1,8 @@
 import { BasicFormItem } from '@/class/basic-form'
 import type { Slot, VNode } from 'vue'
-import type { IAnyEvent, IAnyObject } from '@/types'
+import type { IAnyObject } from '@/types'
 
-interface ISelectProps extends IAnyObject {
+interface ISelect extends IAnyObject {
   /**
    * Show clear button.
    * @default false
@@ -246,8 +246,10 @@ interface ISelectProps extends IAnyObject {
 }
 
 export class Select extends BasicFormItem {
-  public type = 'select'
-  public props: Partial<ISelectProps> = {
+  readonly tag = 'ASelect'
+  readonly type = 'select'
+  readonly icon = 'select'
+  public props: Partial<ISelect> = {
     mode: undefined,
     maxTagCount: undefined,
     maxTagTextLength: undefined,
@@ -264,7 +266,7 @@ export class Select extends BasicFormItem {
     open: undefined,
     options: []
   }
-  constructor(label: string, field: string) {
-    super(label, field)
+  constructor(label = '下拉选择') {
+    super(label)
   }
 }

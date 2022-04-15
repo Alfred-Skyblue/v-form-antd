@@ -2,7 +2,7 @@ import { BasicFormItem } from '@/class/basic-form'
 import type { IDatePickerCommon } from '@/types/date'
 import type { Slot } from 'vue'
 
-interface IDatePickerProps extends IDatePickerCommon {
+interface IDatePicker extends IDatePickerCommon {
   /**
    * Default Picker Value
    * @description to set default picker date
@@ -38,7 +38,7 @@ interface IDatePickerProps extends IDatePickerCommon {
    * Show Time
    * @description to provide an additional time selection
    * --
-   * @default TimePicker Options
+   * @default Time Options
    * @type object | boolean
    */
   showTime: object | boolean
@@ -60,7 +60,10 @@ interface IDatePickerProps extends IDatePickerCommon {
 }
 
 export class DatePicker extends BasicFormItem {
-  public props: Partial<IDatePickerProps> = {
+  readonly tag = 'ADatePicker'
+  readonly type = 'date'
+  readonly icon = 'date-picker'
+  public props: Partial<IDatePicker> = {
     allowClear: undefined,
     autoFocus: undefined,
     bordered: undefined,
@@ -81,7 +84,7 @@ export class DatePicker extends BasicFormItem {
     inputReadOnly: undefined,
     valueFormat: undefined
   }
-  constructor(label: string, field: string) {
-    super(label, field)
+  constructor(label = '日期选择') {
+    super(label)
   }
 }

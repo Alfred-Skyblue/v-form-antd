@@ -1,7 +1,7 @@
 import { BasicFormItem } from '@/class/basic-form'
 import type { IDatePickerCommon } from '@/types/date'
 
-interface IDateRangeProps extends Omit<IDatePickerCommon, 'disabled'> {
+interface IDateRange extends Omit<IDatePickerCommon, 'disabled'> {
   allowEmpty: [boolean, boolean]
 
   /**
@@ -40,7 +40,7 @@ interface IDateRangeProps extends Omit<IDatePickerCommon, 'disabled'> {
   /**
    * to provide an additional time selection
    * showTime.defaultValue to set default time of selected date - type Moment[]
-   * @default TimePicker Options
+   * @default Time Options
    * @type object | boolean
    */
   showTime: object | boolean
@@ -52,7 +52,10 @@ interface IDateRangeProps extends Omit<IDatePickerCommon, 'disabled'> {
 }
 
 export class DateRange extends BasicFormItem {
-  public props: Partial<IDateRangeProps> = {
+  readonly tag = 'ADateRange'
+  readonly type = 'dateRange'
+  readonly icon = 'date-range'
+  public props: Partial<IDateRange> = {
     mode: undefined,
     picker: undefined,
     showTime: false,
@@ -71,7 +74,7 @@ export class DateRange extends BasicFormItem {
     inputReadOnly: undefined,
     valueFormat: undefined
   }
-  constructor(label: string, field: string) {
-    super(label, field)
+  constructor(label = '日期选择') {
+    super(label)
   }
 }

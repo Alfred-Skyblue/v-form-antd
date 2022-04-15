@@ -1,12 +1,28 @@
-import type { IAnyEvent } from '@/types'
+import type { IAnyEvent, IAnyObject } from '@/types'
+import { randomUUID } from '@/utils/util'
 
+let uid = 1
 export abstract class BasicFormItem {
+  abstract icon?: string
+  abstract tag?: string
+  abstract type: string
+  abstract props: IAnyObject
   public on!: IAnyEvent
-  protected constructor(public label: string, public field: string) {
+  public key!: string
+  public field!: string
+  protected constructor(public label: string) {
     this.label = label
-    this.field = field
+    this.init()
   }
   update() {
     console.log('update')
+  }
+  // 生成UUID
+  init(field = `field${uid++}`) {
+    this.field = field
+    this.generateKey()
+  }
+  generateKey() {
+    this.key = randomUUID()
   }
 }

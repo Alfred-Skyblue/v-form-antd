@@ -14,10 +14,10 @@ module.exports = {
         ...Pixels()
       },
       colors: {
+        primary: 'var(--primary-color)',
         shadow: 'var(--shadow-color)'
       },
       backgroundColor: {
-        primary: 'var(--primary-color)',
         body: 'var(--body-bg)'
       }
     }

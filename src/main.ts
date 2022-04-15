@@ -8,5 +8,7 @@ app.use(Antd)
 app.use(VFormAntd)
 app.mount('#app')
 app.config.errorHandler = (err, vm, info) => {
-  console.error(err, vm, info)
+  console.error('error', err)
+  console.error('vm', vm)
+  console.error('info', info)
 }

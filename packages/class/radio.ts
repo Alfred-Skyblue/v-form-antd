@@ -1,7 +1,7 @@
 import { BasicFormItem } from '@/class/basic-form'
 import type { IAnyObject } from '@/types'
 
-interface IRadioProps extends IAnyObject {
+interface IRadio extends IAnyObject {
   /**
    * get focus when component mounted
    * @default false
@@ -30,13 +30,16 @@ interface IRadioProps extends IAnyObject {
 }
 
 export class Radio extends BasicFormItem {
-  public props: Partial<IRadioProps> = {
+  readonly tag = 'ARadio'
+  readonly icon = 'radio'
+  readonly type = 'radio'
+  public props: Partial<IRadio> = {
     autoFocus: undefined,
     checked: undefined,
     disabled: undefined,
     value: undefined
   }
-  constructor(label: string, field: string) {
-    super(label, field)
+  constructor(label = '单选框') {
+    super(label)
   }
 }

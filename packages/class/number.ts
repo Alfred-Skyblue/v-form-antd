@@ -1,7 +1,7 @@
 import { BasicFormItem } from '@/class/basic-form'
 import type { Slot } from 'vue'
-import type { IAnyObject, IAnyEvent } from '@/types'
-interface InputNumberProps extends IAnyObject {
+import type { IAnyObject } from '@/types'
+interface INumber extends IAnyObject {
   /**
    * after label
    */
@@ -116,12 +116,14 @@ interface InputNumberProps extends IAnyObject {
 }
 
 /**
- * @class InputNumber
+ * @class VNumber
  */
-export class InputNumber extends BasicFormItem {
-  public type = 'number'
+export class VNumber extends BasicFormItem {
+  readonly tag = 'AInputNumber'
+  readonly icon = 'number'
+  readonly type = 'number'
   // props
-  public props: Partial<InputNumberProps> = {
+  public props: Partial<INumber> = {
     autoFocus: undefined,
     defaultValue: undefined,
     disabled: undefined,
@@ -133,7 +135,7 @@ export class InputNumber extends BasicFormItem {
     step: undefined,
     value: undefined
   }
-  constructor(label: string, field: string) {
-    super(label, field)
+  constructor(label = '数字输入框') {
+    super(label)
   }
 }
