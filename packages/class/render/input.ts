@@ -1,5 +1,5 @@
 import type { StringAndSlot } from '@/types'
-import { BasicFormItem } from '@/class/basic-form'
+import { BasicFormItem } from './basic-form'
 import type { IAnyObject } from '@/types'
 export interface IInput extends IAnyObject {
   /**

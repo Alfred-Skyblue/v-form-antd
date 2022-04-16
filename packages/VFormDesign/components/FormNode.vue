@@ -9,15 +9,13 @@
     :class="{ active: record.key === formConfig.currentItem.key }"
     @click="handleSelectItem(record)"
   >
-    <a-col :span="24">
-      <v-form-item :record="record"></v-form-item>
-    </a-col>
+    <v-form-item :record="record"></v-form-item>
   </div>
 </template>
 
 <script setup lang="ts">
 import { PropType, inject } from 'vue'
-import type { BasicFormItem } from '@/class/basic-form'
+import type { BasicFormItem } from '@/class/render/basic-form'
 import type { IVFormDesignState } from '@/types/form-design'
 import VFormItem from '@/components/VFormItem/index.vue'
 defineProps({

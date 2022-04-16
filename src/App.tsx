@@ -1,6 +1,5 @@
 import { defineComponent } from 'vue'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
-console.log('-> zhCN', zhCN)
 export default defineComponent({
   name: 'App',
   components: {},

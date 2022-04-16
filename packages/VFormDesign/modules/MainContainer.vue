@@ -5,61 +5,56 @@
 -->
 <template>
   <div class="component-panel v-h-full">
-    <draggable
-      tag="transition-group"
-      :component-data="{
-        tag: 'ul',
-        type: 'transition-group',
-        name: 'list',
-        class: 'v-overflow-hidden v-h-full'
-      }"
-      group="form-draggable"
-      ghostClass="moving"
-      :animation="180"
-      :list="formConfig.formItems"
-      itemKey="key"
-      handle=".drag-move"
-      @add="handleChange"
-    >
-      <template #item="{ element }">
-        <li class="draggable-item drag-move v-cursor-move">
-          <form-node :record="element"></form-node>
-        </li>
-      </template>
-    </draggable>
+    <a-empty class="position-center" v-show="isEmpty" />
+    <a-form class="wh-full" v-bind="formProps">
+      <a-row class="wh-full">
+        <draggable
+          tag="transition-group"
+          :component-data="{
+            tag: 'ul',
+            type: 'transition-group',
+            name: 'list',
+            class: 'v-overflow-hidden wh-full'
+          }"
+          group="form-draggable"
+          ghostClass="moving"
+          :animation="180"
+          :list="formConfig.formItems"
+          itemKey="key"
+          handle=".drag-move"
+          @add="handleChange"
+        >
+          <template #item="{ element }">
+            <li class="draggable-item drag-move v-cursor-move">
+              <layout-item :record="element"></layout-item>
+            </li>
+          </template>
+        </draggable>
+      </a-row>
+    </a-form>
   </div>
 </template>
 
-<script lang="ts">
-import { reactive, toRefs, defineComponent, ref, inject } from 'vue'
-import draggable from 'vuedraggable'
+<script setup lang="ts">
+import { inject, computed } from 'vue'
+import Draggable from 'vuedraggable'
 import { cloneDeep } from 'lodash-es'
-import FormNode from '@/VFormDesign/components/FormNode.vue'
 import type { IVFormDesignState } from '@/types/form-design'
-export default defineComponent({
-  name: 'MainContainer',
-  components: {
-    FormNode,
-    draggable
-  },
-  setup() {
-    const dargOptions = ref({
-      animation: 200,
-      disabled: false,
-      ghostClass: 'ghost'
-    })
-    const { formConfig } = inject<IVFormDesignState>('formDesignState')!
-    console.log(formConfig)
-    const state = reactive({})
-    const handleChange = ({ newIndex }: any) => {
-      const formItems = formConfig.value.formItems
-      formItems[newIndex] = cloneDeep(formItems[newIndex])
-      console.log('-> formItems[newIndex]', formItems[newIndex])
-      debugger
-    }
+import LayoutItem from '@/VFormDesign/components/LayoutItem.vue'
 
-    return { ...toRefs(state), handleChange, dargOptions, formConfig }
-  }
+const { formConfig } = inject<IVFormDesignState>('formDesignState')!
+console.log(formConfig)
+const handleChange = ({ newIndex }: any) => {
+  const formItems = formConfig.value.formItems
+  formItems[newIndex] = cloneDeep(formItems[newIndex])
+}
+
+const isEmpty = computed(() => {
+  return formConfig.value.formItems.length === 0
+})
+
+const formProps = computed(() => {
+  return formConfig.value.config
 })
 </script>
 

@@ -26,7 +26,8 @@ import Header from '@/VFormDesign/modules/Header.vue'
 import LeftAside from '@/VFormDesign/modules/LeftAside.vue'
 import MainContainer from '@/VFormDesign/modules/MainContainer.vue'
 import type { IVFormConfig } from '@/types/form-design'
-import type { BasicFormItem } from '@/class/basic-form'
+import type { BasicFormItem } from '@/class/render/basic-form'
+import { VForm } from '@/class/render/form'
 
 export default defineComponent({
   name: 'VFormDesign',
@@ -34,7 +35,8 @@ export default defineComponent({
   setup() {
     const formConfig = ref<IVFormConfig>({
       formItems: [],
-      currentItem: {} as IVFormConfig['currentItem']
+      currentItem: {} as IVFormConfig['currentItem'],
+      config: new VForm()
     })
     const handleSelectItem = (formItem: BasicFormItem) => {
       console.log('-> formItem', formItem)

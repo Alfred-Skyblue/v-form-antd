@@ -19,27 +19,16 @@
   </a-collapse>
 </template>
 
-<script lang="ts">
-import { reactive, toRefs, defineComponent } from 'vue'
+<script setup lang="ts">
 import CollapseItem from '@/VFormDesign/components/CollapseItem.vue'
 import { basicComponents } from '@/config/form-item-config'
 import { cloneDeep } from 'lodash-es'
-import type { BasicFormItem } from '@/class/basic-form'
+import type { BasicFormItem } from '@/class/render/basic-form'
 
-export default defineComponent({
-  name: 'LeftAside',
-  components: { CollapseItem },
-  setup() {
-    const state = reactive({})
-    const handleStart = (element: BasicFormItem, index: number) => {
-      basicComponents[index] = cloneDeep(element)
-      console.log('-> element', element)
-
-      element.generateKey()
-    }
-    return { ...toRefs(state), basicComponents, handleStart }
-  }
-})
+const handleStart = (element: BasicFormItem, index: number) => {
+  basicComponents[index] = cloneDeep(element)
+  element.generateKey()
+}
 </script>
 
 <style scoped></style>

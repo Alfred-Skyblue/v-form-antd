@@ -23,14 +23,9 @@
 </template>
 
 <script lang="ts">
-import { reactive, toRefs, defineComponent } from 'vue'
-
+import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'Layout',
-  setup() {
-    const state = reactive({})
-    return { ...toRefs(state) }
-  }
+  name: 'Layout'
 })
 </script>
 

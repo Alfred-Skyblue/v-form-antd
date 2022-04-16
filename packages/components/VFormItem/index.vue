@@ -11,13 +11,18 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import type { BasicFormItem } from '@/class/basic-form'
+<script lang="ts">
+import type { BasicFormItem } from '@/class/render/basic-form'
 import type { PropType } from 'vue'
+import { defineComponent } from 'vue'
 
-defineProps({
-  record: {
-    type: Object as PropType<BasicFormItem>
+export default defineComponent({
+  name: 'VFormItem',
+  props: {
+    record: {
+      type: Object as PropType<BasicFormItem>,
+      required: true
+    }
   }
 })
 </script>

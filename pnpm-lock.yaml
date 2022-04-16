@@ -634,7 +634,7 @@ packages:
     dependencies:
       '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/5.18.0_eslint@8.13.0+typescript@4.6.3
       '@typescript-eslint/scope-manager': registry.npmmirror.com/@typescript-eslint/scope-manager/5.18.0
-      '@typescript-eslint/type-utils': registry.npmmirror.com/@typescript-eslint/types-utils/5.18.0_eslint@8.13.0+typescript@4.6.3
+      '@typescript-eslint/type-utils': registry.npmmirror.com/@typescript-eslint/type-utils/5.18.0_eslint@8.13.0+typescript@4.6.3
       '@typescript-eslint/utils': registry.npmmirror.com/@typescript-eslint/utils/5.18.0_eslint@8.13.0+typescript@4.6.3
       debug: registry.npmmirror.com/debug/4.3.4
       eslint: registry.npmmirror.com/eslint/8.13.0
@@ -682,9 +682,9 @@ packages:
     dev: true
 
   registry.npmmirror.com/@typescript-eslint/type-utils/5.18.0_eslint@8.13.0+typescript@4.6.3:
-    resolution: {integrity: sha512-vcn9/6J5D6jtHxpEJrgK8FhaM8r6J1/ZiNu70ZUJN554Y3D9t3iovi6u7JF8l/e7FcBIxeuTEidZDR70UuCIfA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@typescript-eslint/types-utils/-/types-utils-5.18.0.tgz}
-    id: registry.npmmirror.com/@typescript-eslint/types-utils/5.18.0
-    name: '@typescript-eslint/types-utils'
+    resolution: {integrity: sha512-vcn9/6J5D6jtHxpEJrgK8FhaM8r6J1/ZiNu70ZUJN554Y3D9t3iovi6u7JF8l/e7FcBIxeuTEidZDR70UuCIfA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@typescript-eslint/type-utils/-/type-utils-5.18.0.tgz}
+    id: registry.npmmirror.com/@typescript-eslint/type-utils/5.18.0
+    name: '@typescript-eslint/type-utils'
     version: 5.18.0
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -1452,7 +1452,7 @@ packages:
       '@types/parse-json': registry.npmmirror.com/@types/parse-json/4.0.0
       import-fresh: registry.npmmirror.com/import-fresh/3.3.0
       parse-json: registry.npmmirror.com/parse-json/5.2.0
-      path-type: registry.npmmirror.com/path-types/4.0.0
+      path-type: registry.npmmirror.com/path-type/4.0.0
       yaml: registry.npmmirror.com/yaml/1.10.2
     dev: true
 
@@ -1546,7 +1546,7 @@ packages:
     version: 3.0.1
     engines: {node: '>=8'}
     dependencies:
-      path-type: registry.npmmirror.com/path-types/4.0.0
+      path-type: registry.npmmirror.com/path-type/4.0.0
     dev: true
 
   registry.npmmirror.com/dlv/1.1.3:
@@ -2244,7 +2244,7 @@ packages:
     version: 13.13.0
     engines: {node: '>=8'}
     dependencies:
-      type-fest: registry.npmmirror.com/types-fest/0.20.2
+      type-fest: registry.npmmirror.com/type-fest/0.20.2
     dev: true
 
   registry.npmmirror.com/globby/11.1.0:
@@ -2548,7 +2548,7 @@ packages:
     engines: {node: '>= 0.8.0'}
     dependencies:
       prelude-ls: registry.npmmirror.com/prelude-ls/1.2.1
-      type-check: registry.npmmirror.com/types-check/0.4.0
+      type-check: registry.npmmirror.com/type-check/0.4.0
     dev: true
 
   registry.npmmirror.com/lilconfig/2.0.5:
@@ -2748,7 +2748,7 @@ packages:
       fast-levenshtein: registry.npmmirror.com/fast-levenshtein/2.0.6
       levn: registry.npmmirror.com/levn/0.4.1
       prelude-ls: registry.npmmirror.com/prelude-ls/1.2.1
-      type-check: registry.npmmirror.com/types-check/0.4.0
+      type-check: registry.npmmirror.com/type-check/0.4.0
       word-wrap: registry.npmmirror.com/word-wrap/1.2.3
     dev: true
 
@@ -2801,8 +2801,8 @@ packages:
     dev: true
 
   registry.npmmirror.com/path-type/4.0.0:
-    resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/path-types/-/path-types-4.0.0.tgz}
-    name: path-types
+    resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/path-type/-/path-type-4.0.0.tgz}
+    name: path-type
     version: 4.0.0
     engines: {node: '>=8'}
     dev: true
@@ -3303,8 +3303,8 @@ packages:
     dev: true
 
   registry.npmmirror.com/type-check/0.4.0:
-    resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/types-check/-/types-check-0.4.0.tgz}
-    name: types-check
+    resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/type-check/-/type-check-0.4.0.tgz}
+    name: type-check
     version: 0.4.0
     engines: {node: '>= 0.8.0'}
     dependencies:
@@ -3312,8 +3312,8 @@ packages:
     dev: true
 
   registry.npmmirror.com/type-fest/0.20.2:
-    resolution: {integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/types-fest/-/types-fest-0.20.2.tgz}
-    name: types-fest
+    resolution: {integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/type-fest/-/type-fest-0.20.2.tgz}
+    name: type-fest
     version: 0.20.2
     engines: {node: '>=10'}
     dev: true

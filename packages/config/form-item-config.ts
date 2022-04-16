@@ -1,3 +1,3 @@
-import { initFormComponent } from '@/class'
+import { initDesignComponents } from '@/class/design'
 
-export const basicComponents = initFormComponent()
+export const basicComponents = initDesignComponents()

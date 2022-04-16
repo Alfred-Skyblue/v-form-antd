@@ -1,4 +1,4 @@
-import { BasicFormItem } from '@/class/basic-form'
+import { BasicFormItem } from './basic-form'
 import type { IAnyObject } from '@/types'
 
 interface ICheckbox extends IAnyObject {

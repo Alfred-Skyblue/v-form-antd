@@ -1,5 +1,5 @@
-import type { IInput } from '@/class/input'
-import { BasicFormItem } from '@/class/basic-form'
+import type { IInput } from './/input'
+import { BasicFormItem } from './basic-form'
 
 type ITextarea = Pick<
   IInput,

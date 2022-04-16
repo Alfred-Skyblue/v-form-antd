@@ -1,4 +1,4 @@
-import { BasicFormItem } from '@/class/basic-form'
+import { BasicFormItem } from './basic-form'
 import type { VNode } from 'vue'
 import type { IAnyFunction } from '@/types'
 import type { IAnyObject } from '@/types'

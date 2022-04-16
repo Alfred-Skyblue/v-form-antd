@@ -15,11 +15,11 @@
     >
       <template #item="{ element, index }">
         <li
-          class="draggable-item"
+          class="draggable-item v-truncate"
           @dragstart="$emit('dragStart', element, index)"
         >
           <i :class="`v-align-middle iconfont icon-${element.icon}`"></i>
-          <span class="v-ml-5 v-align-middle v-truncate">
+          <span class="v-ml-5 v-align-middle">
             {{ element.label }}
           </span>
         </li>
@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import Draggable from 'vuedraggable'
-import type { BasicFormItem } from '@/class/basic-form'
+import type { BasicFormItem } from '@/class/render/basic-form'
 
 defineProps({
   list: {
