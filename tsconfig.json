@@ -15,6 +15,9 @@
     ],
     "paths": {
       "@/*": ["./packages/*"],
+      "@common/*": ["./packages/common/*"],
+      "@design/*": ["./packages/v-form-design/*"],
+      "@render/*": ["./packages/v-form-render/*"],
       "@styles/*": ["./styles/*"],
     }
   },

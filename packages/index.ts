@@ -1,6 +1,6 @@
 import type { App, Plugin } from 'vue'
 import '@styles/index.less'
-import VFormDesign from './VFormDesign/index.vue'
+import { VFormDesign } from './v-form-design'
 const components = { VFormDesign }
 
 const install: Exclude<Plugin['install'], undefined> = function installTestLib(
