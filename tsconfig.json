@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "packages/**/*","build/**/*","vite.config.ts"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "packages/**/*.ts"],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
@@ -17,7 +17,7 @@
       "@/*": ["./packages/*"],
       "@common/*": ["./packages/common/*"],
       "@design/*": ["./packages/v-form-design/*"],
-      "@render/*": ["./packages/v-form-render/*"],
+      "@create/*": ["./packages/v-form-create/*"],
       "@styles/*": ["./styles/*"],
     }
   },

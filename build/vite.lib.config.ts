@@ -1,18 +1,20 @@
 // vite.config.js
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-export default defineConfig({
+export const buildConfig = defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, '../packages/index.ts'),
-      name: 'MyLib',
-      fileName: format => `my-lib.${format}.js`
+      name: 'v-form-antd',
+      formats: ['es', 'cjs', 'umd'],
+      fileName: format => `v-form-antd.${format}.js`
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', 'ant-design-vue'],
       output: {
         globals: {
-          vue: 'Vue'
+          vue: 'Vue',
+          'ant-design-vue': 'antd'
         }
       }
     }
