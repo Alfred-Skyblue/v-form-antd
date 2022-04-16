@@ -10,6 +10,7 @@
         <Header></Header>
       </template>
       <template #default>
+        <toolbar></toolbar>
         <MainContainer></MainContainer>
       </template>
       <template #cmp-list>
@@ -28,22 +29,36 @@ import MainContainer from '@design/VFormDesign/modules/MainContainer.vue'
 import type { IVFormConfig } from '@design/types/form-design'
 import type { BasicFormItem } from '@common/class/basic-form'
 import { DesignVForm } from '@design/class/form'
+import { cloneDeep } from 'lodash-es'
+import Toolbar from '@design/VFormDesign/modules/Toolbar.vue'
 
 export default defineComponent({
   name: 'VFormDesign',
-  components: { MainContainer, LeftAside, Header, Layout },
+  components: { Toolbar, MainContainer, LeftAside, Header, Layout },
   setup() {
     const formConfig = ref<IVFormConfig>({
       formItems: [],
       currentItem: {} as IVFormConfig['currentItem'],
       config: new DesignVForm()
     })
+    /**
+     * 选中表单项
+     * @param {BasicFormItem} formItem
+     */
     const handleSelectItem = (formItem: BasicFormItem) => {
-      console.log('-> formItem', formItem)
       formConfig.value.currentItem = formItem
     }
-
-    provide('formDesignState', { formConfig, handleSelectItem })
+    /**
+     * 深拷贝一份数据添加到表单项并设置为当前选中项，然后重新生成 uuid
+     * @param {BasicFormItem} formItem
+     */
+    const handlePushItem = (formItem: BasicFormItem) => {
+      const newFormItem = cloneDeep(formItem)
+      formConfig.value.formItems.push(newFormItem)
+      handleSelectItem(newFormItem)
+      formItem.generateKey()
+    }
+    provide('formDesignState', { formConfig, handleSelectItem, handlePushItem })
     const state = reactive({})
     return { ...toRefs(state) }
   }

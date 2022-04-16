@@ -13,5 +13,14 @@ export interface IVFormConfig {
  */
 export interface IVFormDesignState {
   formConfig: Ref<IVFormConfig>
+  /**
+   * 选中表单项
+   * @param {BasicFormItem} formItem
+   */
   handleSelectItem: (item: BasicFormItem) => void
+  /**
+   * 深拷贝一份数据添加到表单项并设置为当前选中项，然后重新生成 uuid
+   * @param {BasicFormItem} formItem
+   */
+  handlePushItem: (item: BasicFormItem) => void
 }

@@ -17,6 +17,7 @@
         <li
           class="draggable-item v-truncate"
           @dragstart="$emit('dragStart', element, index)"
+          @click="handlePushItem(element)"
         >
           <i :class="`v-align-middle iconfont icon-${element.icon}`"></i>
           <span class="v-ml-5 v-align-middle">
@@ -32,6 +33,8 @@
 import type { PropType } from 'vue'
 import Draggable from 'vuedraggable'
 import type { BasicFormItem } from '@common/class/basic-form'
+import { inject } from 'vue'
+import type { IVFormDesignState } from '@design/types/form-design'
 
 defineProps({
   list: {
@@ -39,6 +42,7 @@ defineProps({
     default: () => []
   }
 })
+const { handlePushItem } = inject<IVFormDesignState>('formDesignState')!
 </script>
 
 <style lang="less" scoped>

@@ -4,7 +4,7 @@
  * @description: 设计器面板
 -->
 <template>
-  <div class="component-panel v-h-full">
+  <div class="component-panel">
     <a-empty class="position-center" v-show="isEmpty" />
     <a-form class="wh-full" v-bind="formProps">
       <a-row class="wh-full">
@@ -22,10 +22,13 @@
           :list="formConfig.formItems"
           itemKey="key"
           handle=".drag-move"
-          @add="handleChange"
+          @add="handleAdd"
         >
           <template #item="{ element }">
-            <li class="draggable-item drag-move v-cursor-move">
+            <li
+              class="draggable-item drag-move v-cursor-move"
+              @dragstart="handleSelectItem(element)"
+            >
               <layout-item :record="element"></layout-item>
             </li>
           </template>
@@ -42,11 +45,13 @@ import { cloneDeep } from 'lodash-es'
 import type { IVFormDesignState } from '@design/types/form-design'
 import LayoutItem from '@design/VFormDesign/components/LayoutItem.vue'
 
-const { formConfig } = inject<IVFormDesignState>('formDesignState')!
-console.log(formConfig)
-const handleChange = ({ newIndex }: any) => {
+const { formConfig, handleSelectItem } =
+  inject<IVFormDesignState>('formDesignState')!
+
+const handleAdd = ({ newIndex }: any) => {
   const formItems = formConfig.value.formItems
   formItems[newIndex] = cloneDeep(formItems[newIndex])
+  handleSelectItem(formItems[newIndex])
 }
 
 const isEmpty = computed(() => {
@@ -60,6 +65,7 @@ const formProps = computed(() => {
 
 <style lang="less" scoped>
 .component-panel {
+  height: calc(100% - var(--toolbar-height));
   .draggable-item {
     min-height: 36px;
     border-width: 0 !important;

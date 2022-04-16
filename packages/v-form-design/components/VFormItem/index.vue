@@ -29,7 +29,7 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .form-item-box {
-  /deep/ .ant-form-item {
+  :deep(.ant-form-item) {
     margin-bottom: 0;
     padding: 6px;
   }

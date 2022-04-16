@@ -27,7 +27,6 @@ defineProps({
 // 注入状态
 const formDesignState = inject<IVFormDesignState>('formDesignState')!
 const { formConfig, handleSelectItem } = formDesignState
-console.log('-> handleSelectItem', handleSelectItem)
 </script>
 
 <style lang="less" scoped>
@@ -53,24 +52,17 @@ console.log('-> handleSelectItem', handleSelectItem)
   // 选择时 end
   .form-item-box {
     position: relative;
-    box-sizing: border-box;
     word-wrap: break-word;
     &::before {
+      @apply v-absolute v-h-full v-w-full v-top-0 v-left-0;
       content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
       z-index: 888;
     }
-
     .ant-form-item {
       margin: 0;
       padding-bottom: 6px;
     }
   }
-
   .show-key-box {
     // 显示key
     @apply v-absolute v-bottom-2 v-right-2;
@@ -81,21 +73,14 @@ console.log('-> handleSelectItem', handleSelectItem)
   .copy,
   .delete {
     @apply v-absolute v-top-0 v-w-30 v-h-30 v-text-center;
-    position: absolute;
-    top: 0;
-    width: 30px;
-    height: 30px;
     line-height: 30px;
-    text-align: center;
     color: #fff;
     z-index: 989;
     transition: all 0.3s;
-
     &.unactivated {
       opacity: 0 !important;
       pointer-events: none;
     }
-
     &.active {
       opacity: 1 !important;
     }
