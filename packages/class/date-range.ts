@@ -52,7 +52,7 @@ interface IDateRange extends Omit<IDatePickerCommon, 'disabled'> {
 }
 
 export class DateRange extends BasicFormItem {
-  readonly tag = 'ADateRange'
+  readonly tag = 'ARangePicker'
   readonly type = 'dateRange'
   readonly icon = 'date-range'
   public props: Partial<IDateRange> = {
@@ -74,7 +74,7 @@ export class DateRange extends BasicFormItem {
     inputReadOnly: undefined,
     valueFormat: undefined
   }
-  constructor(label = '日期选择') {
+  constructor(label = '日期范围') {
     super(label)
   }
 }

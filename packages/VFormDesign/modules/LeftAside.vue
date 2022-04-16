@@ -33,6 +33,8 @@ export default defineComponent({
     const state = reactive({})
     const handleStart = (element: BasicFormItem, index: number) => {
       basicComponents[index] = cloneDeep(element)
+      console.log('-> element', element)
+
       element.generateKey()
     }
     return { ...toRefs(state), basicComponents, handleStart }

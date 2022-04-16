@@ -1,12 +1,12 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "packages/**/*"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "packages/**/*","build/**/*","vite.config.ts"],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
     "baseUrl": ".",
     "preserveValueImports": false,
-    "types":["@types/node", "@types/vue","@types/ant-design-vue"],
+    "types":["@types/node"],
     "lib": [
       "esnext",
       "dom",

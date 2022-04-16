@@ -10,7 +10,7 @@
         <Header></Header>
       </template>
       <template #default>
-        <main-container></main-container>
+        <MainContainer></MainContainer>
       </template>
       <template #cmp-list>
         <LeftAside></LeftAside>
@@ -25,15 +25,23 @@ import Layout from '../Layout/index.vue'
 import Header from '@/VFormDesign/modules/Header.vue'
 import LeftAside from '@/VFormDesign/modules/LeftAside.vue'
 import MainContainer from '@/VFormDesign/modules/MainContainer.vue'
+import type { IVFormConfig } from '@/types/form-design'
+import type { BasicFormItem } from '@/class/basic-form'
 
 export default defineComponent({
   name: 'VFormDesign',
   components: { MainContainer, LeftAside, Header, Layout },
   setup() {
-    const formConfig = ref({
-      formItems: []
+    const formConfig = ref<IVFormConfig>({
+      formItems: [],
+      currentItem: {} as IVFormConfig['currentItem']
     })
-    provide('formConfig', formConfig)
+    const handleSelectItem = (formItem: BasicFormItem) => {
+      console.log('-> formItem', formItem)
+      formConfig.value.currentItem = formItem
+    }
+
+    provide('formDesignState', { formConfig, handleSelectItem })
     const state = reactive({})
     return { ...toRefs(state) }
   }

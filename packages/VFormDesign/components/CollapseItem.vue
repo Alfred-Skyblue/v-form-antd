@@ -11,7 +11,7 @@
       :list="list"
       :group="{ name: 'form-draggable', pull: 'clone', put: false }"
       :sort="false"
-      itemKey="type"
+      itemKey="key"
     >
       <template #item="{ element, index }">
         <li
@@ -31,22 +31,20 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import Draggable from 'vuedraggable'
-import type { IFormItemType } from '@/config/form-item-config'
+import type { BasicFormItem } from '@/class/basic-form'
 
 defineProps({
   list: {
-    type: Array as PropType<IFormItemType[]>,
-    default: () => [
-      { title: '标题1', content: '内容1', type: 'text' },
-      { title: '标题2', content: '内容1', type: 'number' }
-    ]
+    type: Array as PropType<BasicFormItem[]>,
+    default: () => []
   }
 })
 </script>
 
 <style lang="less" scoped>
 .draggable-item {
-  @apply v-px-12 v-transition-all v-h-36 v-cursor-move v-border v-rounded;
+  @apply v-px-12 v-transition-all v-h-36 v-cursor-move v-rounded;
+  border: 1px solid #e6e6e6;
   line-height: 36px;
   &:hover {
     @apply v-text-primary v-border-primary;
