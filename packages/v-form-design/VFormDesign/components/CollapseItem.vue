@@ -19,7 +19,7 @@
           @dragstart="$emit('dragStart', element, index)"
           @click="handlePushItem(element)"
         >
-          <i :class="`v-align-middle iconfont icon-${element.icon}`"></i>
+          <Icon :type="element.icon" />
           <span class="v-ml-5 v-align-middle">
             {{ element.label }}
           </span>
@@ -35,6 +35,7 @@ import Draggable from 'vuedraggable'
 import type { BasicFormItem } from '@common/class/basic-form'
 import { inject } from 'vue'
 import type { IVFormDesignState } from '@design/types/form-design'
+import Icon from '@design/components/Icon/index.vue'
 
 defineProps({
   list: {

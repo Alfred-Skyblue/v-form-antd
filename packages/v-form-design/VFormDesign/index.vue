@@ -26,10 +26,9 @@ import Layout from '../Layout/index.vue'
 import Header from '@design/VFormDesign/modules/Header.vue'
 import LeftAside from '@design/VFormDesign/modules/LeftAside.vue'
 import MainContainer from '@design/VFormDesign/modules/MainContainer.vue'
-import type { IVFormConfig } from '@design/types/form-design'
-import type { BasicFormItem } from '@common/class/basic-form'
+import type { IVFormConfig, IVFormDesignState } from '@design/types/form-design'
 import { DesignVForm } from '@design/class/form'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, remove } from 'lodash-es'
 import Toolbar from '@design/VFormDesign/modules/Toolbar.vue'
 
 export default defineComponent({
@@ -45,20 +44,31 @@ export default defineComponent({
      * 选中表单项
      * @param {BasicFormItem} formItem
      */
-    const handleSelectItem = (formItem: BasicFormItem) => {
-      formConfig.value.currentItem = formItem
-    }
+    const handleSelectItem: IVFormDesignState['handleSelectItem'] =
+      formItem => {
+        formConfig.value.currentItem = formItem
+      }
     /**
      * 深拷贝一份数据添加到表单项并设置为当前选中项，然后重新生成 uuid
      * @param {BasicFormItem} formItem
      */
-    const handlePushItem = (formItem: BasicFormItem) => {
+    const handlePushItem: IVFormDesignState['handlePushItem'] = formItem => {
+      formItem.generateKey()
       const newFormItem = cloneDeep(formItem)
       formConfig.value.formItems.push(newFormItem)
       handleSelectItem(newFormItem)
-      formItem.generateKey()
     }
-    provide('formDesignState', { formConfig, handleSelectItem, handlePushItem })
+
+    const handleRemoveItem: IVFormDesignState['handleRemoveItem'] =
+      callback => {
+        remove(formConfig.value.formItems, callback)
+      }
+    provide('formDesignState', {
+      formConfig,
+      handleSelectItem,
+      handlePushItem,
+      handleRemoveItem
+    })
     const state = reactive({})
     return { ...toRefs(state) }
   }

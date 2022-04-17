@@ -23,4 +23,5 @@ export interface IVFormDesignState {
    * @param {BasicFormItem} formItem
    */
   handlePushItem: (item: BasicFormItem) => void
+  handleRemoveItem: (callback: (item: BasicFormItem) => boolean) => void
 }
