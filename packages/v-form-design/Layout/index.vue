@@ -33,7 +33,8 @@ export default defineComponent({
 .v-form-antd-layout {
   @apply v-h-full v-flex v-flex-col;
   .v-form-antd-header {
-    @apply v-h-56 v-bg-primary v-mb-5;
+    @apply v-bg-primary v-mb-5;
+    min-height: 56px;
     color: var(--header-text-color);
     font-size: 20px;
   }

@@ -32,7 +32,7 @@ interface ICheckbox extends IAnyObject {
 }
 
 export class Checkbox extends BasicFormItem {
-  readonly tag = 'ACheckbox'
+  readonly _tag = 'ACheckbox'
   readonly type = 'checkbox'
   readonly icon = 'checkbox'
   public props: Partial<ICheckbox> = {

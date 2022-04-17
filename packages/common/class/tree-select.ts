@@ -202,7 +202,7 @@ interface ITreeSelect {
   replaceFields: IAnyObject
 }
 export class TreeSelect extends BasicFormItem {
-  readonly tag = 'ATreeSelect'
+  readonly _tag = 'ATreeSelect'
   readonly type = 'treeSelect'
   readonly icon = 'tree-select'
   public props: Partial<ITreeSelect> = {

@@ -153,7 +153,7 @@ interface ITimePicker extends IAnyObject {
   size: 'large' | 'default' | 'small'
 }
 export class Time extends BasicFormItem {
-  readonly tag = 'ATimePicker'
+  readonly _tag = 'ATimePicker'
   readonly type = 'time'
   readonly icon = 'time-picker'
 

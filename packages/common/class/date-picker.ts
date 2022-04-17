@@ -60,7 +60,7 @@ interface IDatePicker extends IDatePickerCommon {
 }
 
 export class DatePicker extends BasicFormItem {
-  readonly tag = 'ADatePicker'
+  readonly _tag = 'ADatePicker'
   readonly type = 'date'
   readonly icon = 'date-picker'
   public props: Partial<IDatePicker> = {

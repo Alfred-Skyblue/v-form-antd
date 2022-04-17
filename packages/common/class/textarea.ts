@@ -12,7 +12,7 @@ type ITextarea = Pick<
  * @class Textarea
  */
 export class Textarea extends BasicFormItem {
-  readonly tag = 'ATextarea'
+  readonly _tag = 'ATextarea'
   readonly type = 'textarea'
   readonly icon = 'textarea'
   public props: Partial<ITextarea> = {

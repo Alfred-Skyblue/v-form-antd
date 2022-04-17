@@ -105,7 +105,7 @@ interface ISlider extends IAnyObject {
   tooltipVisible: boolean
 }
 export class Slider extends BasicFormItem {
-  readonly tag = 'ASlider'
+  readonly _tag = 'ASlider'
   readonly type = 'slider'
   readonly icon = 'slider'
   public props: Partial<ISlider> = {

@@ -68,7 +68,7 @@ export interface IInput extends IAnyObject {
 }
 
 export class Input extends BasicFormItem {
-  readonly tag = 'AInput'
+  readonly _tag = 'AInput'
   readonly icon = 'input'
   // componentType
   readonly type = 'input'

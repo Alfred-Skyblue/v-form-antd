@@ -52,7 +52,7 @@ interface IDateRange extends Omit<IDatePickerCommon, 'disabled'> {
 }
 
 export class DateRange extends BasicFormItem {
-  readonly tag = 'ARangePicker'
+  readonly _tag = 'ARangePicker'
   readonly type = 'dateRange'
   readonly icon = 'date-range'
   public props: Partial<IDateRange> = {

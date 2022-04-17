@@ -11,7 +11,7 @@
     <a
       class="delete"
       :class="activeClass"
-      @click.stop="handleRemoveItem(item => item.key === record.key)"
+      @click.stop="handleRemoveItem(item => item._key === record._key)"
     >
       <Icon type="delete" />
     </a>
@@ -20,8 +20,8 @@
 
 <script setup lang="ts">
 import { computed, inject, PropType } from 'vue'
-import { BasicFormItem } from '@/common/class/basic-form'
-import { IVFormDesignState } from '../../types/form-design'
+import type { BasicFormItem } from '@/common/class/basic-form'
+import type { IVFormDesignState } from '../../types/form-design'
 import Icon from '@design/components/Icon/index.vue'
 import { cloneDeep } from 'lodash-es'
 
@@ -35,7 +35,7 @@ const { formConfig, handleRemoveItem, handlePushItem } =
   inject<IVFormDesignState>('formDesignState')!
 
 const activeClass = computed(() => {
-  return props.record!.key === formConfig.value.currentItem.key
+  return props.record!._key === formConfig.value.currentItem._key
     ? 'active'
     : 'unactivated'
 })

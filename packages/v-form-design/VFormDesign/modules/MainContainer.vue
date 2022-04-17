@@ -6,15 +6,15 @@
 <template>
   <div class="component-panel">
     <a-empty class="position-center" v-show="isEmpty" />
-    <a-form class="wh-full" v-bind="formProps">
-      <a-row class="wh-full">
+    <a-form class="v-h-full" v-bind="formProps">
+      <a-row class="wh-full v-overflow-auto v-relative">
         <draggable
           tag="transition-group"
           :component-data="{
             tag: 'ul',
             type: 'transition-group',
             name: 'list',
-            class: 'v-overflow-hidden wh-full'
+            class: 'v-w-full list-main v-absolute v-px-5 v-py-10'
           }"
           group="form-draggable"
           ghostClass="moving"
@@ -66,6 +66,7 @@ const formProps = computed(() => {
 <style lang="less" scoped>
 .component-panel {
   height: calc(100% - var(--toolbar-height));
+  position: relative;
   .draggable-item {
     min-height: 36px;
     border-width: 0 !important;
@@ -79,6 +80,9 @@ const formProps = computed(() => {
   .moving {
     opacity: 0.5 !important;
     background: #c8ebfb;
+  }
+  .list-main {
+    min-height: 100%;
   }
   // 列表动画
   .list-enter-active,

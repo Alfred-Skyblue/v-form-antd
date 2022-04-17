@@ -53,7 +53,7 @@ interface IRate extends IAnyObject {
   tooltips: Array<string>
 }
 export class Rate extends BasicFormItem {
-  readonly tag = 'ARate'
+  readonly _tag = 'ARate'
   readonly type = 'rate'
   readonly icon = 'rate'
   public props: Partial<IRate> = {

@@ -4,11 +4,11 @@ import { randomUUID } from '@design/utils/util'
 let uid = 1
 export abstract class BasicFormItem {
   abstract icon?: string
-  abstract tag?: string
+  abstract _tag?: string
   abstract type: string
   abstract props: IAnyObject
   public on!: IAnyEvent
-  public key!: string
+  public _key!: string
   public field!: string
   protected constructor(public label: string) {
     this.label = label
@@ -23,6 +23,6 @@ export abstract class BasicFormItem {
     this.generateKey()
   }
   generateKey() {
-    this.key = randomUUID()
+    this._key = randomUUID()
   }
 }

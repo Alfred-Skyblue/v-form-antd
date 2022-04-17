@@ -246,7 +246,7 @@ interface ISelect extends IAnyObject {
 }
 
 export class Select extends BasicFormItem {
-  readonly tag = 'ASelect'
+  readonly _tag = 'ASelect'
   readonly type = 'select'
   readonly icon = 'select'
   public props: Partial<ISelect> = {

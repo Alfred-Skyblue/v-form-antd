@@ -119,7 +119,7 @@ interface INumber extends IAnyObject {
  * @class VNumber
  */
 export class VNumber extends BasicFormItem {
-  readonly tag = 'AInputNumber'
+  readonly _tag = 'AInputNumber'
   readonly icon = 'number'
   readonly type = 'number'
   // props

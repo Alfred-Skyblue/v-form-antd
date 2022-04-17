@@ -70,9 +70,13 @@ export default defineComponent({
       handleRemoveItem
     })
     const state = reactive({})
-    return { ...toRefs(state) }
+    return {
+      ...toRefs(state),
+      handleSelectItem,
+      handlePushItem,
+      handleRemoveItem,
+      formConfig
+    }
   }
 })
 </script>
-
-<style scoped></style>

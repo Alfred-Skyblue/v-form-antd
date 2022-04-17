@@ -152,7 +152,7 @@ interface ICascader extends IAnyObject {
   value: Array<string | number>
 }
 export class Cascader extends BasicFormItem {
-  readonly tag = 'ACascader'
+  readonly _tag = 'ACascader'
   readonly type = 'cascader'
   readonly icon = 'cascader'
   public props: Partial<ICascader> = {

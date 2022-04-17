@@ -1,4 +1,5 @@
 .v-form-design {
+  overflow: hidden;
   .xy-center {
     @apply v-flex v-justify-center v-items-center;
   }
@@ -15,5 +16,22 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  ::-webkit-scrollbar {
+    background-color: rgba(27,27,27,.4);
+    border-radius: 10px;
+    width: 3px; //y轴滚动条宽度
+    height:3px; //x轴滚动条高度
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px; //滚动条的圆角
+    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+   //  background: var(--primary-color); //滚动条的背景颜色
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 10px; //滚动条的背景区域的圆角
+    background: rgba(255, 255, 255, 0.44); //滚动条的背景颜色
   }
 }

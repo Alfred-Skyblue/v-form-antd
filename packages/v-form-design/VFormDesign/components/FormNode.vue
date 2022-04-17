@@ -6,7 +6,7 @@
 <template>
   <div
     class="drag-move-box v-relative v-p-8 v-overflow-hidden v-transition-all"
-    :class="{ active: record.key === formConfig.currentItem.key }"
+    :class="{ active: record._key === formConfig.currentItem._key }"
     @click="handleSelectItem(record)"
   >
     <v-form-item :record="record"></v-form-item>
@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { PropType, inject } from 'vue'
-import { BasicFormItem } from '@common/class/basic-form'
+import type { BasicFormItem } from '@common/class/basic-form'
 import type { IVFormDesignState } from '@design/types/form-design'
 import VFormItem from '@design/components/VFormItem/index.vue'
 import FormNodeAction from '@design/VFormDesign/components/FormNodeAction.vue'

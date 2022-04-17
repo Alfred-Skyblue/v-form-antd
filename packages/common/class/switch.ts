@@ -54,7 +54,7 @@ interface ISwitch extends IAnyObject {
   unCheckedValue: any
 }
 export class Switch extends BasicFormItem {
-  readonly tag = 'ASwitch'
+  readonly _tag = 'ASwitch'
   readonly type = 'switch'
   readonly icon = 'switch'
   public props: Partial<ISwitch> = {

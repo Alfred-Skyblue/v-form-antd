@@ -12,6 +12,8 @@ export const buildConfig = defineConfig({
     rollupOptions: {
       external: ['vue', 'ant-design-vue'],
       output: {
+        // 配置 css 文件名
+        assetFileNames: 'v-form-antd.[ext]',
         globals: {
           vue: 'Vue',
           'ant-design-vue': 'antd'
