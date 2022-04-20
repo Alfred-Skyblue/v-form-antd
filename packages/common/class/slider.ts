@@ -1,7 +1,7 @@
 import { BasicFormItem } from './basic-form'
 import type { VNode } from 'vue'
-import type { IAnyFunction } from '@design/types'
-import type { IAnyObject } from '@design/types'
+import type { IAnyFunction, IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface ISlider extends IAnyObject {
   /**
@@ -126,7 +126,8 @@ export class Slider extends BasicFormItem {
     vertical: undefined,
     tooltipVisible: undefined
   }
-  constructor(label = '滑动输入') {
-    super(label)
+
+  constructor(options?: IFormItemOptions) {
+    super({ label: '滑动输入', ...options })
   }
 }

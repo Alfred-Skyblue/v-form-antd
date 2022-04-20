@@ -1,6 +1,7 @@
 import { BasicFormItem } from './basic-form'
 import type { Slot, VNode } from 'vue'
-import type { IAnyObject } from '@design/types'
+import type { IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface ISelect extends IAnyObject {
   /**
@@ -266,7 +267,7 @@ export class Select extends BasicFormItem {
     open: undefined,
     options: []
   }
-  constructor(label = '下拉选择') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '下拉选择', ...options })
   }
 }

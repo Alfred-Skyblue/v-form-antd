@@ -1,5 +1,6 @@
 import { BasicFormItem } from './basic-form'
-import type { IAnyObject } from '@design/types'
+import type { IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface IRate extends IAnyObject {
   /**
@@ -67,7 +68,7 @@ export class Rate extends BasicFormItem {
     value: undefined,
     tooltips: undefined
   }
-  constructor(label = '评分') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '评分', ...options })
   }
 }

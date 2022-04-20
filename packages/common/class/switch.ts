@@ -1,5 +1,6 @@
 import { BasicFormItem } from './basic-form'
-import type { IAnyObject } from '@design/types'
+import type { IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface ISwitch extends IAnyObject {
   /**
@@ -65,7 +66,7 @@ export class Switch extends BasicFormItem {
     size: 'default',
     unCheckedValue: false
   }
-  constructor(label = '开关') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '开关', ...options })
   }
 }

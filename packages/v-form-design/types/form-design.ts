@@ -24,4 +24,5 @@ export interface IVFormDesignState {
    */
   handlePushItem: (item: BasicFormItem) => void
   handleRemoveItem: (callback: (item: BasicFormItem) => boolean) => void
+  handleClear: () => void
 }

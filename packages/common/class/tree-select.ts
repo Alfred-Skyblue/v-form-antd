@@ -1,5 +1,6 @@
 import { BasicFormItem } from './basic-form'
-import type { IAnyFunction, IAnyObject } from '@design/types'
+import type { IAnyFunction, IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface ITreeSelect {
   treeIcon?: boolean
@@ -59,7 +60,6 @@ interface ITreeSelect {
 
   /**
    * Load data asynchronously.
-   * @type
    */
   loadData: IAnyFunction
 
@@ -98,7 +98,6 @@ interface ITreeSelect {
    * TreeSelect.SHOW_ALL: show all checked treeNodes (include parent treeNode).
    * TreeSelect.SHOW_PARENT: show checked treeNodes (just show parent treeNode).
    * @default TreeSelect.SHOW_CHILD
-   * @type
    */
   showCheckedStrategy: 'SHOW_ALL' | 'SHOW_PARENT' | 'SHOW_CHILD'
 
@@ -240,7 +239,7 @@ export class TreeSelect extends BasicFormItem {
     suffixIcon: undefined,
     replaceFields: undefined
   }
-  constructor(label = '树形选择') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '树形选择', ...options })
   }
 }

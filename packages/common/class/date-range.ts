@@ -1,5 +1,6 @@
 import { BasicFormItem } from './basic-form'
-import type { IDatePickerCommon } from '@design/types/date'
+import type { IDatePickerCommon } from '../types/date'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface IDateRange extends Omit<IDatePickerCommon, 'disabled'> {
   allowEmpty: [boolean, boolean]
@@ -74,7 +75,7 @@ export class DateRange extends BasicFormItem {
     inputReadOnly: undefined,
     valueFormat: undefined
   }
-  constructor(label = '日期范围') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '日期范围', ...options })
   }
 }

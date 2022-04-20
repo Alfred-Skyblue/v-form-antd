@@ -1,6 +1,7 @@
 import { BasicFormItem } from './basic-form'
 import type { Slot } from 'vue'
-import type { IAnyObject } from '@design/types'
+import type { IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 interface INumber extends IAnyObject {
   /**
    * after label
@@ -135,7 +136,8 @@ export class VNumber extends BasicFormItem {
     step: undefined,
     value: undefined
   }
-  constructor(label = '数字输入框') {
-    super(label)
+
+  constructor(options?: IFormItemOptions) {
+    super({ label: '数字输入框', ...options })
   }
 }

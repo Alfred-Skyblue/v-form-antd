@@ -49,5 +49,5 @@ export function createFormComponent<T extends keyof IFormComponent>(
   type: T,
   label?: string
 ): BasicFormItem {
-  return new formComponents[type](label)
+  return new formComponents[type]({ label })
 }

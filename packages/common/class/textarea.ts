@@ -1,5 +1,6 @@
 import type { IInput } from './/input'
 import { BasicFormItem } from './basic-form'
+import type { IFormItemOptions } from '@common/types/form'
 
 type ITextarea = Pick<
   IInput,
@@ -21,7 +22,7 @@ export class Textarea extends BasicFormItem {
     showCount: undefined,
     value: undefined
   }
-  constructor(label = '文本域') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '文本域', ...options })
   }
 }

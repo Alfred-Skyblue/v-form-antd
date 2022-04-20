@@ -1,5 +1,6 @@
 import { BasicFormItem } from './basic-form'
-import type { IAnyObject } from '@design/types'
+import type { IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface ICheckbox extends IAnyObject {
   /**
@@ -41,7 +42,7 @@ export class Checkbox extends BasicFormItem {
     disabled: undefined,
     indeterminate: undefined
   }
-  constructor(label = '复选框') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '复选框', ...options })
   }
 }

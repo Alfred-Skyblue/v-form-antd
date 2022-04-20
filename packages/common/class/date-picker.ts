@@ -1,6 +1,7 @@
 import { BasicFormItem } from './basic-form'
-import type { IDatePickerCommon } from '@design/types/date'
+import type { IDatePickerCommon } from '../types/date'
 import type { Slot } from 'vue'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface IDatePicker extends IDatePickerCommon {
   /**
@@ -84,7 +85,7 @@ export class DatePicker extends BasicFormItem {
     inputReadOnly: undefined,
     valueFormat: undefined
   }
-  constructor(label = '日期选择') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '日期选择', ...options })
   }
 }

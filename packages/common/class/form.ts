@@ -1,4 +1,4 @@
-import type { IAnyEvent, IAnyObject } from '@design/types'
+import type { IAnyEvent, IAnyObject } from '@common/types'
 
 export interface IAForm extends IAnyObject {
   layout: 'horizontal' | 'vertical' | 'inline'

@@ -1,7 +1,7 @@
 <!--
  * @author: 杨攀腾
  * @date: 2022/4/11
- * @description: $END$
+ * @description: 表单设计器首页
 -->
 <template>
   <div class="v-form-design light-theme v-h-screen v-bg-body">
@@ -10,7 +10,7 @@
         <Header></Header>
       </template>
       <template #default>
-        <toolbar></toolbar>
+        <toolbar @handleClear="handleClear"></toolbar>
         <MainContainer></MainContainer>
       </template>
       <template #cmp-list>
@@ -63,11 +63,16 @@ export default defineComponent({
       callback => {
         remove(formConfig.value.formItems, callback)
       }
+
+    const handleClear: IVFormDesignState['handleClear'] = () => {
+      formConfig.value.formItems = []
+    }
     provide('formDesignState', {
       formConfig,
       handleSelectItem,
       handlePushItem,
-      handleRemoveItem
+      handleRemoveItem,
+      handleClear
     })
     const state = reactive({})
     return {
@@ -75,6 +80,7 @@ export default defineComponent({
       handleSelectItem,
       handlePushItem,
       handleRemoveItem,
+      handleClear,
       formConfig
     }
   }

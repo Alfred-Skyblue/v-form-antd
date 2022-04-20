@@ -5,9 +5,9 @@
 -->
 <template>
   <div class="component-panel">
-    <a-empty class="position-center" v-show="isEmpty" />
+    <a-empty class="position-center empty-content" v-show="showEmpty" />
     <a-form class="v-h-full" v-bind="formProps">
-      <a-row class="wh-full v-overflow-auto v-relative">
+      <a-row class="wh-full v-overflow-y-auto v-overflow-x-hidden v-relative">
         <draggable
           tag="transition-group"
           :component-data="{
@@ -20,7 +20,7 @@
           ghostClass="moving"
           :animation="180"
           :list="formConfig.formItems"
-          itemKey="key"
+          itemKey="_key"
           handle=".drag-move"
           @add="handleAdd"
         >
@@ -44,6 +44,7 @@ import Draggable from 'vuedraggable'
 import { cloneDeep } from 'lodash-es'
 import type { IVFormDesignState } from '@design/types/form-design'
 import LayoutItem from '@design/VFormDesign/components/LayoutItem.vue'
+import { computedAsync } from '@vueuse/core'
 
 const { formConfig, handleSelectItem } =
   inject<IVFormDesignState>('formDesignState')!
@@ -54,13 +55,27 @@ const handleAdd = ({ newIndex }: any) => {
   handleSelectItem(formItems[newIndex])
 }
 
-const isEmpty = computed(() => {
-  return formConfig.value.formItems.length === 0
-})
-
 const formProps = computed(() => {
   return formConfig.value.config
 })
+
+/**
+ * 异步计算属性，兼容动画
+ * @type {Ref<boolean>}
+ */
+const showEmpty = computedAsync(async () => {
+  return new Promise(resolve => {
+    const isEmpty = formConfig.value.formItems.length === 0
+    if (isEmpty) {
+      const timer = setTimeout(() => {
+        resolve(isEmpty)
+        clearTimeout(timer)
+      }, 650)
+    } else {
+      resolve(isEmpty)
+    }
+  })
+}, true)
 </script>
 
 <style lang="less" scoped>
@@ -70,9 +85,6 @@ const formProps = computed(() => {
   .draggable-item {
     min-height: 36px;
     border-width: 0 !important;
-  }
-  .flip-list-move {
-    transition: transform 0.5s;
   }
   .no-move {
     transition: transform 0s;
@@ -87,13 +99,14 @@ const formProps = computed(() => {
   // 列表动画
   .list-enter-active,
   .list-leave-active {
-    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    animation-name: swoopInLeft;
+    animation-duration: 0.5s;
   }
 
   .list-enter-from,
   .list-leave-to {
-    opacity: 0;
-    transform: translateX(-100px);
+    animation-name: swoopOutRight;
+    animation-duration: 0.5s;
   }
 
   .list-enter {

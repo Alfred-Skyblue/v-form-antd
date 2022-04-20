@@ -51,5 +51,5 @@ export function createDesignComponent<T extends keyof DesignComponentType>(
   type: T,
   label?: string
 ): BasicFormItem {
-  return new designComponents[type](label)
+  return new designComponents[type]({ label })
 }

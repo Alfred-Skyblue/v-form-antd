@@ -1,5 +1,6 @@
 import { BasicFormItem } from './basic-form'
-import type { IAnyFunction, IAnyObject } from '@design/types'
+import type { IAnyFunction, IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface ITimePicker extends IAnyObject {
   /**
@@ -141,7 +142,6 @@ interface ITimePicker extends IAnyObject {
 
   /**
    * to set time
-   * @type Moment
    */
   value: any
 
@@ -183,7 +183,7 @@ export class Time extends BasicFormItem {
     value: undefined,
     size: undefined
   }
-  constructor(label = '时间选择') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '时间选择', ...options })
   }
 }

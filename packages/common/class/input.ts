@@ -1,6 +1,6 @@
-import type { StringAndSlot } from '@design/types'
 import { BasicFormItem } from './basic-form'
-import type { IAnyObject } from '@design/types'
+import type { IAnyObject, StringAndSlot } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 export interface IInput extends IAnyObject {
   /**
    * The label text displayed after (on the right side of) the input field.
@@ -85,7 +85,8 @@ export class Input extends BasicFormItem {
     showCount: undefined,
     allowClear: undefined
   }
-  constructor(label = '输入框') {
-    super(label)
+
+  constructor(options?: IFormItemOptions) {
+    super({ label: '输入框', ...options })
   }
 }

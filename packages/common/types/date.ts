@@ -1,5 +1,5 @@
 import type { Slot } from 'vue'
-import type { IAnyObject } from '@design/types/index'
+import type { IAnyObject } from './index'
 
 export interface IDatePickerCommon extends IAnyObject {
   /**

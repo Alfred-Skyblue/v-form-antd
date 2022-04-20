@@ -1,5 +1,6 @@
 import { BasicFormItem } from './basic-form'
-import type { IAnyObject } from '@design/types'
+import type { IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface IRadio extends IAnyObject {
   /**
@@ -39,7 +40,7 @@ export class Radio extends BasicFormItem {
     disabled: undefined,
     value: undefined
   }
-  constructor(label = '单选框') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '单选框', ...options })
   }
 }

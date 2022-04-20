@@ -58,7 +58,7 @@ const toolbarConfig = reactive([
   {
     title: '清空',
     type: 'reset',
-    event: 'handleClearFormItems',
+    event: 'handleClear',
     icon: 'delete'
   }
 ])

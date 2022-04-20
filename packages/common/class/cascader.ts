@@ -1,5 +1,6 @@
 import { BasicFormItem } from './basic-form'
-import type { IAnyFunction, IAnyObject } from '@design/types'
+import type { IAnyFunction, IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 
 interface ICascader extends IAnyObject {
   /**
@@ -186,7 +187,7 @@ export class Cascader extends BasicFormItem {
     tagRender: undefined,
     value: undefined
   }
-  constructor(label = '级联选择') {
-    super(label)
+  constructor(options?: IFormItemOptions) {
+    super({ label: '级联选择', ...options })
   }
 }

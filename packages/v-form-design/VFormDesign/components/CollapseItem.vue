@@ -11,11 +11,11 @@
       :list="list"
       :group="{ name: 'form-draggable', pull: 'clone', put: false }"
       :sort="false"
-      itemKey="key"
+      itemKey="_key"
     >
       <template #item="{ element, index }">
         <li
-          class="draggable-item v-truncate"
+          class="draggable-item v-truncate cmp-config"
           @dragstart="$emit('dragStart', element, index)"
           @click="handlePushItem(element)"
         >
