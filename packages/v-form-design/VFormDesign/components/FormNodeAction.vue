@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { computed, inject, PropType } from 'vue'
-import type { BasicFormItem } from '@/common/class/basic-form'
+import type { BasicFormItem } from '@common/class/basic-form'
 import type { IVFormDesignState } from '../../types/form-design'
 import Icon from '@design/components/Icon/index.vue'
 import { cloneDeep } from 'lodash-es'

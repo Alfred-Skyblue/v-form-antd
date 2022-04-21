@@ -1,6 +1,6 @@
 import type { BasicFormItem } from '@common/class/basic-form'
 import type { Ref } from 'vue'
-import type { DesignVForm } from '@design/class/form'
+import type { DesignVForm } from '@design/class/form/form'
 
 export interface IVFormConfig {
   formItems: BasicFormItem[]

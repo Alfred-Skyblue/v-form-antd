@@ -27,7 +27,7 @@ import Header from '@design/VFormDesign/modules/Header.vue'
 import LeftAside from '@design/VFormDesign/modules/LeftAside.vue'
 import MainContainer from '@design/VFormDesign/modules/MainContainer.vue'
 import type { IVFormConfig, IVFormDesignState } from '@design/types/form-design'
-import { DesignVForm } from '@design/class/form'
+import { DesignVForm } from '@design/class/form/form'
 import { cloneDeep, remove } from 'lodash-es'
 import Toolbar from '@design/VFormDesign/modules/Toolbar.vue'
 
@@ -53,8 +53,8 @@ export default defineComponent({
      * @param {BasicFormItem} formItem
      */
     const handlePushItem: IVFormDesignState['handlePushItem'] = formItem => {
-      formItem.generateKey()
       const newFormItem = cloneDeep(formItem)
+      newFormItem.generateKey()
       formConfig.value.formItems.push(newFormItem)
       handleSelectItem(newFormItem)
     }
