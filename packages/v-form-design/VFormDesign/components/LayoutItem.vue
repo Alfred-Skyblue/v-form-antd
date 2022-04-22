@@ -5,32 +5,42 @@
 -->
 <template>
   <div>
-    <div v-if="isGridComponent(gridRecord)">
-      <a-row v-bind="gridRecord.props">
-        <a-col v-for="(item, index) of gridRecord.columns" :key="index">
-          <layout-item :record="item"></layout-item>
-        </a-col>
-      </a-row>
-    </div>
+    <GridPanel v-if="isGrid" :record="gridRecord"></GridPanel>
     <form-node v-else :record="record"></form-node>
   </div>
 </template>
 
-<script setup lang="ts">
-import FormNode from '@design/VFormDesign/components/FormNode.vue'
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import FormNode from './FormNode.vue'
+import GridPanel from './GridPanel.vue'
+import { isGridComponent } from '@common/utils/type-guard'
 import type { BasicFormItem } from '@common/class/basic-form'
 import type { PropType } from 'vue'
-import { isGridComponent } from '@common/utils/type-guard'
-import { GridComponent } from '@common/layout/grid'
-const props = defineProps({
-  record: {
-    type: Object as PropType<BasicFormItem>,
-    required: true
+import type { GridComponent } from '@common/layout/grid'
+export default defineComponent({
+  components: {
+    GridPanel,
+    FormNode
+  },
+  props: {
+    record: {
+      type: Object as PropType<BasicFormItem>,
+      required: true
+    }
+  },
+  setup(props) {
+    const isGrid = computed(() => isGridComponent(props.record))
+    const gridRecord = computed(() => props.record as unknown as GridComponent)
+
+    return { isGrid, gridRecord }
   }
 })
-
-// 避免在 template 中警告
-const gridRecord = props.record as GridComponent
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+.grid-panel {
+  background-color: red;
+  min-height: 60px;
+}
+</style>

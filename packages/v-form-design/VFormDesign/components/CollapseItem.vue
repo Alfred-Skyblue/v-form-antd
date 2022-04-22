@@ -8,7 +8,7 @@
     <Draggable
       class="p-5 v-grid v-grid-cols-2 v-gap-4"
       tag="ul"
-      :list="list"
+      :list="modelList"
       :group="{ name: 'form-draggable', pull: 'clone', put: false }"
       :sort="false"
       itemKey="_key"
@@ -16,7 +16,7 @@
       <template #item="{ element, index }">
         <li
           class="draggable-item v-truncate cmp-config"
-          @dragstart="$emit('dragStart', element, index)"
+          @dragstart="handleDragStart(element, index)"
           @click="handlePushItem(element)"
         >
           <Icon :type="element.icon" />
@@ -30,20 +30,28 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import Draggable from 'vuedraggable'
-import type { BasicFormItem } from '@common/class/basic-form'
 import { inject } from 'vue'
 import type { IVFormDesignState } from '@design/types/form-design'
 import Icon from '@design/components/Icon/index.vue'
+import type { VFComponent } from '@common/class/component'
+import { useVModel } from '@vueuse/core'
+import { cloneDeep } from 'lodash-es'
 
-defineProps({
+const emit = defineEmits(['update:list'])
+const props = defineProps({
   list: {
-    type: Array as PropType<BasicFormItem[]>,
+    type: Array as PropType<VFComponent[]>,
     default: () => []
   }
 })
+const modelList = useVModel(props, 'list', emit) as Ref<VFComponent[]>
 const { handlePushItem } = inject<IVFormDesignState>('formDesignState')!
+
+const handleDragStart = (element: VFComponent, index: number) => {
+  modelList.value[index] = cloneDeep(element)
+}
 </script>
 
 <style lang="less" scoped>

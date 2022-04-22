@@ -1,11 +1,11 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "packages/**/*.ts"],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
     "baseUrl": ".",
     "preserveValueImports": false,
+    "isolatedModules": true,
     "types":["@types/node"],
     "lib": [
       "esnext",
@@ -21,6 +21,8 @@
       "@styles/*": ["./styles/*"],
     }
   },
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "packages/**/*.ts", "packages/**/*.vue"],
+  "exclude": ["node_modules"],
   "references": [
     {
       "path": "./tsconfig.vite-config.json"
