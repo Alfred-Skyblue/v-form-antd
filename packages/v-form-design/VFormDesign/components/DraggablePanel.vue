@@ -1,7 +1,7 @@
 <!--
  * @author: 杨攀腾
  * @date: 2022/4/21
- * @description: $END$
+ * @description: 拖拽面板
 -->
 <template>
   <draggable
@@ -15,10 +15,9 @@
     group="form-draggable"
     ghostClass="moving"
     :animation="180"
-    :list="modelValue"
+    :list="list"
     itemKey="_key"
     handle=".drag-move"
-    @add="handleAdd"
   >
     <template #item="{ element }">
       <li
@@ -33,16 +32,14 @@
 
 <script lang="ts" setup>
 import Draggable from 'vuedraggable'
-import { computed, defineProps, inject, Ref } from 'vue'
+import { computed, defineProps, inject, PropType } from 'vue'
 import type { IVFormDesignState } from '../../types/form-design'
-import { cloneDeep } from 'lodash-es'
-import { useVModel } from '@vueuse/core'
 import LayoutItem from '@design/VFormDesign/components/LayoutItem.vue'
 import type { BasicFormItem } from '@common/class/basic-form'
 const { handleSelectItem } = inject<IVFormDesignState>('formDesignState')!
 const props = defineProps({
   list: {
-    type: Array,
+    type: Array as PropType<BasicFormItem[]>,
     required: true
   },
   root: {
@@ -51,19 +48,9 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:list'])
-
-const modelValue = useVModel(props, 'list', emit) as Ref<BasicFormItem[]>
-
 const draggableClass = computed(
   () => `v-w-full list-main  v-px-5 v-py-10 ${props.root ? 'v-absolute' : ''}`
 )
-const handleAdd = (event: { newIndex: number }) => {
-  const { newIndex } = event
-  const newItem = cloneDeep(modelValue.value[newIndex])
-  newItem.generateKey()
-  // modelValue.value[newIndex] = newItem
-}
 </script>
 
 <style lang="less" scoped>

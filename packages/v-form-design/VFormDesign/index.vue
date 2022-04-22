@@ -28,15 +28,16 @@ import LeftAside from '@design/VFormDesign/modules/LeftAside.vue'
 import MainContainer from '@design/VFormDesign/modules/MainContainer.vue'
 import type { IVFormConfig, IVFormDesignState } from '@design/types/form-design'
 import { DesignVForm } from '@design/class/form/form'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, remove } from 'lodash-es'
 import Toolbar from '@design/VFormDesign/modules/Toolbar.vue'
+import type { BasicFormItem } from '@common/class/basic-form'
 
 export default defineComponent({
   name: 'VFormDesign',
   components: { Toolbar, MainContainer, LeftAside, Header, Layout },
   setup() {
     const formConfig = ref<IVFormConfig>({
-      formItems: [],
+      formItems: [] as BasicFormItem[],
       currentItem: {} as IVFormConfig['currentItem'],
       config: new DesignVForm()
     })
@@ -61,7 +62,7 @@ export default defineComponent({
 
     const handleRemoveItem: IVFormDesignState['handleRemoveItem'] =
       callback => {
-        // remove(formConfig.value.formItems, callback)
+        remove(formConfig.value.formItems as [], callback)
       }
 
     const handleClear: IVFormDesignState['handleClear'] = () => {

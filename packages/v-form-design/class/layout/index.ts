@@ -11,11 +11,11 @@ export const createDesignLayoutComponent = <
   T extends DesignLayoutComponentType
 >(
   name: T,
-  options?: IAnyObject
+  options: IAnyObject
 ) => {
   return new designLayoutComponent[name](options)
 }
 
 export const initDesignLayoutComponents = () => {
-  return Object.entries(designLayoutComponent).map(([, Cmp]) => new Cmp())
+  return Object.entries(designLayoutComponent).map(([, Cmp]) => new Cmp({}))
 }

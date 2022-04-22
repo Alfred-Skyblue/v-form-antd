@@ -40,7 +40,6 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .grid-panel {
-  background-color: red;
   min-height: 60px;
 }
 </style>

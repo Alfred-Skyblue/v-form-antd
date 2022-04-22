@@ -8,7 +8,7 @@ const layoutComponents = {
 type LayoutComponentType = keyof typeof layoutComponents
 export const createLayoutComponent = <T extends LayoutComponentType>(
   name: T,
-  options?: IAnyObject
+  options: IAnyObject
 ) => {
   return new layoutComponents[name](options)
 }

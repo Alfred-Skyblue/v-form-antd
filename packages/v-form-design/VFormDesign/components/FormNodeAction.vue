@@ -24,11 +24,10 @@ import type { BasicFormItem } from '@common/class/basic-form'
 import type { IVFormDesignState } from '../../types/form-design'
 import Icon from '@design/components/Icon/index.vue'
 import { cloneDeep } from 'lodash-es'
-import type { VFComponent } from '@common/class/component'
 
 const props = defineProps({
   record: {
-    type: Object as PropType<VFComponent>,
+    type: Object as PropType<BasicFormItem>,
     required: true
   }
 })

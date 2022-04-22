@@ -1,6 +1,6 @@
 import type { IAnyObject } from '@common/types'
-import { VFComponent } from '@common/class/component'
 import type { Col } from '@common/layout/col'
+import { BasicFormItem } from '@common/class/basic-form'
 
 interface IGridProps {
   align?: 'top' | 'middle' | 'bottom'
@@ -8,7 +8,7 @@ interface IGridProps {
   justify?: 'start' | 'end' | 'center' | 'space-around' | 'space-between'
   wrap?: boolean
 }
-export class GridComponent extends VFComponent {
+export class GridComponent extends BasicFormItem {
   public _tag!: string
   public type = 'ARow'
   public icon = 'grid'
@@ -24,8 +24,7 @@ export class GridComponent extends VFComponent {
       list: []
     }
   ]
-  constructor(options?: IAnyObject) {
-    super()
-    console.log('-> options', options)
+  constructor(options: IAnyObject) {
+    super(options)
   }
 }
