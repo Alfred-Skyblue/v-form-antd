@@ -6,7 +6,9 @@
       </a-tab-pane>
       <a-tab-pane key="2" tab="控件属性">
         <div class="config-box v-h-full">
-          <component :is="formConfig.currentItem.propsCmp"></component>
+          <a-form layout="horizontal" :labelCol="{ span: 8 }">
+            <component :is="formConfig.currentItem.propsCmp"></component>
+          </a-form>
         </div>
       </a-tab-pane>
     </a-tabs>
@@ -29,7 +31,7 @@ const activeKey = ref('1')
 .config-aside {
   :deep(.ant-form-item) {
     padding-bottom: 12px;
-    margin: 0;
+    margin-top: 5px;
     border-bottom: 1px solid #ccc;
   }
   height: 100%;
@@ -39,6 +41,13 @@ const activeKey = ref('1')
       padding: 16px;
       height: 100%;
       overflow: auto !important;
+    }
+    .ant-tabs-ink-bar {
+      background: radial-gradient(
+        circle,
+        rgba(63, 94, 251, 1) 0%,
+        rgba(252, 70, 107, 1) 100%
+      );
     }
     .ant-tabs-nav {
       margin: 0;

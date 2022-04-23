@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue'
+import { defineComponent, inject, PropType } from 'vue'
 import type { IVFormDesignState } from '@design/types/form-design'
 import type { DesignInput } from '@design/class/form/input'
 
@@ -26,7 +26,7 @@ export default defineComponent({
   name: 'CheckboxProps',
   props: {
     list: {
-      type: Array,
+      type: Array as PropType<{ label: string; value: string }[]>,
       default: () => []
     }
   },
@@ -42,6 +42,9 @@ export default defineComponent({
 .action-props {
   :deep(.ant-form-item) {
     display: block;
+    .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+      margin-left: 0;
+    }
   }
 }
 </style>

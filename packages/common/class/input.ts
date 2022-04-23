@@ -7,6 +7,7 @@ export interface IInput extends IAnyObject {
    * @type any (string | slot)
    */
   addonAfter: StringAndSlot
+  placeholder: string
 
   /**
    * The label text displayed before (on the left side of) the input field.
@@ -39,6 +40,7 @@ export interface IInput extends IAnyObject {
    */
   id: string
 
+  maxlength: number
   /**
    * The prefix icon for the Input.
    * @type any (string | slot)
@@ -74,6 +76,7 @@ export class Input extends BasicFormItem {
   readonly type = 'input'
   // props
   public props: Partial<IInput> = {
+    // link: [],
     addonAfter: undefined,
     addonBefore: undefined,
     defaultValue: undefined,
