@@ -6,6 +6,7 @@
 <template>
   <a-form-item label="关联字段">
     <a-select
+      placeholder="请选择关联字段"
       :options="options"
       v-model:value="formConfig.currentItem.props.link"
     ></a-select>
@@ -15,15 +16,17 @@
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue'
 import type { IVFormDesignState } from '@design/types/form-design'
-import type { DesignInput } from '@design/class/form/input'
 
 export default defineComponent({
   name: 'LinkItem',
   setup() {
-    const { formConfig } =
-      inject<IVFormDesignState<DesignInput>>('formDesignState')!
+    const { formConfig } = inject<IVFormDesignState>('formDesignState')!
     const options = computed(() => {
-      return formConfig.value.formItems.map(item => {
+      // 过滤关联字段，之关联非自身和非布局组件
+      const linkOptions = formConfig.value.formItems.filter(
+        item => item.type !== 'grid' && item !== formConfig.value.currentItem
+      )
+      return linkOptions.map(item => {
         return {
           label: item.label,
           value: item.field

@@ -18,6 +18,7 @@ type DesignComponentType = typeof designComponents
 
 const designComponents = {
   input: DesignInput,
+  textarea: DesignTextarea,
   number: DesignVNumber,
   cascader: DesignCascader,
   checkbox: DesignCheckbox,
@@ -29,7 +30,6 @@ const designComponents = {
   switch: DesignSwitch,
   slider: DesignSlider,
   rate: DesignRate,
-  textarea: DesignTextarea,
   treeSelect: DesignTreeSelect
 }
 

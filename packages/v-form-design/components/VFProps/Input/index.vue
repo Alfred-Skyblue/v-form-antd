@@ -58,15 +58,18 @@
     </a-form-item>
     <VFormSize></VFormSize>
     <CheckboxProps :list="actionProps"></CheckboxProps>
+    <LinkItem></LinkItem>
   </div>
 </template>
 
 <script lang="ts" setup>
+//
 import { inject, reactive } from 'vue'
 import type { IVFormDesignState } from '@design/types/form-design'
 import type { DesignInput } from '@design/class/form/input'
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
 import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue'
+import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
 
 const { formConfig } =
   inject<IVFormDesignState<DesignInput>>('formDesignState')!
