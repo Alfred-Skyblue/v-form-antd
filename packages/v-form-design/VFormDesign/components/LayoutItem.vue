@@ -10,36 +10,21 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import FormNode from './FormNode.vue'
 import GridPanel from './GridPanel.vue'
 import { isGridComponent } from '@common/utils/type-guard'
 import type { BasicFormItem } from '@common/class/basic-form'
 import type { PropType } from 'vue'
 import type { GridComponent } from '@common/layout/grid'
-export default defineComponent({
-  components: {
-    GridPanel,
-    FormNode
-  },
-  props: {
-    record: {
-      type: Object as PropType<BasicFormItem>,
-      required: true
-    }
-  },
-  setup(props) {
-    const isGrid = computed(() => isGridComponent(props.record))
-    const gridRecord = computed(() => props.record as unknown as GridComponent)
-
-    return { isGrid, gridRecord }
+const props = defineProps({
+  record: {
+    type: Object as PropType<BasicFormItem>,
+    required: true
   }
 })
-</script>
 
-<style lang="less" scoped>
-.grid-panel {
-  min-height: 60px;
-}
-</style>
+const isGrid = computed(() => isGridComponent(props.record))
+const gridRecord = computed(() => props.record as unknown as GridComponent)
+</script>

@@ -6,13 +6,15 @@
 <template>
   <div
     class="grid-panel drag-move-box v-relative v-p-8 v-overflow-hidden v-transition-all"
+    :class="{ active: record._key === formConfig.currentItem._key }"
+    @click.stop="handleSelectItem(record)"
   >
     <a-row v-bind="record.props">
       <a-col
         v-for="(item, index) of record.columns"
         :key="index"
         :span="item.span"
-        class="layout-box"
+        class="layout-box v-bg-white"
       >
         <DraggablePanel v-model:list="item.list"></DraggablePanel>
       </a-col>
@@ -22,11 +24,14 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { GridComponent } from '@common/layout/grid'
 import FormNodeAction from './FormNodeAction.vue'
 import DraggablePanel from './DraggablePanel.vue'
-
+import { inject } from 'vue'
+import type { IVFormDesignState } from '@design/types/form-design'
+const { handleSelectItem, formConfig } =
+  inject<IVFormDesignState>('formDesignState')!
 defineProps({
   record: {
     type: Object as PropType<GridComponent>,
@@ -37,8 +42,12 @@ defineProps({
 
 <style lang="less" scoped>
 .grid-panel {
-  /deep/ .ant-row {
+  background: fade(#9867f7ff, 30%) !important;
+  :deep(.ant-row) {
     min-height: 60px;
+  }
+  &::before {
+    @apply !v-bg-layout;
   }
 }
 </style>

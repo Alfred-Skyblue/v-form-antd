@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 import Draggable from 'vuedraggable'
-import { computed, defineProps, inject, PropType } from 'vue'
+import { computed, inject, PropType } from 'vue'
 import type { IVFormDesignState } from '../../types/form-design'
 import LayoutItem from '@design/VFormDesign/components/LayoutItem.vue'
 import type { BasicFormItem } from '@common/class/basic-form'

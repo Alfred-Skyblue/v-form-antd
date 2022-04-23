@@ -51,6 +51,7 @@ const handleClone = (element: BasicFormItem) => {
   console.log('-> element', element)
   const newItem = cloneDeep(element)
   element.generateKey()
+
   return newItem
 }
 </script>

@@ -4,14 +4,14 @@
  * @description: $END$
 -->
 <template>
-  <div class="copy-delete-box">
+  <div class="copy-delete-box" :class="{ layout: isGrid }">
     <a class="copy" :class="activeClass" @click.stop="handleCopy(record)">
       <Icon type="copy" />
     </a>
     <a
       class="delete"
       :class="activeClass"
-      @click.stop="handleRemoveItem(item => item._key === record._key)"
+      @click.stop="handleRemoveItem(record._key)"
     >
       <Icon type="delete" />
     </a>
@@ -24,6 +24,7 @@ import type { BasicFormItem } from '@common/class/basic-form'
 import type { IVFormDesignState } from '../../types/form-design'
 import Icon from '@design/components/Icon/index.vue'
 import { cloneDeep } from 'lodash-es'
+import { isGridComponent } from '@common/utils/type-guard'
 
 const props = defineProps({
   record: {
@@ -39,6 +40,8 @@ const activeClass = computed(() => {
     ? 'active'
     : 'unactivated'
 })
+
+const isGrid = computed(() => isGridComponent(props.record!))
 
 const handleCopy = (formItem: BasicFormItem) => {
   handlePushItem(cloneDeep(formItem))
@@ -68,6 +71,12 @@ const handleCopy = (formItem: BasicFormItem) => {
 
   > .delete {
     right: 0;
+  }
+}
+.layout {
+  .copy,
+  .delete {
+    @apply v-bg-layout;
   }
 }
 </style>

@@ -18,7 +18,8 @@ module.exports = {
         shadow: 'var(--shadow-color)'
       },
       backgroundColor: {
-        body: 'var(--body-bg)'
+        body: 'var(--body-bg)',
+        layout: 'var(--layout-bg-color)'
       }
     }
   },

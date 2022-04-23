@@ -1,4 +1,5 @@
-import { GridComponent } from '@common/layout/grid'
+import type { GridComponent } from '@common/layout/grid'
+import { isArray } from 'lodash-es'
 
 /**
  * 判断 component 是不是 GridComponent
@@ -6,5 +7,5 @@ import { GridComponent } from '@common/layout/grid'
  * @returns {component is GridComponent}
  */
 export const isGridComponent = (component: any): component is GridComponent => {
-  return component instanceof GridComponent
+  return component.type === 'grid' && isArray(component.columns)
 }

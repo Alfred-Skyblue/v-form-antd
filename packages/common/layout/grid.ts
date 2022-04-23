@@ -10,7 +10,7 @@ interface IGridProps {
 }
 export class GridComponent extends BasicFormItem {
   public _tag!: string
-  public type = 'ARow'
+  public type = 'grid'
   public icon = 'grid'
   public label = '栅格布局'
   public props!: IGridProps

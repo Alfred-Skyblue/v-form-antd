@@ -16,6 +16,7 @@
       <template #cmp-list>
         <LeftAside></LeftAside>
       </template>
+      <template #config>123</template>
     </Layout>
   </div>
 </template>
@@ -31,13 +32,14 @@ import { DesignVForm } from '@design/class/form/form'
 import { cloneDeep, remove } from 'lodash-es'
 import Toolbar from '@design/VFormDesign/modules/Toolbar.vue'
 import type { BasicFormItem } from '@common/class/basic-form'
+import { formForEach } from '@common/utils/util'
 
 export default defineComponent({
   name: 'VFormDesign',
   components: { Toolbar, MainContainer, LeftAside, Header, Layout },
   setup() {
     const formConfig = ref<IVFormConfig>({
-      formItems: [] as BasicFormItem[],
+      formItems: [],
       currentItem: {} as IVFormConfig['currentItem'],
       config: new DesignVForm()
     })
@@ -60,10 +62,17 @@ export default defineComponent({
       handleSelectItem(newFormItem)
     }
 
-    const handleRemoveItem: IVFormDesignState['handleRemoveItem'] =
-      callback => {
-        remove(formConfig.value.formItems as [], callback)
-      }
+    const handleRemoveItem: IVFormDesignState['handleRemoveItem'] = key => {
+      formForEach(
+        formConfig.value.formItems as BasicFormItem[],
+        (item, array) => {
+          if (item._key === key) {
+            remove(array, item)
+          }
+        }
+      )
+      // remove(formConfig.value.formItems as [], callback)
+    }
 
     const handleClear: IVFormDesignState['handleClear'] = () => {
       formConfig.value.formItems = []
