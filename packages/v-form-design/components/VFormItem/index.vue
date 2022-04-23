@@ -6,7 +6,7 @@
 <template>
   <div class="form-item-box v-leading-normal">
     <a-form-item :label="record.label">
-      <component :is="record._tag"></component>
+      <component :is="record._tag" v-bind="record.props"></component>
     </a-form-item>
   </div>
 </template>

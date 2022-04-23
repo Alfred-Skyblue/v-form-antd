@@ -11,7 +11,7 @@ interface ICascader extends IAnyObject {
   allowClear: boolean
 
   /**
-   * get focus when component mounted
+   * get focus when components mounted
    * @default false
    * @type boolean
    */

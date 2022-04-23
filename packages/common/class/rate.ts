@@ -18,7 +18,7 @@ interface IRate extends IAnyObject {
   allowHalf: boolean
 
   /**
-   * get focus when component mounted
+   * get focus when components mounted
    * @default false
    * @type boolean
    */

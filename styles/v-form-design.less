@@ -28,7 +28,7 @@
     }
     // 选择时 start
     &::before {
-    @apply v-bg-primary v-absolute v-top-0 v-transition-all v-w-full v-h-5;
+      @apply v-bg-primary v-absolute v-top-0 v-transition-all v-w-full v-h-5;
       content: '';
       right: -100%;
     }
@@ -45,7 +45,7 @@
       position: relative;
       word-wrap: break-word;
       &::before {
-      @apply v-absolute v-h-full v-w-full v-top-0 v-left-0;
+        @apply v-absolute v-h-full v-w-full v-top-0 v-left-0;
         content: '';
         z-index: 888;
       }
@@ -56,14 +56,14 @@
     }
     .show-key-box {
       // 显示key
-    @apply v-absolute v-bottom-2 v-right-2;
+      @apply v-absolute v-bottom-2 v-right-2;
       font-size: 14px;
       z-index: 999;
-      color: var(--text-key-color);
+      color: var(--primary-color);
     }
     .copy,
     .delete {
-    @apply v-absolute v-top-0 v-w-30 v-h-30 v-text-center;
+      @apply v-absolute v-top-0 v-w-30 v-h-30 v-text-center;
       line-height: 30px;
       color: #fff;
       z-index: 989;
@@ -77,27 +77,31 @@
       }
     }
     .copy {
-    @apply v-bg-primary;
+      @apply v-bg-primary;
       border-radius: 0 0 0 8px;
       right: 30px;
     }
 
     .delete {
-    @apply v-bg-primary;
+      @apply v-bg-primary;
       right: 0;
     }
   }
   ::-webkit-scrollbar {
-    background-color: rgba(27,27,27,.4);
+    background-color: rgba(27, 27, 27, 0.4);
     border-radius: 10px;
     width: 3px; //y轴滚动条宽度
-    height:3px; //x轴滚动条高度
+    height: 3px; //x轴滚动条高度
   }
   ::-webkit-scrollbar-thumb {
     border-radius: 10px; //滚动条的圆角
-    background: rgb(63,94,251);
-    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-   //  background: var(--primary-color); //滚动条的背景颜色
+    background: rgb(63, 94, 251);
+    background: radial-gradient(
+      circle,
+      rgba(63, 94, 251, 1) 0%,
+      rgba(252, 70, 107, 1) 100%
+    );
+    //  background: var(--primary-color); //滚动条的背景颜色
   }
 
   ::-webkit-scrollbar-track {

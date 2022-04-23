@@ -10,6 +10,9 @@
     @click.stop="handleSelectItem(record)"
   >
     <v-form-item :record="record"></v-form-item>
+    <div class="show-key-box">
+      {{ record.label + (record.field ? '/' + record.field : '') }}
+    </div>
     <form-node-action :record="record"></form-node-action>
   </div>
 </template>

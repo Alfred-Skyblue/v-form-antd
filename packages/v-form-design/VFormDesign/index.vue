@@ -16,7 +16,9 @@
       <template #cmp-list>
         <LeftAside></LeftAside>
       </template>
-      <template #config>123</template>
+      <template #config>
+        <ConfigAside></ConfigAside>
+      </template>
     </Layout>
   </div>
 </template>
@@ -33,10 +35,18 @@ import { cloneDeep, remove } from 'lodash-es'
 import Toolbar from '@design/VFormDesign/modules/Toolbar.vue'
 import type { BasicFormItem } from '@common/class/basic-form'
 import { formForEach } from '@common/utils/util'
+import ConfigAside from '@design/VFormDesign/modules/ConfigAside.vue'
 
 export default defineComponent({
   name: 'VFormDesign',
-  components: { Toolbar, MainContainer, LeftAside, Header, Layout },
+  components: {
+    ConfigAside,
+    Toolbar,
+    MainContainer,
+    LeftAside,
+    Header,
+    Layout
+  },
   setup() {
     const formConfig = ref<IVFormConfig>({
       formItems: [],
@@ -66,7 +76,7 @@ export default defineComponent({
       formForEach(
         formConfig.value.formItems as BasicFormItem[],
         (item, array) => {
-          if (item._key === key) {
+          if (item?._key === key) {
             remove(array, item)
           }
         }

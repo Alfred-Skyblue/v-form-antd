@@ -19,6 +19,11 @@ export abstract class BasicFormItem extends VFComponent {
   update() {
     console.log('update')
   }
+
+  generateKey() {
+    this.field = `${this.field}_${uid++}`
+    super.generateKey()
+  }
   // 生成UUID
   private init(options: IFormItemOptions) {
     const { field, label } = options

@@ -11,7 +11,7 @@ export interface IDatePickerCommon extends IAnyObject {
 
   bordered: boolean
   /**
-   * get focus when component mounted
+   * get focus when components mounted
    * @default false
    * @type boolean
    */

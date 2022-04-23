@@ -25,6 +25,7 @@ import type { IVFormDesignState } from '../../types/form-design'
 import Icon from '@design/components/Icon/index.vue'
 import { cloneDeep } from 'lodash-es'
 import { isGridComponent } from '@common/utils/type-guard'
+import { formForEach } from '@common/utils/util'
 
 const props = defineProps({
   record: {
@@ -44,7 +45,12 @@ const activeClass = computed(() => {
 const isGrid = computed(() => isGridComponent(props.record!))
 
 const handleCopy = (formItem: BasicFormItem) => {
-  handlePushItem(cloneDeep(formItem))
+  const newItem = cloneDeep(formItem)
+  formForEach([newItem], item => {
+    item.generateKey()
+  })
+
+  handlePushItem(newItem)
 }
 </script>
 

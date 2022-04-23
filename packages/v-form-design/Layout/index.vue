@@ -4,18 +4,18 @@
  * @description: 布局组件
 -->
 <template>
-  <div class="v-form-antd-layout">
-    <header class="v-form-antd-header xy-center">
+  <div class="v-form-antd-layout v-h-full v-flex v-flex-col">
+    <header class="v-form-antd-header xy-center v-bg-primary v-mb-5">
       <slot name="header"></slot>
     </header>
-    <div class="v-form-antd-body">
-      <div class="v-form-cmp-list">
+    <div class="v-form-antd-body v-flex v-gap-8 v-h-full v-overflow-hidden">
+      <div class="v-form-cmp-list v-h-full v-w-270">
         <slot name="cmp-list"></slot>
       </div>
-      <div class="v-form-main">
+      <div class="v-form-main v-flex-auto">
         <slot></slot>
       </div>
-      <div class="v-form-cfg">
+      <div class="v-form-cfg v-w-270">
         <slot name="config"></slot>
       </div>
     </div>
@@ -31,27 +31,15 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .v-form-antd-layout {
-  @apply v-h-full v-flex v-flex-col;
   .v-form-antd-header {
-    @apply v-bg-primary v-mb-5;
     min-height: 56px;
     color: var(--header-text-color);
     font-size: 20px;
   }
   .v-form-antd-body {
-    @apply v-flex v-gap-8 v-h-full;
     & > div {
       box-shadow: 0 0 1px 1px var(--shadow-color);
     }
-  }
-  .v-form-cmp-list {
-    @apply v-h-full v-w-270;
-  }
-  .v-form-main {
-    @apply v-flex-auto;
-  }
-  .v-form-cfg {
-    @apply v-w-270;
   }
 }
 </style>

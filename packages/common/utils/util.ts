@@ -31,11 +31,13 @@ export const formForEach = (
   callback: (formItem: BasicFormItem, array: BasicFormItem[]) => void
 ) => {
   forEach(formItems, item => {
-    callback(item, formItems)
-    if (isGridComponent(item)) {
-      forEach(item.columns, colItem => {
-        formForEach(colItem.list, callback)
-      })
+    if (item) {
+      callback(item, formItems)
+      if (isGridComponent(item)) {
+        forEach(item.columns, colItem => {
+          formForEach(colItem.list, callback)
+        })
+      }
     }
   })
 }

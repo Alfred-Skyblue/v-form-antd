@@ -28,7 +28,7 @@ interface INumber extends IAnyObject {
    */
   keyboard: boolean
   /**
-   * get focus when component mounted
+   * get focus when components mounted
    * @default false
    * @type boolean
    */

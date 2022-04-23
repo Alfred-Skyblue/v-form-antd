@@ -48,7 +48,6 @@ defineProps({
 const { handlePushItem } = inject<IVFormDesignState>('formDesignState')!
 
 const handleClone = (element: BasicFormItem) => {
-  console.log('-> element', element)
   const newItem = cloneDeep(element)
   element.generateKey()
 

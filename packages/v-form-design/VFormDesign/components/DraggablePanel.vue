@@ -18,6 +18,7 @@
     :list="list"
     itemKey="_key"
     handle=".drag-move"
+    @add="handleAdd"
   >
     <template #item="{ element }">
       <li
@@ -51,6 +52,10 @@ const props = defineProps({
 const draggableClass = computed(
   () => `v-w-full list-main  v-px-5 v-py-10 ${props.root ? 'v-absolute' : ''}`
 )
+
+const handleAdd = (e: { newIndex: number }) => {
+  handleSelectItem(props.list[e.newIndex])
+}
 </script>
 
 <style lang="less" scoped>
