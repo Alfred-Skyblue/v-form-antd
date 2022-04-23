@@ -1,3 +1,3 @@
-import { TreeSelect } from '@common/class/tree-select'
+import { TreeSelect } from '@common/class/form/tree-select'
 
 export class DesignTreeSelect extends TreeSelect {}

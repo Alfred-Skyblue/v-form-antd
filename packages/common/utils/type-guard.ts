@@ -1,4 +1,4 @@
-import type { GridComponent } from '@common/layout/grid'
+import type { GridComponent } from '@common/class/layout/grid'
 import { isArray } from 'lodash-es'
 
 /**

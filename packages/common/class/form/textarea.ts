@@ -1,5 +1,5 @@
 import type { IInput } from './/input'
-import { BasicFormItem } from './basic-form'
+import { BasicFormItem } from '../basic-form'
 import type { IFormItemOptions } from '@common/types/form'
 
 type ITextarea = Pick<

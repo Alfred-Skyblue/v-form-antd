@@ -1,5 +1,5 @@
-import { BasicFormItem } from './basic-form'
-import type { IDatePickerCommon } from '../types/date'
+import { BasicFormItem } from '../basic-form'
+import type { IDatePickerCommon } from '../../types/date'
 import type { Slot } from 'vue'
 import type { IFormItemOptions } from '@common/types/form'
 

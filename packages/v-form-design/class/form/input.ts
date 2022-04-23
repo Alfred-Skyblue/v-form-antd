@@ -1,4 +1,4 @@
-import { Input } from '@common/class/input'
+import { Input } from '@common/class/form/input'
 import InputProps from '@design/components/VFProps/Input/index.vue'
 import type { Component } from '@common/types'
 import { shallowRef } from 'vue'

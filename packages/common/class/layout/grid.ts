@@ -1,5 +1,5 @@
 import type { IAnyObject } from '@common/types'
-import type { Col } from '@common/layout/col'
+import type { Col } from '@common/class/layout/col'
 import { BasicFormItem } from '@common/class/basic-form'
 
 interface IGridProps {

@@ -1,4 +1,4 @@
-import { BasicFormItem } from './basic-form'
+import { BasicFormItem } from '../basic-form'
 import type { Slot } from 'vue'
 import type { IAnyObject } from '@common/types'
 import type { IFormItemOptions } from '@common/types/form'

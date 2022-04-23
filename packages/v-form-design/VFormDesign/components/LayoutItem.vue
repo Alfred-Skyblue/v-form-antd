@@ -17,7 +17,7 @@ import GridPanel from './GridPanel.vue'
 import { isGridComponent } from '@common/utils/type-guard'
 import type { BasicFormItem } from '@common/class/basic-form'
 import type { PropType } from 'vue'
-import type { GridComponent } from '@common/layout/grid'
+import type { GridComponent } from '@common/class/layout/grid'
 const props = defineProps({
   record: {
     type: Object as PropType<BasicFormItem>,

@@ -1,5 +1,5 @@
-import { BasicFormItem } from './basic-form'
-import type { IDatePickerCommon } from '../types/date'
+import { BasicFormItem } from '../basic-form'
+import type { IDatePickerCommon } from '../../types/date'
 import type { IFormItemOptions } from '@common/types/form'
 
 interface IDateRange extends Omit<IDatePickerCommon, 'disabled'> {

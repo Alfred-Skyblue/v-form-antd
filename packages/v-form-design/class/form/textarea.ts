@@ -1,3 +1,3 @@
-import { Textarea } from '@common/class/textarea'
+import { Textarea } from '@common/class/form/textarea'
 
 export class DesignTextarea extends Textarea {}

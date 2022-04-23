@@ -1,4 +1,4 @@
-import { GridComponent } from '@common/layout/grid'
+import { GridComponent } from '@common/class/layout/grid'
 import type { IAnyObject } from '@common/types'
 
 const layoutComponents = {

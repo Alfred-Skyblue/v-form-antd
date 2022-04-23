@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import type { PropType } from 'vue'
-import type { GridComponent } from '@common/layout/grid'
+import type { GridComponent } from '@common/class/layout/grid'
 import FormNodeAction from './FormNodeAction.vue'
 import DraggablePanel from './DraggablePanel.vue'
 import { inject } from 'vue'

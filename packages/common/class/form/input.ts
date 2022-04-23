@@ -1,4 +1,4 @@
-import { BasicFormItem } from './basic-form'
+import { BasicFormItem } from '../basic-form'
 import type { IAnyObject, StringAndSlot } from '@common/types'
 import type { IFormItemOptions } from '@common/types/form'
 export interface IInput extends IAnyObject {
