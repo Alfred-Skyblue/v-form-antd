@@ -5,57 +5,14 @@
 -->
 <template>
   <div>
-    <a-form-item label="标签">
-      <a-input
-        v-model:value="formConfig.currentItem.label"
-        placeholder="请输入标签"
-      />
-    </a-form-item>
-
-    <a-form-item label="占位符">
-      <a-input
-        v-model:value="formConfig.currentItem.props.placeholder"
-        placeholder="请输入占位符"
-      />
-    </a-form-item>
-    <a-form-item label="默认值">
-      <a-input
-        v-model:value="formConfig.currentItem.props.defaultValue"
-        placeholder="请输入默认值"
-      />
-    </a-form-item>
-    <a-form-item label="前置标签">
-      <a-input
-        v-model:value="formConfig.currentItem.props.addonBefore"
-        placeholder="请输入前置标签"
-      />
-    </a-form-item>
-
-    <a-form-item label="后置标签">
-      <a-input
-        v-model:value="formConfig.currentItem.props.addonAfter"
-        placeholder="请输入后置标签"
-      />
-    </a-form-item>
-
-    <a-form-item label="最大长度">
-      <a-input-number
-        v-model:value="formConfig.currentItem.props.maxlength"
-        placeholder="请输入最大长度"
-      />
-    </a-form-item>
-    <a-form-item label="前缀">
-      <a-input
-        v-model:value="formConfig.currentItem.props.prefix"
-        placeholder="请输入前缀"
-      />
-    </a-form-item>
-    <a-form-item label="后缀">
-      <a-input
-        v-model:value="formConfig.currentItem.props.suffix"
-        placeholder="请输入后缀"
-      />
-    </a-form-item>
+    <VFormBuilder
+      :form-data="formConfig.currentItem.props"
+      :form-items="formItems"
+    >
+      <template #label>
+        <a-input v-model:value="formConfig.currentItem.label" />
+      </template>
+    </VFormBuilder>
     <VFormSize></VFormSize>
     <CheckboxProps :list="actionProps"></CheckboxProps>
     <LinkItem></LinkItem>
@@ -63,13 +20,14 @@
 </template>
 
 <script lang="ts" setup>
-//
-import { inject, reactive } from 'vue'
+import { inject, reactive, ref } from 'vue'
 import type { IVFormDesignState } from '@design/types/form-design'
 import type { DesignInput } from '@design/class/form/input'
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
 import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue'
 import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
+import VFormBuilder from '@design/components/VFormBuilder/index.vue'
+import type { IFormBuilderOptions } from '@design/components/VFormBuilder/index.vue'
 
 const { formConfig } =
   inject<IVFormDesignState<DesignInput>>('formDesignState')!
@@ -90,6 +48,51 @@ const actionProps = reactive([
   {
     label: '字符数',
     value: 'showCount'
+  }
+])
+
+const formItems = ref<IFormBuilderOptions[]>([
+  {
+    label: '标签',
+    field: 'label',
+    tag: 'AInput',
+    placeholder: '请输入标签名称'
+  },
+  {
+    label: '占位符',
+    field: 'placeholder',
+    tag: 'AInput',
+    placeholder: '请输入占位符'
+  },
+  {
+    label: '前置标签',
+    field: 'addonBefore',
+    tag: 'AInput',
+    placeholder: '请输入前置标签'
+  },
+  {
+    label: '后置标签',
+    field: 'addonAfter',
+    tag: 'AInput',
+    placeholder: '请输入后置标签'
+  },
+  {
+    label: '前缀',
+    field: 'prefix',
+    tag: 'AInput',
+    placeholder: '请输入前缀'
+  },
+  {
+    label: '后缀',
+    field: 'suffix',
+    tag: 'AInput',
+    placeholder: '请输入后缀'
+  },
+  {
+    label: '最大长度',
+    field: 'maxlength',
+    tag: 'AInput',
+    placeholder: '请输入最大长度'
   }
 ])
 </script>

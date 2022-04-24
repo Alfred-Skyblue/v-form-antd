@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, toRefs, defineComponent, ref, provide } from 'vue'
+import { reactive, toRefs, defineComponent, ref, provide, computed } from 'vue'
 import Layout from '../Layout/index.vue'
 import Header from '@design/VFormDesign/modules/Header.vue'
 import LeftAside from '@design/VFormDesign/modules/LeftAside.vue'
@@ -87,12 +87,16 @@ export default defineComponent({
     const handleClear: IVFormDesignState['handleClear'] = () => {
       formConfig.value.formItems = []
     }
+    const isFixed = computed(
+      () => formConfig.value.config.labelLayout === 'fixed'
+    )
     provide('formDesignState', {
       formConfig,
       handleSelectItem,
       handlePushItem,
       handleRemoveItem,
-      handleClear
+      handleClear,
+      isFixed
     })
     const state = reactive({})
     return {

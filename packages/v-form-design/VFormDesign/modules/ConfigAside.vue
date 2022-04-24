@@ -2,7 +2,9 @@
   <div class="config-aside">
     <a-tabs v-model:activeKey="activeKey">
       <a-tab-pane key="1" tab="表单属性">
-        <div class="config-box">表单属性</div>
+        <a-form layout="vertical">
+          <VFormConfig></VFormConfig>
+        </a-form>
       </a-tab-pane>
       <a-tab-pane key="2" tab="控件属性">
         <div class="config-box v-h-full">
@@ -19,6 +21,7 @@
 import { inject, ref } from 'vue'
 import type { IVFormDesignState } from '@design/types/form-design'
 import type { DesignInput } from '@design/class/form/input'
+import VFormConfig from '@design/components/VFProps/VFormConfig/index.vue'
 const { formConfig } =
   inject<IVFormDesignState<DesignInput>>('formDesignState')!
 console.log('-> formConfig', formConfig)
@@ -33,7 +36,11 @@ const activeKey = ref('1')
     padding-bottom: 12px;
     margin-top: 5px;
     border-bottom: 1px solid #ccc;
+    .ant-slider-rail {
+      background-color: #e0d0d0;
+    }
   }
+
   height: 100%;
   :deep(.ant-tabs) {
     height: 100%;

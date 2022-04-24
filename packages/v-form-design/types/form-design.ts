@@ -25,4 +25,5 @@ export interface IVFormDesignState<T = BasicFormItem> {
   handlePushItem: (item: T) => void
   handleRemoveItem: (key: string) => void
   handleClear: () => void
+  isFixed: Ref<boolean>
 }

@@ -9,16 +9,14 @@
       v-model:value="formConfig.currentItem.props.size"
       button-style="solid"
       size="small"
-    >
-      <a-radio-button value="large">large</a-radio-button>
-      <a-radio-button value="default">default</a-radio-button>
-      <a-radio-button value="small">small</a-radio-button>
-    </a-radio-group>
+      option-type="button"
+      :options="options"
+    ></a-radio-group>
   </a-form-item>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue'
+import { defineComponent, inject, reactive } from 'vue'
 import type { IVFormDesignState } from '@design/types/form-design'
 import type { DesignInput } from '@design/class/form/input'
 
@@ -27,7 +25,22 @@ export default defineComponent({
   setup() {
     const { formConfig } =
       inject<IVFormDesignState<DesignInput>>('formDesignState')!
-    return { formConfig }
+
+    const options = reactive([
+      {
+        label: 'large',
+        value: 'large'
+      },
+      {
+        label: 'default',
+        value: 'default'
+      },
+      {
+        label: 'small',
+        value: 'small'
+      }
+    ])
+    return { formConfig, options }
   }
 })
 </script>
