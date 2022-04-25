@@ -3,7 +3,7 @@ import type { Ref } from 'vue'
 import type { DesignVForm } from '@design/class/form/form'
 
 export interface IVFormConfig<T = BasicFormItem> {
-  formItems: T[]
+  formItems: BasicFormItem[]
   currentItem: T
   config: DesignVForm
 }

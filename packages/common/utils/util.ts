@@ -28,11 +28,15 @@ export function randomUUID() {
 
 export const formForEach = (
   formItems: BasicFormItem[],
-  callback: (formItem: BasicFormItem, array: BasicFormItem[]) => void
+  callback: (
+    formItem: BasicFormItem,
+    array: BasicFormItem[],
+    index: number
+  ) => void
 ) => {
-  forEach(formItems, item => {
+  forEach(formItems, (item, index) => {
     if (item) {
-      callback(item, formItems)
+      callback(item, formItems, index)
       if (isGridComponent(item)) {
         forEach(item.columns, colItem => {
           formForEach(colItem.list, callback)

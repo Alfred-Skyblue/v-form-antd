@@ -75,9 +75,13 @@ export default defineComponent({
     const handleRemoveItem: IVFormDesignState['handleRemoveItem'] = key => {
       formForEach(
         formConfig.value.formItems as BasicFormItem[],
-        (item, array) => {
+        (item, array, index) => {
           if (item?._key === key) {
             remove(array, item)
+
+            formConfig.value.currentItem =
+              array[index - 1] ||
+              formConfig.value.formItems[formConfig.value.formItems.length - 1]
           }
         }
       )
@@ -86,6 +90,7 @@ export default defineComponent({
 
     const handleClear: IVFormDesignState['handleClear'] = () => {
       formConfig.value.formItems = []
+      formConfig.value.currentItem = {} as IVFormConfig['currentItem']
     }
     const isFixed = computed(
       () => formConfig.value.config.labelLayout === 'fixed'

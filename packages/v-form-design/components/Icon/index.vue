@@ -1,7 +1,7 @@
 <!--
  * @author: 杨攀腾
  * @date: 2022/4/17
- * @description: $END$
+ * @description: icon 图标组件
 -->
 <template>
   <i :class="`v-align-middle iconfont icon-${type}`"></i>

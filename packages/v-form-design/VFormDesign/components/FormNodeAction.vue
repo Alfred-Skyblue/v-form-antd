@@ -1,7 +1,7 @@
 <!--
  * @author: 杨攀腾
  * @date: 2022/4/17
- * @description: $END$
+ * @description: 表单复制删除组件
 -->
 <template>
   <div class="copy-delete-box" :class="{ layout: isGrid }">

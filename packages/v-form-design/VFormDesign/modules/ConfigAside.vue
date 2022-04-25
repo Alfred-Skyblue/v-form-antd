@@ -34,7 +34,7 @@ const activeKey = ref('1')
 .config-aside {
   :deep(.ant-form-item) {
     padding-bottom: 12px;
-    margin-top: 5px;
+    margin: 5px 0 12px 0;
     border-bottom: 1px solid #ccc;
     .ant-slider-rail {
       background-color: #e0d0d0;

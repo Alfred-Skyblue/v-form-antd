@@ -1,7 +1,7 @@
 <!--
  * @author: 杨攀腾
  * @date: 2022/4/23
- * @description: $END$
+ * @description: 表单联动组件
 -->
 <template>
   <a-form-item label="关联字段">

@@ -10,7 +10,9 @@
   >
     <a-form-item>
       <template #label>
-        {{ record.label }}
+        <div class="v-form-label-box">
+          {{ record.label }}
+        </div>
       </template>
       <component :is="record._tag" v-bind="record.props"></component>
     </a-form-item>
@@ -62,6 +64,9 @@ export default defineComponent({
     padding: 6px;
     .ant-form-item-label {
       flex: v-bind(labelFlex);
+    }
+    .ant-form-item-control {
+      width: 100% !important;
     }
   }
 }
