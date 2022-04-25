@@ -74,5 +74,3 @@ const formItems = reactive([
   }
 ])
 </script>
-
-<style scoped></style>

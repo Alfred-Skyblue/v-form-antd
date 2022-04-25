@@ -25,5 +25,3 @@ import {
   layoutComponents
 } from '@design/config/form-item-config'
 </script>
-
-<style scoped></style>
