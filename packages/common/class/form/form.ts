@@ -18,8 +18,9 @@ export interface IAForm extends IAnyObject {
 
 export class VForm implements IAForm {
   public layout: 'horizontal' | 'vertical' | 'inline' = 'horizontal'
-  labelLayout: 'fixed' | 'grid' = 'fixed'
-  labelWidth?: number = 100
+  public labelLayout: 'fixed' | 'grid' = 'fixed'
+  public labelWidth?: number = 100
+  public colon!: boolean
   public hideRequiredMark = undefined
   public labelAlign = undefined
   public labelCol?: IAnyObject

@@ -1,23 +1,17 @@
 <!--
  * @author: ypt
- * @date: 2022/4/23
- * @description: 公用表单项容器
+ * @date: 2022/4/25
+ * @description: Number
 -->
 <template>
-  <a-form-item :label="label"></a-form-item>
+  <div></div>
 </template>
 
 <script lang="ts">
 import { reactive, toRefs, defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'BaseFormItem',
-  props: {
-    label: {
-      type: String,
-      default: ''
-    }
-  },
+  name: 'index',
   setup() {
     const state = reactive({})
     return { ...toRefs(state) }

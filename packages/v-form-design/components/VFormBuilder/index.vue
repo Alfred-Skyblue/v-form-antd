@@ -1,5 +1,5 @@
 <!--
- * @author: 杨攀腾
+ * @author: ypt
  * @date: 2022/4/24
  * @description: 表单构建器，仅用于构建表单属性
 -->
@@ -9,7 +9,7 @@
     :key="formItem.field"
     :label="formItem.label"
   >
-    <slot :name="formItem.field">
+    <slot :name="formItem.field" v-bind="{ ...formItem }">
       <component
         :is="formItem.tag"
         :placeholder="formItem.placeholder"

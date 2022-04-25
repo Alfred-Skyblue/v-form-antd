@@ -1,5 +1,5 @@
 <!--
- * @author: 杨攀腾
+ * @author: ypt
  * @date: 2022/4/23
  * @description: 主表单属性配置
 -->

@@ -1,22 +1,20 @@
 <!--
- * @author: 杨攀腾
+ * @author: ypt
  * @date: 2022/4/23
  * @description: 输入框属性
 -->
 <template>
-  <div>
-    <VFormBuilder
-      :form-data="formConfig.currentItem.props"
-      :form-items="formItems"
-    >
-      <template #label>
-        <a-input v-model:value="formConfig.currentItem.label" />
-      </template>
-    </VFormBuilder>
-    <VFormSize></VFormSize>
-    <CheckboxProps :list="actionProps"></CheckboxProps>
-    <LinkItem></LinkItem>
-  </div>
+  <VFormBuilder
+    :form-data="formConfig.currentItem.props"
+    :form-items="formItems"
+  >
+    <template #label>
+      <a-input v-model:value="formConfig.currentItem.label" />
+    </template>
+  </VFormBuilder>
+  <VFormSize></VFormSize>
+  <CheckboxProps :list="actionProps"></CheckboxProps>
+  <LinkItem></LinkItem>
 </template>
 
 <script lang="ts" setup>
