@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, toRefs, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'BaseFormItem',
@@ -17,10 +17,6 @@ export default defineComponent({
       type: String,
       default: ''
     }
-  },
-  setup() {
-    const state = reactive({})
-    return { ...toRefs(state) }
   }
 })
 </script>

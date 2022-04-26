@@ -25,7 +25,7 @@ export abstract class BasicFormItem extends VFComponent {
     super.generateKey()
   }
   // 生成UUID
-  private init(options: IFormItemOptions) {
+  init(options: IFormItemOptions) {
     const { field, label } = options
     label && (this.label = label)
     this.field = field ?? `field${uid++}`

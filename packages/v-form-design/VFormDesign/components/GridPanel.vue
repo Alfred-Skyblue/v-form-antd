@@ -6,7 +6,7 @@
 <template>
   <div
     class="grid-panel drag-move-box v-relative v-p-8 v-overflow-hidden v-transition-all"
-    :class="{ active: record._key === formConfig.currentItem._key }"
+    :class="{ active: record._key === currentItem._key }"
     @click.stop="handleSelectItem(record)"
   >
     <a-row v-bind="record.props">
@@ -28,16 +28,16 @@ import type { PropType } from 'vue'
 import type { GridComponent } from '@common/class/layout/grid'
 import FormNodeAction from './FormNodeAction.vue'
 import DraggablePanel from './DraggablePanel.vue'
-import { inject } from 'vue'
-import type { IVFormDesignState } from '@design/types/form-design'
-const { handleSelectItem, formConfig } =
-  inject<IVFormDesignState>('formDesignState')!
+import { useFormDesign } from '@design/hooks/useFormDesign'
+
 defineProps({
   record: {
     type: Object as PropType<GridComponent>,
     required: true
   }
 })
+
+const { currentItem, handleSelectItem } = useFormDesign()
 </script>
 
 <style lang="less" scoped>

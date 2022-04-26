@@ -6,7 +6,7 @@
 <template>
   <a-form-item label="尺寸">
     <a-radio-group
-      v-model:value="formConfig.currentItem.props.size"
+      v-model:value="currentItem.props.size"
       button-style="solid"
       size="small"
       option-type="button"
@@ -16,15 +16,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive } from 'vue'
-import type { IVFormDesignState } from '@design/types/form-design'
-import type { DesignInput } from '@design/class/form/input'
+import { defineComponent, reactive } from 'vue'
+import { useFormDesign } from '@design/hooks/useFormDesign'
 
 export default defineComponent({
   name: 'VFormSize',
   setup() {
-    const { formConfig } =
-      inject<IVFormDesignState<DesignInput>>('formDesignState')!
+    const { currentItem } = useFormDesign()
 
     const options = reactive([
       {
@@ -40,7 +38,7 @@ export default defineComponent({
         value: 'small'
       }
     ])
-    return { formConfig, options }
+    return { currentItem, options }
   }
 })
 </script>

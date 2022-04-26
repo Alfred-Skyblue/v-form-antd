@@ -1,4 +1,4 @@
-import { computed, inject, toRefs } from 'vue'
+import { computed, inject, reactive, toRefs } from 'vue'
 import type { IVFormDesignState } from '@design/types/form-design'
 import type { BasicFormItem } from '@common/class/basic-form'
 
@@ -7,9 +7,9 @@ import type { BasicFormItem } from '@common/class/basic-form'
  * @returns {{...IVFormDesignState,currentItem:BasicFormItem}}
  */
 export const useFormDesign = <T extends BasicFormItem = BasicFormItem>() => {
-  const formDesignState = inject<IVFormDesignState>('formDesignState')!
-  const currentItem = computed(
-    () => formDesignState.formConfig.value.currentItem as T
+  const formDesignState = reactive(
+    inject<IVFormDesignState<T>>('formDesignState')!
   )
+  const currentItem = computed<T>(() => formDesignState.formConfig.currentItem)
   return { currentItem, ...toRefs(formDesignState) }
 }

@@ -9,7 +9,7 @@
       <a-tab-pane key="2" tab="控件属性">
         <div class="config-box v-h-full">
           <a-form layout="horizontal" :labelCol="{ span: 8 }">
-            <component :is="formConfig.currentItem.propsCmp"></component>
+            <component :is="currentItem.propsCmp"></component>
           </a-form>
         </div>
       </a-tab-pane>
@@ -18,16 +18,18 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref } from 'vue'
-import type { IVFormDesignState } from '@design/types/form-design'
-import type { DesignInput } from '@design/class/form/input'
-import VFormConfig from '@design/components/VFProps/VFormConfig/index.vue'
-const { formConfig } =
-  inject<IVFormDesignState<DesignInput>>('formDesignState')!
-console.log('-> formConfig', formConfig)
+import { ref, watch } from 'vue'
+import type { Component } from 'vue'
 
-// console.log('-> currentItem')
+import VFormConfig from '@design/components/VFProps/VFormConfig/index.vue'
+import { useFormDesign } from '@design/hooks/useFormDesign'
+import type { BasicFormItem } from '@common/class/basic-form'
+const { currentItem } = useFormDesign<BasicFormItem & { propsCmp: Component }>()
+
 const activeKey = ref('1')
+watch(currentItem, newValue => {
+  activeKey.value = newValue?._key ? '2' : '1'
+})
 </script>
 
 <style lang="less" scoped>

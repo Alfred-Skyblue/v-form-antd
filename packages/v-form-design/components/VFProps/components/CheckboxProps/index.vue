@@ -8,7 +8,7 @@
     <a-form-item label="控制属性">
       <a-checkbox
         v-for="item of list"
-        v-model:checked="formConfig.currentItem.props[item.value]"
+        v-model:checked="currentItem.props[item.value]"
         :key="item.value"
       >
         {{ item.label }}
@@ -18,9 +18,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, PropType } from 'vue'
-import type { IVFormDesignState } from '@design/types/form-design'
-import type { DesignInput } from '@design/class/form/input'
+import { defineComponent, PropType } from 'vue'
+import { useFormDesign } from '@design/hooks/useFormDesign'
 
 export default defineComponent({
   name: 'CheckboxProps',
@@ -31,9 +30,8 @@ export default defineComponent({
     }
   },
   setup() {
-    const { formConfig } =
-      inject<IVFormDesignState<DesignInput>>('formDesignState')!
-    return { formConfig }
+    const { currentItem } = useFormDesign()
+    return { currentItem }
   }
 })
 </script>

@@ -24,7 +24,15 @@
 </template>
 
 <script lang="ts">
-import { reactive, toRefs, defineComponent, ref, provide, computed } from 'vue'
+import {
+  reactive,
+  toRefs,
+  defineComponent,
+  ref,
+  provide,
+  computed,
+  onMounted
+} from 'vue'
 import Layout from '../Layout/index.vue'
 import Header from '@design/VFormDesign/modules/Header.vue'
 import LeftAside from '@design/VFormDesign/modules/LeftAside.vue'
@@ -33,7 +41,6 @@ import type { IVFormConfig, IVFormDesignState } from '@design/types/form-design'
 import { DesignVForm } from '@design/class/form/form'
 import { cloneDeep, remove } from 'lodash-es'
 import Toolbar from '@design/VFormDesign/modules/Toolbar.vue'
-import type { BasicFormItem } from '@common/class/basic-form'
 import { formForEach } from '@common/utils/util'
 import ConfigAside from '@design/VFormDesign/modules/ConfigAside.vue'
 
@@ -73,19 +80,15 @@ export default defineComponent({
     }
 
     const handleRemoveItem: IVFormDesignState['handleRemoveItem'] = key => {
-      formForEach(
-        formConfig.value.formItems as BasicFormItem[],
-        (item, array, index) => {
-          if (item?._key === key) {
-            remove(array, item)
+      const len = formConfig.value.formItems.length
+      formForEach(formConfig.value.formItems, (item, array, index) => {
+        if (item?._key === key) {
+          remove(array, item)
 
-            formConfig.value.currentItem =
-              array[index - 1] ||
-              formConfig.value.formItems[formConfig.value.formItems.length - 1]
-          }
+          formConfig.value.currentItem =
+            array[index - 1] || formConfig.value.formItems[len - 1]
         }
-      )
-      // remove(formConfig.value.formItems as [], callback)
+      })
     }
 
     const handleClear: IVFormDesignState['handleClear'] = () => {
@@ -103,6 +106,7 @@ export default defineComponent({
       handleClear,
       isFixed
     })
+
     const state = reactive({})
     return {
       ...toRefs(state),
