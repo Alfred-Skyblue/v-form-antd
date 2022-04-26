@@ -4,12 +4,9 @@
  * @description: 输入框属性
 -->
 <template>
-  <VFormBuilder
-    :form-data="formConfig.currentItem.props"
-    :form-items="formItems"
-  >
+  <VFormBuilder :form-data="currentItem.props" :form-items="formItems">
     <template #label>
-      <a-input v-model:value="formConfig.currentItem.label" />
+      <a-input v-model:value="currentItem.label" />
     </template>
   </VFormBuilder>
   <VFormSize></VFormSize>
@@ -18,17 +15,16 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, reactive, ref } from 'vue'
-import type { IVFormDesignState } from '@design/types/form-design'
-import type { DesignInput } from '@design/class/form/input'
+import { reactive, ref } from 'vue'
+
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
 import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue'
 import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
 import VFormBuilder from '@design/components/VFormBuilder/index.vue'
 import type { IFormBuilderOptions } from '@design/components/VFormBuilder/index.vue'
+import { useFormDesign } from '@design/hooks/useFormDesign'
 
-const { formConfig } =
-  inject<IVFormDesignState<DesignInput>>('formDesignState')!
+const { currentItem } = useFormDesign()
 
 const actionProps = reactive([
   {

@@ -6,7 +6,7 @@
 <template>
   <div
     class="drag-move-box v-relative v-p-8 v-overflow-hidden v-transition-all"
-    :class="{ active: record._key === formConfig.currentItem._key }"
+    :class="{ active: record._key === currentItem._key }"
     @click.stop="handleSelectItem(record)"
   >
     <v-form-item :record="record"></v-form-item>
@@ -18,18 +18,16 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, inject } from 'vue'
+import type { PropType } from 'vue'
 import type { BasicFormItem } from '@common/class/basic-form'
-import type { IVFormDesignState } from '@design/types/form-design'
 import VFormItem from '@design/components/VFormItem/index.vue'
 import FormNodeAction from '@design/VFormDesign/components/FormNodeAction.vue'
+import { useFormDesign } from '@design/hooks/useFormDesign'
 defineProps({
   record: {
     type: Object as PropType<BasicFormItem>,
     required: true
   }
 })
-// 注入状态
-const formDesignState = inject<IVFormDesignState>('formDesignState')!
-const { formConfig, handleSelectItem } = formDesignState
+const { currentItem, handleSelectItem, formConfig } = useFormDesign()
 </script>

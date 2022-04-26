@@ -5,3 +5,9 @@ export interface IFormItemOptions extends IAnyObject {
   field?: string
   hidden?: boolean
 }
+
+export interface ISelectOption {
+  label: string
+  value: string
+  children?: ISelectOption[]
+}

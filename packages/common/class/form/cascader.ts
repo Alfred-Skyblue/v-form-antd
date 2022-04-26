@@ -174,7 +174,6 @@ export class Cascader extends BasicFormItem {
     multiple: undefined,
     notFoundContent: undefined,
     open: undefined,
-    options: undefined,
     placeholder: undefined,
     popupClassName: undefined,
     searchValue: undefined,
@@ -185,7 +184,22 @@ export class Cascader extends BasicFormItem {
     size: undefined,
     suffixIcon: undefined,
     tagRender: undefined,
-    value: undefined
+    value: undefined,
+    options: [
+      {
+        label: '选项1',
+        value: 'value1',
+        children: [
+          { label: '1-1', value: '1-1' },
+          { label: '1-2', value: '1-2' }
+        ]
+      },
+      {
+        label: '选项2',
+        value: 'value2',
+        children: [{ label: '2-1', value: '2-1' }]
+      }
+    ]
   }
   constructor(options?: IFormItemOptions) {
     super({ label: '级联选择', ...options })

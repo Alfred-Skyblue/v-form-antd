@@ -4,12 +4,9 @@
  * @description: 文本域属性配置
 -->
 <template>
-  <VFormBuilder
-    :form-data="formConfig.currentItem.props"
-    :form-items="formItems"
-  >
+  <VFormBuilder :form-data="currentItem.props" :form-items="formItems">
     <template #label>
-      <a-input v-model:value="formConfig.currentItem.label" />
+      <a-input v-model:value="currentItem.label" />
     </template>
   </VFormBuilder>
   <CheckboxProps :list="actionProps"></CheckboxProps>
@@ -18,13 +15,12 @@
 
 <script lang="ts" setup>
 import VFormBuilder from '@design/components/VFormBuilder/index.vue'
-import { inject, reactive } from 'vue'
-import type { IVFormDesignState } from '@design/types/form-design'
+import { reactive } from 'vue'
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
 import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
+import { useFormDesign } from '@design/hooks/useFormDesign'
 
-const { formConfig } = inject<IVFormDesignState>('formDesignState')!
-
+const { currentItem } = useFormDesign()
 const actionProps = reactive([
   {
     label: '禁用',
