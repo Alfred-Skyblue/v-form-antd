@@ -29,7 +29,7 @@ export function generateKey(formItem?: IVFormComponent): string | boolean {
 
   if (formItem) {
     const key = `${toLine(formItem.type)}_${count.value}`
-    formItem.key = `${key}+${randomUUID}`
+    formItem.key = `${key}+${randomUUID()}`
     formItem.field = key
     return true
   }
