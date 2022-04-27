@@ -17,7 +17,7 @@
       <template #item="{ element }">
         <li
           class="draggable-item v-truncate cmp-config"
-          @click="handlePushItem(element)"
+          @click.stop.prevent="handlePushItem(element)"
         >
           <Icon :type="element.icon" />
           <span class="v-ml-5 v-align-middle">

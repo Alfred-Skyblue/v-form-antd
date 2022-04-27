@@ -24,15 +24,7 @@
 </template>
 
 <script lang="ts">
-import {
-  reactive,
-  toRefs,
-  defineComponent,
-  ref,
-  provide,
-  computed,
-  onMounted
-} from 'vue'
+import { reactive, toRefs, defineComponent, ref, provide, computed } from 'vue'
 import Layout from '../Layout/index.vue'
 import Header from '@design/VFormDesign/modules/Header.vue'
 import LeftAside from '@design/VFormDesign/modules/LeftAside.vue'
@@ -79,14 +71,18 @@ export default defineComponent({
       handleSelectItem(newFormItem)
     }
 
+    /**
+     * 删除表单项同时选中上一个表单项，若没有上一个表单项则选中最后一个表单项
+     * @param {string} key
+     */
     const handleRemoveItem: IVFormDesignState['handleRemoveItem'] = key => {
-      const len = formConfig.value.formItems.length
       formForEach(formConfig.value.formItems, (item, array, index) => {
         if (item?._key === key) {
           remove(array, item)
-
-          formConfig.value.currentItem =
+          const len = formConfig.value.formItems.length
+          const curItem =
             array[index - 1] || formConfig.value.formItems[len - 1]
+          handleSelectItem(curItem)
         }
       })
     }

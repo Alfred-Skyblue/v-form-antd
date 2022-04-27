@@ -8,7 +8,6 @@ app.config.globalProperties.$log = console.log
 app.use(Antd)
 app.use(VFormAntd)
 app.mount('#app')
-console.log('-> import.meta.env', import.meta.env)
 app.config.errorHandler = (err, vm, info) => {
   console.error('error', err)
   console.error('vm', vm)

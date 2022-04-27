@@ -10,6 +10,7 @@
         v-for="item of list"
         v-model:checked="currentItem.props[item.value]"
         :key="item.value"
+        v-on="item.on || {}"
       >
         {{ item.label }}
       </a-checkbox>
@@ -20,12 +21,15 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
+import type { IAnyEvent } from '@common/types'
 
 export default defineComponent({
   name: 'CheckboxProps',
   props: {
     list: {
-      type: Array as PropType<{ label: string; value: string }[]>,
+      type: Array as PropType<
+        { label: string; value: string; on?: IAnyEvent }[]
+      >,
       default: () => []
     }
   },

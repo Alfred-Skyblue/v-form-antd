@@ -6,7 +6,7 @@ type ITextarea = Pick<
   IInput,
   'allowClear' | 'defaultValue' | 'showCount' | 'value'
 > & {
-  autoSize: boolean | { minRows: number; maxRows: number }
+  autosize: boolean | { minRows: number; maxRows: number }
 }
 
 /**
@@ -17,7 +17,7 @@ export class Textarea extends BasicFormItem {
   readonly type = 'textarea'
   readonly icon = 'textarea'
   public props: Partial<ITextarea> = {
-    autoSize: undefined,
+    autosize: undefined,
     allowClear: undefined,
     showCount: undefined,
     value: undefined

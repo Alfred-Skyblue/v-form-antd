@@ -76,14 +76,13 @@ const handleAdd = (e: { newIndex: number }) => {
 // 列表动画
 .list-enter-active,
 .list-leave-active {
-  animation-name: swoopInLeft;
-  animation-duration: 0.5s;
+  transition: all 0.3s;
 }
 
 .list-enter-from,
 .list-leave-to {
-  animation-name: swoopOutRight;
-  animation-duration: 0.5s;
+  opacity: 0;
+  transform: translateX(-100px);
 }
 
 .list-enter {

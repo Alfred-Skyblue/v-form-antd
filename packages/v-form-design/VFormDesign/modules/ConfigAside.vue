@@ -7,11 +7,19 @@
         </a-form>
       </a-tab-pane>
       <a-tab-pane key="2" tab="控件属性">
-        <div class="config-box v-h-full">
+        <div
+          class="config-box v-h-full"
+          v-if="currentItem && currentItem.propsCmp"
+        >
           <a-form layout="horizontal" :labelCol="{ span: 8 }">
             <component :is="currentItem.propsCmp"></component>
           </a-form>
         </div>
+        <a-empty
+          v-else
+          class="empty-text v-text-gray-500 !v-mt-200"
+          description="未选中控件"
+        />
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -19,13 +27,11 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import type { Component } from 'vue'
 
 import VFormConfig from '@design/components/VFProps/VFormConfig/index.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
 import type { BasicFormItem } from '@common/class/basic-form'
-const { currentItem } = useFormDesign<BasicFormItem & { propsCmp: Component }>()
-
+const { currentItem } = useFormDesign<BasicFormItem & { propsCmp: string }>()
 const activeKey = ref('1')
 watch(currentItem, newValue => {
   activeKey.value = newValue?._key ? '2' : '1'

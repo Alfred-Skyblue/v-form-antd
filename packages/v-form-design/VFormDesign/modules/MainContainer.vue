@@ -5,7 +5,11 @@
 -->
 <template>
   <div class="component-panel">
-    <a-empty class="position-center empty-content" v-show="showEmpty" />
+    <a-empty
+      class="position-center empty-content v-text-gray-500"
+      v-show="showEmpty"
+      description="请从左侧拖入组件"
+    />
     <a-form class="v-h-full" v-bind="formProps">
       <a-row class="wh-full v-overflow-y-auto v-overflow-x-hidden v-relative">
         <draggable-panel
@@ -18,35 +22,23 @@
 </template>
 
 <script setup lang="ts">
-import { inject, computed } from 'vue'
-import type { IVFormDesignState } from '@design/types/form-design'
+import { computed } from 'vue'
 
-import { computedAsync } from '@vueuse/core'
 import DraggablePanel from '../components/DraggablePanel.vue'
+import { useFormDesign } from '@design/hooks/useFormDesign'
 
-const { formConfig } = inject<IVFormDesignState>('formDesignState')!
-
+const { formConfig } = useFormDesign()
 const formProps = computed(() => {
   return formConfig.value.config
 })
 
 /**
- * 异步计算属性，兼容动画
- * @type {Ref<boolean>}
+ * 表单项空状态
+ * @type {ComputedRef<boolean>}
  */
-const showEmpty = computedAsync(async () => {
-  return new Promise(resolve => {
-    const isEmpty = formConfig.value.formItems.length === 0
-    if (isEmpty) {
-      const timer = setTimeout(() => {
-        resolve(isEmpty)
-        clearTimeout(timer)
-      }, 650)
-    } else {
-      resolve(isEmpty)
-    }
-  })
-}, true)
+const showEmpty = computed(() => {
+  return formConfig.value.formItems.length === 0
+})
 </script>
 
 <style lang="less" scoped>
