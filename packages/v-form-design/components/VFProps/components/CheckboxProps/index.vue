@@ -6,20 +6,21 @@
 <template>
   <div class="action-props">
     <a-form-item label="控制属性">
-      <a-checkbox
-        v-for="item of list"
-        v-model:checked="currentItem.props[item.value]"
-        :key="item.value"
-        v-on="item.on || {}"
-      >
-        {{ item.label }}
-      </a-checkbox>
+      <span v-for="item of list" :key="item.value">
+        <a-checkbox
+          v-if="!item.hidden"
+          v-model:checked="currentItem.props[item.value]"
+          v-on="item.on || {}"
+        >
+          {{ item.label }}
+        </a-checkbox>
+      </span>
     </a-form-item>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, Ref } from 'vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
 import type { IAnyEvent } from '@common/types'
 
@@ -28,7 +29,12 @@ export default defineComponent({
   props: {
     list: {
       type: Array as PropType<
-        { label: string; value: string; on?: IAnyEvent }[]
+        {
+          label: string
+          value: string
+          on?: IAnyEvent
+          hidden?: boolean | Ref<boolean>
+        }[]
       >,
       default: () => []
     }

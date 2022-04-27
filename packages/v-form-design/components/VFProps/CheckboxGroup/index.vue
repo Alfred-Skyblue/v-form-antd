@@ -1,8 +1,9 @@
 <!--
  * @author: ypt
  * @date: 2022/4/25
- * @description: 文本域属性配置
+ * @description: 复选框组
 -->
+
 <template>
   <VFormBuilder :form-data="currentItem.props" :form-items="formItems">
     <template #label>
@@ -13,40 +14,23 @@
     </template>
   </VFormBuilder>
   <CheckboxProps :list="actionProps"></CheckboxProps>
+  <VOptions v-model:options="currentItem.props.options"></VOptions>
   <LinkItem></LinkItem>
 </template>
 
 <script lang="ts" setup>
-import VFormBuilder from '@design/components/VFormBuilder/index.vue'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
+
 import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
+import VOptions from '@design/components/VFProps/components/VOptions/index.vue'
+import VFormBuilder from '@design/components/VFormBuilder/index.vue'
+import type { IFormBuilderOptions } from '@design/components/VFormBuilder/index.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
 
 const { currentItem } = useFormDesign()
-const actionProps = reactive([
-  {
-    label: '禁用',
-    value: 'disabled'
-  },
-  {
-    label: '可清除',
-    value: 'allowClear'
-  },
-  {
-    label: '边框',
-    value: 'bordered'
-  },
-  {
-    label: '字符数',
-    value: 'showCount'
-  },
-  {
-    label: '自适应高度',
-    value: 'autosize'
-  }
-])
-const formItems = reactive([
+
+const formItems = ref<IFormBuilderOptions[]>([
   {
     label: '标签',
     field: 'label',
@@ -60,22 +44,18 @@ const formItems = reactive([
     placeholder: '请输入数据字段'
   },
   {
-    label: '占位符',
-    field: 'placeholder',
-    tag: 'AInput',
-    placeholder: '请输入占位符'
-  },
-  {
     label: '默认值',
     field: 'defaultValue',
-    tag: 'AInput',
-    placeholder: '请输入默认值'
-  },
+    tag: 'ACheckboxGroup',
+    props: {
+      options: currentItem.value.props.options
+    }
+  }
+])
+const actionProps = reactive([
   {
-    label: '最大长度',
-    field: 'maxlength',
-    tag: 'AInput',
-    placeholder: '请输入最大长度'
+    label: '禁用',
+    value: 'disabled'
   }
 ])
 </script>

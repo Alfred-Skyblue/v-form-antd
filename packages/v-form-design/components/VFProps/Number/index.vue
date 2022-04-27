@@ -9,6 +9,9 @@
     <template #label>
       <a-input v-model:value="currentItem.label" />
     </template>
+    <template #field>
+      <a-input v-model:value="currentItem.field" />
+    </template>
   </VFormBuilder>
   <VFormSize></VFormSize>
   <CheckboxProps :list="actionProps"></CheckboxProps>
@@ -55,6 +58,12 @@ const formItems = ref<IFormBuilderOptions[]>([
     field: 'label',
     tag: 'AInput',
     placeholder: '请输入标签名称'
+  },
+  {
+    label: '数据字段',
+    field: 'field',
+    tag: 'AInput',
+    placeholder: '请输入数据字段'
   },
   {
     label: '占位符',

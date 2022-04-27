@@ -4,25 +4,23 @@
  * @description: 表单构建器，仅用于构建表单属性
 -->
 <template>
-  <a-form-item
-    v-for="formItem of formItems"
-    :key="formItem.field"
-    :label="formItem.label"
-  >
-    <slot :name="formItem.field" v-bind="{ ...formItem }">
-      <component
-        :is="formItem.tag"
-        :placeholder="formItem.placeholder"
-        v-model:value="data[formItem.field]"
-        v-bind="formItem.props"
-        v-on="formItem.on || {}"
-      ></component>
-    </slot>
-  </a-form-item>
+  <div v-for="formItem of formItems" :key="formItem.field">
+    <a-form-item :label="formItem.label" v-if="!formItem.hidden">
+      <slot :name="formItem.field" v-bind="{ ...formItem }">
+        <component
+          :is="formItem.tag"
+          :placeholder="formItem.placeholder"
+          v-model:value="data[formItem.field]"
+          v-bind="formItem.props"
+          v-on="formItem.on || {}"
+        ></component>
+      </slot>
+    </a-form-item>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, Ref } from 'vue'
 import type { IAnyEvent, IAnyObject } from '@common/types'
 import { useVModel } from '@vueuse/core'
 export interface IFormBuilderOptions {
@@ -32,6 +30,7 @@ export interface IFormBuilderOptions {
   placeholder?: string
   props?: IAnyObject
   on?: IAnyEvent
+  hidden?: boolean | Ref<boolean>
 }
 export default defineComponent({
   name: 'VFormBuilder',

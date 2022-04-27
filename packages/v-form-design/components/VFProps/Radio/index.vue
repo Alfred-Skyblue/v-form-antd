@@ -1,8 +1,9 @@
 <!--
  * @author: ypt
- * @date: 2022/4/23
- * @description: 输入框属性
+ * @date: 2022/4/25
+ * @description: 复选框组
 -->
+
 <template>
   <VFormBuilder :form-data="currentItem.props" :form-items="formItems">
     <template #label>
@@ -14,39 +15,22 @@
   </VFormBuilder>
   <VFormSize></VFormSize>
   <CheckboxProps :list="actionProps"></CheckboxProps>
+  <VOptions v-model:options="currentItem.props.options"></VOptions>
   <LinkItem></LinkItem>
 </template>
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
-import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue'
+
 import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
+import VOptions from '@design/components/VFProps/components/VOptions/index.vue'
 import VFormBuilder from '@design/components/VFormBuilder/index.vue'
 import type { IFormBuilderOptions } from '@design/components/VFormBuilder/index.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
+import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue'
 
 const { currentItem } = useFormDesign()
-
-const actionProps = reactive([
-  {
-    label: '禁用',
-    value: 'disabled'
-  },
-  {
-    label: '可清除',
-    value: 'allowClear'
-  },
-  {
-    label: '边框',
-    value: 'bordered'
-  },
-  {
-    label: '字符数',
-    value: 'showCount'
-  }
-])
 
 const formItems = ref<IFormBuilderOptions[]>([
   {
@@ -62,40 +46,34 @@ const formItems = ref<IFormBuilderOptions[]>([
     placeholder: '请输入数据字段'
   },
   {
-    label: '占位符',
-    field: 'placeholder',
-    tag: 'AInput',
-    placeholder: '请输入占位符'
+    label: '选项类型',
+    field: 'optionType',
+    tag: 'ARadioGroup',
+    props: {
+      options: [
+        { label: 'default', value: 'default' },
+        { label: 'button', value: 'button' }
+      ],
+      optionType: 'button'
+    }
   },
   {
-    label: '前置标签',
-    field: 'addonBefore',
-    tag: 'AInput',
-    placeholder: '请输入前置标签'
-  },
+    label: '风格',
+    field: 'buttonStyle',
+    tag: 'ARadioGroup',
+    props: {
+      options: [
+        { label: 'outline', value: 'outline' },
+        { label: 'solid', value: 'solid' }
+      ],
+      optionType: 'button'
+    }
+  }
+])
+const actionProps = reactive([
   {
-    label: '后置标签',
-    field: 'addonAfter',
-    tag: 'AInput',
-    placeholder: '请输入后置标签'
-  },
-  {
-    label: '前缀',
-    field: 'prefix',
-    tag: 'AInput',
-    placeholder: '请输入前缀'
-  },
-  {
-    label: '后缀',
-    field: 'suffix',
-    tag: 'AInput',
-    placeholder: '请输入后缀'
-  },
-  {
-    label: '最大长度',
-    field: 'maxlength',
-    tag: 'AInput',
-    placeholder: '请输入最大长度'
+    label: '禁用',
+    value: 'disabled'
   }
 ])
 </script>

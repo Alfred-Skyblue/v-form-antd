@@ -31,7 +31,7 @@ interface IRadio extends IAnyObject {
 }
 
 export class Radio extends BasicFormItem {
-  readonly _tag = 'ARadio'
+  readonly _tag = 'ARadioGroup'
   readonly icon = 'radio'
   readonly type = 'radio'
   public props: Partial<IRadio> = {

@@ -1,8 +1,9 @@
 <!--
  * @author: ypt
- * @date: 2022/4/23
- * @description: 输入框属性
+ * @date: 2022/4/25
+ * @description: 下拉选择属性配置
 -->
+
 <template>
   <VFormBuilder :form-data="currentItem.props" :form-items="formItems">
     <template #label>
@@ -14,39 +15,22 @@
   </VFormBuilder>
   <VFormSize></VFormSize>
   <CheckboxProps :list="actionProps"></CheckboxProps>
+  <VOptions v-model:options="currentItem.props.options"></VOptions>
   <LinkItem></LinkItem>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-
+import { computed, reactive, ref } from 'vue'
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
-import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue'
+
 import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
+import VOptions from '@design/components/VFProps/components/VOptions/index.vue'
 import VFormBuilder from '@design/components/VFormBuilder/index.vue'
 import type { IFormBuilderOptions } from '@design/components/VFormBuilder/index.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
+import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue'
 
 const { currentItem } = useFormDesign()
-
-const actionProps = reactive([
-  {
-    label: '禁用',
-    value: 'disabled'
-  },
-  {
-    label: '可清除',
-    value: 'allowClear'
-  },
-  {
-    label: '边框',
-    value: 'bordered'
-  },
-  {
-    label: '字符数',
-    value: 'showCount'
-  }
-])
 
 const formItems = ref<IFormBuilderOptions[]>([
   {
@@ -68,34 +52,35 @@ const formItems = ref<IFormBuilderOptions[]>([
     placeholder: '请输入占位符'
   },
   {
-    label: '前置标签',
-    field: 'addonBefore',
-    tag: 'AInput',
-    placeholder: '请输入前置标签'
+    label: '模式',
+    field: 'mode',
+    tag: 'ARadioGroup',
+    props: {
+      options: [
+        { label: 'multiple', value: 'multiple' },
+        { label: 'tags', value: 'tags' },
+        { label: 'combobox', value: 'combobox' }
+      ]
+    }
   },
   {
-    label: '后置标签',
-    field: 'addonAfter',
-    tag: 'AInput',
-    placeholder: '请输入后置标签'
+    label: '最多tag数',
+    field: 'maxTagCount',
+    tag: 'AInputNumber',
+    hidden: computed(
+      () => !['tags', 'multiple'].includes(currentItem.value.props.mode)
+    )
+  }
+])
+
+const actionProps = reactive([
+  {
+    label: '禁用',
+    value: 'disabled'
   },
   {
-    label: '前缀',
-    field: 'prefix',
-    tag: 'AInput',
-    placeholder: '请输入前缀'
-  },
-  {
-    label: '后缀',
-    field: 'suffix',
-    tag: 'AInput',
-    placeholder: '请输入后缀'
-  },
-  {
-    label: '最大长度',
-    field: 'maxlength',
-    tag: 'AInput',
-    placeholder: '请输入最大长度'
+    label: '可清除',
+    value: 'allowClear'
   }
 ])
 </script>
