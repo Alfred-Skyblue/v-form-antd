@@ -4,7 +4,7 @@
  * @description: 选项配置文件
 -->
 <template>
-  <div class="v-options-config">
+  <div class="v-options-config" v-if="modelOptions">
     <a-form-item label="选项">
       <div
         class="v-flex v-space-x-6 v-space-y-4 v-items-center"

@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, toRefs, defineComponent, ref, provide, computed } from 'vue'
+import { defineComponent, ref, provide, computed } from 'vue'
 import Layout from '../Layout/index.vue'
 import Header from '@design/VFormDesign/modules/Header.vue'
 import LeftAside from '@design/VFormDesign/modules/LeftAside.vue'
@@ -35,6 +35,7 @@ import { cloneDeep, remove } from 'lodash-es'
 import Toolbar from '@design/VFormDesign/modules/Toolbar.vue'
 import { formForEach } from '@common/utils/util'
 import ConfigAside from '@design/VFormDesign/modules/ConfigAside.vue'
+import type { BasicFormItem } from '@common/class/basic-form'
 
 export default defineComponent({
   name: 'VFormDesign',
@@ -79,9 +80,10 @@ export default defineComponent({
       formForEach(formConfig.value.formItems, (item, array, index) => {
         if (item?._key === key) {
           remove(array, item)
-          const len = formConfig.value.formItems.length
           const curItem =
-            array[index - 1] || formConfig.value.formItems[len - 1]
+            array[index] ||
+            formConfig.value.formItems.at(-1) ||
+            ({} as BasicFormItem)
           handleSelectItem(curItem)
         }
       })
@@ -103,9 +105,7 @@ export default defineComponent({
       isFixed
     })
 
-    const state = reactive({})
     return {
-      ...toRefs(state),
       handleSelectItem,
       handlePushItem,
       handleRemoveItem,

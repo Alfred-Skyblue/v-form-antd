@@ -1,7 +1,7 @@
 <!--
  * @author: ypt
  * @date: 2022/4/25
- * @description: 日期选择
+ * @description: 时间选择器属性配置
 -->
 
 <template>
@@ -30,9 +30,6 @@ import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue
 
 const { currentItem } = useFormDesign()
 
-const defaultValueCmp = computed(() => {
-  return currentItem.value.type === 'dateRange' ? 'ARangePicker' : 'ADatePicker'
-})
 const formItems = computed<IFormBuilderOptions[]>(() => [
   {
     label: '标签',
@@ -54,81 +51,51 @@ const formItems = computed<IFormBuilderOptions[]>(() => [
   },
   {
     label: '默认值',
-    field: 'defaultPickerValue',
-    tag: defaultValueCmp.value,
+    field: 'defaultValue',
+    tag: 'ATimePicker',
     props: currentItem.value.props
   },
   {
-    label: '日期格式',
+    label: '值格式',
     field: 'valueFormat',
     tag: 'AInput',
-    placeholder: '默认为dayjs对象'
+    placeholder: '默认dayjs对象'
   },
   {
-    label: '类型',
-    field: 'picker',
-    tag: 'ARadioGroup',
-    on: {
-      change(e: InputEvent) {
-        if (e.target.value !== 'date') {
-          currentItem.value.props.showTime = undefined
-          currentItem.value.props.showNow = undefined
-        }
-      }
-    },
-    props: {
-      options: [
-        {
-          label: '日期',
-          value: 'date'
-        },
-        {
-          label: '周',
-          value: 'week'
-        },
-        {
-          label: '月',
-          value: 'month'
-        },
-        {
-          label: '季度',
-          value: 'quarter'
-        },
-        {
-          label: '年',
-          value: 'year'
-        }
-      ]
-    }
+    label: '时间隔',
+    field: 'hourStep',
+    tag: 'AInputNumber',
+    placeholder: '请输入时间隔'
+  },
+  {
+    label: '分间隔',
+    field: 'minuteStep',
+    tag: 'AInputNumber',
+    placeholder: '请输入分间隔'
+  },
+  {
+    label: '秒间隔',
+    field: 'secondStep',
+    tag: 'AInputNumber',
+    placeholder: '请输入秒间隔'
   }
 ])
-const actionProps = computed(() => {
-  const datePickerProps = [
-    {
-      label: 'time',
-      value: 'showTime'
-    },
-    {
-      label: '此刻',
-      value: 'showNow',
-      hidden: !currentItem.value.props.showTime
-    },
-    {
-      label: '显示今天',
-      value: 'showToday'
-    }
-  ]
-  const isDate = [undefined, 'date'].includes(currentItem.value.props.picker)
-  return [
-    {
-      label: '禁用',
-      value: 'disabled'
-    },
-    {
-      label: '可清除',
-      value: 'allowClear'
-    },
-    ...(isDate ? datePickerProps : [])
-  ]
-})
+const actionProps = computed(() => [
+  {
+    label: '禁用',
+    value: 'disabled'
+  },
+  {
+    label: '可清除',
+    value: 'allowClear'
+  },
+  {
+    label: '此刻',
+    value: 'showNow'
+  },
+  {
+    label: '12小时制',
+    value: 'use12Hours'
+  }
+])
 </script>

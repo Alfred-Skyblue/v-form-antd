@@ -4,7 +4,7 @@
  * @description: 以复选框操作的属性
 -->
 <template>
-  <div class="action-props">
+  <div :class="{ 'action-props': list.length > 2 }">
     <a-form-item label="控制属性">
       <span v-for="item of list" :key="item.value">
         <a-checkbox

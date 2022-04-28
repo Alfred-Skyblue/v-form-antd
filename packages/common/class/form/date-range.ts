@@ -56,25 +56,7 @@ export class DateRange extends BasicFormItem {
   readonly _tag = 'ARangePicker'
   readonly type = 'dateRange'
   readonly icon = 'date-range'
-  public props: Partial<IDateRange> = {
-    mode: undefined,
-    picker: undefined,
-    showTime: false,
-    allowClear: true,
-    bordered: true,
-    autoFocus: false,
-    open: false,
-    placeholder: undefined,
-    dropdownClassName: undefined,
-    size: undefined,
-    suffixIcon: undefined,
-    prevIcon: undefined,
-    nextIcon: undefined,
-    superNextIcon: undefined,
-    superPrevIcon: undefined,
-    inputReadOnly: undefined,
-    valueFormat: undefined
-  }
+  public props: Partial<IDateRange> = {}
   constructor(options?: IFormItemOptions) {
     super({ label: '日期范围', ...options })
   }

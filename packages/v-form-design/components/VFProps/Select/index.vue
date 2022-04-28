@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive } from 'vue'
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
 
 import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
@@ -32,7 +32,7 @@ import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue
 
 const { currentItem } = useFormDesign()
 
-const formItems = ref<IFormBuilderOptions[]>([
+const formItems = computed<IFormBuilderOptions[]>(() => [
   {
     label: '标签',
     field: 'label',
@@ -52,6 +52,15 @@ const formItems = ref<IFormBuilderOptions[]>([
     placeholder: '请输入占位符'
   },
   {
+    label: '默认值',
+    field: 'defaultValue',
+    tag: 'ASelect',
+    props: {
+      ...currentItem.value.props,
+      placeholder: '请选择默认值'
+    }
+  },
+  {
     label: '模式',
     field: 'mode',
     tag: 'ARadioGroup',
@@ -67,9 +76,7 @@ const formItems = ref<IFormBuilderOptions[]>([
     label: '最多tag数',
     field: 'maxTagCount',
     tag: 'AInputNumber',
-    hidden: computed(
-      () => !['tags', 'multiple'].includes(currentItem.value.props.mode)
-    )
+    hidden: !['tags', 'multiple'].includes(currentItem.value.props.mode)
   }
 ])
 

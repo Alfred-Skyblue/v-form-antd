@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { computed, reactive } from 'vue'
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
 
 import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
@@ -32,7 +32,7 @@ import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue
 
 const { currentItem } = useFormDesign()
 
-const formItems = ref<IFormBuilderOptions[]>([
+const formItems = computed<IFormBuilderOptions[]>(() => [
   {
     label: '标签',
     field: 'label',
