@@ -57,17 +57,7 @@ export class Rate extends BasicFormItem {
   readonly _tag = 'ARate'
   readonly type = 'rate'
   readonly icon = 'rate'
-  public props: Partial<IRate> = {
-    allowClear: undefined,
-    allowHalf: undefined,
-    autoFocus: undefined,
-    character: undefined,
-    count: undefined,
-    defaultValue: undefined,
-    disabled: undefined,
-    value: undefined,
-    tooltips: undefined
-  }
+  public props: Partial<IRate> = {}
   constructor(options?: IFormItemOptions) {
     super({ label: '评分', ...options })
   }
