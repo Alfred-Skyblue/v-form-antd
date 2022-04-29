@@ -54,8 +54,7 @@ export default defineComponent({
     const state = reactive({
       layoutOptions: [
         { label: '水平', value: 'horizontal' },
-        { label: '垂直', value: 'vertical' },
-        { label: '行内', value: 'inline' }
+        { label: '垂直', value: 'vertical' }
       ],
       labelLayoutOptions: [
         { label: '固定', value: 'fixed' },

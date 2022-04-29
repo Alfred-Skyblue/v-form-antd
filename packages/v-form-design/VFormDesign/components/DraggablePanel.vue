@@ -21,12 +21,13 @@
     @add="handleAdd"
   >
     <template #item="{ element }">
-      <li
+      <a-col
+        :span="formItemSpan(element.span)"
         class="draggable-item drag-move v-cursor-move"
         @dragstart="handleSelectItem(element)"
       >
         <layout-item :record="element"></layout-item>
-      </li>
+      </a-col>
     </template>
   </draggable>
 </template>
@@ -50,18 +51,25 @@ const props = defineProps({
 })
 
 const draggableClass = computed(
-  () => `v-w-full list-main  v-px-5 v-py-10 ${props.root ? 'v-absolute' : ''}`
+  () => `draggable-main ant-row  ${props.root ? 'v-absolute' : ''}`
 )
 
 const handleAdd = (e: { newIndex: number }) => {
   handleSelectItem(props.list[e.newIndex])
 }
+
+const formItemSpan = computed(() => {
+  return (span?: number) => span ?? 24
+})
 </script>
 
 <style lang="less" scoped>
 .draggable-item {
   min-height: 36px;
   border-width: 0 !important;
+}
+.draggable-main {
+  @apply v-w-full list-main  v-px-5 v-py-10 v-content-start;
 }
 .no-move {
   transition: transform 0s;

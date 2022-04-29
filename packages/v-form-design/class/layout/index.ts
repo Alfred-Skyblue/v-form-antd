@@ -1,8 +1,10 @@
 import { DesignGrid } from '@design/class/layout/grid'
+import { DesignDivider } from '@design/class/layout/divider'
 import type { IAnyObject } from '@common/types'
 
 export const designLayoutComponent = {
-  grid: DesignGrid
+  grid: DesignGrid,
+  divider: DesignDivider
 }
 
 type DesignLayoutComponentType = keyof typeof designLayoutComponent

@@ -4,7 +4,15 @@
  * @description: 表单构建器，仅用于构建表单属性
 -->
 <template>
-  <div v-for="formItem of formItems" :key="formItem.field">
+  <div v-for="(formItem, index) of formItems" :key="formItem.field">
+    <a-form-item v-if="index === 3" label="栅格数">
+      <a-slider
+        v-model:value="currentItem.span"
+        :min="0"
+        :max="24"
+        @change="handleGridChange"
+      ></a-slider>
+    </a-form-item>
     <a-form-item :label="formItem.label" v-if="!formItem.hidden">
       <slot :name="formItem.field" v-bind="{ ...formItem }">
         <component
@@ -23,6 +31,8 @@
 import { defineComponent, PropType, Ref } from 'vue'
 import type { IAnyEvent, IAnyObject } from '@common/types'
 import { useVModel } from '@vueuse/core'
+import { useFormDesign } from '@design/hooks/useFormDesign'
+import { globalConfig } from '@common/class/basic-form'
 export interface IFormBuilderOptions {
   label: string
   field: string
@@ -45,7 +55,11 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const data = useVModel(props, 'formData', emit)
-    return { data }
+    const { currentItem } = useFormDesign()
+    const handleGridChange = (val: number) => {
+      globalConfig.span = val
+    }
+    return { data, currentItem, handleGridChange }
   }
 })
 </script>

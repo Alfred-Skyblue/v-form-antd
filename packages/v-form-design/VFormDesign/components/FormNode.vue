@@ -1,12 +1,15 @@
 <!--
  * @author: ypt
  * @date: 2022/4/15
- * @description: 表单项组件
+ * @description: 表单节点组件
 -->
 <template>
   <div
     class="drag-move-box v-relative v-p-8 v-overflow-hidden v-transition-all"
-    :class="{ active: record._key === currentItem._key }"
+    :class="[
+      { active: record._key === currentItem._key },
+      { '!v-bg-red-200': currentItem.hidden }
+    ]"
     @click.stop="handleSelectItem(record)"
   >
     <v-form-item :record="record"></v-form-item>

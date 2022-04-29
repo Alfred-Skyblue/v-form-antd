@@ -1,18 +1,24 @@
-import type { IAnyEvent, IAnyObject } from '@common/types'
-import type { IFormItemOptions } from '@common/types/form'
+import type { Component, IAnyEvent, IAnyObject } from '@common/types'
 import { VFComponent } from '@common/class/component'
+import type { IFormItemOptions } from '@common/types/form'
 
+export const globalConfig = {
+  span: 24
+}
 let uid = 1
 
 export abstract class BasicFormItem extends VFComponent {
   abstract icon?: string
-  abstract _tag?: string
+  abstract _tag?: string | Component
   abstract type: string
   abstract props: IAnyObject
+  public _isLayout!: boolean
+  public hidden!: boolean
   public label!: string
   public on!: IAnyEvent
   public field!: string
-  protected constructor(options: IFormItemOptions) {
+  public span!: number
+  constructor(options: IFormItemOptions) {
     super()
     this.init(options)
   }
@@ -22,6 +28,7 @@ export abstract class BasicFormItem extends VFComponent {
 
   generateKey() {
     this.field = `${this.field}_${uid++}`
+    this.span = globalConfig.span
     super.generateKey()
   }
   // 生成UUID

@@ -14,7 +14,7 @@
         <a-input v-model:value="option.label" />
         <a-input v-model:value="option.value" />
         <a
-          class="push v-rounded-full v-text-center hover:v-bg-red-300 v-transition-all v-bg-gray-200"
+          class="remove v-rounded-full v-text-center hover:v-bg-red-300 v-transition-all v-bg-gray-200"
           @click="handleRemoveOption(option)"
         >
           <Icon type="delete" />
@@ -69,7 +69,7 @@ const handleRemoveOption = (option: ISelectOption) => {
       margin-left: 0;
     }
   }
-  .push {
+  .remove {
     flex: 0 0 25px;
   }
 }

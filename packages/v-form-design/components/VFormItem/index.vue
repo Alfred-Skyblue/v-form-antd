@@ -9,12 +9,16 @@
     :class="{ 'v-form-item-fixed': isFixed }"
   >
     <a-form-item>
-      <template #label>
+      <template #label v-if="!record._isLayout">
         <div class="v-form-label-box">
           {{ record.label }}
         </div>
       </template>
-      <component :is="record._tag" v-bind="record.props"></component>
+      <component
+        :is="record._tag"
+        v-bind="record.props"
+        v-on="record.on || {}"
+      ></component>
     </a-form-item>
   </div>
 </template>

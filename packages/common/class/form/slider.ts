@@ -117,7 +117,6 @@ export class Slider extends BasicFormItem {
     marks: undefined,
     max: undefined,
     min: undefined,
-    range: undefined,
     reverse: undefined,
     step: undefined,
     tipFormatter: undefined,

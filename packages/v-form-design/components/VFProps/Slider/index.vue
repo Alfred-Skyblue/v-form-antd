@@ -40,10 +40,6 @@ const actionProps = reactive([
     value: 'reverse'
   },
   {
-    label: '双向',
-    value: 'range'
-  },
-  {
     label: '垂直',
     value: 'vertical'
   }

@@ -10,13 +10,14 @@
       v-show="showEmpty"
       description="请从左侧拖入组件"
     />
-    <a-form class="v-h-full" v-bind="formProps">
-      <a-row class="wh-full v-overflow-y-auto v-overflow-x-hidden v-relative">
-        <draggable-panel
-          :root="true"
-          v-model:list="formConfig.formItems"
-        ></draggable-panel>
-      </a-row>
+    <a-form
+      class="v-h-full v-overflow-y-auto v-overflow-x-hidden v-relative"
+      v-bind="formProps"
+    >
+      <draggable-panel
+        :root="true"
+        v-model:list="formConfig.formItems"
+      ></draggable-panel>
     </a-form>
   </div>
 </template>

@@ -1,4 +1,3 @@
-import type { IAnyObject } from '@common/types'
 import type { Col } from '@common/class/layout/col'
 import { BasicFormItem } from '@common/class/basic-form'
 
@@ -9,6 +8,7 @@ interface IGridProps {
   wrap?: boolean
 }
 export class GridComponent extends BasicFormItem {
+  public _isLayout = true
   public _tag!: string
   public type = 'grid'
   public icon = 'grid'
@@ -24,7 +24,4 @@ export class GridComponent extends BasicFormItem {
       list: []
     }
   ]
-  constructor(options: IAnyObject) {
-    super(options)
-  }
 }
