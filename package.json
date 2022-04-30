@@ -12,6 +12,7 @@
     "@ant-design/icons-vue": "^6.1.0",
     "@vueuse/core": "^8.2.5",
     "lodash-es": "^4.17.21",
+    "v3-img-preview": "^1.1.16",
     "vue": "^3.2.31",
     "vuedraggable": "^4.1.0"
   },

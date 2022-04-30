@@ -5,25 +5,33 @@
 -->
 
 <template>
-  <div class="clearfix">
-    <a-upload
-      v-model:file-list="fileList"
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      list-type="picture-card"
-      @preview="handlePreview"
-    >
-      <div v-if="fileList.length < 8">
-        <PlusOutlined class="push-outlined"></PlusOutlined>
-        <div style="margin-top: 8px">Upload</div>
-      </div>
-    </a-upload>
-  </div>
+  <a-upload
+    v-model:file-list="uploadFileList"
+    list-type="picture-card"
+    @preview="handlePreview"
+    @remove="handleRemove"
+    v-bind="formItem && formItem.props"
+    v-on="listeners"
+  >
+    <div v-if="showUpload">
+      <PlusOutlined class="push-outlined"></PlusOutlined>
+      <div class="v-mt-8">{{ formItem?.label || '图片上传' }}</div>
+    </div>
+  </a-upload>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, nextTick, PropType, ref, toRefs } from 'vue'
 import type { UploadProps } from 'ant-design-vue'
 import type { IAnyObject } from '@common/types'
 import { PlusOutlined } from '@ant-design/icons-vue'
+import { v3ImgPreviewFn } from 'v3-img-preview'
+import { useVModel } from '@vueuse/core'
+import type { BasicFormItem } from '@common/class/basic-form'
+import type {
+  UploadChangeParam,
+  UploadFile
+} from 'ant-design-vue/lib/upload/interface'
+import { isFunction, omit } from 'lodash-es'
 function getBase64(file: File) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -36,86 +44,76 @@ function getBase64(file: File) {
 export default defineComponent({
   name: 'VFormUpload',
   components: { PlusOutlined },
-  setup() {
-    const previewVisible = ref(false)
-    const previewImage = ref('')
-    const previewTitle = ref('')
-
-    const fileList = ref<UploadProps['fileList']>([
-      {
-        uid: '-1',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      },
-      {
-        uid: '-2',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      },
-      {
-        uid: '-3',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      },
-      {
-        uid: '-4',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      },
-      {
-        uid: '-xxx',
-        percent: 50,
-        name: 'image.png',
-        status: 'uploading',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      },
-      {
-        uid: '-5',
-        name: 'image.png',
-        status: 'error'
-      }
-    ])
-
-    const handleCancel = () => {
-      previewVisible.value = false
-      previewTitle.value = ''
+  props: {
+    formItem: {
+      type: Object as PropType<BasicFormItem>,
+      required: true
+    },
+    value: {
+      type: Array as PropType<UploadProps['fileList']>,
+      default: () => []
+    },
+    showUpload: {
+      type: Boolean,
+      default: true
     }
+  },
+  setup(props, { emit }) {
+    const { formItem } = toRefs(props)
+    const fileList = useVModel(props, 'value', emit)
+    const uploadFileList = ref([...fileList.value!])
+
+    const onEvents = computed(() => formItem.value?.on ?? {})
+    const listeners = computed(() =>
+      omit(onEvents, ['change', 'remove', 'preview'])
+    )
+
     const handlePreview = async (file: IAnyObject) => {
+      await onEvents.value?.preview?.(file)
       if (!file.url && !file.preview) {
         file.preview = (await getBase64(file.originFileObj)) as string
       }
-      previewImage.value = file.url || file.preview
-      previewVisible.value = true
-      previewTitle.value =
-        file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
+      const url = file.url || file.preview
+      v3ImgPreviewFn(url)
     }
 
+    const updateFileList = () => {
+      nextTick(() => {
+        fileList.value = uploadFileList.value?.filter(
+          file => file.status === 'done'
+        )
+      })
+    }
+
+    const uploadChange = (info: UploadChangeParam) => {
+      onEvents.value?.change?.(info)
+
+      const { file } = info
+      if (file.status === 'done' && file.response?.code === 0) {
+        updateFileList()
+      }
+    }
+
+    const handleRemove = async (file: UploadFile) => {
+      let remove = formItem.value?.props?.remove
+      remove = isFunction(remove) ? remove : () => Promise.resolve(true)
+      const res = await remove(file)
+      if (res === false) return res
+      nextTick(updateFileList)
+      return res
+    }
     return {
-      previewVisible,
-      previewImage,
       fileList,
-      handleCancel,
+      uploadFileList,
       handlePreview,
-      previewTitle
+      handleRemove,
+      uploadChange,
+      listeners
     }
   }
 })
 </script>
 <style lang="less" scoped>
-/* you can make up upload button and sample style by using stylesheets */
-.ant-upload-select-picture-card i {
-  font-size: 32px;
-  color: #999;
-}
-
-.ant-upload-select-picture-card .ant-upload-text {
-  margin-top: 8px;
-  color: #666;
-}
 .push-outlined {
   font-size: 28px;
   color: #666 !important;
