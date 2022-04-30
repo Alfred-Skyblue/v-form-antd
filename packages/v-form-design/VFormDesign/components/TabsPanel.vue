@@ -16,10 +16,7 @@
         :tab="item.label"
         class="layout-box v-bg-white"
       >
-        <DraggablePanel
-          v-model:list="item.list"
-          class="v-min-h-[40px]"
-        ></DraggablePanel>
+        <DraggablePanel v-model:list="item.list"></DraggablePanel>
       </a-tab-pane>
     </a-tabs>
     <FormNodeAction :record="record"></FormNodeAction>

@@ -1,64 +1,13 @@
 import { BasicFormItem } from '../basic-form'
 import type { IAnyObject } from '@common/types'
 import type { IFormItemOptions } from '@common/types/form'
+import type { SwitchProps } from 'ant-design-vue'
 
-interface ISwitch extends IAnyObject {
-  /**
-   * get focus when components mounted
-   * @default false
-   * @type boolean
-   */
-  autoFocus: boolean
-
-  /**
-   * determine whether the Switch is checked
-   * @default false
-   * @type boolean
-   */
-  checked: boolean
-
-  /**
-   * content to be shown when the state is checked
-   * @type any (string | slot)
-   */
-  checkedChildren: any
-
-  checkedValue: 'boolean' | 'string' | 'number'
-
-  /**
-   * Disable switch
-   * @default false
-   * @type boolean
-   */
-  disabled: boolean
-
-  /**
-   * loading state of switch
-   * @default false
-   * @type boolean
-   */
-  loading: boolean
-
-  /**
-   * the size of the Switch, options: default small
-   * @default 'default'
-   * @type string
-   */
-  size: 'small' | 'default'
-
-  /**
-   * content to be shown when the state is unchecked
-   * @type any (string | slot)
-   */
-  unCheckedChildren: any
-
-  unCheckedValue: any
-}
 export class Switch extends BasicFormItem {
   readonly _tag = 'ASwitch'
   readonly type = 'switch'
   readonly icon = 'switch'
-  public props: Partial<ISwitch> = {
+  public props: Partial<SwitchProps & IAnyObject> = {
     autoFocus: false,
     checked: false,
     checkedValue: 'boolean',

@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
     "@vueuse/core": "^8.2.5",
     "lodash-es": "^4.17.21",
     "vue": "^3.2.31",

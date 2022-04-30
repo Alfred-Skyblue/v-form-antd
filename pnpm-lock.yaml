@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@ant-design/icons-vue': ^6.1.0
   '@rushstack/eslint-patch': ^1.1.0
   '@types/lodash-es': ^4.17.6
   '@types/node': ^16.11.26
@@ -28,6 +29,7 @@ specifiers:
   vuedraggable: ^4.1.0
 
 dependencies:
+  '@ant-design/icons-vue': 6.1.0_vue@3.2.31
   '@vueuse/core': 8.2.5_vue@3.2.31
   lodash-es: 4.17.21
   vue: 3.2.31
@@ -69,11 +71,9 @@ packages:
     resolution: {integrity: sha512-qAZRvPzfdWHtfameEGP2Qvuf838NhergR35o+EuVyB5XvSA98xod5r4utvi4TJ3ywmevm290g9nsCG5MryrdWQ==}
     dependencies:
       '@ctrl/tinycolor': 3.4.0
-    dev: true
 
   /@ant-design/icons-svg/4.2.1:
     resolution: {integrity: sha512-EB0iwlKDGpG93hW8f85CTJTs4SvMX7tt5ceupvhALp1IF44SeUFOMhKUOYqpsoYWQKAOuTRDMqn75rEaKDp0Xw==}
-    dev: true
 
   /@ant-design/icons-vue/6.1.0_vue@3.2.31:
     resolution: {integrity: sha512-EX6bYm56V+ZrKN7+3MT/ubDkvJ5rK/O2t380WFRflDcVFgsvl3NLH7Wxeau6R8DbrO5jWR6DSTC3B6gYFp77AA==}
@@ -83,7 +83,6 @@ packages:
       '@ant-design/colors': 6.0.0
       '@ant-design/icons-svg': 4.2.1
       vue: 3.2.31
-    dev: true
 
   /@babel/code-frame/7.16.7:
     resolution: {integrity: sha512-iAXqUn8IIeBTNd72xsFlgaXHkMBMt6y4HJp1tIaK465CWLT/fG1aqB7ykr95gHHmlBdGbFeWWfyB4NJJ0nmeIg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@babel/code-frame/-/code-frame-7.16.7.tgz}
@@ -381,7 +380,6 @@ packages:
   /@ctrl/tinycolor/3.4.0:
     resolution: {integrity: sha512-JZButFdZ1+/xAfpguQHoabIXkcqRRKpMrWKBkpEZZyxfY9C1DpADFB8PEqGSTeFr135SaTRfKqGKx5xSCLI7ZQ==}
     engines: {node: '>=10'}
-    dev: true
 
   /@eslint/eslintrc/1.2.1:
     resolution: {integrity: sha512-bxvbYnBPN1Gibwyp6NrpnFzA3YtRL3BBAyEAFVIpNTm2Rn4Vy87GA5M4aSn3InRrlsbX5N0GW7XIx+U4SAEKdQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@eslint/eslintrc/-/eslintrc-1.2.1.tgz}
