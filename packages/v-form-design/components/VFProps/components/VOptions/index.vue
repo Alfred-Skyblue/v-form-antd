@@ -34,11 +34,16 @@ import type { ISelectOption } from '@common/types/form'
 import { useVModel } from '@vueuse/core'
 import Icon from '@design/components/Icon/index.vue'
 import { remove } from 'lodash-es'
+import type { ITabsColumn } from '@common/class/layout/tabs'
 
 const emit = defineEmits(['update:options'])
 const props = defineProps({
   options: {
-    type: Array as PropType<ISelectOption[]>
+    type: Array as PropType<(ISelectOption | ITabsColumn)[]>
+  },
+  isLayout: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -49,7 +54,12 @@ const modelOptions = useVModel(props, 'options', emit) as Ref<ISelectOption[]>
  */
 const handleAddOptions = () => {
   const len = modelOptions.value.length
-  modelOptions.value.push({ label: `选项${len + 1}`, value: `value${len + 1}` })
+  const opt = {
+    label: `选项${len + 1}`,
+    value: `选项${len + 1}`,
+    ...(props.isLayout && { list: [] })
+  }
+  modelOptions.value.push(opt)
 }
 
 /**

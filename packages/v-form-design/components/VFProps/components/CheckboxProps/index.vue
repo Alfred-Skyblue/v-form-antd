@@ -6,7 +6,12 @@
 <template>
   <div :class="{ 'action-props': list.length > 2 }">
     <a-form-item label="控制属性">
-      <a-checkbox v-model:checked="currentItem.hidden">隐藏</a-checkbox>
+      <a-checkbox
+        v-if="!currentItem._isLayout"
+        v-model:checked="currentItem.hidden"
+      >
+        隐藏
+      </a-checkbox>
       <span v-for="item of list" :key="item.value">
         <a-checkbox
           v-if="!item.hidden"

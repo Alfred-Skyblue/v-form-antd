@@ -1,6 +1,6 @@
 import type { BasicFormItem } from '@common/class/basic-form'
-import { forEach } from 'lodash-es'
-import { isGridComponent } from '@common/utils/type-guard'
+import { isArray } from 'lodash-es'
+import { isGridComponent, isTabsComponent } from '@common/utils/type-guard'
 
 /**
  * 生成随机 id
@@ -26,20 +26,26 @@ export function randomUUID() {
   )
 }
 
+/**
+ * 遍历表单项列表
+ * @param {BasicFormItem | BasicFormItem[]} formItems
+ * @param {(formItem: BasicFormItem, array: BasicFormItem[], index: number) => void} callback
+ */
 export const formForEach = (
-  formItems: BasicFormItem[],
+  formItems: BasicFormItem | BasicFormItem[],
   callback: (
     formItem: BasicFormItem,
     array: BasicFormItem[],
     index: number
   ) => void
 ) => {
-  forEach(formItems, (item, index) => {
+  const array = isArray(formItems) ? formItems : [formItems]
+  array.forEach((item, index) => {
     if (item) {
-      callback(item, formItems, index)
-      if (isGridComponent(item)) {
-        forEach(item.columns, colItem => {
-          formForEach(colItem.list, callback)
+      callback(item, array, index)
+      if (isGridComponent(item) || isTabsComponent(item)) {
+        item.columns.forEach(column => {
+          formForEach(column.list, callback)
         })
       }
     }
@@ -60,7 +66,7 @@ export const findFormItem: (
   const traverse = (formItems: BasicFormItem[]): boolean => {
     return formItems.some((formItem: BasicFormItem) => {
       // 处理栅格
-      if (isGridComponent(formItem)) {
+      if (isGridComponent(formItem) || isTabsComponent(formItem)) {
         return formItem.columns?.some(item => traverse(item.list))
       }
       if (cb(formItem)) res = formItem

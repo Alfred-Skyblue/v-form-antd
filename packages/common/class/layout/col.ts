@@ -84,5 +84,5 @@ interface IColProps {
 export class Col {
   public span = 12
   public props?: IColProps
-  list: Array<BasicFormItem> = []
+  list: BasicFormItem[] = []
 }

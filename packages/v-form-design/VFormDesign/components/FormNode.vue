@@ -8,7 +8,7 @@
     class="drag-move-box v-relative v-p-8 v-overflow-hidden v-transition-all"
     :class="[
       { active: record._key === currentItem._key },
-      { '!v-bg-red-200': currentItem.hidden }
+      { '!v-bg-red-200 v-opacity-50': record.hidden }
     ]"
     @click.stop="handleSelectItem(record)"
   >
@@ -32,5 +32,5 @@ defineProps({
     required: true
   }
 })
-const { currentItem, handleSelectItem, formConfig } = useFormDesign()
+const { currentItem, handleSelectItem } = useFormDesign()
 </script>

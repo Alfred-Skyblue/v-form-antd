@@ -4,7 +4,7 @@
  * @description: 表单复制删除组件
 -->
 <template>
-  <div class="copy-delete-box" :class="{ layout: isGrid }">
+  <div class="copy-delete-box" :class="{ layout: isLayout }">
     <a class="copy" :class="activeClass" @click.stop="handleCopy(record)">
       <Icon type="copy" />
     </a>
@@ -19,13 +19,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, PropType } from 'vue'
+import { computed, inject, PropType, shallowRef } from 'vue'
 import type { BasicFormItem } from '@common/class/basic-form'
 import type { IVFormDesignState } from '../../types/form-design'
 import Icon from '@design/components/Icon/index.vue'
 import { cloneDeep } from 'lodash-es'
-import { isGridComponent } from '@common/utils/type-guard'
 import { formForEach } from '@common/utils/util'
+import type { IAnyObject } from '@common/types'
 
 const props = defineProps({
   record: {
@@ -42,16 +42,22 @@ const activeClass = computed(() => {
     : 'unactivated'
 })
 
-const isGrid = computed(() => isGridComponent(props.record!))
-
 const handleCopy = (formItem: BasicFormItem) => {
   const newItem = cloneDeep(formItem)
   formForEach([newItem], item => {
     item.generateKey()
+    if ('propsCmp' in item) {
+      ;(item as IAnyObject).propsCmp = shallowRef((item as IAnyObject).propsCmp)
+    }
+    if (item._tag !== 'string') item._tag = shallowRef(item._tag)
   })
 
   handlePushItem(newItem)
 }
+
+const isLayout = computed(() => {
+  return props.record!._isLayout && props.record.type !== 'divider'
+})
 </script>
 
 <style lang="less" scoped>

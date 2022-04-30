@@ -14,14 +14,5 @@ export class GridComponent extends BasicFormItem {
   public icon = 'grid'
   public label = '栅格布局'
   public props!: IGridProps
-  public columns: Col[] = [
-    {
-      span: 12,
-      list: []
-    },
-    {
-      span: 12,
-      list: []
-    }
-  ]
+  public columns: Col[] = []
 }

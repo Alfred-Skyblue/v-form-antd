@@ -36,6 +36,7 @@ import Toolbar from '@design/VFormDesign/modules/Toolbar.vue'
 import { formForEach } from '@common/utils/util'
 import ConfigAside from '@design/VFormDesign/modules/ConfigAside.vue'
 import type { BasicFormItem } from '@common/class/basic-form'
+import { msg } from '@common/utils/log'
 
 export default defineComponent({
   name: 'VFormDesign',
@@ -59,6 +60,7 @@ export default defineComponent({
      */
     const handleSelectItem: IVFormDesignState['handleSelectItem'] =
       formItem => {
+        if (!formItem) msg('formItem is null')
         formConfig.value.currentItem = formItem
       }
     /**
@@ -77,16 +79,20 @@ export default defineComponent({
      * @param {string} key
      */
     const handleRemoveItem: IVFormDesignState['handleRemoveItem'] = key => {
-      formForEach(formConfig.value.formItems, (item, array, index) => {
-        if (item?._key === key) {
-          remove(array, item)
-          const curItem =
-            array[index] ||
-            formConfig.value.formItems.at(-1) ||
-            ({} as BasicFormItem)
-          handleSelectItem(curItem)
-        }
-      })
+      try {
+        formForEach(formConfig.value.formItems, (item, array, index) => {
+          if (item?._key === key) {
+            remove(array, item)
+            const curItem =
+              array[index] ||
+              formConfig.value.formItems.at(-1) ||
+              ({} as BasicFormItem)
+            handleSelectItem(curItem)
+          }
+        })
+      } catch (e) {
+        msg(e as Error)
+      }
     }
 
     const handleClear: IVFormDesignState['handleClear'] = () => {
