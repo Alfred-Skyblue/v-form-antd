@@ -7,12 +7,9 @@
         </a-form>
       </a-tab-pane>
       <a-tab-pane key="2" tab="控件属性">
-        <div
-          class="config-box v-h-full"
-          v-if="currentItem && currentItem.propsCmp"
-        >
+        <div class="config-box v-h-full" v-if="propsComponent">
           <a-form layout="horizontal" :labelCol="{ span: 8 }">
-            <component :is="currentItem.propsCmp"></component>
+            <component :is="propsComponent"></component>
           </a-form>
         </div>
         <a-empty
@@ -26,12 +23,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-
 import VFormConfig from '@design/components/VFProps/VFormConfig/index.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
 import type { BasicFormItem } from '@common/class/basic-form'
-const { currentItem } = useFormDesign<BasicFormItem & { propsCmp: string }>()
+import { designPropsMap } from '@design/class/form'
+import { computed } from 'vue'
+import type { Component } from '@common/types'
+import { designLayoutPropsMap } from '@design/class/layout'
+
+const { currentItem } = useFormDesign<BasicFormItem>()
+
+const propsComponent = computed<Component>(() => {
+  const { type, _isLayout } = currentItem.value
+  return _isLayout
+    ? designLayoutPropsMap[type as keyof typeof designPropsMap]
+    : designPropsMap[type as keyof typeof designPropsMap]
+})
 </script>
 
 <style lang="less" scoped>

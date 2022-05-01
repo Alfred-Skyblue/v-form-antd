@@ -4,10 +4,11 @@ import type { IFormItemOptions } from '@common/types/form'
 import type { InputProps } from 'ant-design-vue'
 
 export class Input extends BasicFormItem {
+  static type = 'input'
   readonly _tag = 'AInput'
   readonly icon = 'input'
   // componentType
-  readonly type = 'input'
+  readonly type = Input.type
   // props
   public props: Partial<InputProps & IAnyObject> = {
     // link: [],

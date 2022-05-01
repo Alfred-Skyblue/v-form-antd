@@ -4,8 +4,9 @@ import type { IFormItemOptions } from '@common/types/form'
 import type { RateProps } from 'ant-design-vue'
 
 export class Rate extends BasicFormItem {
+  static type = 'rate'
+  readonly type = Rate.type
   readonly _tag = 'ARate'
-  readonly type = 'rate'
   readonly icon = 'rate'
   public props: Partial<RateProps & IAnyObject> = {}
   constructor(options?: IFormItemOptions) {

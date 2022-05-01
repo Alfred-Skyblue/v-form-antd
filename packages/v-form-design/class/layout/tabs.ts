@@ -1,9 +1,10 @@
 import { ITabsColumn, Tabs } from '@common/class/layout/tabs'
-import type { Component } from '@common/types'
-import { shallowRef } from 'vue'
 import TabsProps from '@design/components/VFProps/Tabs/index.vue'
 
 export class DesignTabs extends Tabs {
+  static designType = Tabs.type
+  static designProps = TabsProps
+
   public columns: ITabsColumn[] = [
     {
       value: '1',
@@ -16,5 +17,4 @@ export class DesignTabs extends Tabs {
       list: []
     }
   ]
-  public propsCmp: Component = shallowRef(TabsProps)
 }

@@ -4,8 +4,9 @@ import type { IFormItemOptions } from '@common/types/form'
 import type { TreeSelectProps } from 'ant-design-vue'
 
 export class TreeSelect extends BasicFormItem {
+  static type = 'treeSelect'
+  readonly type = TreeSelect.type
   readonly _tag = 'ATreeSelect'
-  readonly type = 'treeSelect'
   readonly icon = 'tree-select'
   public props: Partial<TreeSelectProps & IAnyObject> = {}
   constructor(options?: IFormItemOptions) {

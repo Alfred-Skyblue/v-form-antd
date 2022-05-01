@@ -7,9 +7,10 @@ import type { InputNumberProps } from 'ant-design-vue'
  * @class VNumber
  */
 export class VNumber extends BasicFormItem {
+  static type = 'number'
+  readonly type = VNumber.type
   readonly _tag = 'AInputNumber'
   readonly icon = 'number'
-  readonly type = 'number'
   // props
   public props: Partial<InputNumberProps & IAnyObject> = {
     autoFocus: undefined,

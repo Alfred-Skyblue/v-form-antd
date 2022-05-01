@@ -8,9 +8,10 @@ interface IGridProps {
   wrap?: boolean
 }
 export class GridComponent extends BasicFormItem {
+  static type = 'grid'
+  public type = GridComponent.type
   public _isLayout = true
   public _tag!: string
-  public type = 'grid'
   public icon = 'grid'
   public label = '栅格布局'
   public props!: IGridProps

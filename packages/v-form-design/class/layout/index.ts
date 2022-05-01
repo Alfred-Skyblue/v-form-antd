@@ -20,6 +20,16 @@ export const createDesignLayoutComponent = <
   return new designLayoutComponent[name](options)
 }
 
+export const designLayoutPropsMap = Object.entries(
+  designLayoutComponent
+).reduce(
+  (acc, [, { designType, designProps }]) => ({
+    ...acc,
+    [designType]: designProps
+  }),
+  {}
+)
+
 export const initDesignLayoutComponents = () => {
   return Object.entries(designLayoutComponent).map(([, Cmp]) => new Cmp({}))
 }

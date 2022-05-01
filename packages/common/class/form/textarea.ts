@@ -7,8 +7,9 @@ import type { IAnyObject } from '@common/types'
  * @class Textarea
  */
 export class Textarea extends BasicFormItem {
+  static type = 'textarea'
+  readonly type = Textarea.type
   readonly _tag = 'ATextarea'
-  readonly type = 'textarea'
   readonly icon = 'textarea'
   public props: Partial<TextAreaProps & IAnyObject> = {
     autosize: undefined,

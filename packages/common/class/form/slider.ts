@@ -4,8 +4,9 @@ import type { IFormItemOptions } from '@common/types/form'
 import type { SliderProps } from 'ant-design-vue'
 
 export class Slider extends BasicFormItem {
+  static type = 'slider'
+  readonly type = Slider.type
   readonly _tag = 'ASlider'
-  readonly type = 'slider'
   readonly icon = 'slider'
   public props: Partial<SliderProps & IAnyObject> = {
     autoFocus: undefined,

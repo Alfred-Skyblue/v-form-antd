@@ -4,8 +4,9 @@ import type { CascaderProps } from 'ant-design-vue'
 import type { IAnyObject } from '@common/types'
 
 export class Cascader extends BasicFormItem {
+  static type = 'cascader'
   readonly _tag = 'ACascader'
-  readonly type = 'cascader'
+  readonly type = Cascader.type
   readonly icon = 'cascader'
   public props: Partial<CascaderProps & IAnyObject> = {
     options: []

@@ -6,9 +6,10 @@ export interface ITabsColumn {
   list: BasicFormItem[]
 }
 export class Tabs extends BasicFormItem {
+  static type = 'tabs'
+  public type = Tabs.type
   public _isLayout = true
   public _tag!: 'ATabs'
-  public type = 'tabs'
   public icon = 'tabs'
   public label = '标签页布局'
   public props = {

@@ -4,8 +4,9 @@ import type { IFormItemOptions } from '@common/types/form'
 import type { TimePickerProps } from 'ant-design-vue'
 
 export class Time extends BasicFormItem {
+  static type = 'time'
+  readonly type = Time.type
   readonly _tag = 'ATimePicker'
-  readonly type = 'time'
   readonly icon = 'time-picker'
 
   public props: Partial<TimePickerProps & IAnyObject> = {

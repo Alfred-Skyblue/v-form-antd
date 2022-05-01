@@ -1,10 +1,10 @@
 import { TreeSelect } from '@common/class/form/tree-select'
-import type { Component } from '@common/types'
-import { shallowRef } from 'vue'
 import TreeSelectProps from '@design/components/VFProps/TreeSelect/index.vue'
 
 export class DesignTreeSelect extends TreeSelect {
-  public propsCmp: Component = shallowRef(TreeSelectProps)
+  static designType = TreeSelect.type
+  static designProps = TreeSelectProps
+
   constructor() {
     super()
     this.props.treeData = [

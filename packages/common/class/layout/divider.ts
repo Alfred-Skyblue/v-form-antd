@@ -14,6 +14,10 @@ interface IDivider {
 }
 // Non-function value encountered for default slot. Prefer function slots for better performance
 export class Divider extends BasicFormItem implements IDivider {
+  static type = 'divider'
+  public type = Divider.type
+  public icon = 'divider'
+  public label = '分割线'
   public _isLayout = true
   _tag = shallowRef(
     defineComponent({
@@ -29,9 +33,7 @@ export class Divider extends BasicFormItem implements IDivider {
           h(ADivider, { ...attrs }, { default: () => props?.title })
     })
   )
-  public type = 'divider'
-  public icon = 'divider'
-  public label = '分割线'
+
   public props = {
     title: 'title'
   }

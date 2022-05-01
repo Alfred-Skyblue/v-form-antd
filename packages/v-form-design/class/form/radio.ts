@@ -1,10 +1,10 @@
 import { Radio } from '@common/class/form/radio'
-import type { Component } from '@common/types'
-import { shallowRef } from 'vue'
 import RadioProps from '@design/components/VFProps/Radio/index.vue'
 
 export class DesignRadio extends Radio {
-  public propsCmp: Component = shallowRef(RadioProps)
+  static designType = Radio.type
+  static designProps = RadioProps
+
   constructor() {
     super()
     this.props.options = [

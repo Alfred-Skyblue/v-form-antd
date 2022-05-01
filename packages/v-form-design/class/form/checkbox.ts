@@ -1,10 +1,10 @@
 import { Checkbox } from '@common/class/form/checkbox'
-import type { Component } from '@common/types'
-import { shallowRef } from 'vue'
 import CheckboxGroupProps from '@design/components/VFProps/CheckboxGroup/index.vue'
 
 export class DesignCheckbox extends Checkbox {
-  public propsCmp: Component = shallowRef(CheckboxGroupProps)
+  static designType = Checkbox.type
+  static designProps = CheckboxGroupProps
+
   constructor() {
     super()
     this.props.options = [

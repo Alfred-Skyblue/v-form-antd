@@ -4,8 +4,9 @@ import type { RangePickerProps } from 'ant-design-vue/es/vc-picker'
 import type { IAnyObject } from '@common/types'
 
 export class DateRange extends BasicFormItem {
+  static type = 'dateRange'
   readonly _tag = 'ARangePicker'
-  readonly type = 'dateRange'
+  readonly type = DateRange.type
   readonly icon = 'date-range'
   public props: Partial<RangePickerProps<any> & IAnyObject> = {}
   constructor(options?: IFormItemOptions) {

@@ -25,7 +25,6 @@ import type { IVFormDesignState } from '../../types/form-design'
 import Icon from '@design/components/Icon/index.vue'
 import { cloneDeep } from 'lodash-es'
 import { formForEach } from '@common/utils/util'
-import type { IAnyObject } from '@common/types'
 
 const props = defineProps({
   record: {
@@ -46,9 +45,6 @@ const handleCopy = (formItem: BasicFormItem) => {
   const newItem = cloneDeep(formItem)
   formForEach([newItem], item => {
     item.generateKey()
-    if ('propsCmp' in item) {
-      ;(item as IAnyObject).propsCmp = shallowRef((item as IAnyObject).propsCmp)
-    }
     if (item._tag !== 'string') item._tag = shallowRef(item._tag)
   })
 

@@ -4,8 +4,9 @@ import type { DatePickerProps } from 'ant-design-vue'
 import type { IAnyObject } from '@common/types'
 
 export class DatePicker extends BasicFormItem {
+  static type = 'date'
   readonly _tag = 'ADatePicker'
-  readonly type = 'date'
+  readonly type = DatePicker.type
   readonly icon = 'date-picker'
   public props: Partial<DatePickerProps & IAnyObject> = {
     allowClear: undefined,

@@ -4,9 +4,10 @@ import type { IFormItemOptions } from '@common/types/form'
 import type { RadioProps } from 'ant-design-vue'
 
 export class Radio extends BasicFormItem {
+  static type = 'radio'
+  readonly type = Radio.type
   readonly _tag = 'ARadioGroup'
   readonly icon = 'radio'
-  readonly type = 'radio'
   public props: Partial<RadioProps & IAnyObject> = {
     autoFocus: undefined,
     checked: undefined,

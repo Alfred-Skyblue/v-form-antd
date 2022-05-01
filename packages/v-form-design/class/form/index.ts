@@ -37,6 +37,17 @@ const designComponents = {
   uploadImg: DesignUploadImg
 }
 
+export const designPropsMap = Object.entries(designComponents).reduce(
+  (acc, [, component]) => {
+    const { designType, designProps } = component
+    return {
+      ...acc,
+      [designType]: designProps
+    }
+  },
+  {}
+)
+
 /**
  * 初始化设计器组件列表
  * @returns {BasicFormItem[]}
