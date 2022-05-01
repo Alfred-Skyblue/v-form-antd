@@ -25,8 +25,9 @@ import { reactive } from 'vue'
 import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
 import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue'
+import type { DesignVSlot } from '@design/class/high-level/slot'
 
-const { currentItem } = useFormDesign()
+const { currentItem } = useFormDesign<DesignVSlot>()
 const formItems = reactive([
   {
     label: '标签',

@@ -7,7 +7,7 @@ import { buildConfig } from './build/vite.lib.config'
 export default ({ mode }: { mode: string }) => {
   const isProd = mode === 'production'
   return defineConfig({
-    // ...(isProd && buildConfig),
+    ...(isProd && buildConfig),
     plugins: [vue(), vueJsx()],
     css: {
       preprocessorOptions: {
