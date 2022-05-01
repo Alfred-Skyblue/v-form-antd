@@ -7,16 +7,21 @@
         </a-form>
       </a-tab-pane>
       <a-tab-pane key="2" tab="控件属性">
-        <div class="config-box v-h-full" v-if="propsComponent">
-          <a-form layout="horizontal" :labelCol="{ span: 8 }">
-            <component :is="propsComponent"></component>
-          </a-form>
-        </div>
-        <a-empty
-          v-else
-          class="empty-text v-text-gray-500 !v-mt-200"
-          description="未选中控件"
-        />
+        <a-form layout="horizontal" :labelCol="{ span: 8 }">
+          <div v-if="currentItem.type" class="config-box v-h-full">
+            <slot
+              :name="`${currentItem.type}Attrs`"
+              v-bind="{ formItem: currentItem }"
+            >
+              <component :is="propsComponent"></component>
+            </slot>
+          </div>
+          <a-empty
+            v-else
+            class="empty-text v-text-gray-500 !v-mt-200"
+            description="未选中控件"
+          />
+        </a-form>
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -30,14 +35,18 @@ import { designPropsMap } from '@design/class/form'
 import { computed } from 'vue'
 import type { Component } from '@common/types'
 import { designLayoutPropsMap } from '@design/class/layout'
+import { designHighLevelPropsMap } from '@design/class/high-level'
 
 const { currentItem } = useFormDesign<BasicFormItem>()
 
 const propsComponent = computed<Component>(() => {
-  const { type, _isLayout } = currentItem.value
-  return _isLayout
-    ? designLayoutPropsMap[type as keyof typeof designPropsMap]
-    : designPropsMap[type as keyof typeof designPropsMap]
+  const { type } = currentItem.value
+  const propsMap = {
+    ...designPropsMap,
+    ...designLayoutPropsMap,
+    ...designHighLevelPropsMap
+  }
+  return propsMap[type as keyof typeof propsMap] || 'div'
 })
 </script>
 

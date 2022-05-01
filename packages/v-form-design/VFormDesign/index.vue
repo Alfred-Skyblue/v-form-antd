@@ -17,7 +17,11 @@
         <LeftAside></LeftAside>
       </template>
       <template #config>
-        <ConfigAside></ConfigAside>
+        <ConfigAside>
+          <template v-for="(value, slot) in $slots" #[slot]="props">
+            <slot :name="slot" v-bind="props"></slot>
+          </template>
+        </ConfigAside>
       </template>
     </Layout>
   </div>
@@ -48,7 +52,8 @@ export default defineComponent({
     Header,
     Layout
   },
-  setup() {
+  setup(props, { slots }) {
+    console.log('=>(index.vue:56) slots', slots)
     const formConfig = ref<IVFormConfig>({
       formItems: [],
       currentItem: {} as IVFormConfig['currentItem'],

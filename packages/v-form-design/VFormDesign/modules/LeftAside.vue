@@ -8,9 +8,9 @@
     <a-collapse-panel header="基础组件" key="1">
       <collapse-item v-model:list="basicComponents"></collapse-item>
     </a-collapse-panel>
-    <!--    <a-collapse-panel header="高级组件" key="2">-->
-    <!--      <collapse-item></collapse-item>-->
-    <!--    </a-collapse-panel>-->
+    <a-collapse-panel header="高级组件" key="2">
+      <collapse-item v-model:list="highLevelComponents"></collapse-item>
+    </a-collapse-panel>
     <a-collapse-panel header="布局组件" key="3">
       <collapse-item v-model:list="layoutComponents"></collapse-item>
     </a-collapse-panel>
@@ -22,6 +22,7 @@
 import CollapseItem from '@design/VFormDesign/components/CollapseItem.vue'
 import {
   basicComponents,
-  layoutComponents
+  layoutComponents,
+  highLevelComponents
 } from '@design/config/form-item-config'
 </script>

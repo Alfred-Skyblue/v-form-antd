@@ -9,7 +9,7 @@
       <slot name="header"></slot>
     </header>
     <div class="v-form-antd-body v-flex v-gap-8 v-h-full v-overflow-hidden">
-      <div class="v-form-cmp-list v-h-full v-w-270">
+      <div class="v-form-cmp-list v-h-full v-w-270 v-overflow-auto">
         <slot name="cmp-list"></slot>
       </div>
       <div class="v-form-main v-flex-auto">
