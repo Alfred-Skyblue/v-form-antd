@@ -37,4 +37,7 @@ export abstract class BasicFormItem extends VFComponent {
     label && (this.label = label)
     this.field = field ?? `field${uid++}`
   }
+  initSpan() {
+    this.span = globalConfig.span
+  }
 }

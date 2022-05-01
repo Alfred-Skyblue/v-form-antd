@@ -13,6 +13,8 @@ import { DesignRate } from './rate'
 import { DesignTextarea } from './textarea'
 import { DesignTreeSelect } from './tree-select'
 import type { BasicFormItem } from '@common/class/basic-form'
+import { DesignUploadFile } from '@design/class/form/uploadFile'
+import { DesignUploadImg } from '@design/class/form/uploadImg'
 
 type DesignComponentType = typeof designComponents
 
@@ -30,7 +32,9 @@ const designComponents = {
   switch: DesignSwitch,
   slider: DesignSlider,
   rate: DesignRate,
-  treeSelect: DesignTreeSelect
+  treeSelect: DesignTreeSelect,
+  uploadFile: DesignUploadFile,
+  uploadImg: DesignUploadImg
 }
 
 /**

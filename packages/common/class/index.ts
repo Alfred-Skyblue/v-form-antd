@@ -14,6 +14,7 @@ import { DateRange } from './form/date-range'
 import { TreeSelect } from './form/tree-select'
 import { forEach } from 'lodash-es'
 import type { BasicFormItem } from './basic-form'
+import { UploadFile } from './form/uploadFile'
 
 export const formComponents = {
   input: Input,
@@ -29,7 +30,8 @@ export const formComponents = {
   slider: Slider,
   rate: Rate,
   textarea: Textarea,
-  treeSelect: TreeSelect
+  treeSelect: TreeSelect,
+  uploadFile: UploadFile
 }
 export type IFormComponent = typeof formComponents
 

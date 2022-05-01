@@ -2,7 +2,6 @@ import { BasicFormItem } from '@common/class/basic-form'
 import type { IAnyObject } from '@common/types'
 import { defineComponent, h, shallowRef } from 'vue'
 import { Divider as ADivider } from 'ant-design-vue'
-console.log('-> ADivider', ADivider)
 interface IDivider {
   props: {
     title?: string

@@ -1,6 +1,6 @@
 <template>
   <div class="config-aside">
-    <a-tabs v-model:activeKey="activeKey">
+    <a-tabs>
       <a-tab-pane key="1" tab="表单属性">
         <a-form layout="vertical">
           <VFormConfig></VFormConfig>
@@ -32,10 +32,6 @@ import VFormConfig from '@design/components/VFProps/VFormConfig/index.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
 import type { BasicFormItem } from '@common/class/basic-form'
 const { currentItem } = useFormDesign<BasicFormItem & { propsCmp: string }>()
-const activeKey = ref('1')
-watch(currentItem, newValue => {
-  activeKey.value = newValue?._key ? '2' : '1'
-})
 </script>
 
 <style lang="less" scoped>

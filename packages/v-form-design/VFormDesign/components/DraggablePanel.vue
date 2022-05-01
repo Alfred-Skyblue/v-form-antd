@@ -55,12 +55,12 @@ const draggableClass = computed(
 )
 
 const handleAdd = (e: { newIndex: number }) => {
-  handleSelectItem(props.list[e.newIndex])
+  const newItem = props.list[e.newIndex]
+  newItem.initSpan()
+  handleSelectItem(newItem)
 }
 
-const formItemSpan = computed(() => {
-  return (span?: number) => span ?? 24
-})
+const formItemSpan = (span?: number) => span ?? 24
 </script>
 
 <style lang="less" scoped>

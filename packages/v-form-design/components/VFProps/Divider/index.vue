@@ -18,7 +18,6 @@ import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/i
 import { useFormDesign } from '@design/hooks/useFormDesign'
 
 const { currentItem } = useFormDesign()
-console.log('-> currentItem', currentItem)
 const actionProps = computed(() => [
   {
     label: '虚线',

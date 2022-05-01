@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './App'
+import App from './App.vue'
 import VFormAntd from '@/index'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
