@@ -10,7 +10,7 @@
         <Header></Header>
       </template>
       <template #default>
-        <toolbar @handleClear="handleClear"></toolbar>
+        <toolbar></toolbar>
         <MainContainer></MainContainer>
       </template>
       <template #cmp-list>
@@ -18,8 +18,8 @@
       </template>
       <template #config>
         <ConfigAside>
-          <template v-for="(value, slot) in $slots" #[slot]="props">
-            <slot :name="slot" v-bind="props"></slot>
+          <template v-for="(slot, name) in $slots" #[name]="props">
+            <slot :name="name" v-bind="props"></slot>
           </template>
         </ConfigAside>
       </template>
@@ -85,7 +85,7 @@ export default defineComponent({
      */
     const handleRemoveItem: IVFormDesignState['handleRemoveItem'] = key => {
       try {
-        formForEach(formConfig.value.formItems, (item, array, index) => {
+        formForEach(formConfig.value.formItems, (item, index, array) => {
           if (item?._key === key) {
             remove(array, item)
             const curItem =

@@ -35,14 +35,14 @@ export const formForEach = (
   formItems: BasicFormItem | BasicFormItem[],
   callback: (
     formItem: BasicFormItem,
-    array: BasicFormItem[],
-    index: number
+    index: number,
+    array: BasicFormItem[]
   ) => void
 ) => {
   const array = isArray(formItems) ? formItems : [formItems]
   array.forEach((item, index) => {
     if (item) {
-      callback(item, array, index)
+      callback(item, index, array)
       if (isGridComponent(item) || isTabsComponent(item)) {
         item.columns.forEach(column => {
           formForEach(column.list, callback)

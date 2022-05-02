@@ -8,7 +8,9 @@
     <a-select
       placeholder="请选择关联字段"
       :options="options"
-      v-model:value="currentItem.props.link"
+      mode="multiple"
+      :maxTagCount="1"
+      v-model:value="currentItem.link"
     ></a-select>
   </a-form-item>
 </template>

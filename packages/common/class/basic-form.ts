@@ -11,7 +11,7 @@ export abstract class BasicFormItem extends VFComponent {
   abstract icon?: string
   abstract _tag?: string | Component
   abstract type: string
-  abstract props: IAnyObject
+  public props!: IAnyObject
   public _isLayout!: boolean
   public hidden!: boolean
   public label!: string
@@ -27,15 +27,15 @@ export abstract class BasicFormItem extends VFComponent {
   }
 
   generateKey() {
-    this.field = `${this.field}_${uid++}`
-    this.span = globalConfig.span
+    this.initSpan()
     super.generateKey()
+    this.init()
   }
   // 生成UUID
-  init(options: IFormItemOptions) {
-    const { field, label } = options
+  init(options?: IFormItemOptions) {
+    const { field, label } = options ?? {}
     label && (this.label = label)
-    this.field = field ?? `field${uid++}`
+    if (!this._isLayout) this.field = field ?? `field${uid++}`
   }
   initSpan() {
     this.span = globalConfig.span

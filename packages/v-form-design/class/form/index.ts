@@ -16,9 +16,7 @@ import type { BasicFormItem } from '@common/class/basic-form'
 import { DesignUploadFile } from '@design/class/form/uploadFile'
 import { DesignUploadImg } from '@design/class/form/uploadImg'
 
-type DesignComponentType = typeof designComponents
-
-const designComponents = {
+export const designComponents = {
   input: DesignInput,
   textarea: DesignTextarea,
   number: DesignVNumber,
@@ -54,17 +52,4 @@ export const designPropsMap = Object.entries(designComponents).reduce(
  */
 export const initDesignComponents = () => {
   return Object.entries(designComponents).map(([, Cmp]) => new Cmp())
-}
-
-/**
- * 创建设计器组件
- * @param {keyof DesignComponentType} type
- * @param {string} label
- * @returns {BasicFormItem}
- */
-export function createDesignComponent<T extends keyof DesignComponentType>(
-  type: T,
-  label?: string
-): BasicFormItem {
-  return new designComponents[type]({ label })
 }

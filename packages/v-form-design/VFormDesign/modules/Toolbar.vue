@@ -24,6 +24,7 @@
       </a>
     </div>
     <JsonPreview ref="jsonPreview"></JsonPreview>
+    <ImportJson ref="importJson"></ImportJson>
   </div>
 </template>
 
@@ -32,9 +33,14 @@ import { reactive, ref } from 'vue'
 import Icon from '@design/components/Icon/index.vue'
 import JsonPreview from '@design/VFormDesign/components/JsonPreview.vue'
 import type { IJsonPreview } from '@design/VFormDesign/components/JsonPreview.vue'
+import { useFormDesign } from '@design/hooks/useFormDesign'
+import ImportJson from '@design/VFormDesign/components/ImportJson.vue'
+import type { IImportJson } from '@design/VFormDesign/components/ImportJson.vue'
 
 const jsonPreview = ref<IJsonPreview | null>(null)
+const importJson = ref<IImportJson | null>(null)
 
+const { handleClear } = useFormDesign()
 const toolbarConfig = reactive([
   {
     title: '预览',
@@ -45,7 +51,9 @@ const toolbarConfig = reactive([
   {
     title: '导入',
     type: 'importJson',
-    event: 'handleOpenImportJsonModal',
+    event: () => {
+      importJson.value?.handlePreview()
+    },
     icon: 'upload-file'
   },
   {
@@ -59,7 +67,7 @@ const toolbarConfig = reactive([
   {
     title: '清空',
     type: 'reset',
-    event: 'handleClear',
+    event: handleClear,
     icon: 'delete'
   }
 ])

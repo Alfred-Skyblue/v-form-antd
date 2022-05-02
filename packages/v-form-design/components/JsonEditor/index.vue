@@ -22,7 +22,6 @@ function syntaxHighlight(json: IAnyObject | string): string {
     json = JSON.stringify(
       json,
       (key, value) => {
-        console.log('=>(index.vue:23) key', key)
         if (['_key', 'currentItem', '_tag', 'icon'].includes(key)) {
           return undefined
         }
@@ -85,7 +84,7 @@ export default defineComponent({
       })
     }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const jsonEditor = ref<HTMLElement | null>(null)
     const formattedJSON = ref(syntaxHighlight(props.code))
 
@@ -99,6 +98,7 @@ export default defineComponent({
         return false
       }
       formattedJSON.value = syntaxHighlight(jsonObj)
+      emit('change', jsonObj)
     }
     return { formattedJSON, updateJSON, jsonEditor }
   }
