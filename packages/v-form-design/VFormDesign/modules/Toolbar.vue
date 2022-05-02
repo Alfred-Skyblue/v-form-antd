@@ -16,10 +16,10 @@
         </a>
       </a-tooltip>
       <div class="v-h-1/3 v-w-1 v-bg-[#c4c4c4]"></div>
-      <a disabled>
+      <a :class="{ disabled: !canUndo }" @click="undo">
         <Icon type="undo" />
       </a>
-      <a disabled>
+      <a :class="{ disabled: !canRedo }" @click="redo">
         <Icon type="redo" />
       </a>
     </div>
@@ -36,11 +36,14 @@ import type { IJsonPreview } from '@design/VFormDesign/components/JsonPreview.vu
 import { useFormDesign } from '@design/hooks/useFormDesign'
 import ImportJson from '@design/VFormDesign/components/ImportJson.vue'
 import type { IImportJson } from '@design/VFormDesign/components/ImportJson.vue'
+import { useDebouncedRefHistory } from '@vueuse/core'
+import { cloneDeep } from 'lodash-es'
+import { findFormItem } from '@common/utils/util'
 
 const jsonPreview = ref<IJsonPreview | null>(null)
 const importJson = ref<IImportJson | null>(null)
 
-const { handleClear } = useFormDesign()
+const { handleClear, formConfig } = useFormDesign()
 const toolbarConfig = reactive([
   {
     title: '预览',
@@ -71,6 +74,24 @@ const toolbarConfig = reactive([
     icon: 'delete'
   }
 ])
+
+const { undo, redo, canUndo, canRedo } = useDebouncedRefHistory(formConfig, {
+  capacity: 20,
+  debounce: 1000,
+  dump: cloneDeep,
+  deep: true,
+  parse(val) {
+    const { formItems, currentItem } = val
+    // region 重新定义 currentItem 的指向
+    const newCur = findFormItem(
+      formItems,
+      item => item._key === currentItem._key
+    )
+    if (newCur) val.currentItem = newCur
+    // endregion
+    return val
+  }
+})
 </script>
 
 <style lang="less" scoped>
@@ -81,6 +102,11 @@ const toolbarConfig = reactive([
     color: #666;
     &:hover {
       @apply v-text-primary;
+    }
+    &.disabled,
+    &.disabled:hover {
+      color: #ccc;
+      cursor: not-allowed;
     }
     .iconfont {
       font-size: 18px;

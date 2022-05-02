@@ -13,15 +13,15 @@
       :getContainer="getContainer"
       @ok="handleOk"
     >
-      <JsonEdit :code="formConfig" />
+      <JsonEditor :code="formConfig" />
     </a-modal>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import JsonEdit from '@design/components/JsonEditor/index.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
+import JsonEditor from '@design/components/JsonEditor/index.vue'
 
 export interface IJsonPreview {
   handleOk: () => void

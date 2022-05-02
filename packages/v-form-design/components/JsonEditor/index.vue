@@ -3,7 +3,6 @@
     <div class="v-h-500 v-overflow-auto json-container">
       <pre
         ref="jsonEditor"
-        class=""
         v-html="formattedJSON"
         contenteditable="true"
         placeholder="请输入"
@@ -48,7 +47,7 @@ function syntaxHighlight(json: IAnyObject | string): string {
 }
 
 export default defineComponent({
-  name: 'JsonEdit',
+  name: 'JsonEditor',
   props: {
     code: {
       type: [Object, Array],
@@ -110,7 +109,7 @@ section {
   .json-container {
     outline: 1px solid #ccc;
     :deep(pre) {
-      min-height: 100px;
+      min-height: 460px;
       padding: 4px;
       outline: 0;
       /* :empty 选择器匹配没有子元素且没有文本节点的元素。 */
