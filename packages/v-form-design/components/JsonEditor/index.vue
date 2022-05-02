@@ -48,6 +48,7 @@ function syntaxHighlight(json: IAnyObject | string): string {
 
 export default defineComponent({
   name: 'JsonEditor',
+  emits: ['change'],
   props: {
     code: {
       type: [Object, Array],

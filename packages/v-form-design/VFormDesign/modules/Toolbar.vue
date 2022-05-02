@@ -48,7 +48,9 @@ const toolbarConfig = reactive([
   {
     title: '预览',
     type: 'preview',
-    event: 'handlePreview',
+    event: () => {
+      console.log('preview')
+    },
     icon: 'preview'
   },
   {

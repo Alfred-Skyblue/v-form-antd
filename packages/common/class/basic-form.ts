@@ -18,6 +18,7 @@ export abstract class BasicFormItem extends VFComponent {
   public on!: IAnyEvent
   public field!: string
   public span!: number
+  public link!: string[]
   constructor(options: IFormItemOptions) {
     super()
     this.init(options)
