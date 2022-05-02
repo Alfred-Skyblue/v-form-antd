@@ -20,8 +20,8 @@ export default ({ mode }: { mode: string }) => {
       alias: {
         '@': fileURLToPath(new URL('./packages', import.meta.url)),
         '@common': fileURLToPath(new URL('./packages/common', import.meta.url)),
-        '@create': fileURLToPath(
-          new URL('./packages/v-form-create', import.meta.url)
+        '@render': fileURLToPath(
+          new URL('./packages/v-form-render', import.meta.url)
         ),
         '@design': fileURLToPath(
           new URL('./packages/v-form-design', import.meta.url)

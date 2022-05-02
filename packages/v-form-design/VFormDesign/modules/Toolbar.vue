@@ -11,7 +11,7 @@
         :title="item.title"
         :key="item.icon"
       >
-        <a @click="$emit(item.event)">
+        <a @click="item.event">
           <Icon :type="item.icon" />
         </a>
       </a-tooltip>
@@ -23,12 +23,17 @@
         <Icon type="redo" />
       </a>
     </div>
+    <JsonPreview ref="jsonPreview"></JsonPreview>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import Icon from '@design/components/Icon/index.vue'
+import JsonPreview from '@design/VFormDesign/components/JsonPreview.vue'
+import type { IJsonPreview } from '@design/VFormDesign/components/JsonPreview.vue'
+
+const jsonPreview = ref<IJsonPreview | null>(null)
 
 const toolbarConfig = reactive([
   {
@@ -46,14 +51,10 @@ const toolbarConfig = reactive([
   {
     title: '生成JSON',
     type: 'exportJson',
-    event: 'handleOpenJsonModal',
-    icon: 'json'
-  },
-  {
-    title: '生成代码',
-    type: 'exportCode',
-    event: 'handleOpenCodeModal',
-    icon: 'code'
+    icon: 'json',
+    event: () => {
+      jsonPreview.value?.handlePreview()
+    }
   },
   {
     title: '清空',
