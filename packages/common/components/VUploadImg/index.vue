@@ -14,8 +14,16 @@
     v-bind="bindAttrs"
   >
     <div v-if="showUpload">
-      <PlusOutlined class="push-outlined"></PlusOutlined>
-      <div class="v-mt-8">{{ text }}</div>
+      <div v-if="uploadType === 'picture-card'">
+        <PlusOutlined class="push-outlined"></PlusOutlined>
+        <div class="v-mt-8">{{ text }}</div>
+      </div>
+      <div v-else>
+        <a-button class="v-space-x-6">
+          <Icon type="upload" />
+          <span class="v-align-middle">{{ text }}</span>
+        </a-button>
+      </div>
     </div>
   </a-upload>
 </template>
@@ -28,6 +36,7 @@ import { v3ImgPreviewFn } from 'v3-img-preview'
 
 import { omit } from 'lodash-es'
 import { useUpload } from '@common/hooks/useUpload'
+import Icon from '@design/components/Icon/index.vue'
 function getBase64(file: File) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -39,7 +48,7 @@ function getBase64(file: File) {
 
 export default defineComponent({
   name: 'VUploadImg',
-  components: { PlusOutlined },
+  components: { Icon, PlusOutlined },
   props: {
     value: {
       type: Array as PropType<UploadProps['fileList']>,
@@ -73,12 +82,16 @@ export default defineComponent({
       v3ImgPreviewFn(url)
     }
 
+    const uploadType = computed(() => {
+      return bindAttrs.value?.listType ?? 'picture-card'
+    })
     return {
       uploadFileList,
       handlePreview,
       handleRemove,
       uploadChange,
-      bindAttrs
+      bindAttrs,
+      uploadType
     }
   }
 })

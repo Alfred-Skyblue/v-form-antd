@@ -47,26 +47,42 @@ const formItems = computed<IFormBuilderOptions[]>(() => [
     placeholder: '请输入数据字段'
   },
   {
-    label: '上传文本',
+    label: '占位符',
     field: 'text',
     tag: 'AInput',
-    placeholder: '请输入上传文本'
+    placeholder: '请输入占位符'
   },
   {
-    label: '默认值',
-    field: 'defaultValue',
-    tag: 'ATreeSelect',
-    props: {
-      ...currentItem.value.props,
-      placeholder: '请选择默认值'
-    }
+    label: '上传地址',
+    field: 'action',
+    tag: 'AInput',
+    placeholder: '请输入上传地址'
   },
   {
-    label: '最多tag数',
-    field: 'maxTagCount',
+    label: '上传数量',
+    field: 'maxCount',
     tag: 'AInputNumber',
-    placeholder: '请输入最多tag数',
-    hidden: !currentItem.value.props.multiple
+    placeholder: '请输入上传数量'
+  },
+  {
+    label: '参数名',
+    field: 'name',
+    tag: 'AInput',
+    placeholder: '请输入参数名(name)'
+  },
+  {
+    label: '样式',
+    field: 'listType',
+    tag: 'ARadioGroup',
+    props: {
+      options: [
+        { label: 'text', value: 'text' },
+        { label: 'picture', value: 'picture' },
+        { label: 'card', value: 'picture-card' }
+      ],
+      optionType: 'button',
+      size: 'small'
+    }
   }
 ])
 
@@ -76,33 +92,16 @@ const actionProps = computed(() => [
     value: 'disabled'
   },
   {
-    label: '可清除',
-    value: 'allowClear'
+    label: '文件夹',
+    value: 'directory'
   },
   {
     label: '多选',
-    value: 'multiple',
-    on: {
-      change(e: IAnyObject) {
-        if (e.target.checked) {
-          currentItem.value.props.showSearch = undefined
-          currentItem.value.props.maxTagCount = undefined
-        }
-      }
-    }
+    value: 'multiple'
   },
   {
-    label: '搜索',
-    value: 'showSearch',
-    hidden: currentItem.value.props.multiple
-  },
-  {
-    label: '复选框',
-    value: 'treeCheckable'
-  },
-  {
-    label: '参考线',
-    value: 'treeLine'
+    label: '携带cookie',
+    value: 'withCredentials'
   }
 ])
 </script>
