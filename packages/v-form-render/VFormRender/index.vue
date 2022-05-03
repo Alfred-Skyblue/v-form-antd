@@ -11,7 +11,14 @@
         :key="formItem._key"
         :span="formItem.span ?? 24"
       >
+        <div v-if="!!formItem.slotName">
+          <slot
+            :name="formItem.slotName"
+            v-bind="{ formItem: { ...formItem } }"
+          ></slot>
+        </div>
         <RenderFormItem
+          v-else
           :record="formItem"
           :form-config="formConfig"
         ></RenderFormItem>
@@ -23,21 +30,17 @@
 <script lang="ts">
 import { defineComponent, onBeforeMount, PropType } from 'vue'
 import type { BasicFormItem } from '@common/class/basic-form'
-import type { VForm } from '@common/class/form/form'
 import RenderFormItem from '@render/VFormRender/components/RenderFormItem.vue'
 import { formForEach } from '@common/utils/util'
 import { createDesignComponent, IDesignComponentType } from '@design/class'
+import type { VFormConfig } from '@common/types/form'
 
-export interface IFormConfig {
-  formItems: Partial<BasicFormItem>[]
-  config: Partial<VForm>
-}
 export default defineComponent({
   name: 'VFormRender',
   components: { RenderFormItem },
   props: {
     formConfig: {
-      type: Object as PropType<IFormConfig>,
+      type: Object as PropType<VFormConfig>,
       required: true
     }
   },

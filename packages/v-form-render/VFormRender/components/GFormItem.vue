@@ -8,7 +8,13 @@
     class="form-item-box v-leading-normal"
     :class="{ 'v-form-item-fixed': isFixed }"
   >
-    <a-form-item>
+    <a-form-item
+      v-bind="{
+        rules: record.rules,
+        required: record.required,
+        name: record.field
+      }"
+    >
       <template #label v-if="!record._isLayout">
         <div class="v-form-label-box">
           {{ record.label }}
@@ -27,15 +33,15 @@
 import type { BasicFormItem } from '@common/class/basic-form'
 import type { PropType } from 'vue'
 import { computed, toRefs } from 'vue'
-import type { IFormConfig } from '@render/VFormRender/index.vue'
+import type { VFormConfig } from '@common/types/form'
 
 const props = defineProps({
   record: {
-    type: Object as PropType<BasicFormItem>,
+    type: Object as PropType<Partial<BasicFormItem>>,
     required: true
   },
   formConfig: {
-    type: Object as PropType<IFormConfig>,
+    type: Object as PropType<VFormConfig>,
     required: true
   },
   isFixed: {

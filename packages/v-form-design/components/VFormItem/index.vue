@@ -8,7 +8,7 @@
     class="form-item-box v-leading-normal"
     :class="{ 'v-form-item-fixed': isFixed }"
   >
-    <a-form-item>
+    <a-form-item v-bind="{ rules: record.rules, required: record.required }">
       <template #label v-if="!record._isLayout">
         <div class="v-form-label-box">
           {{ record.label }}

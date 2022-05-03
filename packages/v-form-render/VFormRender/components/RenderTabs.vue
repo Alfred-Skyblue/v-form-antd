@@ -1,15 +1,14 @@
 <!--
- * @author: ypt
- * @date: 2022/4/21
- * @description: 渲染栅格组件
+ * @Author: 杨攀腾
+ * @Date: 2022-05-03 13:26:38
+ * @Description: 渲染tabs
 -->
 <template>
-  <a-row v-bind="record.props">
-    <a-col
-      v-for="(item, index) of record.columns"
-      :key="index"
-      :span="item.span"
-      class="layout-box v-bg-white"
+  <a-tabs v-bind="record.props">
+    <a-tab-pane
+      v-for="item of record.columns"
+      :key="item.value"
+      :tab="item.label"
     >
       <div v-for="formItem of item.list" :key="formItem._key">
         <RenderFormItem
@@ -18,19 +17,19 @@
           :isFixed="isFixed"
         ></RenderFormItem>
       </div>
-    </a-col>
-  </a-row>
+    </a-tab-pane>
+  </a-tabs>
 </template>
 
 <script lang="ts" setup>
 import type { PropType } from 'vue'
-import type { GridComponent } from '@common/class/layout/grid'
-import RenderFormItem from '@render/VFormRender/components/RenderFormItem.vue'
+import type { Tabs } from '@common/class/layout/tabs'
 import type { VFormConfig } from '@common/types/form'
+import RenderFormItem from '@render/VFormRender/components/RenderFormItem.vue'
 
 defineProps({
   record: {
-    type: Object as PropType<GridComponent>,
+    type: Object as PropType<Tabs>,
     required: true
   },
   formConfig: {
@@ -43,3 +42,5 @@ defineProps({
   }
 })
 </script>
+
+<style lang="less" scoped></style>

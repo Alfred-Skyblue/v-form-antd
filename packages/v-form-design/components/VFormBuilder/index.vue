@@ -25,6 +25,8 @@
       </slot>
     </a-form-item>
   </div>
+  <a-divider title="校验规则">校验规则</a-divider>
+  <VFormRules></VFormRules>
 </template>
 
 <script lang="ts">
@@ -33,6 +35,7 @@ import type { IAnyEvent, IAnyObject } from '@common/types'
 import { useVModel } from '@vueuse/core'
 import { useFormDesign } from '@design/hooks/useFormDesign'
 import { globalConfig } from '@common/class/basic-form'
+import VFormRules from '@design/components/VFProps/components/VFormRules/index.vue'
 export interface IFormBuilderOptions {
   label: string
   field: string
@@ -44,6 +47,7 @@ export interface IFormBuilderOptions {
 }
 export default defineComponent({
   name: 'VFormBuilder',
+  components: { VFormRules },
   props: {
     formItems: {
       type: Array as PropType<IFormBuilderOptions[]>,

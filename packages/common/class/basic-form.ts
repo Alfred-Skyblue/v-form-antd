@@ -7,11 +7,25 @@ export const globalConfig = {
 }
 let uid = 1
 
+interface VRule {
+  message?: string
+  required?: boolean
+  type?: string
+  validator?: (
+    rule: VRule,
+    value: any,
+    callback: (message?: string) => void
+  ) => void
+  pattern?: RegExp | string
+  [key: string]: any
+}
 export abstract class BasicFormItem extends VFComponent {
   abstract icon?: string
   abstract _tag?: string | Component
   abstract type: string
   public props!: IAnyObject
+  public rules?: VRule[]
+  public required?: boolean
   public _isLayout!: boolean
   public hidden!: boolean
   public label!: string

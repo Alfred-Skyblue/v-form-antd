@@ -25,6 +25,7 @@
     </div>
     <JsonPreview ref="jsonPreview"></JsonPreview>
     <ImportJson ref="importJson"></ImportJson>
+    <FormPreview ref="formPreview"></FormPreview>
   </div>
 </template>
 
@@ -39,9 +40,12 @@ import type { IImportJson } from '@design/VFormDesign/components/ImportJson.vue'
 import { useDebouncedRefHistory } from '@vueuse/core'
 import { cloneDeep } from 'lodash-es'
 import { findFormItem } from '@common/utils/util'
+import FormPreview from '@design/VFormDesign/components/FormPreview.vue'
+import type { IFormPreview } from '@design/VFormDesign/components/FormPreview.vue'
 
 const jsonPreview = ref<IJsonPreview | null>(null)
 const importJson = ref<IImportJson | null>(null)
+const formPreview = ref<IFormPreview | null>(null)
 
 const { handleClear, formConfig } = useFormDesign()
 const toolbarConfig = reactive([
@@ -49,7 +53,7 @@ const toolbarConfig = reactive([
     title: '预览',
     type: 'preview',
     event: () => {
-      console.log('preview')
+      formPreview.value?.handlePreview()
     },
     icon: 'preview'
   },
