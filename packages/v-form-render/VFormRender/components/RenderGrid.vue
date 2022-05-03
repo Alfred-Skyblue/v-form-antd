@@ -9,14 +9,13 @@
       v-for="(item, index) of record.columns"
       :key="index"
       :span="item.span"
-      class="layout-box v-bg-white"
     >
       <div v-for="formItem of item.list" :key="formItem._key">
-        <RenderFormItem
-          :record="formItem"
-          :form-config="formConfig"
-          :isFixed="isFixed"
-        ></RenderFormItem>
+        <RenderFormItem :record="formItem">
+          <template v-for="(slot, name) of $slots" :key="name" #[name]="attrs">
+            <slot :name="name" v-bind="attrs"></slot>
+          </template>
+        </RenderFormItem>
       </div>
     </a-col>
   </a-row>
@@ -26,20 +25,11 @@
 import type { PropType } from 'vue'
 import type { GridComponent } from '@common/class/layout/grid'
 import RenderFormItem from '@render/VFormRender/components/RenderFormItem.vue'
-import type { VFormConfig } from '@common/types/form'
 
 defineProps({
   record: {
     type: Object as PropType<GridComponent>,
     required: true
-  },
-  formConfig: {
-    type: Object as PropType<VFormConfig>,
-    required: true
-  },
-  isFixed: {
-    type: Boolean,
-    default: true
   }
 })
 </script>

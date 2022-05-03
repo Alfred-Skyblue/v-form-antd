@@ -11,7 +11,6 @@ export class Input extends BasicFormItem {
   readonly type = Input.type
   // props
   public props: Partial<InputProps & IAnyObject> = {
-    // link: [],
     addonAfter: undefined,
     addonBefore: undefined,
     defaultValue: undefined,

@@ -30,7 +30,14 @@ import { useFormDesign } from '@design/hooks/useFormDesign'
 
 const { formConfig } = useFormDesign()
 const formProps = computed(() => {
-  return formConfig.value.config
+  let { labelLayout, labelCol, labelWidth } = formConfig.value.config
+  if (labelLayout === 'fixed') {
+    labelCol = { style: { width: `${labelWidth}px` } }
+  }
+  return {
+    ...formConfig.value.config,
+    labelCol
+  }
 })
 
 /**

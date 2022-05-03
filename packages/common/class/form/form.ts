@@ -26,8 +26,5 @@ export class VForm implements IAForm {
   public labelCol?: IAnyObject
   public wrapperCol?: IAnyObject
   public labelWrap = undefined
-  public model = undefined
-  public scrollToFirstError = undefined
-  public validateOnRuleChange = undefined
   public on?: IAnyEvent
 }

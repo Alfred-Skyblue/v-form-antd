@@ -2,11 +2,13 @@ import { BasicFormItem } from '../basic-form'
 import type { IAnyObject } from '@common/types'
 import type { IFormItemOptions } from '@common/types/form'
 import type { SwitchProps } from 'ant-design-vue'
+import VSwitch from '@common/components/VSwitch/index.vue'
+import { shallowRef } from 'vue'
 
 export class Switch extends BasicFormItem {
   static type = 'switch'
   readonly type = Switch.type
-  readonly _tag = 'ASwitch'
+  readonly _tag = shallowRef(VSwitch)
   readonly icon = 'switch'
   public props: Partial<SwitchProps & IAnyObject> = {
     autoFocus: false,

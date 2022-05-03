@@ -1,28 +1,56 @@
 <!--
  * @Author: 杨攀腾
  * @Date: 2022-05-02 20:30:42
- * @Description: 渲染表单项
+ * @Description: 渲染表单项  =======>  当你看到一大堆 template slot 时，会感到很懵逼吧？
 -->
+
 <template>
-  <div v-if="record._isLayout">
-    <RenderGrid
-      v-if="getComponentType('grid')"
-      :record="gridRecord"
-      :form-config="formConfig"
-    ></RenderGrid>
+  <a-col
+    v-if="formConfig"
+    v-for="formItem of formConfig?.formItems"
+    :key="formItem._key"
+    :span="formItem.span ?? 24"
+  >
+    <template v-if="!formItem.hidden">
+      <div v-if="!!formItem.slotName">
+        <slot
+          :name="formItem.slotName"
+          v-bind="{ formItem: { ...formItem } }"
+        ></slot>
+      </div>
+      <RenderFormItem :record="formItem">
+        <template v-for="(slot, name) of $slots" :key="name" #[name]="attrs">
+          <slot :name="name" v-bind="attrs"></slot>
+        </template>
+      </RenderFormItem>
+    </template>
+  </a-col>
+  <div v-else-if="!record.hidden">
+    <RenderGrid v-if="getComponentType('grid')" :record="gridRecord">
+      <template v-for="(slot, name) of $slots" :key="name" #[name]="attrs">
+        <slot :name="name" v-bind="attrs"></slot>
+      </template>
+    </RenderGrid>
     <RenderTabs
       v-else-if="getComponentType('tabs')"
       :record="tabsRecord"
       :form-config="formConfig"
-    ></RenderTabs>
+    >
+      <template v-for="(slot, name) of $slots" :key="name" #[name]="attrs">
+        <slot :name="name" v-bind="attrs"></slot>
+      </template>
+    </RenderTabs>
+    <div v-else-if="!!record.slotName">
+      <slot :name="record.slotName" v-bind="{ formItem: { ...record } }"></slot>
+    </div>
+    <GFormItem v-else :record="record"></GFormItem>
   </div>
-  <GFormItem v-else :form-config="formConfig" :record="record"></GFormItem>
 </template>
 
 <script lang="ts" setup>
-import type { BasicFormItem } from '@common/class/basic-form'
+import { BasicFormItem } from '@common/class/basic-form'
 import type { PropType } from 'vue'
-import { computed, toRefs } from 'vue'
+import { computed } from 'vue'
 import type { GridComponent } from '@common/class/layout/grid'
 import RenderGrid from './RenderGrid.vue'
 import GFormItem from './GFormItem.vue'
@@ -33,15 +61,11 @@ import type { Tabs } from '@common/class/layout/tabs'
 const props = defineProps({
   record: {
     type: Object as PropType<Partial<BasicFormItem>>,
-    required: true
+    default: () => ({})
   },
   formConfig: {
-    type: Object as PropType<VFormConfig>,
-    required: true
-  },
-  isFixed: {
-    type: Boolean,
-    default: true
+    type: [Object, Boolean] as PropType<VFormConfig>,
+    default: false
   }
 })
 
@@ -49,35 +73,7 @@ const gridRecord = computed(() => props.record as GridComponent)
 
 const tabsRecord = computed(() => props.record as Tabs)
 
-const { formConfig, isFixed } = toRefs(props)
-// 计算表单项固定样式
-const labelFlex = computed(() => {
-  const { labelWidth, layout } = formConfig.value.config
-  return isFixed.value && layout === 'horizontal' ? `0 0 ${labelWidth}px` : ''
-})
-
 const getComponentType = (type: string) => {
-  return props.record.type === type
+  return props.record instanceof BasicFormItem && props.record?.type === type
 }
 </script>
-
-<style lang="less" scoped>
-.form-item-box {
-  :deep(.ant-form-item) {
-    margin-bottom: 0;
-    padding: 6px;
-  }
-}
-.v-form-item-fixed {
-  :deep(.ant-form-item) {
-    margin-bottom: 0;
-    padding: 6px;
-    .ant-form-item-label {
-      flex: v-bind(labelFlex);
-    }
-    .ant-form-item-control {
-      width: 100% !important;
-    }
-  }
-}
-</style>

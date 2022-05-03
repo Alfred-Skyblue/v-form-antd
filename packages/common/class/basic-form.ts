@@ -24,15 +24,16 @@ export abstract class BasicFormItem extends VFComponent {
   abstract _tag?: string | Component
   abstract type: string
   public props!: IAnyObject
+  public slotName?: string
   public rules?: VRule[]
   public required?: boolean
+  public message?: string
   public _isLayout!: boolean
   public hidden!: boolean
   public label!: string
   public on!: IAnyEvent
   public field!: string
   public span!: number
-  public link!: string[]
   constructor(options: IFormItemOptions) {
     super()
     this.init(options)

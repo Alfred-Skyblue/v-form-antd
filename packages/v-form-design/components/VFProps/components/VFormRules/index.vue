@@ -4,11 +4,19 @@
  * @description: 校验规则
 -->
 <template>
-  <div class="v-flex v-mb-10">
-    <a-checkbox v-model:checked="currentItem.required">必选</a-checkbox>
+  <div class="v-flex v-items-center">
+    <a-checkbox class="v-w-1/2" v-model:checked="currentItem.required">
+      必填
+    </a-checkbox>
+    <a-input
+      placeholder="请输入必选校验文案"
+      v-model:value="currentItem.message"
+    ></a-input>
+  </div>
+  <div class="v-my-8">
     <a class="v-ml-auto" @click="handleAddRule">
       <Icon type="plus" />
-      <span class="v-align-middle v-ml-4">添加规则</span>
+      <span class="v-align-middle v-ml-4">添加正则</span>
     </a>
   </div>
   <div class="v-space-y-6">
@@ -21,13 +29,13 @@
         <span class="v-w-1/4 v-align-middle">正则：</span>
         <a-input
           class="v-align-middle"
-          v-model="rule.pattern"
+          v-model:value="rule.pattern"
           placeholder="请输入正则"
         />
       </div>
       <div class="v-flex v-items-center">
         <span class="v-w-1/4 v-align-middle">文案：</span>
-        <a-input v-model="rule.message" placeholder="请输入校验文案" />
+        <a-input v-model:value="rule.message" placeholder="请输入校验文案" />
       </div>
       <a
         class="close v-w-20 v-h-20 v-absolute v-rounded-full v-text-center"

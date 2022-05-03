@@ -11,11 +11,11 @@
       :tab="item.label"
     >
       <div v-for="formItem of item.list" :key="formItem._key">
-        <RenderFormItem
-          :record="formItem"
-          :form-config="formConfig"
-          :isFixed="isFixed"
-        ></RenderFormItem>
+        <RenderFormItem :record="formItem">
+          <template v-for="(slot, name) of $slots" :key="name" #[name]="attrs">
+            <slot :name="name" v-bind="attrs"></slot>
+          </template>
+        </RenderFormItem>
       </div>
     </a-tab-pane>
   </a-tabs>
@@ -24,23 +24,14 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
 import type { Tabs } from '@common/class/layout/tabs'
-import type { VFormConfig } from '@common/types/form'
 import RenderFormItem from '@render/VFormRender/components/RenderFormItem.vue'
-
+import { useSlots } from 'vue'
+const slot = useSlots()
+console.log('=>(RenderTabs.vue:35) slot', slot)
 defineProps({
   record: {
     type: Object as PropType<Tabs>,
     required: true
-  },
-  formConfig: {
-    type: Object as PropType<VFormConfig>,
-    required: true
-  },
-  isFixed: {
-    type: Boolean,
-    default: true
   }
 })
 </script>
-
-<style lang="less" scoped></style>
