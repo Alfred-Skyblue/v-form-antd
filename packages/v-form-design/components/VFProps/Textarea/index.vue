@@ -13,14 +13,13 @@
     </template>
   </VFormBuilder>
   <CheckboxProps :list="actionProps"></CheckboxProps>
-  <LinkItem></LinkItem>
 </template>
 
 <script lang="ts" setup>
 import VFormBuilder from '@design/components/VFormBuilder/index.vue'
 import { reactive } from 'vue'
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
-import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
+
 import { useFormDesign } from '@design/hooks/useFormDesign'
 
 const { currentItem } = useFormDesign()

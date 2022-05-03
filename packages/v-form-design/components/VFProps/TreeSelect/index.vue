@@ -16,14 +16,12 @@
   <VFormSize></VFormSize>
   <CheckboxProps :list="actionProps"></CheckboxProps>
   <VOptions v-model:options="currentItem.props.treeData"></VOptions>
-  <LinkItem></LinkItem>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue'
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
 
-import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
 import VOptions from '@design/components/VFProps/components/VOptions/index.vue'
 import VFormBuilder from '@design/components/VFormBuilder/index.vue'
 import type { IFormBuilderOptions } from '@design/components/VFormBuilder/index.vue'

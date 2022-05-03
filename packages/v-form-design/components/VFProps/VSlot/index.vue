@@ -16,13 +16,12 @@
     </template>
   </VFormBuilder>
   <VFormSize></VFormSize>
-  <LinkItem></LinkItem>
 </template>
 
 <script lang="ts" setup>
 import VFormBuilder from '@design/components/VFormBuilder/index.vue'
 import { reactive } from 'vue'
-import LinkItem from '@design/components/VFProps/components/LinkItem/index.vue'
+
 import { useFormDesign } from '@design/hooks/useFormDesign'
 import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue'
 import type { DesignVSlot } from '@design/class/high-level/slot'
