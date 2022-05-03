@@ -1,7 +1,7 @@
 import { BasicFormItem } from '@common/class/basic-form'
-import type { IAnyObject } from '@common/types'
 import { defineComponent, h, shallowRef } from 'vue'
 import { Divider as ADivider } from 'ant-design-vue'
+import type { IFormItemOptions } from '@common/types/form'
 interface IDivider {
   props: {
     title?: string
@@ -37,8 +37,8 @@ export class Divider extends BasicFormItem implements IDivider {
   public props = {
     title: 'title'
   }
-  constructor(options: IAnyObject) {
-    super(options)
+  constructor(options?: IFormItemOptions) {
+    super({ ...options })
   }
   getLabel() {
     console.log(this)

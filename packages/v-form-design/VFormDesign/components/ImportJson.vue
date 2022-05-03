@@ -6,7 +6,7 @@
 <template>
   <div class="json-preview">
     <a-modal
-      title="预览json"
+      title="导入json"
       v-model:visible="visible"
       :width="800"
       :destroyOnClose="true"

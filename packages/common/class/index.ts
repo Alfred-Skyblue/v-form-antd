@@ -15,6 +15,10 @@ import { TreeSelect } from './form/tree-select'
 import { forEach } from 'lodash-es'
 import type { BasicFormItem } from './basic-form'
 import { UploadFile } from './form/uploadFile'
+import { layoutComponents } from '@common/class/layout'
+import { highLevelComponent } from '@common/class/high-level'
+import type { IAnyObject } from '@common/types'
+import type { IFormItemOptions } from '@common/types/form'
 
 export const formComponents = {
   input: Input,
@@ -31,7 +35,9 @@ export const formComponents = {
   rate: Rate,
   textarea: Textarea,
   treeSelect: TreeSelect,
-  uploadFile: UploadFile
+  uploadFile: UploadFile,
+  ...layoutComponents,
+  ...highLevelComponent
 }
 export type IFormComponent = typeof formComponents
 
@@ -49,7 +55,7 @@ export const initFormComponent = () => {
 
 export function createFormComponent<T extends keyof IFormComponent>(
   type: T,
-  label?: string
+  options?: IFormItemOptions
 ): BasicFormItem {
-  return new formComponents[type]({ label })
+  return new formComponents[type](options)
 }

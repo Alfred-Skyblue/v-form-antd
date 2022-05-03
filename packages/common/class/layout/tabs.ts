@@ -1,4 +1,5 @@
 import { BasicFormItem } from '@common/class/basic-form'
+import type { IFormItemOptions } from '@common/types/form'
 
 export interface ITabsColumn {
   value: string
@@ -16,4 +17,7 @@ export class Tabs extends BasicFormItem {
     animated: true
   }
   public columns: ITabsColumn[] = []
+  constructor(options?: IFormItemOptions) {
+    super({ label: '标签页布局', ...options })
+  }
 }

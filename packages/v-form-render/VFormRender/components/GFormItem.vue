@@ -1,7 +1,7 @@
 <!--
- * @author: ypt
- * @date: 2022/4/16
- * @description: 表单项组件
+ * @Author: 杨攀腾
+ * @Date: 2022-05-02 20:30:33
+ * @Description: 吐槽一下命名太难了
 -->
 <template>
   <div
@@ -23,33 +23,32 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { BasicFormItem } from '@common/class/basic-form'
 import type { PropType } from 'vue'
-import { computed, defineComponent, inject } from 'vue'
-import type { IVFormDesignState } from '@design/types/form-design'
+import { computed, toRefs } from 'vue'
+import type { IFormConfig } from '@render/VFormRender/index.vue'
 
-export default defineComponent({
-  name: 'VFormItem',
-  props: {
-    record: {
-      type: Object as PropType<BasicFormItem>,
-      required: true
-    }
+const props = defineProps({
+  record: {
+    type: Object as PropType<BasicFormItem>,
+    required: true
   },
-  setup() {
-    const { formConfig, isFixed } =
-      inject<IVFormDesignState>('formDesignState')!
-    // 计算表单项固定样式
-    const labelFlex = computed(() => {
-      const { labelWidth, layout } = formConfig.value.config
-      return isFixed.value && layout === 'horizontal'
-        ? `0 0 ${labelWidth}px`
-        : ''
-    })
-
-    return { labelFlex, isFixed }
+  formConfig: {
+    type: Object as PropType<IFormConfig>,
+    required: true
+  },
+  isFixed: {
+    type: Boolean,
+    default: true
   }
+})
+
+const { formConfig, isFixed } = toRefs(props)
+// 计算表单项固定样式
+const labelFlex = computed(() => {
+  const { labelWidth, layout } = formConfig.value.config
+  return isFixed.value && layout === 'horizontal' ? `0 0 ${labelWidth}px` : ''
 })
 </script>
 
