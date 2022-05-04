@@ -13,6 +13,7 @@
     </template>
   </VFormBuilder>
   <CheckboxProps :list="actionProps"></CheckboxProps>
+  <VFormRules></VFormRules>
 </template>
 
 <script lang="ts" setup>
@@ -21,6 +22,7 @@ import { reactive } from 'vue'
 import CheckboxProps from '@design/components/VFProps/components/CheckboxProps/index.vue'
 
 import { useFormDesign } from '@design/hooks/useFormDesign'
+import VFormRules from '@design/components/VFProps/components/VFormRules/index.vue'
 
 const { currentItem } = useFormDesign()
 const actionProps = reactive([

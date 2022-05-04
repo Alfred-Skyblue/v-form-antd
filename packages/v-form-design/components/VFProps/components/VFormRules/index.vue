@@ -4,6 +4,8 @@
  * @description: 校验规则
 -->
 <template>
+  <a-divider title="校验规则">校验规则</a-divider>
+
   <div class="v-flex v-items-center">
     <a-checkbox class="v-w-1/2" v-model:checked="currentItem.required">
       必填

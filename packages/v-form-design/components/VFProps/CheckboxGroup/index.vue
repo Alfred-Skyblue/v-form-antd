@@ -15,6 +15,7 @@
   </VFormBuilder>
   <CheckboxProps :list="actionProps"></CheckboxProps>
   <VOptions v-model:options="currentItem.props.options"></VOptions>
+  <VFormRules></VFormRules>
 </template>
 
 <script lang="ts" setup>
@@ -25,6 +26,7 @@ import VOptions from '@design/components/VFProps/components/VOptions/index.vue'
 import VFormBuilder from '@design/components/VFormBuilder/index.vue'
 import type { IFormBuilderOptions } from '@design/components/VFormBuilder/index.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
+import VFormRules from '@design/components/VFProps/components/VFormRules/index.vue'
 
 const { currentItem } = useFormDesign()
 

@@ -16,6 +16,7 @@
     </template>
   </VFormBuilder>
   <VFormSize></VFormSize>
+  <VFormRules></VFormRules>
 </template>
 
 <script lang="ts" setup>
@@ -25,6 +26,7 @@ import { reactive } from 'vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
 import VFormSize from '@design/components/VFProps/components/VFormSize/index.vue'
 import type { DesignVSlot } from '@design/class/high-level/slot'
+import VFormRules from '@design/components/VFProps/components/VFormRules/index.vue'
 
 const { currentItem } = useFormDesign<DesignVSlot>()
 const formItems = reactive([
