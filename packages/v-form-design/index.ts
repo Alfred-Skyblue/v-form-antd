@@ -1,3 +1,1 @@
-import VFormDesign from './VFormDesign/index.vue'
-
-export { VFormDesign }
+export { default as VFormDesign } from './VFormDesign/index.vue'

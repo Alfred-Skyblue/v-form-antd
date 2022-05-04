@@ -4,8 +4,8 @@ import { resolve } from 'path'
 export const buildConfig = defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, '../packages/entry.ts'),
-      name: 'v-form-antd',
+      entry: resolve(__dirname, '../packages/index.ts'),
+      name: 'vFormAntd',
       formats: ['es', 'cjs', 'umd'],
       fileName: format => `v-form-antd.${format}.js`
     },

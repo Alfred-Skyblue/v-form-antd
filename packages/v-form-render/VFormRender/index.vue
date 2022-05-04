@@ -30,10 +30,7 @@ import {
   ref,
   toRefs
 } from 'vue'
-import type { BasicFormItem } from '@common/class/basic-form'
 import RenderFormItem from '@render/VFormRender/components/RenderFormItem.vue'
-import { formForEach } from '@common/utils/util'
-import { createDesignComponent, IDesignComponentType } from '@design/class'
 import type { VFormConfig } from '@common/types/form'
 import type { IAnyObject } from '@common/types'
 import { useVModels } from '@vueuse/core'

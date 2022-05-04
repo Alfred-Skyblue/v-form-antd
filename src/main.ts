@@ -1,6 +1,6 @@
 import { createApp, defineComponent, h, PropType } from 'vue'
 import App from './App.vue'
-import VFormAntd from '@/entry'
+import VFormAntd from '@/index'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import type { BasicFormItem } from '@common/class/basic-form'

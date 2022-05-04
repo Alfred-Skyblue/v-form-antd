@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
-import VFormRender from '@render/VFormRender/index.vue'
+import VFormDesign from '@design/VFormDesign/index.vue'
 import { ref } from 'vue'
 import type { VFormConfig } from '@common/types/form'
 const formData = {}

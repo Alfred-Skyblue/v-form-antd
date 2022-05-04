@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, provide, computed } from 'vue'
+import { defineComponent, ref, provide, computed, PropType } from 'vue'
 import Layout from '../Layout/index.vue'
 import Header from '@design/VFormDesign/modules/Header.vue'
 import LeftAside from '@design/VFormDesign/modules/LeftAside.vue'
@@ -42,9 +42,15 @@ import { formForEach } from '@common/utils/util'
 import ConfigAside from '@design/VFormDesign/modules/ConfigAside.vue'
 import type { BasicFormItem } from '@common/class/basic-form'
 import { msg } from '@common/utils/log'
+import type { IAnyObject } from '@common/types'
 
 export default defineComponent({
   name: 'VFormDesign',
+  props: {
+    formData: {
+      type: Object as PropType<IAnyObject>
+    }
+  },
   components: {
     ConfigAside,
     Toolbar,

@@ -9,7 +9,7 @@ export default ({ mode }: { mode: string }) => {
   const isProd = mode === 'production'
   return defineConfig({
     ...(isProd && buildConfig),
-    plugins: [vue(), vueJsx(), dts({ outputDir: 'dist/types' })],
+    plugins: [dts({ outputDir: 'dist/types' }), vue(), vueJsx()],
     css: {
       preprocessorOptions: {
         less: {
