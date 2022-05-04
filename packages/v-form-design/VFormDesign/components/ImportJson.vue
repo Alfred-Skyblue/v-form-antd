@@ -22,13 +22,11 @@
 import { ref } from 'vue'
 
 import { useFormDesign } from '@design/hooks/useFormDesign'
-import { formForEach } from '@common/utils/util'
 import type { IVFormConfig } from '@design/types/form-design'
 
-import type { IDesignComponentType } from '@design/class'
-import { createDesignComponent } from '@design/class'
 import JsonEditor from '@design/components/JsonEditor/index.vue'
 import type { IJsonEditor } from '@design/components/JsonEditor/index.vue'
+import { useFormatForm } from '@common/hooks/useFormatForm'
 
 export interface IImportJson {
   handleOk: () => void
@@ -52,16 +50,10 @@ const getContainer = () => {
 const handleOk = () => {
   const jsonStr = jsonEditor.value?.getValue()
   if (!jsonStr) return
-  const config = JSON.parse(jsonStr) as IVFormConfig
-  formForEach(config.formItems, (item, index, ctx) => {
-    const { label, type } = item
-    const formItem = createDesignComponent(type as IDesignComponentType, {
-      label
-    })
-    ctx[index] = Object.assign(formItem, item)
-  })
-  config.currentItem = config.formItems[0] ?? {}
-  formConfig.value = config
+  const config = ref(JSON.parse(jsonStr) as IVFormConfig)
+  useFormatForm(config)
+  config.value.currentItem = config.value.formItems[0] ?? {}
+  formConfig.value = config.value
   handlePreview(false)
 }
 

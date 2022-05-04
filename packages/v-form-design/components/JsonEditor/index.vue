@@ -22,7 +22,14 @@ function syntaxHighlight(json: IAnyObject | string): string {
       json,
       (key, value) => {
         if (
-          ['_key', '_isLayout', 'currentItem', '_tag', 'icon'].includes(key)
+          [
+            '_key',
+            '_isLayout',
+            'currentItem',
+            '_tag',
+            'icon',
+            '_isCustom'
+          ].includes(key)
         ) {
           return undefined
         }

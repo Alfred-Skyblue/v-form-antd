@@ -39,6 +39,7 @@ import type { IAnyObject } from '@common/types'
 import { useVModels } from '@vueuse/core'
 import type { FormInstance } from 'ant-design-vue'
 import { useVForm } from '@render/VFormRender/hooks/useVForm'
+import { useFormatForm } from '@common/hooks/useFormatForm'
 
 export default defineComponent({
   name: 'VFormRender',
@@ -63,17 +64,7 @@ export default defineComponent({
     provide('formData', newFormData)
 
     const init = () => {
-      formForEach(
-        formConfig.value.formItems as BasicFormItem[],
-        (item, index, ctx) => {
-          const { label, type } = item
-          const formItem = createDesignComponent(type as IDesignComponentType, {
-            label
-          })
-          ctx[index] = Object.assign(formItem, item)
-          console.log('=>(index.vue:54) ctx[index]', ctx[index].update)
-        }
-      )
+      useFormatForm(formConfig)
     }
 
     onBeforeMount(() => {
