@@ -13,7 +13,10 @@
               :name="`${currentItem.type}Attrs`"
               v-bind="{ formItem: currentItem }"
             >
-              <component :is="propsComponent"></component>
+              <component
+                :is="propsComponent"
+                v-bind="{ formItem: currentItem }"
+              ></component>
             </slot>
           </div>
           <a-empty
@@ -36,17 +39,25 @@ import { computed } from 'vue'
 import type { Component } from '@common/types'
 import { designLayoutPropsMap } from '@design/class/layout'
 import { designHighLevelPropsMap } from '@design/class/high-level'
+import { isCustomComponent } from '@common/utils/type-guard'
 
 const { currentItem } = useFormDesign<BasicFormItem>()
 
 const propsComponent = computed<Component>(() => {
   const { type } = currentItem.value
+
   const propsMap = {
     ...designPropsMap,
     ...designLayoutPropsMap,
     ...designHighLevelPropsMap
   }
-  return propsMap[type as keyof typeof propsMap] || 'div'
+  let component: string | Component =
+    propsMap[type as keyof typeof propsMap] || 'div'
+
+  if (isCustomComponent(currentItem.value)) {
+    component = currentItem.value.attrsConfig
+  }
+  return component
 })
 </script>
 

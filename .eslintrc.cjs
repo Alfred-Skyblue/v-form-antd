@@ -16,11 +16,12 @@ module.exports = {
     'vue/setup-compiler-macros': true
   },
   rules: {
-    'no-debugger': 'off',
+    'no-debugger': 0,
     'vue/multi-word-component-names': 0,
     '@typescript-eslint/ban-ts-comment': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
-    'vue/no-use-v-if-with-v-for': 0
+    'vue/no-use-v-if-with-v-for': 0,
+    'vue/no-mutating-props': 0,
   }
 }

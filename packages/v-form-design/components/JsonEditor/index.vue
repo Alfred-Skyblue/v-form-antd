@@ -48,6 +48,9 @@ function syntaxHighlight(json: IAnyObject | string): string {
   )
 }
 
+export interface IJsonEditor {
+  getValue: () => string
+}
 export default defineComponent({
   name: 'JsonEditor',
   emits: ['change'],
@@ -102,7 +105,18 @@ export default defineComponent({
       formattedJSON.value = syntaxHighlight(jsonObj)
       emit('change', jsonObj)
     }
-    return { formattedJSON, updateJSON, jsonEditor }
+
+    const getValue = () => {
+      if (!jsonEditor.value) return
+      try {
+        JSON.parse(jsonEditor.value!.innerText)
+      } catch (e) {
+        message.error('请输入正确的JSON格式')
+        return false
+      }
+      return jsonEditor.value!.innerText
+    }
+    return { formattedJSON, updateJSON, jsonEditor, getValue }
   }
 })
 </script>

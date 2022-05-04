@@ -14,7 +14,9 @@
     <a-collapse-panel header="布局组件" key="3">
       <collapse-item v-model:list="layoutComponents"></collapse-item>
     </a-collapse-panel>
-    <a-collapse-panel header="自定义组件" key="4">自定义组件</a-collapse-panel>
+    <a-collapse-panel header="自定义组件" key="4">
+      <collapse-item v-model:list="customComponentsList"></collapse-item>
+    </a-collapse-panel>
   </a-collapse>
 </template>
 
@@ -23,6 +25,7 @@ import CollapseItem from '@design/VFormDesign/components/CollapseItem.vue'
 import {
   basicComponents,
   layoutComponents,
-  highLevelComponents
+  highLevelComponents,
+  customComponentsList
 } from '@design/config/form-item-config'
 </script>
