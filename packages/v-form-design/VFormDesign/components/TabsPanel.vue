@@ -30,7 +30,7 @@ import { useFormDesign } from '@design/hooks/useFormDesign'
 import DraggablePanel from '@design/VFormDesign/components/DraggablePanel.vue'
 import FormNodeAction from '@design/VFormDesign/components/FormNodeAction.vue'
 
-defineProps({
+const props = defineProps({
   record: {
     type: Object as PropType<Tabs>,
     required: true

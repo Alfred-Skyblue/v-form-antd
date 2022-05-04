@@ -1,10 +1,10 @@
 import type { App, Plugin } from 'vue'
 import '@styles/index.less'
 import { VFormDesign } from './v-form-design'
-import JsonEditor from '@design/components/JsonEditor/index.vue'
 import type { CustomComponent } from '@common/class/custom'
 import { setCustomComponents } from '@common/custom'
-const components = { VFormDesign, JsonEditor }
+import { VFormRender } from '@render/index'
+const components = { VFormDesign, VFormRender }
 
 const install: Exclude<Plugin['install'], undefined> = function (
   app: App,
@@ -16,4 +16,4 @@ const install: Exclude<Plugin['install'], undefined> = function (
   })
 }
 
-export default install
+export default { install, VFormDesign, VFormRender }

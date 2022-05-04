@@ -30,7 +30,7 @@ import FormNodeAction from './FormNodeAction.vue'
 import DraggablePanel from './DraggablePanel.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
 
-defineProps({
+const props = defineProps({
   record: {
     type: Object as PropType<GridComponent>,
     required: true

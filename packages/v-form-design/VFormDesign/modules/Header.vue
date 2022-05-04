@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     default: 'v-form-antd表单设计器'

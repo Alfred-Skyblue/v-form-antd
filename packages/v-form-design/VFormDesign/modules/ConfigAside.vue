@@ -40,6 +40,7 @@ import type { Component } from '@common/types'
 import { designLayoutPropsMap } from '@design/class/layout'
 import { designHighLevelPropsMap } from '@design/class/high-level'
 import { isCustomComponent } from '@common/utils/type-guard'
+import { msg } from '@common/utils/log'
 
 const { currentItem } = useFormDesign<BasicFormItem>()
 
@@ -56,6 +57,9 @@ const propsComponent = computed<Component>(() => {
 
   if (isCustomComponent(currentItem.value)) {
     component = currentItem.value.attrsConfig
+  }
+  if (!component) {
+    msg('未找到对应配置项组件')
   }
   return component
 })

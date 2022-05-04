@@ -25,10 +25,7 @@
 import type { PropType } from 'vue'
 import type { Tabs } from '@common/class/layout/tabs'
 import RenderFormItem from '@render/VFormRender/components/RenderFormItem.vue'
-import { useSlots } from 'vue'
-const slot = useSlots()
-console.log('=>(RenderTabs.vue:35) slot', slot)
-defineProps({
+const props = defineProps({
   record: {
     type: Object as PropType<Tabs>,
     required: true

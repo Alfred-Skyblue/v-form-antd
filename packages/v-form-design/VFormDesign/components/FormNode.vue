@@ -26,7 +26,7 @@ import type { BasicFormItem } from '@common/class/basic-form'
 import VFormItem from '@design/components/VFormItem/index.vue'
 import FormNodeAction from '@design/VFormDesign/components/FormNodeAction.vue'
 import { useFormDesign } from '@design/hooks/useFormDesign'
-defineProps({
+const props = defineProps({
   record: {
     type: Object as PropType<BasicFormItem>,
     required: true

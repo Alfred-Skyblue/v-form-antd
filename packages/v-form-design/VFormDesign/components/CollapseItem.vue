@@ -38,7 +38,7 @@ import Icon from '@design/components/Icon/index.vue'
 import { cloneDeep } from 'lodash-es'
 import type { BasicFormItem } from '@common/class/basic-form'
 
-defineProps({
+const props = defineProps({
   list: {
     type: Array as PropType<BasicFormItem[]>,
     default: () => []

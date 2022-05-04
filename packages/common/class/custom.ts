@@ -1,6 +1,7 @@
 import { BasicFormItem } from '@common/class/basic-form'
 import type { Component } from '@common/types'
 import { shallowRef } from 'vue'
+import { msg } from '@common/utils/log'
 
 export interface CustomComponent {
   label: string
@@ -20,13 +21,13 @@ export class CustomFormItem extends BasicFormItem {
     const { label, component, attrsConfig, type } = options
     super({ label })
     if (!attrsConfig) {
-      console.error('lack use CustomComponent required attrsConfig')
+      msg('lack use CustomComponent required attrsConfig')
     }
     if (!component) {
-      console.error('lack use CustomComponent required component')
+      msg('lack use CustomComponent required component')
     }
     if (!type) {
-      console.error('lack use CustomComponent required type')
+      msg('lack use CustomComponent required type')
     }
     this._tag = shallowRef(component)
     this.type = type

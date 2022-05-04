@@ -4,7 +4,7 @@ import { resolve } from 'path'
 export const buildConfig = defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, '../packages/index.ts'),
+      entry: resolve(__dirname, '../packages/entry.ts'),
       name: 'v-form-antd',
       formats: ['es', 'cjs', 'umd'],
       fileName: format => `v-form-antd.${format}.js`
@@ -13,7 +13,7 @@ export const buildConfig = defineConfig({
       external: ['vue', 'ant-design-vue'],
       output: {
         // 配置 css 文件名
-        assetFileNames: 'v-form-antd.[ext]',
+        assetFileNames: 'index.[ext]',
         globals: {
           vue: 'Vue',
           'ant-design-vue': 'antd'

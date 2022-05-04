@@ -26,7 +26,7 @@ import type { PropType } from 'vue'
 import type { GridComponent } from '@common/class/layout/grid'
 import RenderFormItem from '@render/VFormRender/components/RenderFormItem.vue'
 
-defineProps({
+const props = defineProps({
   record: {
     type: Object as PropType<GridComponent>,
     required: true

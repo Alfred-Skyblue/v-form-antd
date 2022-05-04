@@ -8,6 +8,8 @@
     "allowJs": true,
     "isolatedModules": true,
     "types":["@types/node"],
+    "skipDiagnostics": false,
+    "logDiagnostics": true,
     "lib": [
       "esnext",
       "dom",
@@ -22,7 +24,7 @@
       "@styles/*": ["./styles/*"],
     }
   },
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "packages/**/*.ts", "packages/**/*.vue"],
+  "include": [ "src/**/*", "src/**/*.vue", "packages/**/*.ts", "packages/**/*.vue"],
   "exclude": ["node_modules"],
   "references": [
     {
