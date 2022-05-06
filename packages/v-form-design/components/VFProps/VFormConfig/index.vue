@@ -34,10 +34,12 @@
       <a-checkbox v-model:checked="formConfig.config.labelWrap">
         标签换行
       </a-checkbox>
-      <a-checkbox v-model:value="formConfig.config.hideRequiredMark">
+      <a-checkbox v-model:checked="formConfig.config.hideRequiredMark">
         隐藏必选标记
       </a-checkbox>
-      <a-checkbox v-model:value="formConfig.config.colon">显示冒号</a-checkbox>
+      <a-checkbox v-model:checked="formConfig.config.colon">
+        显示冒号
+      </a-checkbox>
     </a-form-item>
   </div>
 </template>

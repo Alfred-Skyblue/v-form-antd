@@ -25,7 +25,7 @@
     }
   },
   "include": [ "src/**/*", "src/**/*.vue", "packages/**/*.ts", "packages/**/*.vue"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules","/types"],
   "references": [
     {
       "path": "./tsconfig.vite-config.json"

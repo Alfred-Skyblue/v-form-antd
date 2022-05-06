@@ -61,6 +61,9 @@ const propsComponent = computed<Component>(() => {
   if (!component) {
     msg('未找到对应配置项组件')
   }
+  if (typeof component !== 'string') {
+    component.inheritAttrs = false
+  }
   return component
 })
 </script>

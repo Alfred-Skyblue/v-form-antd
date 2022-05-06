@@ -4,7 +4,7 @@
   "main": "dist/v-form-antd.umd.js",
   "module": "dist/v-form-antd.es.js",
   "ssr": "dist/v-form-antd.ssr.js",
-  "types": "dist/types/packages/index.d.ts",
+  "types": "types/index.d.ts",
   "unpkg": "dist/v-form-antd.umd.js",
   "jsdelivr": "dist/v-form-antd.umd.js",
   "styles": "dist/index.css",
@@ -31,7 +31,7 @@
     "build": "vue-tsc --noEmit --skipLibCheck && vite build",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore .eslintignore"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",

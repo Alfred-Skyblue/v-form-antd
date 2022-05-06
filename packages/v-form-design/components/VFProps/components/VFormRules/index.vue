@@ -21,7 +21,7 @@
       <span class="v-align-middle v-ml-4">添加正则</span>
     </a>
   </div>
-  <div class="v-space-y-6">
+  <div class="v-space-y-6 v-pb-20">
     <div
       v-for="(rule, index) of currentItem.rules"
       :key="index"

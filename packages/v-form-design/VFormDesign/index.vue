@@ -11,7 +11,7 @@
         <Header></Header>
       </template>
       <template #default>
-        <toolbar></toolbar>
+        <Toolbar></Toolbar>
         <MainContainer></MainContainer>
       </template>
       <template #cmp-list>
