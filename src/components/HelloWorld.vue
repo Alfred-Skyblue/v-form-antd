@@ -1,7 +1,7 @@
 <!--
  * @author: ypt
  * @date: 2022/5/26
- * @description: $END$
+ * @description: demo页面
 -->
 <template>
   <div>{{ message }}</div>
