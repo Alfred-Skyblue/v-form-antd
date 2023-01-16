@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
+// test
 export default defineComponent({
   name: 'HelloWorld',
   props: {
